@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bab 10 · Mengukur Arah Kiblat dengan Smartphone</title>
+<meta name="falak-bab" content="10">
+<link rel="stylesheet" href="../falak.css">
+<script src="../data.js"></script>
+<script src="../falak.js"></script>
+<script src="../kunci.js"></script>
+</head>
+<body>
+<style>
+/* Layout: lembar kuliah satu kolom, navigasi bagian lengket di atas; simulasi dan kalkulator dua kolom di layar besar */
+:root{
+  --bg:#f2f4f6; --surface:#ffffff; --ink:#15213a; --muted:#56627a; --line:#d5dbe4;
+  --accent:#0d6b5f; --accent-soft:#e1f0ec; --gold:#a8701a; --gold-soft:#f6ecd9;
+  --sky:#2c4a86; --sky-soft:#e3e9f6; --warn:#a33a2a; --warn-soft:#f7e3df;
+  --f-display:"Spectral",Georgia,"Times New Roman",serif;
+  --f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --f-arab:"Amiri","Traditional Arabic","Scheherazade New",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1522; --surface:#172033; --ink:#e6eaf2; --muted:#9aa6bd; --line:#2b3850;
+  --accent:#4fc2ad; --accent-soft:#163a37; --gold:#e3b464; --gold-soft:#3a2f1c;
+  --sky:#8eaaf0; --sky-soft:#1d2a47; --warn:#f08a78; --warn-soft:#3b211d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1522; --surface:#172033; --ink:#e6eaf2; --muted:#9aa6bd; --line:#2b3850;
+  --accent:#4fc2ad; --accent-soft:#163a37; --gold:#e3b464; --gold-soft:#3a2f1c;
+  --sky:#8eaaf0; --sky-soft:#1d2a47; --warn:#f08a78; --warn-soft:#3b211d; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65}
+.wrap{max-width:980px;margin:0 auto;padding-inline:20px;padding-block:0 64px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,5vw,3.1rem);font-weight:700}
+h2{font-size:clamp(1.55rem,3.4vw,2.1rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0;max-width:68ch}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.ar-in{font-family:var(--f-arab);font-size:1.15em}
+.muted{color:var(--muted)}
+.small{font-size:.92rem}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+header.top{padding-block:44px 28px;display:grid;gap:14px;border-bottom:1px solid var(--line)}
+header.top .meta{display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--muted);font-size:.95rem}
+header.top .meta b{color:var(--ink);font-weight:600}
+.lead{font-size:1.12rem;color:var(--muted)}
+
+nav.sec{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-20px;padding-inline:20px}
+nav.sec ul{display:flex;gap:4px;list-style:none;margin:0;padding:8px 0;overflow-x:auto;scrollbar-width:none}
+nav.sec a{display:block;white-space:nowrap;padding:6px 12px;border-radius:6px;text-decoration:none;color:var(--muted);font-weight:600;font-size:.93rem}
+nav.sec a:hover{color:var(--ink);background:var(--surface)}
+
+section{padding-block:48px 8px;display:grid;grid-template-columns:minmax(0,1fr);gap:20px;scroll-margin-top:60px}
+.sec-head{display:grid;gap:6px}
+
+.goals{background:var(--accent-soft);border-radius:8px;padding:18px 20px;display:grid;gap:8px}
+.goals ol,.goals ul{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.box ul,.box ol{margin:0;padding-left:1.15em;display:grid;gap:4px}
+.note{border-left:3px solid var(--gold);padding:4px 0 4px 14px;color:var(--muted);font-size:.95rem;max-width:72ch}
+.note b{color:var(--ink)}
+.warn{background:var(--gold-soft);color:var(--ink);border-radius:8px;padding:12px 16px;font-size:.95rem}
+.warn b{color:var(--gold)}
+.prose{display:grid;gap:12px}
+.prose ul,.prose ol{margin:0;padding-left:1.2em;display:grid;gap:4px;max-width:70ch}
+
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--bg)}
+td.n,th.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.r,th.r{text-align:right}
+td i[lang=ar]{font-style:normal;font-family:var(--f-arab);font-size:1.12rem;color:var(--gold)}
+tr.hl td{background:var(--gold-soft)}
+tr.today td{background:var(--accent-soft)}
+
+.eq{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 18px;overflow-x:auto;display:grid;gap:6px}
+.eq .cap{font-size:.88rem;color:var(--muted)}
+math{font-size:1.12em}
+
+.ayat{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.ayat figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px}
+.ar{font-family:var(--f-arab);font-size:1.6rem;line-height:1.9;direction:rtl;text-align:right;color:var(--ink)}
+.ayat figcaption{font-size:.93rem;color:var(--muted)}
+.ayat figcaption b{color:var(--gold);font-family:var(--f-mono);font-size:.78rem;font-weight:600;display:block;margin-bottom:2px}
+
+.sim{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:start}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px;min-width:0}
+.stage svg{width:100%;height:auto;display:block;touch-action:none}
+svg .c{fill:none;stroke:var(--muted);stroke-width:1.3}
+svg .back{stroke-dasharray:4 5;opacity:.45}
+svg .grid{stroke:var(--line);stroke-width:1}
+svg .axisl{stroke:var(--muted);stroke-width:1.2}
+svg .lbl{fill:var(--ink);font-family:var(--f-mono);font-size:13px;font-weight:600}
+svg .sm{fill:var(--muted);font-family:var(--f-body);font-size:11.5px}
+svg .tick{fill:var(--muted);font-family:var(--f-mono);font-size:10.5px}
+.ctrl{display:grid;gap:14px;min-width:0}
+.ctrl label,.field{display:grid;gap:4px;font-weight:600;font-size:.95rem}
+.ctrl label span,.field span.v{font-family:var(--f-mono);color:var(--accent)}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+select,input[type=number],input[type=text],input[type=date]{font:inherit;font-weight:400;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);min-width:0;width:100%}
+input[type=number],input[type=text]{font-family:var(--f-mono)}
+.readout{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:.93rem;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;align-content:start}
+.readout b{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;overflow-wrap:anywhere;min-width:0}
+.readout .big{grid-column:1/-1;font-family:var(--f-display);font-size:1.6rem;font-weight:700;color:var(--accent);text-align:left}
+.presets{display:flex;flex-wrap:wrap;gap:6px}
+.presets button,.btn{font:inherit;font-size:.88rem;font-weight:600;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.presets button:hover,.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.85rem;font-weight:600;background:var(--sky-soft);color:var(--sky)}
+.pill.g{background:var(--gold-soft);color:var(--gold)}
+.pill.a{background:var(--accent-soft);color:var(--accent)}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;grid-template-columns:minmax(0,1fr);gap:16px;min-width:0}
+.calc .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.worked{display:grid;gap:6px;font-size:.95rem;counter-reset:w}
+.worked div{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:baseline}
+.worked div::before{counter-increment:w;content:counter(w);font-family:var(--f-mono);font-size:.75rem;color:var(--accent);font-weight:600}
+.worked code{font-family:var(--f-mono);font-size:.88rem;background:var(--bg);padding:1px 6px;border-radius:4px;overflow-wrap:anywhere}
+.worked div>span{min-width:0}
+
+.steps{margin:0;padding:0;list-style:none;display:grid;gap:12px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:baseline}
+.steps li::before{content:counter(s);font-family:var(--f-mono);font-weight:600;color:var(--bg);background:var(--accent);border-radius:50%;width:26px;height:26px;display:grid;place-items:center;font-size:.8rem}
+
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px}
+.ex .q{font-weight:600}
+.ex details summary{cursor:pointer;color:var(--accent);font-weight:600}
+.ex details[open] summary{margin-bottom:8px}
+.ex .sol{display:grid;gap:8px;font-size:.96rem}
+
+.quiz{display:grid;gap:14px}
+.qz{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px;display:grid;gap:10px}
+.qz p{font-weight:600}
+.opts{display:grid;gap:6px}
+.opts button{font:inherit;text-align:left;padding:8px 12px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--accent)}
+.opts button.ok{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+.opts button.bad{border-color:var(--warn);color:var(--warn)}
+.opts button:disabled{cursor:default}
+.fb{font-size:.92rem;color:var(--muted)}
+.score{font-family:var(--f-mono);font-weight:600;color:var(--accent)}
+
+.task{background:var(--gold-soft);border-radius:8px;padding:18px;display:grid;gap:8px}
+.task h3{color:var(--gold)}
+.task ol{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+.rubric td:not(:first-child){font-size:.9rem}
+.next{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.92rem;color:var(--muted)}
+.next b{color:var(--ink)}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem;display:grid;gap:10px}
+
+@media (max-width:760px){
+  .two,.sim,.calc .grid2{grid-template-columns:1fr}
+  body{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">Astronomi Islam (Ilmu Falak) · Bab 10</div>
+  <h1>Mengukur Arah Kiblat dengan Smartphone</h1>
+  <p class="lead">Smartphone membawa magnetometer, akselerometer, GPS, dan jam yang sangat akurat. Pertemuan ini membahas cara kerja sensor itu, sumber kesalahannya, dan cara memakainya secara ilmiah untuk mengukur arah kiblat.</p>
+  <div class="meta">
+    <div>Dosen: <b>Dr. Ea Cahya Septia Mahen, S.Pd., M.Si.</b></div>
+    <div>Prodi: <b>Pendidikan Fisika, UIN Sunan Gunung Djati Bandung</b></div>
+  </div>
+</header>
+
+<nav class="sec" aria-label="Bagian materi">
+  <ul>
+    <li><a href="#tujuan">Tujuan</a></li>
+    <li><a href="#sensor">Sensor smartphone</a></li>
+    <li><a href="#kompas">Kompas digital</a></li>
+    <li><a href="#gangguan">Simulasi gangguan</a></li>
+    <li><a href="#metode">Metode berbasis smartphone</a></li>
+    <li><a href="#data">Mengolah data</a></li>
+    <li><a href="#praktikum">Praktikum</a></li>
+    <li><a href="#latihan">Latihan</a></li>
+  </ul>
+</nav>
+
+
+<section id="tujuan">
+  <div class="goals">
+    <div class="eyebrow">Tujuan pertemuan</div>
+    <p>Setelah pertemuan ini, mahasiswa mampu:</p>
+    <ol>
+      <li>menjelaskan sensor smartphone yang relevan dengan penentuan arah kiblat;</li>
+      <li>menjelaskan cara kerja kompas digital dan sumber kesalahannya;</li>
+      <li>membandingkan beberapa metode pengukuran arah kiblat berbasis smartphone;</li>
+      <li>mengolah data pengukuran sudut berulang (rata-rata sirkular, simpangan baku, galat);</li>
+      <li>menyusun laporan praktikum pengukuran arah kiblat.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="sensor">
+  <div class="sec-head"><div class="eyebrow">1</div><h2>Sensor yang dipakai</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Sensor</th><th>Mengukur</th><th>Kegunaan untuk kiblat</th><th>Keterbatasan</th></tr></thead>
+    <tbody>
+      <tr><td><b>Magnetometer</b></td><td>Medan magnet 3 sumbu (µT)</td><td>Kompas: arah utara magnetik</td><td>Terganggu logam dan arus listrik; perlu kalibrasi</td></tr>
+      <tr><td><b>Akselerometer</b></td><td>Percepatan 3 sumbu, termasuk gravitasi</td><td>Mengetahui kemiringan ponsel; inklinometer untuk menegakkan tongkat</td><td>Terganggu getaran dan gerak tangan</td></tr>
+      <tr><td><b>Giroskop</b></td><td>Kecepatan sudut</td><td>Menstabilkan arah saat ponsel diputar</td><td>Bergeser (drift) jika lama</td></tr>
+      <tr><td><b>GPS (GNSS)</b></td><td>Posisi dan waktu satelit</td><td>Koordinat masjid; jam akurat untuk rashdul kiblat</td><td>Posisi kurang teliti di dalam gedung</td></tr>
+      <tr><td><b>Kamera</b></td><td>Citra</td><td>Dokumentasi bayangan; aplikasi realitas tertambah (AR)</td><td>Distorsi lensa</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="kompas">
+  <div class="sec-head"><div class="eyebrow">2</div><h2>Cara kerja kompas digital</h2>
+  <p>Medan magnet Bumi di Indonesia besarnya sekitar 40-an mikrotesla, dengan komponen horizontal mengarah ke utara magnetik. Jika ponsel diletakkan mendatar, magnetometer membaca komponen B<sub>x</sub> (ke kanan layar) dan B<sub>y</sub> (ke atas layar). Arah hadap ponsel terhadap utara magnetik:</p></div>
+  <div class="eq">
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>A</mi><mtext>mag</mtext></msub><mo>=</mo><mi>atan2</mi><mo>(</mo><mo>&#x2212;</mo><msub><mi>B</mi><mi>x</mi></msub><mo>,</mo><mspace width="0.3em"/><msub><mi>B</mi><mi>y</mi></msub><mo>)</mo></mrow></math>
+    <div class="cap">Jika ponsel miring, data akselerometer dipakai untuk "meratakan" vektor medan dulu (kompensasi kemiringan). Konvensi sumbu bisa berbeda antar-merek; aplikasi mengurusnya secara otomatis.</div>
+  </div>
+  <div class="two">
+    <div class="box"><h3>Utara sejati di aplikasi</h3><p>Banyak aplikasi menampilkan utara sejati dengan menambahkan deklinasi magnetik dari model medan magnet dunia, berdasarkan lokasi GPS. Pastikan pengaturan "utara sejati" aktif dan izin lokasi diberikan. Jika tidak, aplikasi menampilkan utara magnetik.</p></div>
+    <div class="box"><h3>Kalibrasi</h3><p>Gerakkan ponsel membentuk angka 8 di udara beberapa kali. Langkah ini memberi data ke semua arah sehingga perangkat lunak dapat menghapus pengaruh magnet tetap di dalam ponsel (<i>hard iron</i>) dan distorsi oleh bahan feromagnetik (<i>soft iron</i>).</p></div>
+  </div>
+</section>
+
+<section id="gangguan">
+  <div class="sec-head"><div class="eyebrow">3</div><h2>Simulasi: pengaruh benda besi</h2>
+  <p>Model sederhana: medan Bumi horizontal ditambah medan dipol dari tiang besi di sebelah barat ponsel. Geser jarak dan kekuatan magnetisasi untuk melihat seberapa jauh jarum kompas berbelok. Angka dalam simulasi ini ilustratif, bukan pengukuran.</p></div>
+  <div class="sim">
+    <div class="stage"><svg id="mag" viewBox="0 0 420 300" role="img" aria-label="Simulasi gangguan magnet pada kompas"></svg></div>
+    <div class="ctrl">
+      <label for="gR">Jarak ponsel ke besi <span id="vR">50 cm</span><input id="gR" type="range" min="10" max="200" value="50"></label>
+      <label for="gM">Kekuatan magnetisasi besi <span id="vM">sedang</span><input id="gM" type="range" min="0" max="3" step="0.1" value="1"></label>
+      <div class="readout">
+        <span>Medan Bumi horizontal (model)</span><b>38,0 µT</b>
+        <span>Medan gangguan</span><b id="oB">—</b>
+        <span>Simpangan jarum</span><b id="oDev">—</b>
+      </div>
+      <p class="small muted">Medan dipol melemah sebanding 1/r³: menjauh dua kali lipat mengurangi gangguan delapan kali.</p>
+    </div>
+  </div>
+</section>
+
+<section id="metode">
+  <div class="sec-head"><div class="eyebrow">4</div><h2>Metode berbasis smartphone</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Metode</th><th>Cara</th><th>Kelebihan</th><th>Kelemahan</th></tr></thead>
+    <tbody>
+      <tr><td><b>Aplikasi kompas kiblat</b></td><td>Aplikasi menghitung azimut kiblat dari GPS dan menunjukkan arahnya dengan magnetometer.</td><td>Cepat, mudah</td><td>Paling rentan gangguan logam; galat beberapa derajat sering terjadi</td></tr>
+      <tr><td><b>Peta satelit</b></td><td>Di Google Earth, tarik garis dengan alat penggaris dari masjid ke Ka'bah. Bandingkan arah garis dengan dinding masjid pada citra.</td><td>Tidak terpengaruh logam; garis Google Earth mengikuti lingkaran besar</td><td>Bergantung ketajaman dan ketepatan posisi citra</td></tr>
+      <tr><td><b>Aplikasi posisi Matahari</b></td><td>Aplikasi menampilkan azimut Matahari saat ini. Gunakan bayangan tongkat sebagai acuan arah, lalu putar sebesar selisih azimut.</td><td>Teliti; tidak terpengaruh logam</td><td>Perlu Matahari dan tongkat tegak</td></tr>
+      <tr><td><b>Jam GPS + bayangan kiblat</b></td><td>Pakai jam ponsel yang tersinkron sebagai pewaktu rashdul kiblat (Bab 9).</td><td>Paling teliti di antara metode di atas</td><td>Hanya pada jam tertentu</td></tr>
+      <tr><td><b>Sensor mentah (phyphox)</b></td><td>Aplikasi phyphox (RWTH Aachen) merekam data magnetometer dan akselerometer untuk dianalisis.</td><td>Cocok untuk eksperimen dan analisis galat</td><td>Perlu pengolahan data sendiri</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note"><b>Prinsip umum.</b> Gunakan kompas ponsel hanya sebagai pemeriksaan cepat. Untuk menetapkan arah kiblat masjid, gunakan metode berbasis Matahari atau peta satelit, lalu bandingkan.</p>
+</section>
+
+<section id="data">
+  <div class="sec-head"><div class="eyebrow">5</div><h2>Mengolah data pengukuran sudut</h2>
+  <p>Ukur berulang kali agar galat acak terlihat. Untuk data sudut, rata-rata biasa bisa keliru jika data melintasi 0°/360° (misalnya 359° dan 1° rata-ratanya 0°, bukan 180°). Karena itu dipakai <b>rata-rata sirkular</b>:</p></div>
+  <div class="eq">
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mover><mi>A</mi><mo>&#xAF;</mo></mover><mo>=</mo><mi>atan2</mi><mrow><mo>(</mo><mo>&#x2211;</mo><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.17em"/><msub><mi>A</mi><mi>i</mi></msub><mo>,</mo><mspace width="0.3em"/><mo>&#x2211;</mo><mi>cos</mi><mo>&#x2061;</mo><mspace width="0.17em"/><msub><mi>A</mi><mi>i</mi></msub><mo>)</mo></mrow></mrow></math>
+    <div class="cap">Simpangan baku dihitung dari selisih setiap data terhadap rata-rata sirkular. Galat baku rata-rata = simpangan baku / √n.</div>
+  </div>
+  <div class="calc">
+    <div class="grid2">
+      <div class="ctrl">
+        <label class="field" for="dIn">Data azimut (°), dipisah koma atau baris baru
+          <textarea id="dIn" rows="6" style="font:inherit;font-family:var(--f-mono);padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);width:100%">293.5, 296.0, 294.0, 297.5, 295.0, 292.5, 296.5, 294.5, 295.5, 293.0</textarea></label>
+        <label class="field" for="dRef">Azimut kiblat hasil hitungan (°)<input id="dRef" type="text" value="295.15"></label>
+        <p class="small muted">Data awal adalah contoh. Ganti dengan data kelompok Anda.</p>
+      </div>
+      <div class="readout">
+        <span>Jumlah data n</span><b id="dN">—</b>
+        <span>Rata-rata sirkular</span><b id="dM">—</b>
+        <span>Simpangan baku</span><b id="dS">—</b>
+        <span>Galat baku rata-rata</span><b id="dSE">—</b>
+        <span>Selisih dengan hitungan</span><b id="dDiff">—</b>
+        <span>Data terkecil–terbesar</span><b id="dRng">—</b>
+      </div>
+    </div>
+    <svg id="dPlot" viewBox="0 0 600 90" style="width:100%;height:auto" role="img" aria-label="Sebaran data azimut"></svg>
+  </div>
+</section>
+
+<section id="praktikum">
+  <div class="sec-head"><div class="eyebrow">6</div><h2>Praktikum: membandingkan metode</h2></div>
+  <ol class="steps">
+    <li><p>Di halaman masjid proyek, catat koordinat dari GPS ponsel. Hitung azimut kiblat (Bab 7).</p></li>
+    <li><p>Kalibrasi kompas ponsel. Lakukan 10 kali pembacaan arah kiblat dengan aplikasi kompas di tempat terbuka, dan 10 kali di dalam ruang dekat tiang. Masukkan ke pengolah data di atas.</p></li>
+    <li><p>Tentukan garis kiblat dengan metode Matahari (bayangan kiblat harian atau azimut Matahari). Anggap ini sebagai acuan.</p></li>
+    <li><p>Tarik garis masjid–Ka'bah di Google Earth dan ukur sudut dinding mihrab terhadap garis itu.</p></li>
+    <li><p>Bandingkan semua hasil dalam satu tabel: metode, rata-rata, simpangan baku, selisih terhadap acuan.</p></li>
+  </ol>
+  <div class="box">
+    <h3>Format laporan</h3>
+    <ol>
+      <li>Pendahuluan: tujuan dan identitas masjid (nama, alamat, koordinat).</li>
+      <li>Dasar teori singkat: rumus arah kiblat dan prinsip tiap metode.</li>
+      <li>Alat dan prosedur, disertai foto.</li>
+      <li>Data dan pengolahan: tabel pengukuran, rata-rata sirkular, simpangan baku.</li>
+      <li>Pembahasan: sumber galat, perbandingan metode, kondisi arah saf masjid.</li>
+      <li>Kesimpulan dan rekomendasi untuk pengurus masjid.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="latihan">
+  <div class="sec-head"><div class="eyebrow">Penutup</div><h2>Latihan pemahaman</h2><p>Lima soal untuk memeriksa pemahaman. Skor tidak disimpan.</p></div>
+  <div class="quiz" id="quiz"></div>
+  <p class="score" id="score"></p>
+  <div class="task">
+    <h3>Tugas Bab 10 (kelompok)</h3>
+    <ol>
+      <li>Lakukan praktikum di atas dan susun laporan sesuai format. Laporan ini menjadi bagian arah kiblat dalam proyek akhir.</li>
+      <li>Rekam data magnetometer dengan phyphox sambil mendekatkan ponsel ke tiang besi dari jarak 2 m sampai 10 cm. Buat grafik besar medan terhadap jarak dan bandingkan dengan pola 1/r³.</li>
+    </ol>
+    <p class="small muted">Dikumpulkan pada Bab 12.</p>
+  </div>
+</section>
+
+<script type="application/json" id="quizdata">[
+ {"q":"Sensor ponsel yang berfungsi sebagai kompas adalah …","o":["Akselerometer","Magnetometer","Giroskop","Barometer"],"a":1,"e":"Magnetometer mengukur medan magnet Bumi."},
+ {"q":"Gerakan angka 8 saat memakai aplikasi kompas bertujuan untuk …","o":["Mengaktifkan GPS","Mengkalibrasi magnetometer","Mengukur ketinggian","Menghemat baterai"],"a":1,"e":"Kalibrasi menghapus pengaruh magnet tetap dan distorsi bahan di sekitar sensor."},
+ {"q":"Medan gangguan dari benda besi kecil (dipol) melemah sebanding dengan …","o":["1/r","1/r²","1/r³","r"],"a":2,"e":"Medan dipol berbanding terbalik dengan pangkat tiga jarak."},
+ {"q":"Rata-rata biasa dari 358° dan 4° adalah 181°. Rata-rata sirkularnya …","o":["181°","1°","0°","362°"],"a":1,"e":"Dengan atan2(Σsin, Σcos) hasilnya 1°, sesuai arah sebenarnya."},
+ {"q":"Metode smartphone yang paling tidak terpengaruh benda logam adalah …","o":["Aplikasi kompas kiblat","Peta satelit atau posisi Matahari","Magnetometer mentah","Semua sama"],"a":1,"e":"Peta satelit dan Matahari tidak memakai medan magnet."}
+]</script>
+
+
+<footer>
+  <div class="next"><span>Sebelumnya: <b>Bab 9 · Rashdul Kiblat & Bayangan Kiblat Harian</b></span><span>Berikutnya: <b>Bab 12 · Waktu Salat: Zuhur & Ashar</b></span></div>
+  <div>Astronomi Islam · Bab 10 · Program Studi Pendidikan Fisika, UIN Sunan Gunung Djati Bandung</div>
+</footer>
+</div>
+
+<script>
+/* Pustaka bersama Astronomi Islam: format angka, posisi Matahari, arah kiblat, waktu sholat, kuis */
+var F = (function(){
+  var RAD = Math.PI/180, DEG = 180/Math.PI;
+  var KABAH = {phi: 21 + 25/60 + 21/3600, lam: 39 + 49/60 + 34/3600};
+  function mod(a,n){ return ((a%n)+n)%n; }
+  function fnum(x,d){ if(!isFinite(x)) return '—'; return x.toFixed(d).replace('.',',').replace('-','−'); }
+  function sgn(x,d){ return (x>0?'+':'')+fnum(x,d); }
+  function dms(x, secs){
+    if(!isFinite(x)) return '—';
+    var s = x<0?'−':''; x=Math.abs(x);
+    var d=Math.floor(x), mf=(x-d)*60, m=Math.floor(mf), sc=(mf-m)*60;
+    if(!secs){ m=Math.round(mf); if(m===60){d++;m=0;} return s+d+'°'+(m<10?'0':'')+m+'′'; }
+    sc=Math.round(sc); if(sc===60){sc=0;m++;} if(m===60){m=0;d++;}
+    return s+d+'°'+(m<10?'0':'')+m+'′'+(sc<10?'0':'')+sc+'″';
+  }
+  function hm(h, mode){ /* jam desimal -> "hh:mm"; mode 'up' bulatkan ke atas, 'down' ke bawah */
+    if(!isFinite(h)) return '—';
+    h = mod(h,24); var m = h*60;
+    m = mode==='up' ? Math.ceil(m-1e-9) : mode==='down' ? Math.floor(m+1e-9) : Math.round(m);
+    var hh=Math.floor(m/60)%24, mm=m%60;
+    return (hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm;
+  }
+  function hms(h){
+    if(!isFinite(h)) return '—';
+    h = mod(h,24); var s=Math.round(h*3600), hh=Math.floor(s/3600)%24, mm=Math.floor(s%3600/60), ss=s%60;
+    return (hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss;
+  }
+  function minsec(m){ var s=m<0?'−':'+'; m=Math.abs(m); var mm=Math.floor(m), ss=Math.round((m-mm)*60); if(ss===60){mm++;ss=0;} return s+mm+' m '+(ss<10?'0':'')+ss+' d'; }
+  function jd(y,mo,d,hUT){ /* Kalender Gregorius */
+    if(mo<=2){ y-=1; mo+=12; }
+    var A=Math.floor(y/100), B=2-A+Math.floor(A/4);
+    return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(mo+1))+d+B-1524.5+(hUT||0)/24;
+  }
+  function sun(JD){ /* algoritma NOAA (Meeus, ketelitian sekitar 0,01°) */
+    var T=(JD-2451545)/36525;
+    var L0=mod(280.46646+T*(36000.76983+0.0003032*T),360);
+    var M=357.52911+T*(35999.05029-0.0001537*T);
+    var e=0.016708634-T*(0.000042037+0.0000001267*T);
+    var Mr=M*RAD;
+    var C=Math.sin(Mr)*(1.914602-T*(0.004817+0.000014*T))+Math.sin(2*Mr)*(0.019993-0.000101*T)+Math.sin(3*Mr)*0.000289;
+    var trueL=L0+C;
+    var om=125.04-1934.136*T;
+    var lam=trueL-0.00569-0.00478*Math.sin(om*RAD);
+    var eps0=23+(26+(21.448-T*(46.815+T*(0.00059-T*0.001813)))/60)/60;
+    var eps=eps0+0.00256*Math.cos(om*RAD);
+    var dec=Math.asin(Math.sin(eps*RAD)*Math.sin(lam*RAD))*DEG;
+    var ra=mod(Math.atan2(Math.cos(eps*RAD)*Math.sin(lam*RAD),Math.cos(lam*RAD))*DEG,360);
+    var y=Math.pow(Math.tan(eps*RAD/2),2);
+    var E=y*Math.sin(2*L0*RAD)-2*e*Math.sin(Mr)+4*e*y*Math.sin(Mr)*Math.cos(2*L0*RAD)-0.5*y*y*Math.sin(4*L0*RAD)-1.25*e*e*Math.sin(2*Mr);
+    var R=1.000001018*(1-e*e)/(1+e*Math.cos((M+C)*RAD));
+    return {dec:dec, eot:4*E*DEG, ra:ra, lam:mod(lam,360), eps:eps, sd:0.2666/R, R:R};
+  }
+  function altaz(JD, phi, lam){ /* tinggi & azimut Matahari (geometris, tanpa refraksi) */
+    var s=sun(JD), T=(JD-2451545)/36525;
+    var gmst=mod(280.46061837+360.98564736629*(JD-2451545)+T*T*(0.000387933-T/38710000),360);
+    var H=mod(gmst+lam-s.ra+180,360)-180;
+    var p=phi*RAD, d=s.dec*RAD, h=H*RAD;
+    var alt=Math.asin(Math.sin(p)*Math.sin(d)+Math.cos(p)*Math.cos(d)*Math.cos(h))*DEG;
+    var az=mod(Math.atan2(-Math.cos(d)*Math.sin(h), Math.cos(p)*Math.sin(d)-Math.sin(p)*Math.cos(d)*Math.cos(h))*DEG,360);
+    return {alt:alt, az:az, H:H, dec:s.dec};
+  }
+  function qibla(phi, lam){
+    var p=phi*RAD, pk=KABAH.phi*RAD, dl=(KABAH.lam-lam)*RAD;
+    var A=mod(Math.atan2(Math.sin(dl), Math.cos(p)*Math.tan(pk)-Math.sin(p)*Math.cos(dl))*DEG,360);
+    var c=Math.sin(p)*Math.sin(pk)+Math.cos(p)*Math.cos(pk)*Math.cos(dl);
+    var ang=Math.acos(Math.max(-1,Math.min(1,c)))*DEG;
+    return {A:A, dist:ang*RAD*6371, ang:ang};
+  }
+  function falak(A){
+    A=mod(A,360);
+    if(Math.abs(A)<1e-9) return 'U'; if(Math.abs(A-180)<1e-9) return 'S';
+    if(Math.abs(A-90)<1e-9) return 'T'; if(Math.abs(A-270)<1e-9) return 'B';
+    if(A>180){ var d=A-270; return 'B '+dms(Math.abs(d),false)+' '+(d>0?'U':'S'); }
+    var e=90-A; return 'T '+dms(Math.abs(e),false)+' '+(e>0?'U':'S');
+  }
+  function hourAngle(h, phi, dec){ /* sudut waktu (derajat) saat Matahari bertinggi h */
+    var p=phi*RAD, d=dec*RAD;
+    var c=(Math.sin(h*RAD)-Math.sin(p)*Math.sin(d))/(Math.cos(p)*Math.cos(d));
+    if(c<-1||c>1) return NaN;
+    return Math.acos(c)*DEG;
+  }
+  /* Waktu sholat. o = {phi, lam, tz, H (m), y, m, d, ihtiyat (menit), subuh, isya, ashar(1|2)} */
+  function prayer(o){
+    var ih = o.ihtiyat==null?2:o.ihtiyat, sub=o.subuh==null?-20:o.subuh, isy=o.isya==null?-18:o.isya, k=o.ashar||1;
+    var base=jd(o.y,o.m,o.d,0);
+    function at(localH){ return sun(base+(localH-o.tz)/24); }
+    var s=at(12), transit=12+o.tz-o.lam/15-s.eot/60;
+    for(var i=0;i<2;i++){ s=at(transit); transit=12+o.tz-o.lam/15-s.eot/60; }
+    var hSet=-(16/60+34/60+1.76*Math.sqrt(Math.max(0,o.H||0))/60);
+    function ev(h, sign){
+      var t=transit;
+      for(var i=0;i<3;i++){ var ss=at(t); var H=hourAngle(typeof h==='function'?h(ss.dec):h, o.phi, ss.dec); if(isNaN(H)) return NaN; t=transit+sign*H/15; }
+      return t;
+    }
+    var asharH=function(dec){ return Math.atan(1/(Math.tan(Math.abs(o.phi-dec)*RAD)+k))*DEG; };
+    var r={transit:transit, dec:s.dec, eot:s.eot, hSet:hSet,
+      subuh:ev(sub,-1), terbit:ev(hSet,-1), dhuha:ev(4.5,-1), ashar:ev(asharH,1), maghrib:ev(hSet,1), isya:ev(isy,1)};
+    r.asharAlt=asharH(sun(base+(r.ashar-o.tz)/24).dec);
+    r.final={
+      imsak: r.subuh+ih/60-10/60, subuh:r.subuh+ih/60, terbit:r.terbit-ih/60, dhuha:r.dhuha+ih/60,
+      zuhur:r.transit+ih/60, ashar:r.ashar+ih/60, maghrib:r.maghrib+ih/60, isya:r.isya+ih/60
+    };
+    return r;
+  }
+  /* Saat Matahari berazimut tertentu (untuk bayangan kiblat). Mengembalikan daftar jam lokal. */
+  function azimuthTimes(o, targetAz){
+    var base=jd(o.y,o.m,o.d,0), out=[], prev=null, prevT=null;
+    for(var mnt=5*60; mnt<=19*60; mnt+=1){
+      var t=mnt/60, a=altaz(base+(t-o.tz)/24, o.phi, o.lam);
+      var dd=mod(a.az-targetAz+540,360)-180;
+      if(prev!==null && Math.abs(dd-prev)<20 && (prev<=0&&dd>0 || prev>=0&&dd<0)){
+        var f=prev/(prev-dd), tt=prevT+f/60, aa=altaz(base+(tt-o.tz)/24, o.phi, o.lam);
+        if(aa.alt>0) out.push({t:tt, alt:aa.alt});
+      }
+      prev=dd; prevT=t;
+    }
+    return out;
+  }
+  /* Kuis bersama */
+  function quiz(){
+    var data=document.getElementById('quizdata'), box=document.getElementById('quiz'), sc=document.getElementById('score');
+    if(!data||!box) return;
+    var Q=JSON.parse(data.textContent), score=0, done=0;
+    if(sc) sc.textContent='Skor: 0 / '+Q.length;
+    Q.forEach(function(it,i){
+      var d=document.createElement('div'); d.className='qz';
+      d.innerHTML='<p>'+(i+1)+'. '+it.q+'</p><div class="opts"></div><div class="fb" hidden></div>';
+      var opts=d.querySelector('.opts'), fb=d.querySelector('.fb');
+      it.o.forEach(function(o,j){
+        var b=document.createElement('button'); b.type='button'; b.textContent=String.fromCharCode(65+j)+'. '+o;
+        b.addEventListener('click',function(){
+          opts.querySelectorAll('button').forEach(function(x,k){ x.disabled=true; if(k===it.a) x.classList.add('ok'); });
+          if(j===it.a){ score++; fb.textContent='Benar. '+it.e; } else { b.classList.add('bad'); fb.textContent='Kurang tepat. '+it.e; }
+          fb.hidden=false; done++;
+          if(sc) sc.textContent='Skor: '+score+' / '+Q.length+(done===Q.length?' · selesai':'');
+        });
+        opts.appendChild(b);
+      });
+      box.appendChild(d);
+    });
+  }
+  function $(id){ return document.getElementById(id); }
+  function num(id){ var v=$(id).value; return parseFloat(String(v).replace(',','.').replace('−','-')); }
+  function copy(text, btn){
+    var done=function(){ if(btn){ var t=btn.textContent; btn.textContent='Tersalin'; setTimeout(function(){btn.textContent=t;},1500);} };
+    try{ navigator.clipboard.writeText(text).then(done, function(){ fallback(); }); }catch(e){ fallback(); }
+    function fallback(){ var ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); done();}catch(_){} ta.remove(); }
+  }
+  var PLACES=[
+    ["UIN SGD Bandung",-6.9312,107.7175,700],
+    ["Kota Bandung",-6.9175,107.6191,768],
+    ["Jakarta",-6.1754,106.8272,8],
+    ["Surabaya",-7.2575,112.7521,5],
+    ["Yogyakarta",-7.7956,110.3695,113],
+    ["Banda Aceh",5.5483,95.3238,10],
+    ["Makassar",-5.1477,119.4327,5],
+    ["Jayapura",-2.5337,140.7181,10],
+    ["Makkah",21.4225,39.8262,277]
+  ];
+  var TZ={"Jayapura":9,"Makassar":8,"Makkah":3};
+  function placeSelect(sel, onPick){
+    PLACES.forEach(function(p,i){ var o=document.createElement('option'); o.value=i; o.textContent=p[0]; sel.appendChild(o); });
+    sel.addEventListener('change',function(){ var p=PLACES[+sel.value]; onPick({name:p[0],phi:p[1],lam:p[2],H:p[3],tz:TZ[p[0]]||7}); });
+  }
+  function today(){ var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function parseDate(s){ var a=String(s).split('-'); return {y:+a[0],m:+a[1],d:+a[2]}; }
+  var BULAN=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  return {RAD:RAD,DEG:DEG,KABAH:KABAH,mod:mod,fnum:fnum,sgn:sgn,dms:dms,hm:hm,hms:hms,minsec:minsec,jd:jd,sun:sun,altaz:altaz,qibla:qibla,falak:falak,hourAngle:hourAngle,prayer:prayer,azimuthTimes:azimuthTimes,quiz:quiz,$:$,num:num,copy:copy,PLACES:PLACES,placeSelect:placeSelect,today:today,parseDate:parseDate,BULAN:BULAN};
+})();
+
+(function(){
+var RAD=F.RAD, NS='http://www.w3.org/2000/svg';
+function mk(svg,tag,a){ var e=document.createElementNS(NS,tag); for(var k in a) e.setAttribute(k,a[k]); svg.appendChild(e); return e; }
+function tx(svg,x,y,c,s,anc,st){ var t=mk(svg,'text',{x:x,y:y,'class':c}); if(anc) t.setAttribute('text-anchor',anc); if(st) t.setAttribute('style',st); t.textContent=s; }
+var M=F.$('mag');
+function updG(){
+  var r=+F.$('gR').value, m=+F.$('gM').value;
+  F.$('vR').textContent=r+' cm'; F.$('vM').textContent=m<0.3?'lemah':m<1.5?'sedang':m<2.4?'kuat':'sangat kuat';
+  /* dipol vertikal-horizontal sederhana: besi di barat, momen mengarah ke utara; medan di ponsel (timur dari besi) */
+  var Bd=m*8*Math.pow(50/r,3); /* µT: sekitar 8 µT pada r = 50 cm untuk magnetisasi sedang (ilustratif) */
+  var H=38, Bn=H - 0.5*Bd, Be=Bd*0.6, dev=Math.atan2(Be,Bn)/RAD;
+  F.$('oB').textContent=F.fnum(Math.hypot(0.5*Bd,0.6*Bd),1)+' µT'; F.$('oDev').textContent=F.fnum(Math.abs(dev),1)+'°';
+  while(M.firstChild) M.removeChild(M.firstChild);
+  mk(M,'rect',{x:0,y:0,width:420,height:300,style:'fill:var(--surface)'});
+  var px=300, py=150, ix=px-r*1.3; ix=Math.max(30,ix);
+  mk(M,'rect',{x:ix-12,y:py-60,width:24,height:120,rx:3,style:'fill:var(--muted);opacity:.6'}); tx(M,ix,py+80,'sm','besi','middle');
+  mk(M,'line',{x1:ix+14,y1:py,x2:px-30,y2:py,style:'stroke:var(--line);stroke-dasharray:4 4'});
+  tx(M,(ix+px)/2,py-8,'sm',r+' cm','middle');
+  mk(M,'circle',{cx:px,cy:py,r:60,style:'fill:var(--bg);stroke:var(--line);stroke-width:1.5'});
+  tx(M,px,py-66,'lbl','U','middle');
+  mk(M,'line',{x1:px,y1:py,x2:px,y2:py-55,style:'stroke:var(--accent);stroke-width:2;stroke-dasharray:4 3'});
+  var a=dev*RAD; mk(M,'line',{x1:px-48*Math.sin(a),y1:py+48*Math.cos(a),x2:px+52*Math.sin(a),y2:py-52*Math.cos(a),style:'stroke:var(--warn);stroke-width:4;stroke-linecap:round'});
+  mk(M,'circle',{cx:px,cy:py,r:4,style:'fill:var(--ink)'});
+  tx(M,12,290,'sm','Garis putus-putus hijau: utara magnetik sebenarnya. Jarum merah: arah yang ditunjukkan kompas.');
+}
+['gR','gM'].forEach(function(i){ F.$(i).addEventListener('input',updG); }); updG();
+
+/* data */
+function updD(){
+  var arr=F.$('dIn').value.split(/[\s,;]+/).map(function(s){return parseFloat(s.replace(',','.'));}).filter(function(x){return isFinite(x);});
+  var ref=F.num('dRef'), P=F.$('dPlot'); while(P.firstChild) P.removeChild(P.firstChild);
+  if(!arr.length){ F.$('dN').textContent='0'; return; }
+  var S=0,C=0; arr.forEach(function(a){ S+=Math.sin(a*RAD); C+=Math.cos(a*RAD); });
+  var mean=F.mod(Math.atan2(S,C)/RAD,360), dev=arr.map(function(a){return F.mod(a-mean+540,360)-180;});
+  var sd=arr.length>1?Math.sqrt(dev.reduce(function(s,d){return s+d*d;},0)/(arr.length-1)):0;
+  F.$('dN').textContent=arr.length; F.$('dM').textContent=F.fnum(mean,2)+'°'; F.$('dS').textContent=F.fnum(sd,2)+'°';
+  F.$('dSE').textContent=F.fnum(sd/Math.sqrt(arr.length),2)+'°';
+  var dd=isNaN(ref)?NaN:F.mod(mean-ref+540,360)-180; F.$('dDiff').textContent=isNaN(dd)?'—':F.sgn(dd,2)+'°';
+  F.$('dRng').textContent=F.fnum(mean+Math.min.apply(null,dev),1)+'° – '+F.fnum(mean+Math.max.apply(null,dev),1)+'°';
+  var span=Math.max(5,Math.max.apply(null,dev.map(Math.abs).concat(isNaN(dd)?[0]:[Math.abs(dd)]))*1.2), X0=30,X1=570;
+  function xo(d){ return X0+(d+span)/(2*span)*(X1-X0); }
+  mk(P,'line',{x1:X0,x2:X1,y1:50,y2:50,'class':'axisl'});
+  dev.forEach(function(d){ mk(P,'circle',{cx:xo(d),cy:50,r:5,style:'fill:var(--sky);opacity:.6'}); });
+  mk(P,'line',{x1:xo(0),x2:xo(0),y1:28,y2:72,style:'stroke:var(--sky);stroke-width:2'}); tx(P,xo(0),20,'tick','rata-rata','middle');
+  if(!isNaN(dd)){ mk(P,'line',{x1:xo(-dd),x2:xo(-dd),y1:28,y2:72,style:'stroke:var(--accent);stroke-width:2;stroke-dasharray:4 3'}); tx(P,xo(-dd),86,'tick','hitungan','middle'); }
+  tx(P,X0,86,'tick','−'+F.fnum(span,1)+'°'); tx(P,X1,86,'tick','+'+F.fnum(span,1)+'°','end');
+}
+['dIn','dRef'].forEach(function(i){ F.$(i).addEventListener('input',updD); }); updD();
+
+F.quiz();
+})();
+</script>
+
+</body>
+</html>

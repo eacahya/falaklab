@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bab 15 · Studi Kasus: Perbedaan Hisab Waktu Salat antarlembaga</title>
+<meta name="falak-bab" content="15">
+<link rel="stylesheet" href="../falak.css">
+<script src="../data.js"></script>
+<script src="../falak.js"></script>
+<script src="../kunci.js"></script>
+</head>
+<body>
+<style>
+/* Layout: lembar kuliah satu kolom, navigasi bagian lengket di atas; simulasi dan kalkulator dua kolom di layar besar */
+:root{
+  --bg:#f2f4f6; --surface:#ffffff; --ink:#15213a; --muted:#56627a; --line:#d5dbe4;
+  --accent:#0d6b5f; --accent-soft:#e1f0ec; --gold:#a8701a; --gold-soft:#f6ecd9;
+  --sky:#2c4a86; --sky-soft:#e3e9f6; --warn:#a33a2a; --warn-soft:#f7e3df;
+  --f-display:"Spectral",Georgia,"Times New Roman",serif;
+  --f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --f-arab:"Amiri","Traditional Arabic","Scheherazade New",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1522; --surface:#172033; --ink:#e6eaf2; --muted:#9aa6bd; --line:#2b3850;
+  --accent:#4fc2ad; --accent-soft:#163a37; --gold:#e3b464; --gold-soft:#3a2f1c;
+  --sky:#8eaaf0; --sky-soft:#1d2a47; --warn:#f08a78; --warn-soft:#3b211d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1522; --surface:#172033; --ink:#e6eaf2; --muted:#9aa6bd; --line:#2b3850;
+  --accent:#4fc2ad; --accent-soft:#163a37; --gold:#e3b464; --gold-soft:#3a2f1c;
+  --sky:#8eaaf0; --sky-soft:#1d2a47; --warn:#f08a78; --warn-soft:#3b211d; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65}
+.wrap{max-width:980px;margin:0 auto;padding-inline:20px;padding-block:0 64px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,5vw,3.1rem);font-weight:700}
+h2{font-size:clamp(1.55rem,3.4vw,2.1rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0;max-width:68ch}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.ar-in{font-family:var(--f-arab);font-size:1.15em}
+.muted{color:var(--muted)}
+.small{font-size:.92rem}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+header.top{padding-block:44px 28px;display:grid;gap:14px;border-bottom:1px solid var(--line)}
+header.top .meta{display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--muted);font-size:.95rem}
+header.top .meta b{color:var(--ink);font-weight:600}
+.lead{font-size:1.12rem;color:var(--muted)}
+
+nav.sec{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-20px;padding-inline:20px}
+nav.sec ul{display:flex;gap:4px;list-style:none;margin:0;padding:8px 0;overflow-x:auto;scrollbar-width:none}
+nav.sec a{display:block;white-space:nowrap;padding:6px 12px;border-radius:6px;text-decoration:none;color:var(--muted);font-weight:600;font-size:.93rem}
+nav.sec a:hover{color:var(--ink);background:var(--surface)}
+
+section{padding-block:48px 8px;display:grid;grid-template-columns:minmax(0,1fr);gap:20px;scroll-margin-top:60px}
+.sec-head{display:grid;gap:6px}
+
+.goals{background:var(--accent-soft);border-radius:8px;padding:18px 20px;display:grid;gap:8px}
+.goals ol,.goals ul{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.box ul,.box ol{margin:0;padding-left:1.15em;display:grid;gap:4px}
+.note{border-left:3px solid var(--gold);padding:4px 0 4px 14px;color:var(--muted);font-size:.95rem;max-width:72ch}
+.note b{color:var(--ink)}
+.warn{background:var(--gold-soft);color:var(--ink);border-radius:8px;padding:12px 16px;font-size:.95rem}
+.warn b{color:var(--gold)}
+.prose{display:grid;gap:12px}
+.prose ul,.prose ol{margin:0;padding-left:1.2em;display:grid;gap:4px;max-width:70ch}
+
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--bg)}
+td.n,th.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.r,th.r{text-align:right}
+td i[lang=ar]{font-style:normal;font-family:var(--f-arab);font-size:1.12rem;color:var(--gold)}
+tr.hl td{background:var(--gold-soft)}
+tr.today td{background:var(--accent-soft)}
+
+.eq{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 18px;overflow-x:auto;display:grid;gap:6px}
+.eq .cap{font-size:.88rem;color:var(--muted)}
+math{font-size:1.12em}
+
+.ayat{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.ayat figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px}
+.ar{font-family:var(--f-arab);font-size:1.6rem;line-height:1.9;direction:rtl;text-align:right;color:var(--ink)}
+.ayat figcaption{font-size:.93rem;color:var(--muted)}
+.ayat figcaption b{color:var(--gold);font-family:var(--f-mono);font-size:.78rem;font-weight:600;display:block;margin-bottom:2px}
+
+.sim{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:start}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px;min-width:0}
+.stage svg{width:100%;height:auto;display:block;touch-action:none}
+svg .c{fill:none;stroke:var(--muted);stroke-width:1.3}
+svg .back{stroke-dasharray:4 5;opacity:.45}
+svg .grid{stroke:var(--line);stroke-width:1}
+svg .axisl{stroke:var(--muted);stroke-width:1.2}
+svg .lbl{fill:var(--ink);font-family:var(--f-mono);font-size:13px;font-weight:600}
+svg .sm{fill:var(--muted);font-family:var(--f-body);font-size:11.5px}
+svg .tick{fill:var(--muted);font-family:var(--f-mono);font-size:10.5px}
+.ctrl{display:grid;gap:14px;min-width:0}
+.ctrl label,.field{display:grid;gap:4px;font-weight:600;font-size:.95rem}
+.ctrl label span,.field span.v{font-family:var(--f-mono);color:var(--accent)}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+select,input[type=number],input[type=text],input[type=date]{font:inherit;font-weight:400;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);min-width:0;width:100%}
+input[type=number],input[type=text]{font-family:var(--f-mono)}
+.readout{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:.93rem;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;align-content:start}
+.readout b{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;overflow-wrap:anywhere;min-width:0}
+.readout .big{grid-column:1/-1;font-family:var(--f-display);font-size:1.6rem;font-weight:700;color:var(--accent);text-align:left}
+.presets{display:flex;flex-wrap:wrap;gap:6px}
+.presets button,.btn{font:inherit;font-size:.88rem;font-weight:600;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.presets button:hover,.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.85rem;font-weight:600;background:var(--sky-soft);color:var(--sky)}
+.pill.g{background:var(--gold-soft);color:var(--gold)}
+.pill.a{background:var(--accent-soft);color:var(--accent)}
+.box>.pill{justify-self:start}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;grid-template-columns:minmax(0,1fr);gap:16px;min-width:0}
+.calc .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.worked{display:grid;gap:6px;font-size:.95rem;counter-reset:w}
+.worked div{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:baseline}
+.worked div::before{counter-increment:w;content:counter(w);font-family:var(--f-mono);font-size:.75rem;color:var(--accent);font-weight:600}
+.worked code{font-family:var(--f-mono);font-size:.88rem;background:var(--bg);padding:1px 6px;border-radius:4px;overflow-wrap:anywhere}
+.worked div>span{min-width:0}
+
+.steps{margin:0;padding:0;list-style:none;display:grid;gap:12px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:baseline}
+.steps li>div{display:grid;gap:8px;min-width:0}
+.steps li::before{content:counter(s);font-family:var(--f-mono);font-weight:600;color:var(--bg);background:var(--accent);border-radius:50%;width:26px;height:26px;display:grid;place-items:center;font-size:.8rem}
+
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px}
+.ex .q{font-weight:600}
+.ex details summary{cursor:pointer;color:var(--accent);font-weight:600}
+.ex details[open] summary{margin-bottom:8px}
+.ex .sol{display:grid;gap:8px;font-size:.96rem}
+
+.quiz{display:grid;gap:14px}
+.qz{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px;display:grid;gap:10px}
+.qz p{font-weight:600}
+.opts{display:grid;gap:6px}
+.opts button{font:inherit;text-align:left;padding:8px 12px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--accent)}
+.opts button.ok{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+.opts button.bad{border-color:var(--warn);color:var(--warn)}
+.opts button:disabled{cursor:default}
+.fb{font-size:.92rem;color:var(--muted)}
+.score{font-family:var(--f-mono);font-weight:600;color:var(--accent)}
+
+.task{background:var(--gold-soft);border-radius:8px;padding:18px;display:grid;gap:8px}
+.task h3{color:var(--gold)}
+.task ol{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+.rubric td:not(:first-child){font-size:.9rem}
+.next{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.92rem;color:var(--muted)}
+.next b{color:var(--ink)}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem;display:grid;gap:10px}
+
+@media (max-width:760px){
+  .two,.sim,.calc .grid2{grid-template-columns:1fr}
+  body{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">Astronomi Islam (Ilmu Falak) · Lampiran</div>
+  <h1>Studi Kasus: Perbedaan Hisab Waktu Salat antar Lembaga di Indonesia</h1>
+  <p class="lead">Mengapa jadwal salat di masjid, aplikasi, dan kalender ormas bisa berselisih beberapa menit? Studi kasus ini membedah sumber perbedaan itu satu per satu, mengukurnya dengan hitungan, lalu menilainya secara kritis dari sisi fikih, astronomi, dan kehidupan bermasyarakat.</p>
+  <div class="meta"><div>Dosen: <b>Dr. Ea Cahya Septia Mahen, S.Pd., M.Si.</b></div><div>Prodi: <b>Pendidikan Fisika, UIN Sunan Gunung Djati Bandung</b></div></div>
+</header>
+<nav class="sec" aria-label="Bagian materi"><ul>
+    <li><a href="#tujuan">Tujuan</a></li>
+    <li><a href="#kasus">Kasus pemicu</a></li>
+    <li><a href="#lembaga">Kriteria lembaga</a></li>
+    <li><a href="#sumber">Sumber perbedaan</a></li>
+    <li><a href="#lab">Laboratorium</a></li>
+    <li><a href="#sensitivitas">Sensitivitas</a></li>
+    <li><a href="#subuh">Kasus Subuh</a></li>
+    <li><a href="#maghrib">Kasus Maghrib</a></li>
+    <li><a href="#global">Perbandingan global</a></li>
+    <li><a href="#kritis">Analisis kritis</a></li>
+    <li><a href="#diskusi">Diskusi</a></li>
+    <li><a href="#tugas">Tugas</a></li>
+</ul></nav>
+
+
+<section id="tujuan">
+  <div class="goals">
+    <div class="eyebrow">Tujuan</div>
+    <p>Setelah studi kasus ini, mahasiswa mampu:</p>
+    <ol>
+      <li>mengidentifikasi parameter hisab yang menyebabkan perbedaan jadwal salat antarlembaga;</li>
+      <li>menghitung besar pengaruh setiap parameter terhadap jadwal, dalam menit;</li>
+      <li>membandingkan kriteria lembaga di Indonesia dan di dunia beserta dasarnya;</li>
+      <li>menilai perbedaan secara kritis dari sisi dalil, data pengamatan, dan dampak sosial;</li>
+      <li>menyampaikan penjelasan yang jernih kepada masyarakat tentang perbedaan jadwal.</li>
+    </ol>
+  </div>
+  <p class="note"><b>Prasyarat.</b> Bab 12–14 (rumus waktu salat, kriteria tinggi Matahari, ihtiyat, ketinggian tempat). Studi kasus ini cocok untuk Bab 13 atau sebagai bahan diskusi kelompok setelah Bab 14.</p>
+</section>
+
+<section id="kasus">
+  <div class="sec-head"><div class="eyebrow">1</div><h2>Kasus pemicu (ilustrasi)</h2></div>
+  <div class="box">
+    <p>Di sebuah kompleks perumahan di Bandung, dua masjid berjarak 300 meter. Masjid pertama mengumandangkan azan Subuh pukul 04.18, masjid kedua pukul 04.26. Seorang jamaah membuka dua aplikasi di ponselnya: satu menunjukkan Maghrib 17.45, yang lain 17.50. Kalender dinding dari kantor kelurahan menulis Zuhur 11.42, sedangkan aplikasi menulis 11.41.</p>
+    <p><b>Pertanyaan:</b> apakah salah satunya keliru? Dari mana selisih 8 menit, 5 menit, dan 1 menit itu berasal? Jadwal mana yang sebaiknya diikuti, dan bagaimana menjelaskannya kepada jamaah?</p>
+  </div>
+  <p>Jawabannya hampir selalu sama: <b>rumusnya sama, parameternya berbeda</b>. Semua lembaga memakai rumus sudut waktu yang sama (Bab 12–13). Perbedaan muncul dari pilihan angka yang dimasukkan ke rumus itu.</p>
+</section>
+
+<section id="lembaga">
+  <div class="sec-head"><div class="eyebrow">2</div><h2>Kriteria lembaga di Indonesia</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Lembaga</th><th class="n">Subuh</th><th class="n">Isya</th><th>Catatan</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><b>Kementerian Agama RI</b></td><td class="n">−20°</td><td class="n">−18°</td><td>Kriteria jadwal resmi. Kemenag menegaskan (Desember 2020 dan Desember 2025) bahwa −20° benar secara fikih dan sains, berdasarkan pengamatan bertahun-tahun di berbagai daerah dengan kamera dan fotometri. Ihtiyat sekitar 2 menit.</td></tr>
+      <tr><td><b>Lembaga Falakiyah PBNU</b></td><td class="n">−20°</td><td class="n">−18°</td><td>Seminar LF PBNU di Bandung, 11 Desember 2022, menegaskan awal Subuh tetap −20° berdasarkan pengamatan lapangan di berbagai wilayah Indonesia.</td></tr>
+      <tr><td><b>Majelis Tarjih Muhammadiyah</b></td><td class="n">−18°</td><td class="n">−18°</td><td>Diputuskan dalam Munas Tarjih XXXI (Desember 2020), berlaku sejak 2021. Dasarnya pengamatan OIF UMSU (Medan), Pastron UAD (Yogyakarta), dan ISRN UHAMKA (Jakarta) di lebih dari 20 kota selama sekitar 4 tahun. Akibatnya Subuh sekitar 8 menit lebih lambat.</td></tr>
+      <tr><td><b>Persatuan Islam (Persis)</b></td><td class="n">−20°</td><td class="n">—</td><td>Memakai −20° seperti Kemenag dan NU. Tidak menerapkan koreksi ketinggian tempat secara mutlak untuk Maghrib; koreksi hanya untuk tempat yang ufuknya benar-benar lebih rendah, seperti gedung tinggi atau puncak gunung (penjelasan Persis, Februari 2026).</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note"><b>Catatan.</b> Kolom Isya yang kosong berarti sumber yang dikutip tidak menyebutkannya secara eksplisit. Mahasiswa diminta memverifikasi kriteria lengkap setiap lembaga dari dokumen resminya sebagai bagian dari tugas.</p>
+</section>
+
+<section id="sumber">
+  <div class="sec-head"><div class="eyebrow">3</div><h2>Tujuh sumber perbedaan</h2>
+  <p>Setiap jadwal adalah hasil dari satu rumus dengan tujuh "kenop" pengaturan. Kenali kenop mana yang diputar berbeda.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>No</th><th>Parameter</th><th>Pilihan yang beredar</th><th>Waktu yang terdampak</th><th class="n">Besar perbedaan (Bandung)</th></tr></thead>
+    <tbody>
+      <tr><td class="n">1</td><td><b>Kriteria Subuh</b></td><td>−20°, −19,5°, −18°, −15°</td><td>Subuh, Imsak</td><td class="n">−20° vs −18°: ±8–9 menit</td></tr>
+      <tr><td class="n">2</td><td><b>Kriteria Isya</b></td><td>−18°, −17°, atau interval tetap setelah Maghrib</td><td>Isya</td><td class="n">−18° vs −17°: ±4 menit</td></tr>
+      <tr><td class="n">3</td><td><b>Koreksi ufuk (ketinggian tempat)</b></td><td>Tanpa koreksi; dip dari tinggi tempat; dip dari profil medan; koreksi tetap</td><td>Terbit, Maghrib</td><td class="n">H = 768 m: Maghrib +3,3 menit</td></tr>
+      <tr><td class="n">4</td><td><b>Ihtiyat</b></td><td>0–4 menit; kadang berbeda per waktu (Zuhur lebih besar)</td><td>Semua</td><td class="n">sama dengan selisih ihtiyat</td></tr>
+      <tr><td class="n">5</td><td><b>Pembulatan</b></td><td>Ke atas; ke menit terdekat; terbit ke bawah</td><td>Semua</td><td class="n">0–1 menit</td></tr>
+      <tr><td class="n">6</td><td><b>Titik acuan koordinat</b></td><td>Pusat kota, kantor bupati, titik paling barat wilayah</td><td>Semua</td><td class="n">1° bujur = 4 menit</td></tr>
+      <tr><td class="n">7</td><td><b>Mazhab Ashar</b></td><td>Jumhur (bayangan + 1×), Hanafi (+ 2×)</td><td>Ashar</td><td class="n">±70 menit</td></tr>
+    </tbody>
+  </table></div>
+  <p>Perbedaan algoritma posisi Matahari (Meeus, VSOP87, tabel ephemeris) hanya menimbulkan selisih beberapa detik, jauh lebih kecil daripada ketujuh parameter di atas. Jadi, perbedaan jadwal antarlembaga <b>bukan</b> karena salah hitung, melainkan karena pilihan parameter.</p>
+</section>
+
+<section id="lab">
+  <div class="sec-head"><div class="eyebrow">4</div><h2>Laboratorium perbedaan jadwal</h2>
+  <p>Hitung jadwal satu tempat dan satu tanggal dengan kriteria berbagai lembaga sekaligus. Kolom selisih dibandingkan terhadap Kemenag. Ubah ihtiyat, tinggi tempat, dan mazhab Ashar untuk melihat pengaruhnya.</p></div>
+  <div class="calc">
+    <div class="fields">
+      <label class="field" for="lPlace">Tempat<select id="lPlace"></select></label>
+      <label class="field" for="lPhi">Lintang φ<input id="lPhi" type="text" value="-6.9175"></label>
+      <label class="field" for="lLam">Bujur λ<input id="lLam" type="text" value="107.6191"></label>
+      <label class="field" for="lTz">Zona (UTC+)<input id="lTz" type="number" value="7"></label>
+      <label class="field" for="lDate">Tanggal<input id="lDate" type="date"></label>
+      <label class="field" for="lIh">Ihtiyat (menit)<input id="lIh" type="number" value="2"></label>
+      <label class="field" for="lH">Tinggi tempat H (m)<input id="lH" type="number" value="0"></label>
+      <label class="field" for="lK">Mazhab Ashar<select id="lK"><option value="1">Jumhur</option><option value="2">Hanafi</option></select></label>
+    </div>
+    <div class="tbl"><table>
+      <thead><tr><th>Kriteria</th><th class="n">Subuh</th><th class="n">Terbit</th><th class="n">Zuhur</th><th class="n">Ashar</th><th class="n">Maghrib</th><th class="n">Isya</th></tr></thead>
+      <tbody id="lOut"></tbody>
+    </table></div>
+    <p class="small muted">Angka kecil di bawah jam adalah selisih (menit) terhadap baris Kemenag. Untuk lembaga luar negeri, hanya sudut Subuh dan Isya yang diganti; parameter lain disamakan agar perbandingannya adil.</p>
+  </div>
+</section>
+
+<section id="sensitivitas">
+  <div class="sec-head"><div class="eyebrow">5</div><h2>Mengapa 2° menjadi 8 menit? Analisis sensitivitas</h2>
+  <p>Turunkan rumus cos t = (sin h − sin φ sin δ)/(cos φ cos δ) terhadap h. Hasilnya menunjukkan berapa menit jadwal bergeser untuk setiap perubahan satu derajat kriteria:</p></div>
+  <div class="eq">
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mfrac><mrow><mi>d</mi><mi>t</mi></mrow><mrow><mi>d</mi><mi>h</mi></mrow></mfrac><mo>=</mo><mo>&#x2212;</mo><mfrac><mrow><mi>cos</mi><mo>&#x2061;</mo><mspace width="0.17em"/><mi>h</mi></mrow><mrow><mi>cos</mi><mo>&#x2061;</mo><mspace width="0.17em"/><mi>&#x3C6;</mi><mspace width="0.2em"/><mi>cos</mi><mo>&#x2061;</mo><mspace width="0.17em"/><mi>&#x3B4;</mi><mspace width="0.2em"/><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.17em"/><mi>t</mi></mrow></mfrac><mspace width="1.5em"/><mo>&#x21D2;</mo><mspace width="1.5em"/><mi>&#x394;</mi><mi>T</mi><mo>&#x2248;</mo><mn>4</mn><mtext>&#xA0;menit</mtext><mo>&#xD7;</mo><mfrac><mrow><mi>cos</mi><mo>&#x2061;</mo><mspace width="0.17em"/><mi>h</mi></mrow><mrow><mi>cos</mi><mo>&#x2061;</mo><mspace width="0.17em"/><mi>&#x3C6;</mi><mspace width="0.2em"/><mi>cos</mi><mo>&#x2061;</mo><mspace width="0.17em"/><mi>&#x3B4;</mi><mspace width="0.2em"/><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.17em"/><mi>t</mi></mrow></mfrac><mo>&#xD7;</mo><mi>&#x394;</mi><mi>h</mi></mrow></math>
+    <div class="cap">Di dekat ekuator (cos φ ≈ 1, cos δ ≈ 1) dan untuk Subuh (t ≈ 110°, sin t ≈ 0,94; cos 20° ≈ 0,94), faktornya mendekati 1: satu derajat ≈ 4 menit. Maka −20° ke −18° ≈ 8 menit. Di lintang tinggi, faktor ini membesar, sehingga perbedaan kriteria jauh lebih terasa.</div>
+  </div>
+  <div class="sim">
+    <div class="stage"><svg id="sChart" viewBox="0 0 560 300" role="img" aria-label="Selisih Subuh kriteria −20° dan −18° terhadap lintang"></svg></div>
+    <div class="ctrl">
+      <label for="sDec">Deklinasi Matahari δ <span id="vDec">0°</span><input id="sDec" type="range" min="-23.4" max="23.4" step="0.1" value="0"></label>
+      <div class="readout">
+        <span>Selisih di Bandung (6,9° LS)</span><b id="oB">—</b>
+        <span>Selisih di Kairo (30° LU)</span><b id="oC">—</b>
+        <span>Selisih di London (51,5° LU)</span><b id="oL">—</b>
+      </div>
+      <p class="small muted">Grafik menunjukkan selisih awal Subuh antara kriteria −20° dan −18° untuk berbagai lintang. Kurva terputus di lintang tinggi saat Matahari tidak pernah turun sampai −20° (musim panas belahan utara).</p>
+    </div>
+  </div>
+</section>
+
+<section id="subuh">
+  <div class="sec-head"><div class="eyebrow">6</div><h2>Kasus utama: kriteria Subuh</h2></div>
+  <div class="two">
+    <div class="box">
+      <span class="pill a">Pandangan −20°</span>
+      <h3>Kemenag, NU, Persis</h3>
+      <ul>
+        <li>Fajar shadiq didefinisikan sebagai cahaya putih mendatar yang makin melebar di ufuk timur.</li>
+        <li>Pengamatan bertahun-tahun di berbagai daerah (antara lain Labuan Bajo, Jombang, Riau, Sulawesi Selatan) dengan kamera kepekaan tinggi dan analisis fotometri, untuk membedakan fajar dari polusi cahaya dan cahaya zodiak.</li>
+        <li>Ditetapkan melalui musyawarah para pakar falak dan diskusi panjang lintas ormas.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <span class="pill g">Pandangan −18°</span>
+      <h3>Muhammadiyah (sejak 2021)</h3>
+      <ul>
+        <li>Pengamatan dengan sky quality meter dan kamera di lebih dari 20 kota selama sekitar 4 tahun oleh tiga pusat kajian astronomi.</li>
+        <li>Kajian historis: sebagian besar ahli falak klasik memakai 18°–19°.</li>
+        <li>Selaras dengan kriteria yang banyak dipakai di dunia (MWL, Karachi) dan dengan JAKIM Malaysia, yang mengubah Subuh dari −20° menjadi −18° pada November 2019.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="box">
+    <h3>Mengapa pengamatan bisa memberi hasil berbeda?</h3>
+    <ul>
+      <li><b>Definisi.</b> Kapan tepatnya "fajar muncul"? Saat sensor pertama kali mendeteksi kenaikan kecerlangan, atau saat mata telanjang yakin melihat cahaya mendatar?</li>
+      <li><b>Instrumen.</b> Kamera peka dan SQM mendeteksi cahaya lebih awal daripada mata.</li>
+      <li><b>Lokasi.</b> Polusi cahaya kota menutupi cahaya fajar yang redup sehingga fajar tampak terlambat; lokasi gelap di tepi laut memberi hasil lebih awal.</li>
+      <li><b>Atmosfer dan Bulan.</b> Kelembapan, aerosol, dan cahaya Bulan menggeser titik belok kurva kecerlangan.</li>
+      <li><b>Metode analisis.</b> Regresi linear, titik belok kurva, atau analisis visual memberi angka yang berbeda dari data yang sama. LF PBNU sendiri mencatat bahwa hasil berbeda karena perbedaan instrumen, setelan, dan metode.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="maghrib">
+  <div class="sec-head"><div class="eyebrow">7</div><h2>Kasus kedua: Maghrib dan ketinggian tempat</h2>
+  <p>Perbedaan Maghrib dan Terbit biasanya berasal dari perlakuan kerendahan ufuk (Bab 2 dan 14).</p></div>
+  <div class="three">
+    <div class="box"><h3>Tanpa koreksi</h3><p>Ufuk dianggap datar setinggi mata pengamat. Dipakai banyak aplikasi dan sesuai pandangan Persis untuk sebagian besar kota.</p></div>
+    <div class="box"><h3>Koreksi tinggi tempat</h3><p>Dip = 1,76′√H. Jika H diisi dengan ketinggian di atas permukaan laut (misalnya 768 m untuk Bandung), Maghrib mundur sekitar 3 menit. Masalahnya: ufuk Bandung adalah pegunungan, bukan laut.</p></div>
+    <div class="box"><h3>Koreksi dari profil medan</h3><p>Sudut ufuk dihitung dari peta ketinggian (DEM) ke arah terbenam Matahari hari itu, seperti mode Otomatis di KAFFAH MR PRO. Ufuk yang terhalang gunung tidak memundurkan Maghrib.</p></div>
+  </div>
+  <div class="box">
+    <h3>Temuan dari validasi KAFFAH MR PRO</h3>
+    <p>Dibandingkan dengan 123 hari jadwal Kemenag Kota Bandung tahun 2026: tanpa koreksi ufuk, Maghrib hitungan rata-rata <b>5 menit lebih awal</b> dan Terbit <b>5 menit lebih lambat</b> daripada jadwal Kemenag. Keduanya cocok dalam ±1 menit bila dipakai kerendahan ufuk setara sekitar 70′, yang menurut rumus 1,76′√H setara dengan H ≈ 1.575 m. Sementara itu, Zuhur Kemenag rata-rata 1 menit lebih lambat, cocok dengan ihtiyat Zuhur sekitar 3 menit. Untuk Makassar dan Jayapura, semua waktu selain Zuhur cocok dalam ±1 menit tanpa koreksi ufuk.</p>
+    <p class="small muted">Pertanyaan terbuka untuk didiskusikan: parameter apa yang dipakai jadwal resmi untuk kota dataran tinggi, dan apakah nilainya mencerminkan ufuk yang benar-benar terlihat?</p>
+  </div>
+</section>
+
+<section id="global">
+  <div class="sec-head"><div class="eyebrow">8</div><h2>Perbandingan global</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Metode</th><th class="n">Subuh</th><th class="n">Isya</th><th>Wilayah pemakai utama</th></tr></thead>
+    <tbody>
+      <tr><td>Muslim World League</td><td class="n">−18°</td><td class="n">−17°</td><td>Eropa, Timur Jauh, sebagian Amerika</td></tr>
+      <tr><td>ISNA</td><td class="n">−15°</td><td class="n">−15°</td><td>Amerika Utara</td></tr>
+      <tr><td>Egyptian General Authority of Survey</td><td class="n">−19,5°</td><td class="n">−17,5°</td><td>Afrika, Suriah, Lebanon</td></tr>
+      <tr><td>Umm al-Qura, Makkah</td><td class="n">−18,5°</td><td>90 menit setelah Maghrib (120 menit saat Ramadan)</td><td>Jazirah Arab</td></tr>
+      <tr><td>University of Islamic Sciences, Karachi</td><td class="n">−18°</td><td class="n">−18°</td><td>Pakistan, Afganistan, Bangladesh, India</td></tr>
+      <tr><td>Institute of Geophysics, Tehran</td><td class="n">−17,7°</td><td class="n">−14°</td><td>Iran</td></tr>
+      <tr><td>JAKIM Malaysia</td><td class="n">−18° (sejak 2019)</td><td>—</td><td>Malaysia; jadwal per zona dengan ihtiyat</td></tr>
+    </tbody>
+  </table></div>
+  <p>Rentang sudut Subuh di dunia dari −15° sampai −20° setara dengan selisih sekitar 20 menit di wilayah tropis. Sudut kecil seperti ISNA dipilih antara lain karena di lintang tinggi sudut besar membuat Subuh sangat dini atau bahkan tidak terdefinisi di musim panas.</p>
+</section>
+
+<section id="kritis">
+  <div class="sec-head"><div class="eyebrow">9</div><h2>Kerangka analisis kritis</h2>
+  <p>Gunakan empat lensa berikut untuk menilai perbedaan jadwal. Analisis yang baik tidak berhenti pada "mana yang benar", tetapi menjelaskan mengapa berbeda, seberapa besar, dan apa akibatnya.</p></div>
+  <div class="two">
+    <div class="box"><h3>1. Lensa dalil (fikih)</h3><ul><li>Bagaimana fajar shadiq dan syafaq didefinisikan dalam hadis dan kitab fikih?</li><li>Apakah definisi itu menuntut pengamatan mata atau boleh dengan alat?</li><li>Bagaimana kaidah kehati-hatian (ihtiyath) diterapkan: untuk awal salat atau untuk awal puasa? Keduanya menarik ke arah yang berlawanan untuk Subuh.</li></ul></div>
+    <div class="box"><h3>2. Lensa data (astronomi)</h3><ul><li>Berapa banyak data, di mana, dan dalam kondisi apa?</li><li>Instrumen dan metode analisis apa yang dipakai? Apakah data dan metodenya terbuka untuk diperiksa?</li><li>Apakah ada ketidakpastian yang dilaporkan (misalnya −18° ± 1°)?</li></ul></div>
+    <div class="box"><h3>3. Lensa model (hisab)</h3><ul><li>Apakah semua parameter (ihtiyat, ketinggian, pembulatan, titik acuan) dicantumkan pada jadwal?</li><li>Parameter mana yang berdasar dalil, mana yang berdasar data, dan mana yang sekadar kebiasaan teknis?</li></ul></div>
+    <div class="box"><h3>4. Lensa sosial (masyarakat)</h3><ul><li>Bagaimana perbedaan memengaruhi jamaah yang tinggal di antara dua masjid?</li><li>Bagaimana menyampaikan perbedaan tanpa memicu saling menyalahkan?</li><li>Kapan keseragaman jadwal lebih penting daripada perbedaan beberapa menit?</li></ul></div>
+  </div>
+  <div class="warn"><b>Sikap ilmiah.</b> Perbedaan kriteria adalah hasil ijtihad yang memiliki dasar, bukan kesalahan. Tugas ahli falak adalah membuat dasar itu transparan dan terukur. Persis, misalnya, menyebut perbedaan ini sebagai hasil ijtihad masing-masing lembaga dalam memahami dalil syar'i dan data astronomi.</div>
+</section>
+
+<section id="diskusi">
+  <div class="sec-head"><div class="eyebrow">10</div><h2>Skenario diskusi kelompok</h2></div>
+  <div class="ex"><p class="q">Skenario A. Dua masjid bertetangga, satu mengikuti Kemenag dan satu mengikuti Muhammadiyah. Seorang jamaah bertanya kepada Anda sebagai guru, "Subuh yang benar jam berapa?"</p>
+    <details><summary>Poin pembahasan</summary><div class="sol"><p>Jelaskan bahwa keduanya memakai rumus yang sama, berbeda pada kriteria −20° dan −18°, yang setara sekitar 8 menit. Keduanya berdasar dalil dan pengamatan. Untuk sahur, masyarakat dapat memakai yang lebih awal sebagai kehati-hatian; untuk salat, mengikuti masjid tempat berjamaah. Hindari menyatakan salah satu "batal".</p></div></details></div>
+  <div class="ex"><p class="q">Skenario B. DKM masjid di Lembang (±1.300 mdpl) menemukan jadwal Maghrib aplikasi berbeda 4 menit dari jadwal kabupaten.</p>
+    <details><summary>Poin pembahasan</summary><div class="sol"><p>Periksa parameter koreksi ufuk masing-masing sumber dan titik acuan koordinatnya. Hitung dip dari H relatif terhadap ufuk barat yang benar-benar terlihat. Bandingkan dengan pengamatan terbenam Matahari langsung dari halaman masjid selama beberapa hari.</p></div></details></div>
+  <div class="ex"><p class="q">Skenario C. Seorang pengembang aplikasi ingin menyediakan pilihan kriteria. Pengaturan bawaan apa yang sebaiknya dipakai di Indonesia, dan informasi apa yang wajib ditampilkan?</p>
+    <details><summary>Poin pembahasan</summary><div class="sol"><p>Bawaan sebaiknya mengikuti jadwal resmi (Kemenag) agar konsisten dengan masyarakat, dengan pilihan kriteria lain yang diberi label jelas. Tampilkan semua parameter: sudut Subuh/Isya, ihtiyat, koreksi ufuk, mazhab Ashar, dan sumber koordinat. Bandingkan dengan aplikasi PERSIS TIMES yang membebaskan pengguna memilih metode hisab.</p></div></details></div>
+</section>
+
+<section id="tugas">
+  <div class="sec-head"><div class="eyebrow">Penutup</div><h2>Latihan dan tugas</h2></div>
+  <div class="quiz" id="quiz"></div>
+  <p class="score" id="score"></p>
+  <div class="task">
+    <h3>Tugas studi kasus (kelompok)</h3>
+    <ol>
+      <li>Pilih satu kabupaten/kota. Kumpulkan jadwal salat satu bulan dari minimal tiga sumber: Kemenag, satu ormas (Muhammadiyah, NU, atau Persis), dan satu aplikasi populer.</li>
+      <li>Buat tabel selisih harian setiap waktu salat. Hitung rata-rata dan rentang selisihnya.</li>
+      <li>Dengan file Excel (tutorial) atau laboratorium di halaman ini, cari kombinasi parameter yang mereproduksi setiap sumber dalam ±1 menit. Laporkan parameter hasil temuan Anda.</li>
+      <li>Tulis analisis kritis 3–5 halaman memakai empat lensa di bagian 9, lengkap dengan rujukan dokumen resmi setiap lembaga.</li>
+      <li>Susun satu lembar penjelasan sederhana untuk jamaah tentang perbedaan jadwal tersebut.</li>
+    </ol>
+  </div>
+</section>
+
+<script type="application/json" id="quizdata">[
+ {"q":"Penyebab utama perbedaan jadwal salat antarlembaga di Indonesia adalah …","o":["Kesalahan hitung","Perbedaan parameter (kriteria, ihtiyat, koreksi ufuk, dll.)","Perbedaan zona waktu","Perbedaan arah kiblat"],"a":1,"e":"Rumusnya sama; yang berbeda adalah angka yang dimasukkan."},
+ {"q":"Muhammadiyah menetapkan awal Subuh pada tinggi Matahari …","o":["−20°","−19,5°","−18°","−15°"],"a":2,"e":"Keputusan Munas Tarjih XXXI (2020), berlaku sejak 2021."},
+ {"q":"Di Indonesia, perbedaan kriteria Subuh −20° dan −18° setara dengan sekitar …","o":["2 menit","4 menit","8 menit","20 menit"],"a":2,"e":"Di dekat ekuator, 1° ≈ 4 menit, jadi 2° ≈ 8 menit."},
+ {"q":"Parameter yang hanya memengaruhi Terbit dan Maghrib adalah …","o":["Kriteria Subuh","Koreksi ufuk/ketinggian tempat","Mazhab Ashar","Ihtiyat"],"a":1,"e":"Kerendahan ufuk hanya masuk ke kriteria terbit dan terbenam."},
+ {"q":"Mengapa selisih kriteria Subuh lebih terasa di lintang tinggi?","o":["Karena zona waktunya lebar","Karena Matahari bergerak lebih landai terhadap ufuk, sehingga dt/dh membesar","Karena atmosfer lebih tipis","Karena tidak ada ihtiyat"],"a":1,"e":"Faktor 1/(cos φ cos δ sin t) membesar ketika φ besar."},
+ {"q":"JAKIM Malaysia mengubah kriteria Subuh menjadi −18° pada tahun …","o":["2010","2015","2019","2023"],"a":2,"e":"Perubahan dilakukan November 2019, menggeser Subuh rata-rata sekitar 8 menit."}
+]</script>
+
+
+<footer><div>Studi kasus pendamping Bab 13–14 · Astronomi Islam · Program Studi Pendidikan Fisika, UIN Sunan Gunung Djati Bandung</div></footer>
+</div>
+<script>
+/* Pustaka bersama Astronomi Islam: format angka, posisi Matahari, arah kiblat, waktu sholat, kuis */
+var F = (function(){
+  var RAD = Math.PI/180, DEG = 180/Math.PI;
+  var KABAH = {phi: 21 + 25/60 + 21/3600, lam: 39 + 49/60 + 34/3600};
+  function mod(a,n){ return ((a%n)+n)%n; }
+  function fnum(x,d){ if(!isFinite(x)) return '—'; return x.toFixed(d).replace('.',',').replace('-','−'); }
+  function sgn(x,d){ return (x>0?'+':'')+fnum(x,d); }
+  function dms(x, secs){
+    if(!isFinite(x)) return '—';
+    var s = x<0?'−':''; x=Math.abs(x);
+    var d=Math.floor(x), mf=(x-d)*60, m=Math.floor(mf), sc=(mf-m)*60;
+    if(!secs){ m=Math.round(mf); if(m===60){d++;m=0;} return s+d+'°'+(m<10?'0':'')+m+'′'; }
+    sc=Math.round(sc); if(sc===60){sc=0;m++;} if(m===60){m=0;d++;}
+    return s+d+'°'+(m<10?'0':'')+m+'′'+(sc<10?'0':'')+sc+'″';
+  }
+  function hm(h, mode){ /* jam desimal -> "hh:mm"; mode 'up' bulatkan ke atas, 'down' ke bawah */
+    if(!isFinite(h)) return '—';
+    h = mod(h,24); var m = h*60;
+    m = mode==='up' ? Math.ceil(m-1e-9) : mode==='down' ? Math.floor(m+1e-9) : Math.round(m);
+    var hh=Math.floor(m/60)%24, mm=m%60;
+    return (hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm;
+  }
+  function hms(h){
+    if(!isFinite(h)) return '—';
+    h = mod(h,24); var s=Math.round(h*3600), hh=Math.floor(s/3600)%24, mm=Math.floor(s%3600/60), ss=s%60;
+    return (hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss;
+  }
+  function minsec(m){ var s=m<0?'−':'+'; m=Math.abs(m); var mm=Math.floor(m), ss=Math.round((m-mm)*60); if(ss===60){mm++;ss=0;} return s+mm+' m '+(ss<10?'0':'')+ss+' d'; }
+  function jd(y,mo,d,hUT){ /* Kalender Gregorius */
+    if(mo<=2){ y-=1; mo+=12; }
+    var A=Math.floor(y/100), B=2-A+Math.floor(A/4);
+    return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(mo+1))+d+B-1524.5+(hUT||0)/24;
+  }
+  function sun(JD){ /* algoritma NOAA (Meeus, ketelitian sekitar 0,01°) */
+    var T=(JD-2451545)/36525;
+    var L0=mod(280.46646+T*(36000.76983+0.0003032*T),360);
+    var M=357.52911+T*(35999.05029-0.0001537*T);
+    var e=0.016708634-T*(0.000042037+0.0000001267*T);
+    var Mr=M*RAD;
+    var C=Math.sin(Mr)*(1.914602-T*(0.004817+0.000014*T))+Math.sin(2*Mr)*(0.019993-0.000101*T)+Math.sin(3*Mr)*0.000289;
+    var trueL=L0+C;
+    var om=125.04-1934.136*T;
+    var lam=trueL-0.00569-0.00478*Math.sin(om*RAD);
+    var eps0=23+(26+(21.448-T*(46.815+T*(0.00059-T*0.001813)))/60)/60;
+    var eps=eps0+0.00256*Math.cos(om*RAD);
+    var dec=Math.asin(Math.sin(eps*RAD)*Math.sin(lam*RAD))*DEG;
+    var ra=mod(Math.atan2(Math.cos(eps*RAD)*Math.sin(lam*RAD),Math.cos(lam*RAD))*DEG,360);
+    var y=Math.pow(Math.tan(eps*RAD/2),2);
+    var E=y*Math.sin(2*L0*RAD)-2*e*Math.sin(Mr)+4*e*y*Math.sin(Mr)*Math.cos(2*L0*RAD)-0.5*y*y*Math.sin(4*L0*RAD)-1.25*e*e*Math.sin(2*Mr);
+    var R=1.000001018*(1-e*e)/(1+e*Math.cos((M+C)*RAD));
+    return {dec:dec, eot:4*E*DEG, ra:ra, lam:mod(lam,360), eps:eps, sd:0.2666/R, R:R};
+  }
+  function altaz(JD, phi, lam){ /* tinggi & azimut Matahari (geometris, tanpa refraksi) */
+    var s=sun(JD), T=(JD-2451545)/36525;
+    var gmst=mod(280.46061837+360.98564736629*(JD-2451545)+T*T*(0.000387933-T/38710000),360);
+    var H=mod(gmst+lam-s.ra+180,360)-180;
+    var p=phi*RAD, d=s.dec*RAD, h=H*RAD;
+    var alt=Math.asin(Math.sin(p)*Math.sin(d)+Math.cos(p)*Math.cos(d)*Math.cos(h))*DEG;
+    var az=mod(Math.atan2(-Math.cos(d)*Math.sin(h), Math.cos(p)*Math.sin(d)-Math.sin(p)*Math.cos(d)*Math.cos(h))*DEG,360);
+    return {alt:alt, az:az, H:H, dec:s.dec};
+  }
+  function qibla(phi, lam){
+    var p=phi*RAD, pk=KABAH.phi*RAD, dl=(KABAH.lam-lam)*RAD;
+    var A=mod(Math.atan2(Math.sin(dl), Math.cos(p)*Math.tan(pk)-Math.sin(p)*Math.cos(dl))*DEG,360);
+    var c=Math.sin(p)*Math.sin(pk)+Math.cos(p)*Math.cos(pk)*Math.cos(dl);
+    var ang=Math.acos(Math.max(-1,Math.min(1,c)))*DEG;
+    return {A:A, dist:ang*RAD*6371, ang:ang};
+  }
+  function falak(A){
+    A=mod(A,360);
+    if(Math.abs(A)<1e-9) return 'U'; if(Math.abs(A-180)<1e-9) return 'S';
+    if(Math.abs(A-90)<1e-9) return 'T'; if(Math.abs(A-270)<1e-9) return 'B';
+    if(A>180){ var d=A-270; return 'B '+dms(Math.abs(d),false)+' '+(d>0?'U':'S'); }
+    var e=90-A; return 'T '+dms(Math.abs(e),false)+' '+(e>0?'U':'S');
+  }
+  function hourAngle(h, phi, dec){ /* sudut waktu (derajat) saat Matahari bertinggi h */
+    var p=phi*RAD, d=dec*RAD;
+    var c=(Math.sin(h*RAD)-Math.sin(p)*Math.sin(d))/(Math.cos(p)*Math.cos(d));
+    if(c<-1||c>1) return NaN;
+    return Math.acos(c)*DEG;
+  }
+  /* Waktu sholat. o = {phi, lam, tz, H (m), y, m, d, ihtiyat (menit), subuh, isya, ashar(1|2)} */
+  function prayer(o){
+    var ih = o.ihtiyat==null?2:o.ihtiyat, sub=o.subuh==null?-20:o.subuh, isy=o.isya==null?-18:o.isya, k=o.ashar||1;
+    var base=jd(o.y,o.m,o.d,0);
+    function at(localH){ return sun(base+(localH-o.tz)/24); }
+    var s=at(12), transit=12+o.tz-o.lam/15-s.eot/60;
+    for(var i=0;i<2;i++){ s=at(transit); transit=12+o.tz-o.lam/15-s.eot/60; }
+    var hSet=-(16/60+34/60+1.76*Math.sqrt(Math.max(0,o.H||0))/60);
+    function ev(h, sign){
+      var t=transit;
+      for(var i=0;i<3;i++){ var ss=at(t); var H=hourAngle(typeof h==='function'?h(ss.dec):h, o.phi, ss.dec); if(isNaN(H)) return NaN; t=transit+sign*H/15; }
+      return t;
+    }
+    var asharH=function(dec){ return Math.atan(1/(Math.tan(Math.abs(o.phi-dec)*RAD)+k))*DEG; };
+    var r={transit:transit, dec:s.dec, eot:s.eot, hSet:hSet,
+      subuh:ev(sub,-1), terbit:ev(hSet,-1), dhuha:ev(4.5,-1), ashar:ev(asharH,1), maghrib:ev(hSet,1), isya:ev(isy,1)};
+    r.asharAlt=asharH(sun(base+(r.ashar-o.tz)/24).dec);
+    r.final={
+      imsak: r.subuh+ih/60-10/60, subuh:r.subuh+ih/60, terbit:r.terbit-ih/60, dhuha:r.dhuha+ih/60,
+      zuhur:r.transit+ih/60, ashar:r.ashar+ih/60, maghrib:r.maghrib+ih/60, isya:r.isya+ih/60
+    };
+    return r;
+  }
+  /* Saat Matahari berazimut tertentu (untuk bayangan kiblat). Mengembalikan daftar jam lokal. */
+  function azimuthTimes(o, targetAz){
+    var base=jd(o.y,o.m,o.d,0), out=[], prev=null, prevT=null;
+    for(var mnt=5*60; mnt<=19*60; mnt+=1){
+      var t=mnt/60, a=altaz(base+(t-o.tz)/24, o.phi, o.lam);
+      var dd=mod(a.az-targetAz+540,360)-180;
+      if(prev!==null && Math.abs(dd-prev)<20 && (prev<=0&&dd>0 || prev>=0&&dd<0)){
+        var f=prev/(prev-dd), tt=prevT+f/60, aa=altaz(base+(tt-o.tz)/24, o.phi, o.lam);
+        if(aa.alt>0) out.push({t:tt, alt:aa.alt});
+      }
+      prev=dd; prevT=t;
+    }
+    return out;
+  }
+  /* Kuis bersama */
+  function quiz(){
+    var data=document.getElementById('quizdata'), box=document.getElementById('quiz'), sc=document.getElementById('score');
+    if(!data||!box) return;
+    var Q=JSON.parse(data.textContent), score=0, done=0;
+    if(sc) sc.textContent='Skor: 0 / '+Q.length;
+    Q.forEach(function(it,i){
+      var d=document.createElement('div'); d.className='qz';
+      d.innerHTML='<p>'+(i+1)+'. '+it.q+'</p><div class="opts"></div><div class="fb" hidden></div>';
+      var opts=d.querySelector('.opts'), fb=d.querySelector('.fb');
+      it.o.forEach(function(o,j){
+        var b=document.createElement('button'); b.type='button'; b.textContent=String.fromCharCode(65+j)+'. '+o;
+        b.addEventListener('click',function(){
+          opts.querySelectorAll('button').forEach(function(x,k){ x.disabled=true; if(k===it.a) x.classList.add('ok'); });
+          if(j===it.a){ score++; fb.textContent='Benar. '+it.e; } else { b.classList.add('bad'); fb.textContent='Kurang tepat. '+it.e; }
+          fb.hidden=false; done++;
+          if(sc) sc.textContent='Skor: '+score+' / '+Q.length+(done===Q.length?' · selesai':'');
+        });
+        opts.appendChild(b);
+      });
+      box.appendChild(d);
+    });
+  }
+  function $(id){ return document.getElementById(id); }
+  function num(id){ var v=$(id).value; return parseFloat(String(v).replace(',','.').replace('−','-')); }
+  function copy(text, btn){
+    var done=function(){ if(btn){ var t=btn.textContent; btn.textContent='Tersalin'; setTimeout(function(){btn.textContent=t;},1500);} };
+    try{ navigator.clipboard.writeText(text).then(done, function(){ fallback(); }); }catch(e){ fallback(); }
+    function fallback(){ var ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); done();}catch(_){} ta.remove(); }
+  }
+  var PLACES=[
+    ["UIN SGD Bandung",-6.9312,107.7175,700],
+    ["Kota Bandung",-6.9175,107.6191,768],
+    ["Jakarta",-6.1754,106.8272,8],
+    ["Surabaya",-7.2575,112.7521,5],
+    ["Yogyakarta",-7.7956,110.3695,113],
+    ["Banda Aceh",5.5483,95.3238,10],
+    ["Makassar",-5.1477,119.4327,5],
+    ["Jayapura",-2.5337,140.7181,10],
+    ["Makkah",21.4225,39.8262,277]
+  ];
+  var TZ={"Jayapura":9,"Makassar":8,"Makkah":3};
+  function placeSelect(sel, onPick){
+    PLACES.forEach(function(p,i){ var o=document.createElement('option'); o.value=i; o.textContent=p[0]; sel.appendChild(o); });
+    sel.addEventListener('change',function(){ var p=PLACES[+sel.value]; onPick({name:p[0],phi:p[1],lam:p[2],H:p[3],tz:TZ[p[0]]||7}); });
+  }
+  function today(){ var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function parseDate(s){ var a=String(s).split('-'); return {y:+a[0],m:+a[1],d:+a[2]}; }
+  var BULAN=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  return {RAD:RAD,DEG:DEG,KABAH:KABAH,mod:mod,fnum:fnum,sgn:sgn,dms:dms,hm:hm,hms:hms,minsec:minsec,jd:jd,sun:sun,altaz:altaz,qibla:qibla,falak:falak,hourAngle:hourAngle,prayer:prayer,azimuthTimes:azimuthTimes,quiz:quiz,$:$,num:num,copy:copy,PLACES:PLACES,placeSelect:placeSelect,today:today,parseDate:parseDate,BULAN:BULAN};
+})();
+
+(function(){
+var RAD=F.RAD, NS='http://www.w3.org/2000/svg';
+function mk(svg,tag,a){ var e=document.createElementNS(NS,tag); for(var k in a) e.setAttribute(k,a[k]); svg.appendChild(e); return e; }
+function tx(svg,x,y,c,s,anc,st){ var t=mk(svg,'text',{x:x,y:y,'class':c}); if(anc) t.setAttribute('text-anchor',anc); if(st) t.setAttribute('style',st); t.textContent=s; }
+var CRIT=[
+ ['Kemenag RI / NU / Persis',-20,-18,null],
+ ['Muhammadiyah',-18,-18,null],
+ ['Muslim World League',-18,-17,null],
+ ['Mesir (EGAS)',-19.5,-17.5,null],
+ ['Umm al-Qura',-18.5,null,90],
+ ['Karachi',-18,-18,null],
+ ['ISNA',-15,-15,null]
+];
+var lDate=F.$('lDate'); lDate.value=F.today();
+F.placeSelect(F.$('lPlace'),function(p){ F.$('lPhi').value=p.phi; F.$('lLam').value=p.lam; F.$('lTz').value=p.tz; updL(); });
+F.$('lPlace').value=1;
+function updL(){
+  var phi=F.num('lPhi'), lam=F.num('lLam'), tz=F.num('lTz'), ih=F.num('lIh'), H=F.num('lH'), k=+F.$('lK').value, p=F.parseDate(lDate.value);
+  if([phi,lam,tz,ih,H].some(isNaN)||!p.y) return;
+  var base=null, rows='';
+  CRIT.forEach(function(c,i){
+    var o={phi:phi,lam:lam,tz:tz,H:H,y:p.y,m:p.m,d:p.d,ihtiyat:ih,subuh:c[1],isya:c[2]==null?-18:c[2],ashar:k};
+    var f=F.prayer(o).final;
+    var v={subuh:F.hm(f.subuh,'up'),terbit:F.hm(f.terbit,'down'),zuhur:F.hm(f.zuhur,'up'),ashar:F.hm(f.ashar,'up'),maghrib:F.hm(f.maghrib,'up'),isya:c[3]?F.hm(Math.ceil((f.maghrib*60)-1e-9)/60+c[3]/60,'up'):F.hm(f.isya,'up')};
+    if(i===0) base=v;
+    function cell(key){ var s='<td class="n"><b>'+v[key]+'</b>'; if(i>0){ var a=v[key].split(':'), b=base[key].split(':'), d=(+a[0]*60+ +a[1])-(+b[0]*60+ +b[1]); s+='<br><span class="small" style="color:'+(d===0?'var(--muted)':d>0?'var(--gold)':'var(--sky)')+'">'+(d>0?'+':'')+d+'</span>'; } return s+'</td>'; }
+    rows+='<tr'+(i===0?' class="hl"':'')+'><td>'+c[0]+'<br><span class="small muted">'+c[1]+'° / '+(c[3]?c[3]+' mnt':c[2]+'°')+'</span></td>'+['subuh','terbit','zuhur','ashar','maghrib','isya'].map(cell).join('')+'</tr>';
+  });
+  F.$('lOut').innerHTML=rows;
+}
+['lPhi','lLam','lTz','lDate','lIh','lH','lK'].forEach(function(i){ F.$(i).addEventListener('input',updL); });
+updL();
+
+/* sensitivitas */
+var S=F.$('sChart'), X0=56,X1=540,Y0=20,Y1=250;
+function diff(phi,dec){ var a=F.hourAngle(-20,phi,dec), b=F.hourAngle(-18,phi,dec); if(isNaN(a)||isNaN(b)) return NaN; return (a-b)*4; }
+function drawS(){
+  var dec=+F.$('sDec').value; F.$('vDec').textContent=F.sgn(dec,1)+'°';
+  while(S.firstChild) S.removeChild(S.firstChild);
+  function x(l){ return X0+(l+60)/120*(X1-X0); } function y(m){ return Y1-m/30*(Y1-Y0); }
+  for(var m=0;m<=30;m+=5){ mk(S,'line',{x1:X0,x2:X1,y1:y(m),y2:y(m),'class':m===0?'axisl':'grid'}); tx(S,X0-6,y(m)+4,'tick',String(m),'end'); }
+  for(var l=-60;l<=60;l+=15){ mk(S,'line',{x1:x(l),x2:x(l),y1:Y0,y2:Y1,'class':'grid'}); tx(S,x(l),Y1+16,'tick',(l>0?l+'° LU':l<0?(-l)+'° LS':'0°'),'middle'); }
+  var d='',pen=false;
+  for(var l=-60;l<=60.001;l+=0.5){ var v=diff(l,dec); if(isNaN(v)||v>30){ pen=false; continue; } d+=(pen?' L':'M')+x(l).toFixed(1)+' '+y(v).toFixed(1); pen=true; }
+  mk(S,'path',{d:d,style:'fill:none;stroke:var(--accent);stroke-width:2.6'});
+  [[-6.92,'Bandung'],[30.04,'Kairo'],[51.5,'London']].forEach(function(c){ var v=diff(c[0],dec); if(isNaN(v)||v>30) return; mk(S,'circle',{cx:x(c[0]),cy:y(v),r:4.5,style:'fill:var(--gold)'}); tx(S,x(c[0]),y(v)-10,'sm',c[1],'middle'); });
+  tx(S,X0,12,'sm','Selisih Subuh −20° vs −18° (menit)');
+  function f(v){ return isNaN(v)?'tidak terdefinisi':F.fnum(v,1)+' menit'; }
+  F.$('oB').textContent=f(diff(-6.92,dec)); F.$('oC').textContent=f(diff(30.04,dec)); F.$('oL').textContent=f(diff(51.5,dec));
+}
+F.$('sDec').addEventListener('input',drawS); drawS();
+
+F.quiz();
+})();
+</script>
+
+</body>
+</html>

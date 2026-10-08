@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Falak Lab</title>
+<meta name="theme-color" content="#0d6b5f">
+<script src="data.js"></script>
+<script src="kunci.js"></script>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg:#f2f4f6;--surface:#fff;--ink:#15213a;--muted:#56627a;--line:#d5dbe4;--accent:#0d6b5f;--accent-ink:#fff;
+  --accent-soft:#e1f0ec;--gold:#a8701a;--gold-soft:#f6ecd9;--warn:#a33a2a;--hero:#0d6b5f;--hero2:#0a5249}
+:root[data-theme="dark"]{--bg:#0f1522;--surface:#172033;--ink:#e6eaf2;--muted:#9aa6bd;--line:#2b3850;--accent:#4fc2ad;--accent-ink:#0f1522;
+  --accent-soft:#163a37;--gold:#e3b464;--gold-soft:#3a2f1c;--warn:#f08a78;--hero:#123f3a;--hero2:#0e302c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1522;--surface:#172033;--ink:#e6eaf2;--muted:#9aa6bd;--line:#2b3850;--accent:#4fc2ad;--accent-ink:#0f1522;
+  --accent-soft:#163a37;--gold:#e3b464;--gold-soft:#3a2f1c;--warn:#f08a78;--hero:#123f3a;--hero2:#0e302c}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 "Source Sans 3",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+button,input{font:inherit}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 48px}
+.hero{background:linear-gradient(160deg,var(--hero),var(--hero2));color:#fff;padding:22px 0 64px}
+.hero .wrap{padding-bottom:0}
+.brand{display:flex;align-items:center;gap:12px}
+.brand svg{flex:none}
+.brand h1{margin:0;font-size:26px;letter-spacing:.01em}
+.brand p{margin:0;font-size:13px;opacity:.85}
+.book{margin:16px 0 0;font-size:15px;opacity:.95}
+.book b{display:block;font-size:18px;font-family:Spectral,Georgia,"Noto Serif",serif}
+.top-tools{position:absolute;top:14px;right:14px;display:flex;gap:6px}
+.icon-btn{width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;cursor:pointer;display:grid;place-items:center}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.open{margin-top:-46px}
+.open h2{margin:0 0 4px;font-size:17px}
+.open p{margin:0 0 12px;color:var(--muted);font-size:14px}
+.row{display:flex;gap:8px}
+.row input{flex:1;min-width:0;height:48px;border:1.5px solid var(--line);border-radius:12px;padding:0 14px;background:var(--bg);color:var(--ink);font-size:18px;letter-spacing:.04em}
+.row input:focus{outline:none;border-color:var(--accent)}
+.btn{height:48px;border:0;border-radius:12px;padding:0 18px;background:var(--accent);color:var(--accent-ink);font-weight:700;cursor:pointer}
+.btn.alt{background:var(--accent-soft);color:var(--accent);display:flex;align-items:center;gap:8px;justify-content:center;width:100%;margin-top:10px}
+.msg{min-height:20px;margin-top:8px;font-size:14px;color:var(--warn)}
+.recent{margin-top:4px;display:flex;flex-wrap:wrap;gap:6px}
+.vols{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:22px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px}
+.vols button{border:0;border-radius:9px;padding:10px 8px;background:none;color:var(--muted);font-weight:700;font-size:14px;cursor:pointer}
+.vols button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink)}
+.chip{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:5px 11px;font-size:13px;cursor:pointer}
+.part{margin:28px 0 10px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+details.ch{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden}
+details.ch>summary{list-style:none;display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer}
+details.ch>summary::-webkit-details-marker{display:none}
+.num{flex:none;width:38px;height:38px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700}
+.ch-t{flex:1;min-width:0}
+.ch-t b{display:block;line-height:1.3}
+.ch-t span{font-size:13px;color:var(--muted)}
+.chev{flex:none;color:var(--muted);transition:transform .2s}
+details[open] .chev{transform:rotate(90deg)}
+.list{border-top:1px solid var(--line)}
+.item{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);padding:12px 16px;color:var(--ink);cursor:pointer}
+.item:last-child{border-bottom:0}
+.item:active{background:var(--accent-soft)}
+.code{flex:none;min-width:48px;padding:3px 0;border-radius:8px;background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:14px;text-align:center}
+.code.q{background:var(--gold-soft);color:var(--gold)}
+.code.r{background:var(--bg);color:var(--muted);border:1px solid var(--line)}
+.it b{display:block;font-weight:600;line-height:1.3}
+.it span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+.it i{display:block;font-style:normal;font-size:12px;color:var(--accent);margin-top:3px}
+.about{margin-top:28px;font-size:14px;color:var(--muted)}
+.about h3{color:var(--ink);font-size:16px;margin:0 0 6px}
+.about p{margin:0 0 8px}
+.about a{color:var(--accent)}
+/* pemindai QR */
+.scan{position:fixed;inset:0;background:#000;z-index:100;display:none;flex-direction:column}
+.scan.on{display:flex}
+.scan video{flex:1;width:100%;object-fit:cover;min-height:0}
+.scan .frame{position:absolute;left:50%;top:45%;width:min(64vw,280px);aspect-ratio:1;transform:translate(-50%,-50%);
+  border:3px solid rgba(255,255,255,.9);border-radius:18px;box-shadow:0 0 0 100vmax rgba(0,0,0,.45)}
+.scan .bottom{position:absolute;left:0;right:0;bottom:0;padding:20px 16px calc(20px + env(safe-area-inset-bottom));text-align:center;color:#fff}
+.scan .bottom p{margin:0 0 12px;font-size:15px}
+.scan .btn{background:#fff;color:#111}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="wrap" style="position:relative">
+    <div class="top-tools">
+      <button class="icon-btn" id="themeBtn" aria-label="Ganti tema">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+    <div class="brand">
+      <svg width="48" height="48" viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="24" r="21" fill="none" stroke="#fff" stroke-width="2.4" opacity=".9"/>
+        <circle cx="24" cy="24" r="14.5" fill="none" stroke="#fff" stroke-width="1" opacity=".45"/>
+        <path d="M24 4.5v4M24 39.5v4M4.5 24h4M39.5 24h4" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity=".8"/>
+        <path d="M24 24 L10.8 17.4" stroke="#f3cf8a" stroke-width="3" stroke-linecap="round"/>
+        <rect x="6.3" y="12.4" width="7" height="7" rx="1" fill="#f3cf8a" transform="rotate(-27 9.8 15.9)"/>
+        <circle cx="24" cy="24" r="2.6" fill="#fff"/>
+      </svg>
+      <div><h1>Falak Lab</h1><p>Simulasi pendamping buku</p></div>
+    </div>
+    <p class="book"><b id="bookTitle"></b><span id="bookSub"></span></p>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="card open">
+    <h2>Buka simulasi dari buku</h2>
+    <p>Ketik kode pada kotak SIM di buku, misalnya <b>7.2</b> (Jilid 1) atau <b>II-5.1</b> (Jilid 2), atau pindai kode QR-nya.</p>
+    <form class="row" id="codeForm" autocomplete="off">
+      <input id="code" inputmode="text" autocapitalize="characters" placeholder="Kode SIM" aria-label="Kode SIM" maxlength="10">
+      <button class="btn" type="submit">Buka</button>
+    </form>
+    <div class="msg" id="msg" role="status"></div>
+    <div class="recent" id="recent"></div>
+    <button class="btn alt" id="scanBtn" type="button">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3M7 12h10"/></svg>
+      Pindai kode QR
+    </button>
+  </div>
+
+  <div class="vols" role="tablist" aria-label="Pilih jilid">
+    <button type="button" role="tab" id="vol1" data-v="1">Jilid 1 · Kiblat &amp; Salat</button>
+    <button type="button" role="tab" id="vol2" data-v="2">Jilid 2 · Hilal &amp; Gerhana</button>
+  </div>
+  <div id="chapters"></div>
+
+  <div class="about card" id="tentang">
+    <h3>Tentang aplikasi</h3>
+    <p id="aboutText"></p>
+    <p>Semua simulasi berjalan tanpa internet. Contoh di Jilid 1 memakai Bandung dan tanggal 2 November 2026; contoh di Jilid 2 memakai UIN SGD Bandung dan hilal awal Rajab 1448 H (9 Desember 2026). Di aplikasi, lokasi dan tanggal dapat diganti.</p>
+    <p id="version"></p>
+  </div>
+</div>
+
+<div class="scan" id="scan" aria-modal="true" role="dialog">
+  <video id="video" playsinline muted></video>
+  <div class="frame"></div>
+  <div class="bottom">
+    <p id="scanMsg">Arahkan kamera ke kode QR pada kotak SIM.</p>
+    <button class="btn" id="scanClose" type="button">Tutup</button>
+  </div>
+</div>
+<canvas id="cv" hidden></canvas>
+
+<script>
+(function () {
+  var D = window.FALAK_DATA;
+  var $ = function (id) { return document.getElementById(id); };
+  function store(k, v) { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } }
+
+  /* tema */
+  var th = store('falak-theme');
+  if (th) document.documentElement.setAttribute('data-theme', th);
+  $('themeBtn').onclick = function () {
+    var dark = document.documentElement.getAttribute('data-theme') === 'dark' ||
+      (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches);
+    var t = dark ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', t); store('falak-theme', t);
+  };
+
+  var V2 = D.vol2;
+  $('bookTitle').textContent = D.book.title;
+  $('bookSub').textContent = V2 ? 'Jilid 1: Arah Kiblat dan Waktu Salat · Jilid 2: Awal Bulan Hijriyah, Rukyat, dan Gerhana' : D.book.sub;
+  $('aboutText').textContent = 'Falak Lab adalah aplikasi pendamping buku ' + D.book.title + ': ' + D.book.sub + (V2 ? ', dan ' + V2.book.title + ': ' + V2.book.sub : '') + ', karya ' + D.book.author + '. Setiap simulasi diberi kode yang sama dengan kotak SIM di buku; kode Jilid 2 diawali II-.';
+  $('version').textContent = 'Versi ' + D.version + ' · ' + (D.count + (V2 ? V2.count : 0)) + ' simulasi · ' + (D.chapters.length + (V2 ? V2.chapters.length : 0)) + ' bab';
+
+  /* indeks kode */
+  var IDX = {};
+  D.chapters.forEach(function (c) { c.sims.forEach(function (s) { s.vol = 1; IDX[s.code] = s; }); });
+  if (V2) V2.chapters.forEach(function (c) { c.sims.forEach(function (s) { s.vol = 2; IDX[s.code] = s; }); });
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function dir(v) { return v === 2 ? 'jilid2/' : 'bab/'; }
+  function url(s) { return dir(s.vol) + 'bab' + pad(s.n) + '.html?sim=' + s.code; }
+  function parse(t) {
+    t = String(t || '').trim().replace(',', '.');
+    var m = t.match(/sim\/((?:ii-)?\d{1,2}\.\d{1,2})/i) || t.match(/^(?:sim\s*)?((?:(?:ii|2)\s*[-–\s]\s*|ii)?\d{1,2}\.\d{1,2})$/i);
+    if (!m) return null;
+    var c = m[1], two = /^(ii|2\s*[-–\s])/i.test(c);
+    c = c.replace(/^(?:ii|2)\s*[-–\s]?\s*/i, two ? '' : '');
+    var k = c.match(/(\d{1,2})\.(\d{1,2})$/);
+    c = (+k[1]) + '.' + (+k[2]);
+    return two ? 'II-' + c : c;
+  }
+  function open(code) {
+    var s = IDX[code];
+    if (!s) { $('msg').textContent = 'Kode ' + code + ' tidak ditemukan. Kode berbentuk bab.nomor, misalnya 7.2 (Jilid 1) atau II-5.1 (Jilid 2).'; return false; }
+    var r = (store('falak-recent') || '').split(',').filter(function (x) { return x && x !== code; });
+    r.unshift(code); store('falak-recent', r.slice(0, 5).join(','));
+    location.href = url(s); return true;
+  }
+
+  $('codeForm').onsubmit = function (e) {
+    e.preventDefault();
+    var raw = $('code').value, c = parse(raw);
+    if (!raw.trim()) { $('msg').textContent = 'Ketik kode SIM terlebih dahulu.'; return; }
+    if (!c) { $('msg').textContent = 'Format kode belum tepat. Contoh: 7.2, 12.3, atau II-5.1.'; return; }
+    open(c);
+  };
+  $('code').oninput = function () { $('msg').textContent = ''; };
+
+  function recent() {
+    var r = (store('falak-recent') || '').split(',').filter(function (x) { return IDX[x]; });
+    var box = $('recent'); box.innerHTML = '';
+    if (!r.length) return;
+    r.forEach(function (c) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'chip';
+      b.textContent = 'SIM ' + c + ' · ' + IDX[c].title; b.onclick = function () { open(c); };
+      box.appendChild(b);
+    });
+  }
+  recent();
+
+  /* daftar bab */
+  var host = $('chapters');
+  function item(code, cls, title, desc, ref, href) {
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'item';
+    b.innerHTML = '<span class="code ' + cls + '"></span><span class="it"><b></b><span></span><i></i></span>';
+    b.querySelector('.code').textContent = code;
+    b.querySelector('b').textContent = title;
+    var sp = b.querySelector('.it>span'); if (desc) sp.textContent = desc; else sp.remove();
+    var i = b.querySelector('i'); if (ref) i.textContent = ref; else i.remove();
+    b.onclick = function () { location.href = href; };
+    return b;
+  }
+  function chapterList(V, v) {
+   var wrap = document.createElement('div'); wrap.id = 'chap' + v; host.appendChild(wrap);
+   V.chapters.forEach(function (c) {
+    if (V.parts[c.n]) { var h = document.createElement('div'); h.className = 'part'; h.textContent = V.parts[c.n]; wrap.appendChild(h); }
+    var d = document.createElement('details'); d.className = 'ch'; d.id = (v === 2 ? 'j2-' : '') + 'bab-' + c.n;
+    var s = document.createElement('summary');
+    s.innerHTML = '<span class="num"></span><span class="ch-t"><b></b><span></span></span><svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>';
+    s.querySelector('.num').textContent = (v === 2 ? 'II·' : '') + c.n;
+    if (v === 2) s.querySelector('.num').style.fontSize = '13px';
+    s.querySelector('b').textContent = c.title;
+    s.querySelector('.ch-t>span').textContent = c.sims.length + ' simulasi' + (c.quiz ? ' · latihan interaktif' : '');
+    d.appendChild(s);
+    var l = document.createElement('div'); l.className = 'list';
+    c.sims.forEach(function (x) { l.appendChild(item(x.code, '', x.title, x.desc, x.book ? 'Buku' + (v === 2 ? ' Jilid 2' : '') + ': ' + (/^\d/.test(x.book) ? 'subbab ' : '') + x.book : '', url(x))); });
+    if (c.quiz) l.appendChild(item('L' + c.n, 'q', 'Latihan ' + c.n, 'Soal pilihan ganda yang sama dengan buku, dengan umpan balik langsung.', '', dir(v) + 'bab' + pad(c.n) + '.html?mode=latihan'));
+    l.appendChild(item('Bab', 'r', 'Ringkasan materi bab', 'Semua simulasi bab ini dalam satu halaman.', '', dir(v) + 'bab' + pad(c.n) + '.html?mode=bab'));
+    d.appendChild(l);
+    wrap.appendChild(d);
+   });
+  }
+  chapterList(D, 1);
+  if (V2) chapterList(V2, 2); else $('vol2').parentNode.hidden = true;
+  function showVol(v) {
+    v = V2 ? v : 1;
+    $('chap1').hidden = v !== 1; if ($('chap2')) $('chap2').hidden = v !== 2;
+    $('vol1').setAttribute('aria-selected', v === 1); $('vol2').setAttribute('aria-selected', v === 2);
+    store('falak-vol', String(v));
+  }
+  $('vol1').onclick = function () { showVol(1); }; $('vol2').onclick = function () { showVol(2); };
+  showVol(+(store('falak-vol') || 1));
+
+  /* tautan langsung: index.html#go=7.2 (dari kode QR atau aplikasi lain) */
+  function route() {
+    var h = decodeURIComponent(location.hash || '');
+    var m = h.match(/^#go=(.+)$/);
+    if (m) { var c = parse(m[1]); history.replaceState(null, '', location.pathname); if (c && !open(c)) $('code').value = c; return; }
+    var b = h.match(/^#((?:j2-)?)bab-(\d+)$/);
+    if (b && $(b[1] + 'bab-' + b[2])) { var el = $(b[1] + 'bab-' + b[2]); showVol(b[1] ? 2 : 1); el.open = true; setTimeout(function () { el.scrollIntoView({ block: 'start' }); }, 0); }
+  }
+  window.addEventListener('hashchange', route); route();
+  window.falakOpen = function (t) { var c = parse(t); if (c) open(c); };
+
+  /* pemindai QR: BarcodeDetector bila ada, selain itu jsQR (lib/jsQR.js) */
+  var stream = null, timer = null, detector = null;
+  function loadJsQR(cb) {
+    if (window.jsQR) return cb(true);
+    var srcs = ['lib/jsQR.js', 'https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js'];
+    (function next(i) {
+      if (i >= srcs.length) return cb(false);
+      var s = document.createElement('script'); s.src = srcs[i];
+      s.onload = function () { cb(!!window.jsQR); }; s.onerror = function () { next(i + 1); };
+      document.head.appendChild(s);
+    })(0);
+  }
+  function stop() {
+    clearTimeout(timer); timer = null;
+    if (stream) stream.getTracks().forEach(function (t) { t.stop(); });
+    stream = null; $('scan').classList.remove('on');
+  }
+  function found(text) {
+    var c = parse(text);
+    if (!c) { $('scanMsg').textContent = 'Kode QR ini bukan kode SIM buku. Coba kode QR lain.'; return false; }
+    if (!IDX[c]) { $('scanMsg').textContent = 'Kode SIM ' + c + ' tidak dikenal.'; return false; }
+    stop(); open(c); return true;
+  }
+  function tick() {
+    var v = $('video');
+    if (!stream) return;
+    if (v.readyState < 2) { timer = setTimeout(tick, 150); return; }
+    if (detector) {
+      detector.detect(v).then(function (r) { if (!(r.length && found(r[0].rawValue))) timer = setTimeout(tick, 200); })
+        .catch(function () { timer = setTimeout(tick, 300); });
+      return;
+    }
+    var cv = $('cv'), w = v.videoWidth, h = v.videoHeight, k = Math.min(1, 720 / Math.max(w, h));
+    cv.width = Math.round(w * k); cv.height = Math.round(h * k);
+    var g = cv.getContext('2d', { willReadFrequently: true });
+    g.drawImage(v, 0, 0, cv.width, cv.height);
+    var img = g.getImageData(0, 0, cv.width, cv.height);
+    var r = window.jsQR(img.data, cv.width, cv.height, { inversionAttempts: 'dontInvert' });
+    if (!(r && r.data && found(r.data))) timer = setTimeout(tick, 200);
+  }
+  $('scanBtn').onclick = function () {
+    $('msg').textContent = '';
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) { $('msg').textContent = 'Kamera tidak tersedia di perangkat ini. Ketik kodenya saja.'; return; }
+    var ready = function (ok) {
+      if (!ok) { $('msg').textContent = 'Pemindai QR belum tersedia. Ketik kodenya saja.'; return; }
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: false }).then(function (s) {
+        stream = s; var v = $('video'); v.srcObject = s; v.play();
+        $('scanMsg').textContent = 'Arahkan kamera ke kode QR pada kotak SIM.';
+        $('scan').classList.add('on'); tick();
+      }).catch(function () { $('msg').textContent = 'Izin kamera ditolak. Ketik kodenya, atau izinkan kamera di pengaturan aplikasi.'; });
+    };
+    if ('BarcodeDetector' in window) {
+      window.BarcodeDetector.getSupportedFormats().then(function (f) {
+        if (f.indexOf('qr_code') >= 0) { detector = new window.BarcodeDetector({ formats: ['qr_code'] }); ready(true); }
+        else loadJsQR(ready);
+      }).catch(function () { loadJsQR(ready); });
+    } else loadJsQR(ready);
+  };
+  $('scanClose').onclick = stop;
+  document.addEventListener('visibilitychange', function () { if (document.hidden) stop(); });
+})();
+</script>
+</body>
+</html>

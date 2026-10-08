@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bab 11 · Instrumen dan Aplikasi Penentu Arah Kiblat</title>
+<meta name="falak-bab" content="11">
+<link rel="stylesheet" href="../falak.css">
+<script src="../data.js"></script>
+<script src="../falak.js"></script>
+<script src="../kunci.js"></script>
+</head>
+<body>
+<style>
+/* Layout: lembar kuliah satu kolom, navigasi bagian lengket di atas; simulasi dan kalkulator dua kolom di layar besar */
+:root{
+  --bg:#f2f4f6; --surface:#ffffff; --ink:#15213a; --muted:#56627a; --line:#d5dbe4;
+  --accent:#0d6b5f; --accent-soft:#e1f0ec; --gold:#a8701a; --gold-soft:#f6ecd9;
+  --sky:#2c4a86; --sky-soft:#e3e9f6; --warn:#a33a2a; --warn-soft:#f7e3df;
+  --f-display:"Spectral",Georgia,"Times New Roman",serif;
+  --f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --f-arab:"Amiri","Traditional Arabic","Scheherazade New",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1522; --surface:#172033; --ink:#e6eaf2; --muted:#9aa6bd; --line:#2b3850;
+  --accent:#4fc2ad; --accent-soft:#163a37; --gold:#e3b464; --gold-soft:#3a2f1c;
+  --sky:#8eaaf0; --sky-soft:#1d2a47; --warn:#f08a78; --warn-soft:#3b211d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1522; --surface:#172033; --ink:#e6eaf2; --muted:#9aa6bd; --line:#2b3850;
+  --accent:#4fc2ad; --accent-soft:#163a37; --gold:#e3b464; --gold-soft:#3a2f1c;
+  --sky:#8eaaf0; --sky-soft:#1d2a47; --warn:#f08a78; --warn-soft:#3b211d; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65}
+.wrap{max-width:980px;margin:0 auto;padding-inline:20px;padding-block:0 64px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,5vw,3.1rem);font-weight:700}
+h2{font-size:clamp(1.55rem,3.4vw,2.1rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0;max-width:68ch}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.ar-in{font-family:var(--f-arab);font-size:1.15em}
+.muted{color:var(--muted)}
+.small{font-size:.92rem}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+header.top{padding-block:44px 28px;display:grid;gap:14px;border-bottom:1px solid var(--line)}
+header.top .meta{display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--muted);font-size:.95rem}
+header.top .meta b{color:var(--ink);font-weight:600}
+.lead{font-size:1.12rem;color:var(--muted)}
+
+nav.sec{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-20px;padding-inline:20px}
+nav.sec ul{display:flex;gap:4px;list-style:none;margin:0;padding:8px 0;overflow-x:auto;scrollbar-width:none}
+nav.sec a{display:block;white-space:nowrap;padding:6px 12px;border-radius:6px;text-decoration:none;color:var(--muted);font-weight:600;font-size:.93rem}
+nav.sec a:hover{color:var(--ink);background:var(--surface)}
+
+section{padding-block:48px 8px;display:grid;grid-template-columns:minmax(0,1fr);gap:20px;scroll-margin-top:60px}
+.sec-head{display:grid;gap:6px}
+
+.goals{background:var(--accent-soft);border-radius:8px;padding:18px 20px;display:grid;gap:8px}
+.goals ol,.goals ul{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.box ul,.box ol{margin:0;padding-left:1.15em;display:grid;gap:4px}
+.note{border-left:3px solid var(--gold);padding:4px 0 4px 14px;color:var(--muted);font-size:.95rem;max-width:72ch}
+.note b{color:var(--ink)}
+.warn{background:var(--gold-soft);color:var(--ink);border-radius:8px;padding:12px 16px;font-size:.95rem}
+.warn b{color:var(--gold)}
+.prose{display:grid;gap:12px}
+.prose ul,.prose ol{margin:0;padding-left:1.2em;display:grid;gap:4px;max-width:70ch}
+
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--bg)}
+td.n,th.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.r,th.r{text-align:right}
+td i[lang=ar]{font-style:normal;font-family:var(--f-arab);font-size:1.12rem;color:var(--gold)}
+tr.hl td{background:var(--gold-soft)}
+tr.today td{background:var(--accent-soft)}
+
+.eq{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 18px;overflow-x:auto;display:grid;gap:6px}
+.eq .cap{font-size:.88rem;color:var(--muted)}
+math{font-size:1.12em}
+
+.ayat{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.ayat figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px}
+.ar{font-family:var(--f-arab);font-size:1.6rem;line-height:1.9;direction:rtl;text-align:right;color:var(--ink)}
+.ayat figcaption{font-size:.93rem;color:var(--muted)}
+.ayat figcaption b{color:var(--gold);font-family:var(--f-mono);font-size:.78rem;font-weight:600;display:block;margin-bottom:2px}
+
+.sim{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:start}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px;min-width:0}
+.stage svg{width:100%;height:auto;display:block;touch-action:none}
+svg .c{fill:none;stroke:var(--muted);stroke-width:1.3}
+svg .back{stroke-dasharray:4 5;opacity:.45}
+svg .grid{stroke:var(--line);stroke-width:1}
+svg .axisl{stroke:var(--muted);stroke-width:1.2}
+svg .lbl{fill:var(--ink);font-family:var(--f-mono);font-size:13px;font-weight:600}
+svg .sm{fill:var(--muted);font-family:var(--f-body);font-size:11.5px}
+svg .tick{fill:var(--muted);font-family:var(--f-mono);font-size:10.5px}
+.ctrl{display:grid;gap:14px;min-width:0}
+.ctrl label,.field{display:grid;gap:4px;font-weight:600;font-size:.95rem}
+.ctrl label span,.field span.v{font-family:var(--f-mono);color:var(--accent)}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+select,input[type=number],input[type=text],input[type=date]{font:inherit;font-weight:400;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);min-width:0;width:100%}
+input[type=number],input[type=text]{font-family:var(--f-mono)}
+.readout{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:.93rem;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;align-content:start}
+.readout b{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;overflow-wrap:anywhere;min-width:0}
+.readout .big{grid-column:1/-1;font-family:var(--f-display);font-size:1.6rem;font-weight:700;color:var(--accent);text-align:left}
+.presets{display:flex;flex-wrap:wrap;gap:6px}
+.presets button,.btn{font:inherit;font-size:.88rem;font-weight:600;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.presets button:hover,.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.85rem;font-weight:600;background:var(--sky-soft);color:var(--sky)}
+.pill.g{background:var(--gold-soft);color:var(--gold)}
+.pill.a{background:var(--accent-soft);color:var(--accent)}
+.box>.pill{justify-self:start}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;grid-template-columns:minmax(0,1fr);gap:16px;min-width:0}
+.calc .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.worked{display:grid;gap:6px;font-size:.95rem;counter-reset:w}
+.worked div{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:baseline}
+.worked div::before{counter-increment:w;content:counter(w);font-family:var(--f-mono);font-size:.75rem;color:var(--accent);font-weight:600}
+.worked code{font-family:var(--f-mono);font-size:.88rem;background:var(--bg);padding:1px 6px;border-radius:4px;overflow-wrap:anywhere}
+.worked div>span{min-width:0}
+
+.steps{margin:0;padding:0;list-style:none;display:grid;gap:12px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:baseline}
+.steps li>div{display:grid;gap:8px;min-width:0}
+.steps li::before{content:counter(s);font-family:var(--f-mono);font-weight:600;color:var(--bg);background:var(--accent);border-radius:50%;width:26px;height:26px;display:grid;place-items:center;font-size:.8rem}
+
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px}
+.ex .q{font-weight:600}
+.ex details summary{cursor:pointer;color:var(--accent);font-weight:600}
+.ex details[open] summary{margin-bottom:8px}
+.ex .sol{display:grid;gap:8px;font-size:.96rem}
+
+.quiz{display:grid;gap:14px}
+.qz{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px;display:grid;gap:10px}
+.qz p{font-weight:600}
+.opts{display:grid;gap:6px}
+.opts button{font:inherit;text-align:left;padding:8px 12px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--accent)}
+.opts button.ok{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+.opts button.bad{border-color:var(--warn);color:var(--warn)}
+.opts button:disabled{cursor:default}
+.fb{font-size:.92rem;color:var(--muted)}
+.score{font-family:var(--f-mono);font-weight:600;color:var(--accent)}
+
+.task{background:var(--gold-soft);border-radius:8px;padding:18px;display:grid;gap:8px}
+.task h3{color:var(--gold)}
+.task ol{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+.rubric td:not(:first-child){font-size:.9rem}
+.next{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.92rem;color:var(--muted)}
+.next b{color:var(--ink)}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem;display:grid;gap:10px}
+
+@media (max-width:760px){
+  .two,.sim,.calc .grid2{grid-template-columns:1fr}
+  body{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">Astronomi Islam (Ilmu Falak) · Lampiran</div>
+  <h1>Instrumen dan Aplikasi Penentu Arah Kiblat</h1>
+  <p class="lead">Dari tongkat istiwa' sampai teodolit dan aplikasi smartphone: cara kerja, langkah penggunaan, kelebihan, dan keterbatasan setiap instrumen penentu arah kiblat, dengan pembahasan khusus aplikasi KAFFAH MR PRO.</p>
+  <div class="meta"><div>Dosen: <b>Dr. Ea Cahya Septia Mahen, S.Pd., M.Si.</b></div><div>Prodi: <b>Pendidikan Fisika, UIN Sunan Gunung Djati Bandung</b></div></div>
+</header>
+<nav class="sec" aria-label="Bagian materi"><ul>
+    <li><a href="#tujuan">Tujuan</a></li>
+    <li><a href="#prinsip">Prinsip umum</a></li>
+    <li><a href="#simulasi">Simulasi</a></li>
+    <li><a href="#tradisional">Alat tradisional</a></li>
+    <li><a href="#teodolit">Teodolit</a></li>
+    <li><a href="#mizwala">Mizwala</a></li>
+    <li><a href="#istiwaaini">Istiwaaini</a></li>
+    <li><a href="#qiswa">Qiswa Portabel</a></li>
+    <li><a href="#banding">Perbandingan</a></li>
+    <li><a href="#aplikasi">Aplikasi smartphone</a></li>
+    <li><a href="#kaffah">KAFFAH MR PRO</a></li>
+    <li><a href="#latihan">Latihan</a></li>
+</ul></nav>
+
+
+<section id="tujuan">
+  <div class="goals">
+    <div class="eyebrow">Tujuan</div>
+    <p>Setelah mempelajari materi ini, mahasiswa mampu:</p>
+    <ol>
+      <li>mengelompokkan instrumen arah kiblat menurut acuan arahnya (magnet, Matahari, peta, atau hitungan);</li>
+      <li>menjelaskan prinsip kerja dan langkah penggunaan teodolit, Mizwala Qibla Finder, Istiwaaini, dan Qiswa Portabel;</li>
+      <li>membandingkan kelebihan dan keterbatasan setiap instrumen;</li>
+      <li>menilai aplikasi smartphone penentu kiblat secara kritis;</li>
+      <li>menggunakan KAFFAH MR PRO untuk jadwal salat, rashdul kiblat, kalibrasi kompas, dan pemeriksaan arah bangunan.</li>
+    </ol>
+  </div>
+  <p class="note"><b>Kaitan dengan materi.</b> Halaman ini melengkapi Bab 8 (utara sejati dan kompas), 10 (rashdul kiblat), dan 11 (smartphone). Semua instrumen di sini menerapkan rumus arah kiblat Bab 7.</p>
+</section>
+
+<section id="prinsip">
+  <div class="sec-head"><div class="eyebrow">1</div><h2>Prinsip umum: dari mana acuan arah diperoleh?</h2>
+  <p>Setiap instrumen kiblat menjawab satu pertanyaan yang sama: <b>di mana arah utara sejati?</b> Setelah utara sejati diketahui, arah kiblat tinggal diputar sebesar azimut kiblat. Perbedaan antarinstrumen terletak pada cara mendapatkan acuan arah itu.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Acuan</th><th>Contoh instrumen</th><th>Kekuatan</th><th>Sumber galat utama</th></tr></thead>
+    <tbody>
+      <tr><td><b>Medan magnet Bumi</b></td><td>Kompas, kompas kiblat, aplikasi kompas</td><td>Cepat, murah, bisa malam hari</td><td>Deklinasi magnetik, besi dan listrik di sekitar</td></tr>
+      <tr><td><b>Posisi Matahari</b></td><td>Tongkat istiwa', teodolit, Mizwala, Istiwaaini, Qiswa Portabel, KAFFAH MR PRO</td><td>Teliti, tidak terpengaruh logam</td><td>Ketepatan jam, ketegakan gnomon, kedataran alat</td></tr>
+      <tr><td><b>Peta dan citra satelit</b></td><td>Google Earth, menu Satelit KAFFAH MR PRO</td><td>Bisa memeriksa bangunan dari jauh</td><td>Pergeseran citra, atap gedung tinggi tampak miring</td></tr>
+      <tr><td><b>Hitungan geometri</b></td><td>Rubu' mujayyab, segitiga siku (Bab 8)</td><td>Memahami konsep, tanpa listrik</td><td>Ketelitian skala dan pembacaan</td></tr>
+    </tbody>
+  </table></div>
+  <p>Semua instrumen berbasis Matahari memakai hubungan sederhana berikut. Jika azimut Matahari saat pengamatan A☉ dan azimut kiblat Aₖ, maka sudut yang harus diputar dari arah Matahari menuju kiblat adalah:</p>
+  <div class="eq">
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>&#x394;</mi><mo>=</mo><msub><mi>A</mi><mi>k</mi></msub><mo>&#x2212;</mo><msub><mi>A</mi><mo>&#x2609;</mo></msub><mspace width="2em"/><mtext>dan dari arah bayangan:</mtext><mspace width="0.6em"/><msub><mi>&#x394;</mi><mtext>bayangan</mtext></msub><mo>=</mo><msub><mi>A</mi><mi>k</mi></msub><mo>&#x2212;</mo><mo>(</mo><msub><mi>A</mi><mo>&#x2609;</mo></msub><mo>+</mo><mn>180</mn><mo>&#xB0;</mo><mo>)</mo></mrow></math>
+    <div class="cap">Positif berarti diputar searah jarum jam. Azimut Matahari dihitung dari tempat, tanggal, dan jam (Bab 3–5). Karena Matahari bergerak, jam pengamatan harus tepat sampai menit, bahkan detik.</div>
+  </div>
+</section>
+
+<section id="simulasi">
+  <div class="sec-head"><div class="eyebrow">2</div><h2>Simulasi instrumen berbasis Matahari</h2>
+  <p>Simulasi ini menunjukkan apa yang dilakukan teodolit, Mizwala, Istiwaaini, dan Qiswa: menghitung azimut Matahari pada saat pengamatan, lalu memutar dari arah bayangan (atau arah Matahari) menuju kiblat.</p></div>
+  <div class="sim">
+    <div class="stage"><svg id="dial" viewBox="0 0 400 400" role="img" aria-label="Piringan instrumen dengan bayangan gnomon dan garis kiblat"></svg></div>
+    <div class="ctrl">
+      <label for="sPlace">Tempat<select id="sPlace"></select></label>
+      <div class="fields">
+        <label class="field" for="sPhi">Lintang φ<input id="sPhi" type="text" value="-6.9312"></label>
+        <label class="field" for="sLam">Bujur λ<input id="sLam" type="text" value="107.7175"></label>
+        <label class="field" for="sTz">Zona (UTC+)<input id="sTz" type="number" value="7"></label>
+        <label class="field" for="sDate">Tanggal<input id="sDate" type="date"></label>
+      </div>
+      <label for="sT">Jam pengamatan <span id="vT">09:00:00</span><input id="sT" type="range" min="6" max="18" step="0.0025" value="9"></label>
+      <div class="readout">
+        <span>Azimut Matahari A☉</span><b id="oSun">—</b>
+        <span>Tinggi Matahari</span><b id="oAlt">—</b>
+        <span>Azimut bayangan</span><b id="oSh">—</b>
+        <span>Azimut kiblat Aₖ</span><b id="oQ">—</b>
+        <span>Putar dari bayangan ke kiblat</span><b id="oD">—</b>
+        <span>Galat bila jam meleset 1 menit</span><b id="oErr">—</b>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tradisional">
+  <div class="sec-head"><div class="eyebrow">3</div><h2>Alat tradisional</h2></div>
+  <div class="three">
+    <div class="box"><h3>Tongkat istiwa' dan bencet</h3><p>Tongkat tegak (gnomon) adalah instrumen falak tertua. Bayangannya dipakai untuk mencari arah utara–selatan saat kulminasi, metode lingkaran India, dan rashdul kiblat (Bab 5, 8, 9). <i>Bencet</i> adalah jam Matahari tetap yang banyak dijumpai di halaman masjid dan pesantren di Jawa.</p><p class="small muted">Kelebihan: sangat murah dan teliti bila tongkat benar-benar tegak. Keterbatasan: hanya pada jam tertentu atau perlu pengamatan pagi dan sore.</p></div>
+    <div class="box"><h3>Rubu' mujayyab</h3><p>Kuadran (seperempat lingkaran) berskala dengan garis-garis sinus dan kosinus, dipakai para ahli falak sebagai "kalkulator analog" trigonometri. Dengan benang dan skalanya, nilai sinus, kosinus, dan sudut untuk rumus arah kiblat dan waktu salat dapat dibaca tanpa kalkulator.</p><p class="small muted">Kelebihan: melatih pemahaman rumus. Keterbatasan: ketelitian terbatas pada skala, biasanya orde menit busur hingga derajat.</p></div>
+    <div class="box"><h3>Kompas</h3><p>Menunjuk utara magnetik. Kompas kiblat sering memiliki skala daftar kota. Wajib dikoreksi deklinasi magnetik dan dijauhkan dari besi (Bab 8).</p><p class="small muted">Kelebihan: cepat, tanpa Matahari. Keterbatasan: galat beberapa derajat sangat mungkin terjadi di dalam bangunan.</p></div>
+  </div>
+</section>
+
+<section id="teodolit">
+  <div class="sec-head"><div class="eyebrow">4</div><h2>Teodolit</h2>
+  <p><b>Teodolit</b> adalah alat ukur sudut horizontal dan vertikal yang dipakai juru ukur tanah. Dalam ilmu falak, teodolit dianggap instrumen paling teliti untuk arah kiblat, dan menjadi pembanding dalam banyak penelitian uji akurasi alat lain. Pengukuran arah kiblat oleh Kementerian Agama dan lembaga falak banyak memakai teodolit, terutama teodolit digital.</p></div>
+  <div class="two">
+    <div class="box">
+      <h3>Komponen utama</h3>
+      <ul>
+        <li><b>Teleskop</b> dengan benang silang untuk membidik.</li>
+        <li><b>Lingkaran horizontal</b>: skala sudut mendatar (azimut), pada teodolit digital tampil di layar dengan resolusi sampai detik busur.</li>
+        <li><b>Lingkaran vertikal</b>: skala sudut tegak (tinggi).</li>
+        <li><b>Nivo</b> (gelembung air) dan <b>sekrup penyetel</b> untuk mendatarkan alat.</li>
+        <li><b>Statif</b> (tripod) dan <b>unting-unting</b> atau penyipat optis untuk menempatkan alat tepat di atas titik.</li>
+        <li><b>Penggerak halus</b> horizontal dan vertikal.</li>
+        <li><b>Filter Matahari</b> atau layar proyeksi untuk membidik Matahari dengan aman.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Prinsip kerja</h3>
+      <p>Teodolit tidak tahu arah utara. Ia hanya mengukur <b>selisih sudut</b> dengan sangat teliti. Acuan diperoleh dengan membidik Matahari pada jam tertentu: azimut Matahari saat itu dihitung, lalu teleskop diputar sebesar Δ = Aₖ − A☉ untuk mendapatkan arah kiblat.</p>
+      <p>Cara lain: setel lingkaran horizontal agar menunjukkan nilai A☉ saat membidik Matahari. Sejak itu, angka di layar adalah azimut sejati, dan teleskop cukup diputar sampai layar menunjukkan Aₖ.</p>
+    </div>
+  </div>
+  <ol class="steps">
+    <li><div><p><b>Persiapan data.</b> Hitung azimut kiblat lokasi. Siapkan tabel azimut Matahari tiap menit untuk rentang jam pengamatan (atau gunakan kalkulator/aplikasi). Cocokkan jam dengan waktu GPS.</p></div></li>
+    <li><div><p><b>Dirikan alat.</b> Pasang statif di atas titik acuan, lalu pasang teodolit. Tepatkan di atas titik dengan unting-unting atau penyipat optis.</p></div></li>
+    <li><div><p><b>Datarkan.</b> Atur sekrup penyetel sampai gelembung nivo di tengah pada semua arah putaran. Teodolit yang tidak datar menghasilkan galat azimut terbesar ketika membidik benda tinggi seperti Matahari.</p></div></li>
+    <li><div><p><b>Bidik Matahari dengan aman.</b> Gunakan filter Matahari, atau proyeksikan bayangan Matahari dari lensa okuler ke kertas putih. <b>Jangan pernah melihat Matahari langsung melalui teleskop.</b> Tepatkan pusat piringan Matahari di benang silang.</p></div></li>
+    <li><div><p><b>Catat jam dan kunci.</b> Catat jam bidikan sampai detik, lalu kunci lingkaran horizontal (atau set ke 0 / set ke A☉ sesuai jenis teodolit).</p></div></li>
+    <li><div><p><b>Putar ke kiblat.</b> Hitung Δ = Aₖ − A☉ untuk jam tersebut. Putar teleskop secara horizontal sebesar Δ (searah jarum jam bila positif). Turunkan teleskop dan tandai titik di tanah atau lantai yang terlihat di benang silang.</p></div></li>
+    <li><div><p><b>Tarik garis.</b> Garis dari titik acuan ke titik tanda adalah garis kiblat. Ulangi pengukuran beberapa kali dan ambil rata-ratanya.</p></div></li>
+  </ol>
+  <div class="two">
+    <div class="box"><h3>Kelebihan</h3><ul><li>Resolusi sudut sangat tinggi (detik busur).</li><li>Tidak terpengaruh logam dan medan magnet.</li><li>Dapat dipakai kapan saja selama Matahari terlihat.</li><li>Menjadi acuan untuk menguji alat lain.</li></ul></div>
+    <div class="box"><h3>Keterbatasan</h3><ul><li>Mahal dan memerlukan pelatihan.</li><li>Sangat bergantung pada ketepatan jam: Matahari bergeser hingga beberapa menit busur setiap menit waktu (lihat simulasi di atas).</li><li>Memerlukan cuaca cerah dan filter Matahari.</li><li>Berat untuk dibawa ke banyak lokasi.</li></ul></div>
+  </div>
+</section>
+
+<section id="mizwala">
+  <div class="sec-head"><div class="eyebrow">5</div><h2>Mizwala Qibla Finder</h2>
+  <p>Mizwala Qibla Finder dirancang oleh <b>Hendro Setyanto</b>, alumnus Astronomi ITB dan pendiri Observatorium Imah Noong di Lembang, Kabupaten Bandung Barat, pada tahun 2011. Hingga 2020, sekitar 600 unit telah dibuat dan dipakai antara lain oleh KUA, MUI, dan Kementerian Agama. Nama <i>mizwala</i> berasal dari istilah Arab untuk jam Matahari.</p></div>
+  <div class="two">
+    <div class="box">
+      <h3>Komponen</h3>
+      <ul>
+        <li><b>Gnomon</b>: tongkat tegak di pusat piringan.</li>
+        <li><b>Bidang dial putar</b>: piringan berskala derajat yang dapat diputar.</li>
+        <li><b>Benang</b> untuk menandai arah.</li>
+        <li><b>Waterpass</b> dan penyangga (tripod) agar piringan datar.</li>
+        <li>Data azimut Matahari, misalnya dari lembar hitung yang disediakan pengembang.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Prinsip</h3>
+      <p>Mizwala adalah jam Matahari yang dibalik fungsinya: dari arah bayangan dan jam pengamatan, piringan diputar sehingga skalanya menunjukkan azimut sejati. Setelah itu, arah kiblat dibaca langsung pada skala sebagai garis benang dari pusat ke angka azimut kiblat.</p>
+      <p>Keunggulannya, pengukuran dapat dilakukan setiap saat ketika Matahari bersinar, tanpa menunggu rashdul kiblat.</p>
+    </div>
+  </div>
+  <ol class="steps">
+    <li><div><p>Letakkan Mizwala di permukaan datar yang terkena Matahari; datarkan dengan waterpass.</p></div></li>
+    <li><div><p>Hitung azimut Matahari (A☉) untuk jam pengamatan berdasarkan jam GPS.</p></div></li>
+    <li><div><p>Putar bidang dial sampai bayangan gnomon jatuh tepat pada angka azimut bayangan (A☉ + 180°, atau nilai bayangan yang tertera pada lembar hitung). Kini skala dial selaras dengan azimut sejati.</p></div></li>
+    <li><div><p>Tarik benang dari pusat ke angka azimut kiblat pada dial. Benang itulah arah kiblat; perpanjang ke lantai.</p></div></li>
+  </ol>
+</section>
+
+<section id="istiwaaini">
+  <div class="sec-head"><div class="eyebrow">6</div><h2>Istiwaaini</h2>
+  <p>Istiwaaini (dari <i>istiwa'</i> + <i>aini</i>, "dua istiwa'") dirancang oleh <b>K.H. Drs. Slamet Hambali</b>, dosen ilmu falak UIN Walisongo Semarang. Alat ini dibuat dari akrilik dengan dua gnomon: satu di titik pusat lingkaran dan satu di titik 0° lingkaran. Tujuannya menghadirkan cara kerja teodolit dengan biaya rendah.</p></div>
+  <div class="two">
+    <div class="box">
+      <h3>Prinsip</h3>
+      <p>Kedua gnomon membentuk garis bidik. Alat diputar sampai bayangan gnomon pusat jatuh tepat pada gnomon di titik 0°, sehingga garis 0° menunjuk ke arah Matahari (seperti membidik Matahari dengan teodolit). Selanjutnya arah kiblat dibaca pada skala sebesar selisih azimut kiblat dan azimut Matahari.</p>
+    </div>
+    <div class="box">
+      <h3>Hasil uji</h3>
+      <p>Penelitian skripsi di UIN Walisongo (Adieb, 2014) membandingkan Istiwaaini dengan teodolit dan menyimpulkan bahwa selisih hasilnya masih dalam batas toleransi. Penelitian serupa banyak dilakukan di program studi ilmu falak sebagai uji akurasi.</p>
+    </div>
+  </div>
+  <ol class="steps">
+    <li><div><p>Datarkan Istiwaaini di tempat terkena Matahari.</p></div></li>
+    <li><div><p>Putar alat sampai bayangan gnomon pusat tepat mengenai gnomon di titik 0°. Catat jam saat itu sampai detik.</p></div></li>
+    <li><div><p>Hitung selisih Δ = Aₖ − A☉ untuk jam tersebut.</p></div></li>
+    <li><div><p>Tarik benang dari pusat ke angka Δ pada skala (sesuai arah putaran skala alat). Benang menunjukkan arah kiblat.</p></div></li>
+  </ol>
+</section>
+
+<section id="qiswa">
+  <div class="sec-head"><div class="eyebrow">7</div><h2>Qiswa Portabel</h2>
+  <p><b>Qiswa Portabel</b> adalah instrumen penentu arah kiblat berbasis posisi Matahari yang dikembangkan dan dilatihkan dalam program pengabdian kepada masyarakat Program Studi Pendidikan Fisika, Fakultas Tarbiyah dan Keguruan UIN Sunan Gunung Djati Bandung, oleh Dr. Ea Cahya Septia Mahen, S.Pd., M.Si. dan H. Saepudin Rahmatullah, M.Si. Instrumen ini memadukan prinsip ilmu falak dengan pengukuran presisi, dan dikalibrasi berdasarkan posisi Matahari.</p></div>
+  <div class="two">
+    <div class="box">
+      <h3>Pemakaian dalam pengabdian masyarakat</h3>
+      <ul>
+        <li>Pelatihan "Peningkatan akurasi penentuan arah kiblat melalui pelatihan Qiswa Portable dan Google Earth berbantuan protractor" di SMAN 1 Pelabuhanratu, 28 Mei 2025, bertepatan dengan hari rashdul kiblat tahunan.</li>
+        <li><i>Training of Trainers</i> instruktur arah kiblat model baru, 9 dan 16 September 2025.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Kaitan dengan instrumen lain</h3>
+      <p>Seperti Mizwala dan Istiwaaini, Qiswa Portabel memakai Matahari sebagai acuan utara sejati, sehingga bebas dari galat magnetik. Dalam pelatihan, hasilnya dipadukan dengan Google Earth dan busur derajat untuk memeriksa arah bangunan. Spesifikasi teknis, komponen, dan prosedur rinci Qiswa Portabel akan diperagakan langsung oleh tim pengembang di kelas.</p>
+    </div>
+  </div>
+</section>
+
+<section id="banding">
+  <div class="sec-head"><div class="eyebrow">8</div><h2>Perbandingan instrumen</h2></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Instrumen</th><th>Acuan</th><th>Ketelitian relatif</th><th>Biaya</th><th>Keahlian</th><th>Waktu pakai</th></tr></thead>
+    <tbody>
+      <tr><td>Kompas</td><td>Magnet</td><td>Rendah–sedang</td><td>Sangat murah</td><td>Rendah</td><td>Kapan saja</td></tr>
+      <tr><td>Tongkat istiwa' (rashdul kiblat)</td><td>Matahari</td><td>Tinggi</td><td>Sangat murah</td><td>Rendah</td><td>Jam tertentu</td></tr>
+      <tr><td>Rubu' mujayyab</td><td>Hitungan</td><td>Sedang</td><td>Murah</td><td>Tinggi</td><td>Kapan saja (hitungan)</td></tr>
+      <tr class="hl"><td>Teodolit</td><td>Matahari</td><td>Sangat tinggi</td><td>Mahal</td><td>Tinggi</td><td>Saat cerah</td></tr>
+      <tr><td>Mizwala Qibla Finder</td><td>Matahari</td><td>Tinggi</td><td>Sedang</td><td>Sedang</td><td>Saat cerah</td></tr>
+      <tr><td>Istiwaaini</td><td>Matahari</td><td>Tinggi</td><td>Sedang</td><td>Sedang</td><td>Saat cerah</td></tr>
+      <tr><td>Qiswa Portabel</td><td>Matahari</td><td>Tinggi</td><td>Sedang</td><td>Sedang</td><td>Saat cerah</td></tr>
+      <tr><td>Aplikasi kompas</td><td>Magnet</td><td>Rendah–sedang</td><td>Gratis</td><td>Rendah</td><td>Kapan saja</td></tr>
+      <tr><td>Citra satelit</td><td>Peta</td><td>Sedang–tinggi</td><td>Gratis</td><td>Sedang</td><td>Kapan saja</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note"><b>Catatan.</b> Ketelitian di atas adalah perbandingan kualitatif. Ketelitian nyata setiap alat bergantung pada pemakai: ketegakan gnomon, kedataran alat, ketepatan jam, dan ketelitian menandai garis. Teodolit dengan jam yang meleset lima menit bisa kalah teliti dibanding tongkat istiwa' yang dipakai dengan benar.</p>
+</section>
+
+<section id="aplikasi">
+  <div class="sec-head"><div class="eyebrow">9</div><h2>Aplikasi smartphone</h2>
+  <p>Ratusan aplikasi kiblat tersedia di Google Play dan App Store. Berdasarkan cara kerjanya, aplikasi itu dapat dikelompokkan menjadi empat jenis.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Jenis</th><th>Contoh</th><th>Cara kerja</th><th>Catatan kritis</th></tr></thead>
+    <tbody>
+      <tr><td><b>Kompas magnetik</b></td><td>Fitur kompas kiblat di aplikasi ibadah umum seperti Muslim Pro, Salatku, i-Qibla, dan banyak aplikasi "Arah Kiblat"</td><td>Azimut kiblat dari GPS, ditampilkan dengan magnetometer</td><td>Mudah terganggu logam; sering tidak menjelaskan apakah memakai utara sejati</td></tr>
+      <tr><td><b>Realitas tertambah (AR)</b></td><td>Google Qibla Finder (aplikasi web, diluncurkan Juni 2017)</td><td>Garis kiblat digambar di atas citra kamera, memakai lokasi dan sensor arah</td><td>Tetap bergantung pada sensor orientasi ponsel</td></tr>
+      <tr><td><b>Peta</b></td><td>Situs pencari kiblat berbasis peta, Google Earth</td><td>Garis lingkaran besar dari lokasi ke Ka'bah di atas peta</td><td>Baik untuk memeriksa arah bangunan; perlu interpretasi citra</td></tr>
+      <tr><td><b>Berbasis Matahari</b></td><td>KAFFAH MR PRO; aplikasi posisi Matahari seperti Sun Surveyor</td><td>Azimut Matahari dihitung, bayangan dipakai sebagai acuan</td><td>Paling teliti di antara aplikasi; perlu Matahari</td></tr>
+    </tbody>
+  </table></div>
+  <div class="box">
+    <h3>Daftar periksa menilai aplikasi kiblat</h3>
+    <ol>
+      <li>Apakah azimut kiblat diukur dari utara sejati, dan apakah deklinasi magnetik diperhitungkan?</li>
+      <li>Apakah ada kalibrasi magnetometer, dan apakah aplikasi memberi peringatan jika medan magnet tidak wajar?</li>
+      <li>Apakah ada acuan bebas magnet (bayangan Matahari, peta)?</li>
+      <li>Untuk jadwal salat: kriteria apa yang dipakai (Subuh −20°/−18°?), berapa ihtiyat, dan bagaimana pembulatannya?</li>
+      <li>Apakah metode perhitungannya dijelaskan dan pernah divalidasi?</li>
+      <li>Apakah aplikasi bisa dipakai tanpa internet, dan data apa yang dikirim ke luar?</li>
+    </ol>
+  </div>
+</section>
+
+<section id="kaffah">
+  <div class="sec-head"><div class="eyebrow">10</div><h2>KAFFAH MR PRO</h2>
+  <p><b>KAFFAH MR PRO</b> adalah instrumen falak digital untuk waktu salat dan arah kiblat, dikembangkan oleh <b>Komunitas Astronomi dan Falak Fakultas Tarbiyah (KAFFAH) UIN Sunan Gunung Djati Bandung</b>. Pengembangnya Ea Cahya Septia Mahen dan Saepudin Rahmatullah. Aplikasi ini dirancang untuk akademisi, praktisi falak, dan DKM masjid.</p></div>
+  <div class="three">
+    <div class="box"><span class="pill a">Identitas</span><ul><li>Versi 2.1, aplikasi Android (minimal Android 8.0)</li><li>ID aplikasi: <code>id.ac.uinsgd.kaffah.mrpro</code></li><li>Dalam proses publikasi ke Google Play</li></ul></div>
+    <div class="box"><span class="pill g">Bahasa</span><ul><li>Indonesia, Inggris, Arab, Jepang, dan Mandarin</li></ul></div>
+    <div class="box"><span class="pill">Luring</span><ul><li>Perhitungan berjalan tanpa internet</li><li>Internet hanya untuk peta satelit, pencarian alamat, dan data ketinggian medan pertama kali</li></ul></div>
+  </div>
+
+  <div class="sec-head"><h3>Empat menu utama</h3></div>
+  <div class="two">
+    <div class="box">
+      <h3>1. SHALAT: jadwal salat</h3>
+      <ul>
+        <li>Lokasi dari GPS, alamat, atau isian manual; zona waktu dari perangkat atau diperkirakan dari koordinat.</li>
+        <li>Kriteria: Subuh −20°, Isya −18°, Imsak 10 menit sebelum Subuh, Dhuha 4,5°, Ashar mazhab Syafi'i.</li>
+        <li>Ihtiyat dapat diatur; waktu dibulatkan ke atas, Terbit dikurangi ihtiyat dan dibulatkan ke bawah (Bab 14).</li>
+        <li><b>Koreksi ufuk Terbit/Maghrib</b> dengan tiga mode: <i>Mati</i> (ufuk astronomis), <i>Manual</i> (dip = 1,76′√h dari tinggi pengamat terhadap dataran sekitarnya, bukan mdpl), dan <i>Otomatis</i>.</li>
+        <li>Mode Otomatis menghitung sudut ufuk dari profil ketinggian medan (Copernicus DEM ±90 m), kelengkungan Bumi, dan refraksi pada arah terbit/terbenam hari itu. Ufuk yang terhalang gunung tidak memajukan Maghrib.</li>
+        <li>Unduh jadwal sebulan atau setahun dalam format CSV untuk Excel, WhatsApp, atau Drive.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>2. RASHDU: rashdul kiblat harian</h3>
+      <ul>
+        <li>Menampilkan jam:menit:detik saat <b>bayangan menunjuk kiblat</b> dan saat <b>Matahari di arah kiblat</b> (Bab 9).</li>
+        <li>Menampilkan azimut dan tinggi Matahari, deklinasi, perata waktu, arah bayangan, dan arah kiblat secara waktu nyata.</li>
+        <li>Peringatan otomatis bila Matahari terlalu rendah atau hampir di zenit (tinggi &gt; 75°), saat bayangan tidak andal.</li>
+        <li>Mode REALTIME atau MANUAL untuk merencanakan pengamatan di tanggal lain.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>3. KALIBRASI: kompas terkoreksi bayangan</h3>
+      <ul>
+        <li>Masalah: kompas HP terganggu besi dan magnet (Bab 10).</li>
+        <li>Solusi: letakkan HP mendatar, arahkan ujung atas HP sejajar bayangan benda tegak, tekan <b>KUNCI</b>. Aplikasi membandingkan arah sensor dengan azimut bayangan yang dihitung, sehingga kompas terkoreksi ke utara sejati.</li>
+        <li>Penguncian ditolak bila Matahari &lt; 5° atau &gt; 80°, dan diberi peringatan bila di luar rentang ideal 15°–75°.</li>
+        <li>Petunjuk putar kanan/kiri sampai "Tepat menghadap kiblat".</li>
+        <li>Kalibrasi angka 8 dengan tampilan kuat medan magnet; isian deklinasi magnetik bila belum dikunci bayangan.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>4. SATELIT: cek arah bangunan</h3>
+      <ul>
+        <li>Peta satelit Esri (dengan tanggal citra), Esri Clarity, atau Google Satelit bila API key dipasang.</li>
+        <li>Pilih jenis dinding: <i>dinding samping</i> (sejajar kiblat) atau <i>dinding mihrab</i> (tegak lurus kiblat).</li>
+        <li>Tandai titik A dan B sepanjang tepi dinding, atau ketuk sisi garis bangunan OpenStreetMap.</li>
+        <li>Hasil: azimut garis A→B, arah hadap bangunan, selisih terhadap kiblat, dan arah koreksi (searah atau berlawanan jarum jam). Garis &lt; 5 m diberi peringatan.</li>
+        <li><b>Busur Koreksi Digital</b>: tempelkan HP ke dinding, tekan SET 0, lalu putar HP sampai tanda KIBLAT di atas. Memakai giroskop bila tersedia, sehingga tidak terpengaruh besi di dalam masjid.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-head"><h3>Dasar perhitungan</h3></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Komponen</th><th>Metode di KAFFAH MR PRO</th><th>Materi terkait</th></tr></thead>
+    <tbody>
+      <tr><td>Posisi Matahari</td><td>Algoritma Jean Meeus (deklinasi, perata waktu, asensio rekta), dihitung ulang secara iteratif pada saat setiap peristiwa</td><td>Bab 4–5</td></tr>
+      <tr><td>Tinggi tampak</td><td>Refraksi atmosfer rumus Saemundsson</td><td>Bab 2, 13</td></tr>
+      <tr><td>Terbit/terbenam</td><td>Refraksi ufuk 34′ + semidiameter 16′ + kerendahan ufuk (manual atau dari DEM)</td><td>Bab 13–14</td></tr>
+      <tr><td>Arah kiblat</td><td>Trigonometri bola terhadap utara sejati; Ka'bah 21,422487° LU, 39,826206° BT</td><td>Bab 7</td></tr>
+      <tr><td>Bayangan kiblat</td><td>Pencarian saat azimut Matahari sama dengan azimut kiblat atau berlawanannya</td><td>Bab 9</td></tr>
+      <tr><td>Arah bangunan</td><td>Azimut awal (initial bearing) garis A→B pada peta</td><td>Bab 6–7</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="sec-head"><h3>Hasil validasi komputasi</h3>
+  <p>Inti perhitungan aplikasi diuji tanpa perubahan terhadap data rujukan yang diambil pada 1 Oktober 2026.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Uji</th><th>Rujukan</th><th>Hasil</th></tr></thead>
+    <tbody>
+      <tr><td>Posisi Matahari</td><td>JPL Horizons (NASA), 85 epoch di Bandung</td><td>RMS galat deklinasi 4,4″; RMS galat azimut sore 6,8″; galat jam bayangan kiblat RMS 10,5 detik</td></tr>
+      <tr><td>Arah kiblat</td><td>Model elipsoid WGS-84 (Vincenty), 12 kota dunia</td><td>Selisih model bola dan elipsoid paling besar 0,18° (Bandung 0,13°)</td></tr>
+      <tr><td>Rashdul kiblat 2026</td><td>Jarak zenit Matahari minimum di Ka'bah</td><td>28 Mei 16.18.00 WIB dan 15 Juli 16.26.45 WIB</td></tr>
+      <tr><td>Jadwal Kota Bandung</td><td>Jadwal Kemenag, 123 hari (Januari, April, Juli, Oktober 2026)</td><td>Imsak, Subuh, Dhuha, Ashar, Isya: 100% dalam ±1 menit. Dzuhur rata-rata 1 menit lebih awal (cocok bila ihtiyat Dzuhur 3 menit). Terbit dan Maghrib berselisih ±5 menit tanpa koreksi ufuk; cocok dalam ±1 menit bila dipakai kerendahan ufuk setara ±1.575 m (dip ±70′)</td></tr>
+      <tr><td>Jadwal Makassar dan Jayapura</td><td>Jadwal Kemenag Oktober 2026</td><td>Semua waktu kecuali Dzuhur dalam ±1 menit tanpa koreksi ufuk</td></tr>
+      <tr><td>Kerendahan ufuk</td><td>Profil medan vs rumus 1,76′√h</td><td>Sesuai sampai ketinggian 700 m (selisih &lt; 0,3′)</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note"><b>Bahan diskusi.</b> Hasil validasi menunjukkan bahwa jadwal Kemenag untuk Kota Bandung memakai koreksi Terbit dan Maghrib yang setara dengan kerendahan ufuk besar, dan ihtiyat Dzuhur sekitar 3 menit. Hubungkan temuan ini dengan pembahasan ketinggian tempat di Bab 14: parameter apa yang sebaiknya dipakai untuk kota di cekungan?</p>
+
+  <div class="sec-head"><h3>Panduan praktikum dengan KAFFAH MR PRO</h3></div>
+  <ol class="steps">
+    <li><div><p><b>Jadwal.</b> Di menu SHALAT, ambil GPS di masjid proyek. Unduh jadwal satu bulan (CSV) dan bandingkan dengan file Excel buatan Anda (tutorial Excel) dan jadwal Kemenag. Coba ketiga mode koreksi ufuk dan catat perbedaannya.</p></div></li>
+    <li><div><p><b>Rashdul kiblat.</b> Di menu RASHDU, catat jam bayangan kiblat hari ini. Pastikan jam HP tersinkron dengan waktu jaringan. Tandai bayangan benang berbandul pada jam itu.</p></div></li>
+    <li><div><p><b>Kalibrasi.</b> Di menu KALIBRASI, lakukan kalibrasi angka 8, lalu kunci dengan bayangan. Catat "Koreksi sensor" yang muncul: itulah galat kompas HP Anda di tempat itu.</p></div></li>
+    <li><div><p><b>Bangunan.</b> Di menu SATELIT, tandai dinding mihrab atau dinding samping masjid. Catat selisih arah bangunan, lalu periksa di dalam masjid dengan Busur Koreksi.</p></div></li>
+    <li><div><p><b>Bandingkan.</b> Susun tabel hasil KAFFAH MR PRO, tongkat istiwa', dan instrumen lain yang tersedia (Mizwala, Istiwaaini, Qiswa, atau teodolit). Bahas sumber selisihnya.</p></div></li>
+  </ol>
+</section>
+
+<section id="latihan">
+  <div class="sec-head"><div class="eyebrow">Penutup</div><h2>Latihan pemahaman</h2><p>Enam soal untuk memeriksa pemahaman. Skor tidak disimpan.</p></div>
+  <div class="quiz" id="quiz"></div>
+  <p class="score" id="score"></p>
+  <div class="task">
+    <h3>Tugas (kelompok)</h3>
+    <ol>
+      <li>Ukur arah kiblat masjid proyek dengan minimal tiga cara: satu berbasis magnet, satu berbasis Matahari (instrumen atau KAFFAH MR PRO), dan satu berbasis citra satelit.</li>
+      <li>Sajikan hasilnya dalam tabel perbandingan dan hitung selisih masing-masing terhadap azimut kiblat hasil hitungan.</li>
+      <li>Nilai satu aplikasi kiblat di Google Play dengan daftar periksa di bagian 9. Tuliskan temuan Anda dalam satu halaman.</li>
+    </ol>
+  </div>
+</section>
+
+<script type="application/json" id="quizdata">[
+ {"q":"Teodolit dapat menentukan arah kiblat dengan teliti karena …","o":["Memiliki kompas internal yang sangat peka","Mengukur selisih sudut dengan sangat teliti, dengan Matahari sebagai acuan","Terhubung ke satelit GPS","Selalu dipakai saat rashdul kiblat"],"a":1,"e":"Teodolit hanya mengukur sudut; acuan utara sejati diperoleh dari azimut Matahari yang dihitung."},
+ {"q":"Pencipta Mizwala Qibla Finder adalah …","o":["Slamet Hambali","Hendro Setyanto","Ahmad Dahlan","Jean Meeus"],"a":1,"e":"Hendro Setyanto, alumnus Astronomi ITB dan pendiri Imah Noong, Lembang (2011)."},
+ {"q":"Ciri khas Istiwaaini adalah …","o":["Memakai magnet ganda","Memakai dua gnomon: di pusat dan di titik 0°","Memakai laser","Hanya dipakai saat malam"],"a":1,"e":"Dua istiwa' (gnomon) membentuk garis bidik ke Matahari, seperti teodolit."},
+ {"q":"Azimut Matahari 100° dan azimut kiblat 295°. Sudut yang diputar dari arah Matahari ke kiblat adalah …","o":["195° searah jarum jam","15° searah jarum jam","195° berlawanan jarum jam","295°"],"a":0,"e":"Δ = 295° − 100° = +195° (searah jarum jam), atau setara 165° berlawanan jarum jam."},
+ {"q":"Fitur KALIBRASI pada KAFFAH MR PRO mengoreksi kompas HP dengan acuan …","o":["Deklinasi magnetik saja","Bayangan Matahari","Peta jalan","Sinyal Wi-Fi"],"a":1,"e":"Arah sensor dibandingkan dengan azimut bayangan hasil hitungan, sehingga galat magnetik hilang."},
+ {"q":"Mode koreksi ufuk Otomatis pada KAFFAH MR PRO memengaruhi waktu …","o":["Subuh dan Isya","Dzuhur dan Ashar","Terbit dan Maghrib","Imsak saja"],"a":2,"e":"Kerendahan ufuk hanya berpengaruh pada kriteria terbit dan terbenam."}
+]</script>
+
+
+<footer><div>Lampiran pendamping Bab 8–10 · Astronomi Islam · Program Studi Pendidikan Fisika, UIN Sunan Gunung Djati Bandung</div></footer>
+</div>
+<script>
+/* Pustaka bersama Astronomi Islam: format angka, posisi Matahari, arah kiblat, waktu sholat, kuis */
+var F = (function(){
+  var RAD = Math.PI/180, DEG = 180/Math.PI;
+  var KABAH = {phi: 21 + 25/60 + 21/3600, lam: 39 + 49/60 + 34/3600};
+  function mod(a,n){ return ((a%n)+n)%n; }
+  function fnum(x,d){ if(!isFinite(x)) return '—'; return x.toFixed(d).replace('.',',').replace('-','−'); }
+  function sgn(x,d){ return (x>0?'+':'')+fnum(x,d); }
+  function dms(x, secs){
+    if(!isFinite(x)) return '—';
+    var s = x<0?'−':''; x=Math.abs(x);
+    var d=Math.floor(x), mf=(x-d)*60, m=Math.floor(mf), sc=(mf-m)*60;
+    if(!secs){ m=Math.round(mf); if(m===60){d++;m=0;} return s+d+'°'+(m<10?'0':'')+m+'′'; }
+    sc=Math.round(sc); if(sc===60){sc=0;m++;} if(m===60){m=0;d++;}
+    return s+d+'°'+(m<10?'0':'')+m+'′'+(sc<10?'0':'')+sc+'″';
+  }
+  function hm(h, mode){ /* jam desimal -> "hh:mm"; mode 'up' bulatkan ke atas, 'down' ke bawah */
+    if(!isFinite(h)) return '—';
+    h = mod(h,24); var m = h*60;
+    m = mode==='up' ? Math.ceil(m-1e-9) : mode==='down' ? Math.floor(m+1e-9) : Math.round(m);
+    var hh=Math.floor(m/60)%24, mm=m%60;
+    return (hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm;
+  }
+  function hms(h){
+    if(!isFinite(h)) return '—';
+    h = mod(h,24); var s=Math.round(h*3600), hh=Math.floor(s/3600)%24, mm=Math.floor(s%3600/60), ss=s%60;
+    return (hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss;
+  }
+  function minsec(m){ var s=m<0?'−':'+'; m=Math.abs(m); var mm=Math.floor(m), ss=Math.round((m-mm)*60); if(ss===60){mm++;ss=0;} return s+mm+' m '+(ss<10?'0':'')+ss+' d'; }
+  function jd(y,mo,d,hUT){ /* Kalender Gregorius */
+    if(mo<=2){ y-=1; mo+=12; }
+    var A=Math.floor(y/100), B=2-A+Math.floor(A/4);
+    return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(mo+1))+d+B-1524.5+(hUT||0)/24;
+  }
+  function sun(JD){ /* algoritma NOAA (Meeus, ketelitian sekitar 0,01°) */
+    var T=(JD-2451545)/36525;
+    var L0=mod(280.46646+T*(36000.76983+0.0003032*T),360);
+    var M=357.52911+T*(35999.05029-0.0001537*T);
+    var e=0.016708634-T*(0.000042037+0.0000001267*T);
+    var Mr=M*RAD;
+    var C=Math.sin(Mr)*(1.914602-T*(0.004817+0.000014*T))+Math.sin(2*Mr)*(0.019993-0.000101*T)+Math.sin(3*Mr)*0.000289;
+    var trueL=L0+C;
+    var om=125.04-1934.136*T;
+    var lam=trueL-0.00569-0.00478*Math.sin(om*RAD);
+    var eps0=23+(26+(21.448-T*(46.815+T*(0.00059-T*0.001813)))/60)/60;
+    var eps=eps0+0.00256*Math.cos(om*RAD);
+    var dec=Math.asin(Math.sin(eps*RAD)*Math.sin(lam*RAD))*DEG;
+    var ra=mod(Math.atan2(Math.cos(eps*RAD)*Math.sin(lam*RAD),Math.cos(lam*RAD))*DEG,360);
+    var y=Math.pow(Math.tan(eps*RAD/2),2);
+    var E=y*Math.sin(2*L0*RAD)-2*e*Math.sin(Mr)+4*e*y*Math.sin(Mr)*Math.cos(2*L0*RAD)-0.5*y*y*Math.sin(4*L0*RAD)-1.25*e*e*Math.sin(2*Mr);
+    var R=1.000001018*(1-e*e)/(1+e*Math.cos((M+C)*RAD));
+    return {dec:dec, eot:4*E*DEG, ra:ra, lam:mod(lam,360), eps:eps, sd:0.2666/R, R:R};
+  }
+  function altaz(JD, phi, lam){ /* tinggi & azimut Matahari (geometris, tanpa refraksi) */
+    var s=sun(JD), T=(JD-2451545)/36525;
+    var gmst=mod(280.46061837+360.98564736629*(JD-2451545)+T*T*(0.000387933-T/38710000),360);
+    var H=mod(gmst+lam-s.ra+180,360)-180;
+    var p=phi*RAD, d=s.dec*RAD, h=H*RAD;
+    var alt=Math.asin(Math.sin(p)*Math.sin(d)+Math.cos(p)*Math.cos(d)*Math.cos(h))*DEG;
+    var az=mod(Math.atan2(-Math.cos(d)*Math.sin(h), Math.cos(p)*Math.sin(d)-Math.sin(p)*Math.cos(d)*Math.cos(h))*DEG,360);
+    return {alt:alt, az:az, H:H, dec:s.dec};
+  }
+  function qibla(phi, lam){
+    var p=phi*RAD, pk=KABAH.phi*RAD, dl=(KABAH.lam-lam)*RAD;
+    var A=mod(Math.atan2(Math.sin(dl), Math.cos(p)*Math.tan(pk)-Math.sin(p)*Math.cos(dl))*DEG,360);
+    var c=Math.sin(p)*Math.sin(pk)+Math.cos(p)*Math.cos(pk)*Math.cos(dl);
+    var ang=Math.acos(Math.max(-1,Math.min(1,c)))*DEG;
+    return {A:A, dist:ang*RAD*6371, ang:ang};
+  }
+  function falak(A){
+    A=mod(A,360);
+    if(Math.abs(A)<1e-9) return 'U'; if(Math.abs(A-180)<1e-9) return 'S';
+    if(Math.abs(A-90)<1e-9) return 'T'; if(Math.abs(A-270)<1e-9) return 'B';
+    if(A>180){ var d=A-270; return 'B '+dms(Math.abs(d),false)+' '+(d>0?'U':'S'); }
+    var e=90-A; return 'T '+dms(Math.abs(e),false)+' '+(e>0?'U':'S');
+  }
+  function hourAngle(h, phi, dec){ /* sudut waktu (derajat) saat Matahari bertinggi h */
+    var p=phi*RAD, d=dec*RAD;
+    var c=(Math.sin(h*RAD)-Math.sin(p)*Math.sin(d))/(Math.cos(p)*Math.cos(d));
+    if(c<-1||c>1) return NaN;
+    return Math.acos(c)*DEG;
+  }
+  /* Waktu sholat. o = {phi, lam, tz, H (m), y, m, d, ihtiyat (menit), subuh, isya, ashar(1|2)} */
+  function prayer(o){
+    var ih = o.ihtiyat==null?2:o.ihtiyat, sub=o.subuh==null?-20:o.subuh, isy=o.isya==null?-18:o.isya, k=o.ashar||1;
+    var base=jd(o.y,o.m,o.d,0);
+    function at(localH){ return sun(base+(localH-o.tz)/24); }
+    var s=at(12), transit=12+o.tz-o.lam/15-s.eot/60;
+    for(var i=0;i<2;i++){ s=at(transit); transit=12+o.tz-o.lam/15-s.eot/60; }
+    var hSet=-(16/60+34/60+1.76*Math.sqrt(Math.max(0,o.H||0))/60);
+    function ev(h, sign){
+      var t=transit;
+      for(var i=0;i<3;i++){ var ss=at(t); var H=hourAngle(typeof h==='function'?h(ss.dec):h, o.phi, ss.dec); if(isNaN(H)) return NaN; t=transit+sign*H/15; }
+      return t;
+    }
+    var asharH=function(dec){ return Math.atan(1/(Math.tan(Math.abs(o.phi-dec)*RAD)+k))*DEG; };
+    var r={transit:transit, dec:s.dec, eot:s.eot, hSet:hSet,
+      subuh:ev(sub,-1), terbit:ev(hSet,-1), dhuha:ev(4.5,-1), ashar:ev(asharH,1), maghrib:ev(hSet,1), isya:ev(isy,1)};
+    r.asharAlt=asharH(sun(base+(r.ashar-o.tz)/24).dec);
+    r.final={
+      imsak: r.subuh+ih/60-10/60, subuh:r.subuh+ih/60, terbit:r.terbit-ih/60, dhuha:r.dhuha+ih/60,
+      zuhur:r.transit+ih/60, ashar:r.ashar+ih/60, maghrib:r.maghrib+ih/60, isya:r.isya+ih/60
+    };
+    return r;
+  }
+  /* Saat Matahari berazimut tertentu (untuk bayangan kiblat). Mengembalikan daftar jam lokal. */
+  function azimuthTimes(o, targetAz){
+    var base=jd(o.y,o.m,o.d,0), out=[], prev=null, prevT=null;
+    for(var mnt=5*60; mnt<=19*60; mnt+=1){
+      var t=mnt/60, a=altaz(base+(t-o.tz)/24, o.phi, o.lam);
+      var dd=mod(a.az-targetAz+540,360)-180;
+      if(prev!==null && Math.abs(dd-prev)<20 && (prev<=0&&dd>0 || prev>=0&&dd<0)){
+        var f=prev/(prev-dd), tt=prevT+f/60, aa=altaz(base+(tt-o.tz)/24, o.phi, o.lam);
+        if(aa.alt>0) out.push({t:tt, alt:aa.alt});
+      }
+      prev=dd; prevT=t;
+    }
+    return out;
+  }
+  /* Kuis bersama */
+  function quiz(){
+    var data=document.getElementById('quizdata'), box=document.getElementById('quiz'), sc=document.getElementById('score');
+    if(!data||!box) return;
+    var Q=JSON.parse(data.textContent), score=0, done=0;
+    if(sc) sc.textContent='Skor: 0 / '+Q.length;
+    Q.forEach(function(it,i){
+      var d=document.createElement('div'); d.className='qz';
+      d.innerHTML='<p>'+(i+1)+'. '+it.q+'</p><div class="opts"></div><div class="fb" hidden></div>';
+      var opts=d.querySelector('.opts'), fb=d.querySelector('.fb');
+      it.o.forEach(function(o,j){
+        var b=document.createElement('button'); b.type='button'; b.textContent=String.fromCharCode(65+j)+'. '+o;
+        b.addEventListener('click',function(){
+          opts.querySelectorAll('button').forEach(function(x,k){ x.disabled=true; if(k===it.a) x.classList.add('ok'); });
+          if(j===it.a){ score++; fb.textContent='Benar. '+it.e; } else { b.classList.add('bad'); fb.textContent='Kurang tepat. '+it.e; }
+          fb.hidden=false; done++;
+          if(sc) sc.textContent='Skor: '+score+' / '+Q.length+(done===Q.length?' · selesai':'');
+        });
+        opts.appendChild(b);
+      });
+      box.appendChild(d);
+    });
+  }
+  function $(id){ return document.getElementById(id); }
+  function num(id){ var v=$(id).value; return parseFloat(String(v).replace(',','.').replace('−','-')); }
+  function copy(text, btn){
+    var done=function(){ if(btn){ var t=btn.textContent; btn.textContent='Tersalin'; setTimeout(function(){btn.textContent=t;},1500);} };
+    try{ navigator.clipboard.writeText(text).then(done, function(){ fallback(); }); }catch(e){ fallback(); }
+    function fallback(){ var ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); done();}catch(_){} ta.remove(); }
+  }
+  var PLACES=[
+    ["UIN SGD Bandung",-6.9312,107.7175,700],
+    ["Kota Bandung",-6.9175,107.6191,768],
+    ["Jakarta",-6.1754,106.8272,8],
+    ["Surabaya",-7.2575,112.7521,5],
+    ["Yogyakarta",-7.7956,110.3695,113],
+    ["Banda Aceh",5.5483,95.3238,10],
+    ["Makassar",-5.1477,119.4327,5],
+    ["Jayapura",-2.5337,140.7181,10],
+    ["Makkah",21.4225,39.8262,277]
+  ];
+  var TZ={"Jayapura":9,"Makassar":8,"Makkah":3};
+  function placeSelect(sel, onPick){
+    PLACES.forEach(function(p,i){ var o=document.createElement('option'); o.value=i; o.textContent=p[0]; sel.appendChild(o); });
+    sel.addEventListener('change',function(){ var p=PLACES[+sel.value]; onPick({name:p[0],phi:p[1],lam:p[2],H:p[3],tz:TZ[p[0]]||7}); });
+  }
+  function today(){ var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function parseDate(s){ var a=String(s).split('-'); return {y:+a[0],m:+a[1],d:+a[2]}; }
+  var BULAN=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  return {RAD:RAD,DEG:DEG,KABAH:KABAH,mod:mod,fnum:fnum,sgn:sgn,dms:dms,hm:hm,hms:hms,minsec:minsec,jd:jd,sun:sun,altaz:altaz,qibla:qibla,falak:falak,hourAngle:hourAngle,prayer:prayer,azimuthTimes:azimuthTimes,quiz:quiz,$:$,num:num,copy:copy,PLACES:PLACES,placeSelect:placeSelect,today:today,parseDate:parseDate,BULAN:BULAN};
+})();
+
+(function(){
+var RAD=F.RAD, NS='http://www.w3.org/2000/svg';
+function mk(svg,tag,a){ var e=document.createElementNS(NS,tag); for(var k in a) e.setAttribute(k,a[k]); svg.appendChild(e); return e; }
+function tx(svg,x,y,c,s,anc,st){ var t=mk(svg,'text',{x:x,y:y,'class':c}); if(anc) t.setAttribute('text-anchor',anc); if(st) t.setAttribute('style',st); t.textContent=s; }
+var D=F.$('dial'), sDate=F.$('sDate'); sDate.value=F.today();
+F.placeSelect(F.$('sPlace'),function(p){ F.$('sPhi').value=p.phi; F.$('sLam').value=p.lam; F.$('sTz').value=p.tz; upd(); });
+function upd(){
+  var phi=F.num('sPhi'), lam=F.num('sLam'), tz=F.num('sTz'), p=F.parseDate(sDate.value), t=+F.$('sT').value;
+  if([phi,lam,tz].some(isNaN)||!p.y) return;
+  var base=F.jd(p.y,p.m,p.d,0), a=F.altaz(base+(t-tz)/24,phi,lam), a2=F.altaz(base+(t+1/60-tz)/24,phi,lam), q=F.qibla(phi,lam);
+  var sh=F.mod(a.az+180,360), d=F.mod(q.A-sh+540,360)-180, rate=Math.abs(F.mod(a2.az-a.az+540,360)-180);
+  F.$('vT').textContent=F.hms(t);
+  F.$('oSun').textContent=F.fnum(a.az,3)+'°'; F.$('oAlt').textContent=F.fnum(a.alt,2)+'°'+(a.alt<=0?' (malam)':'');
+  F.$('oSh').textContent=F.fnum(sh,3)+'°'; F.$('oQ').textContent=F.fnum(q.A,3)+'°';
+  F.$('oD').textContent=a.alt>0?(F.fnum(Math.abs(d),3)+'° '+(d>=0?'searah jarum jam':'berlawanan jarum jam')):'—';
+  F.$('oErr').textContent=a.alt>0?(F.fnum(rate*60,1)+'′ busur'):'—';
+  while(D.firstChild) D.removeChild(D.firstChild);
+  var C=200,R=160;
+  mk(D,'circle',{cx:C,cy:C,r:R,style:'fill:var(--surface);stroke:var(--line);stroke-width:2'});
+  for(var i=0;i<360;i+=5){ var g=i*RAD, r2=i%30===0?R-16:R-7; mk(D,'line',{x1:C+R*Math.sin(g),y1:C-R*Math.cos(g),x2:C+r2*Math.sin(g),y2:C-r2*Math.cos(g),style:'stroke:var(--muted);stroke-width:'+(i%90===0?2:1)}); if(i%30===0) tx(D,C+(R-30)*Math.sin(g),C-(R-30)*Math.cos(g)+4,'tick',String(i),'middle'); }
+  [['U',0],['T',90],['S',180],['B',270]].forEach(function(x){ var g=x[1]*RAD; tx(D,C+(R+14)*Math.sin(g)*0.94,C-(R+14)*Math.cos(g)*0.94+5,'lbl',x[0],'middle'); });
+  var qa=q.A*RAD; mk(D,'line',{x1:C,y1:C,x2:C+(R-4)*Math.sin(qa),y2:C-(R-4)*Math.cos(qa),style:'stroke:var(--accent);stroke-width:3.5;stroke-linecap:round'});
+  tx(D,C+(R-95)*Math.sin(qa),C-(R-95)*Math.cos(qa)-10,'lbl','kiblat','middle','fill:var(--accent)');
+  if(a.alt>0){
+    var sa=sh*RAD, L=Math.min(1/Math.tan(a.alt*RAD),2.4)*60;
+    mk(D,'line',{x1:C,y1:C,x2:C+L*Math.sin(sa),y2:C-L*Math.cos(sa),style:'stroke:var(--ink);stroke-width:6;stroke-linecap:round;opacity:.65'});
+    var su=a.az*RAD; mk(D,'circle',{cx:C+(R-48)*Math.sin(su),cy:C-(R-48)*Math.cos(su),r:9,style:'fill:var(--gold)'}); tx(D,C+(R-48)*Math.sin(su),C-(R-48)*Math.cos(su)+24,'sm','Matahari','middle');
+    var r=40, a0=sh*RAD, a1=q.A*RAD, sweep=d>=0?1:0, large=Math.abs(d)>180?1:0;
+    mk(D,'path',{d:'M'+(C+r*Math.sin(a0))+' '+(C-r*Math.cos(a0))+' A'+r+' '+r+' 0 '+large+' '+sweep+' '+(C+r*Math.sin(a1))+' '+(C-r*Math.cos(a1)),style:'fill:none;stroke:var(--gold);stroke-width:2.4'});
+  }
+  mk(D,'circle',{cx:C,cy:C,r:6,style:'fill:var(--ink)'});
+  tx(D,10,394,'sm','Garis gelap: bayangan gnomon · Busur emas: sudut putar ke kiblat');
+}
+['sPhi','sLam','sTz','sDate','sT'].forEach(function(i){ F.$(i).addEventListener('input',upd); });
+upd();
+
+F.quiz();
+})();
+</script>
+
+</body>
+</html>

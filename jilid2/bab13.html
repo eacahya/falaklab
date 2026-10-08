@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bab 13 · Geometri Gerhana: Titik Simpul, Musim Gerhana, dan Saros</title>
+<meta name="falak-bab" content="13">
+<meta name="falak-jilid" content="2">
+<link rel="stylesheet" href="../falak.css">
+<script src="../data.js"></script>
+<script src="../falak.js"></script>
+<script src="../kunci.js"></script>
+</head>
+<body>
+<style>
+
+/* Astronomi Islam Jilid 2 — gaya sama dengan Jilid 1: lembar kuliah satu kolom, simulasi dua kolom di layar besar */
+:root{
+  --bg:#f2f4f6; --surface:#ffffff; --ink:#15213a; --muted:#56627a; --line:#d5dbe4;
+  --accent:#0d6b5f; --accent-soft:#e1f0ec; --gold:#a8701a; --gold-soft:#f6ecd9;
+  --sky:#2c4a86; --sky-soft:#e3e9f6; --warn:#a33a2a; --warn-soft:#f7e3df;
+  --f-display:"Spectral",Georgia,"Times New Roman",serif;
+  --f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --f-arab:"Amiri","Traditional Arabic","Scheherazade New",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1522; --surface:#172033; --ink:#e6eaf2; --muted:#9aa6bd; --line:#2b3850;
+  --accent:#4fc2ad; --accent-soft:#163a37; --gold:#e3b464; --gold-soft:#3a2f1c;
+  --sky:#8eaaf0; --sky-soft:#1d2a47; --warn:#f08a78; --warn-soft:#3b211d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1522; --surface:#172033; --ink:#e6eaf2; --muted:#9aa6bd; --line:#2b3850;
+  --accent:#4fc2ad; --accent-soft:#163a37; --gold:#e3b464; --gold-soft:#3a2f1c;
+  --sky:#8eaaf0; --sky-soft:#1d2a47; --warn:#f08a78; --warn-soft:#3b211d; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65}
+.wrap{max-width:980px;margin:0 auto;padding-inline:20px;padding-block:0 64px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,5vw,3.1rem);font-weight:700}
+h2{font-size:clamp(1.55rem,3.4vw,2.1rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0;max-width:68ch}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.ar-in{font-family:var(--f-arab);font-size:1.15em}
+.muted{color:var(--muted)}
+.small{font-size:.92rem}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+header.top{padding-block:44px 28px;display:grid;gap:14px;border-bottom:1px solid var(--line)}
+header.top .meta{display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--muted);font-size:.95rem}
+header.top .meta b{color:var(--ink);font-weight:600}
+.lead{font-size:1.12rem;color:var(--muted)}
+
+nav.sec{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-20px;padding-inline:20px}
+nav.sec ul{display:flex;gap:4px;list-style:none;margin:0;padding:8px 0;overflow-x:auto;scrollbar-width:none}
+nav.sec a{display:block;white-space:nowrap;padding:6px 12px;border-radius:6px;text-decoration:none;color:var(--muted);font-weight:600;font-size:.93rem}
+nav.sec a:hover{color:var(--ink);background:var(--surface)}
+
+section{padding-block:48px 8px;display:grid;grid-template-columns:minmax(0,1fr);gap:20px;scroll-margin-top:60px}
+.sec-head{display:grid;gap:6px}
+
+.goals{background:var(--accent-soft);border-radius:8px;padding:18px 20px;display:grid;gap:8px}
+.goals ol,.goals ul{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.box ul,.box ol{margin:0;padding-left:1.15em;display:grid;gap:4px}
+.note{border-left:3px solid var(--gold);padding:4px 0 4px 14px;color:var(--muted);font-size:.95rem;max-width:72ch}
+.note b{color:var(--ink)}
+.warn{background:var(--gold-soft);color:var(--ink);border-radius:8px;padding:12px 16px;font-size:.95rem}
+.warn b{color:var(--gold)}
+.prose{display:grid;gap:12px}
+.prose ul,.prose ol{margin:0;padding-left:1.2em;display:grid;gap:4px;max-width:70ch}
+
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--bg)}
+td.n,th.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.r,th.r{text-align:right}
+td i[lang=ar]{font-style:normal;font-family:var(--f-arab);font-size:1.12rem;color:var(--gold)}
+tr.hl td{background:var(--gold-soft)}
+tr.today td{background:var(--accent-soft)}
+
+.eq{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 18px;overflow-x:auto;display:grid;gap:6px}
+.eq .cap{font-size:.88rem;color:var(--muted)}
+math{font-size:1.12em}
+
+.ayat{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.ayat figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px}
+.ar{font-family:var(--f-arab);font-size:1.6rem;line-height:1.9;direction:rtl;text-align:right;color:var(--ink)}
+.ayat figcaption{font-size:.93rem;color:var(--muted)}
+.ayat figcaption b{color:var(--gold);font-family:var(--f-mono);font-size:.78rem;font-weight:600;display:block;margin-bottom:2px}
+
+.sim{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:start}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px;min-width:0}
+.stage svg{width:100%;height:auto;display:block;touch-action:none}
+svg .c{fill:none;stroke:var(--muted);stroke-width:1.3}
+svg .back{stroke-dasharray:4 5;opacity:.45}
+svg .grid{stroke:var(--line);stroke-width:1}
+svg .axisl{stroke:var(--muted);stroke-width:1.2}
+svg .lbl{fill:var(--ink);font-family:var(--f-mono);font-size:13px;font-weight:600}
+svg .sm{fill:var(--muted);font-family:var(--f-body);font-size:11.5px}
+svg .tick{fill:var(--muted);font-family:var(--f-mono);font-size:10.5px}
+.ctrl{display:grid;gap:14px;min-width:0}
+.ctrl label,.field{display:grid;gap:4px;font-weight:600;font-size:.95rem}
+.ctrl label span,.field span.v{font-family:var(--f-mono);color:var(--accent)}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+select,input[type=number],input[type=text],input[type=date]{font:inherit;font-weight:400;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);min-width:0;width:100%}
+input[type=number],input[type=text]{font-family:var(--f-mono)}
+.readout{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:.93rem;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;align-content:start}
+.readout b{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;overflow-wrap:anywhere;min-width:0}
+.readout .big{grid-column:1/-1;font-family:var(--f-display);font-size:1.6rem;font-weight:700;color:var(--accent);text-align:left}
+.presets{display:flex;flex-wrap:wrap;gap:6px}
+.presets button,.btn{font:inherit;font-size:.88rem;font-weight:600;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.presets button:hover,.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.85rem;font-weight:600;background:var(--sky-soft);color:var(--sky)}
+.pill.g{background:var(--gold-soft);color:var(--gold)}
+.pill.a{background:var(--accent-soft);color:var(--accent)}
+.box>.pill{justify-self:start}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;grid-template-columns:minmax(0,1fr);gap:16px;min-width:0}
+.calc .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.worked{display:grid;gap:6px;font-size:.95rem;counter-reset:w}
+.worked div{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:baseline}
+.worked div::before{counter-increment:w;content:counter(w);font-family:var(--f-mono);font-size:.75rem;color:var(--accent);font-weight:600}
+.worked code{font-family:var(--f-mono);font-size:.88rem;background:var(--bg);padding:1px 6px;border-radius:4px;overflow-wrap:anywhere}
+.worked div>span{min-width:0}
+
+.steps{margin:0;padding:0;list-style:none;display:grid;gap:12px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:baseline}
+.steps li>div{display:grid;gap:8px;min-width:0}
+.steps li::before{content:counter(s);font-family:var(--f-mono);font-weight:600;color:var(--bg);background:var(--accent);border-radius:50%;width:26px;height:26px;display:grid;place-items:center;font-size:.8rem}
+
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px}
+.ex .q{font-weight:600}
+.ex details summary{cursor:pointer;color:var(--accent);font-weight:600}
+.ex details[open] summary{margin-bottom:8px}
+.ex .sol{display:grid;gap:8px;font-size:.96rem}
+
+.quiz{display:grid;gap:14px}
+.qz{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px;display:grid;gap:10px}
+.qz p{font-weight:600}
+.opts{display:grid;gap:6px}
+.opts button{font:inherit;text-align:left;padding:8px 12px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--accent)}
+.opts button.ok{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+.opts button.bad{border-color:var(--warn);color:var(--warn)}
+.opts button:disabled{cursor:default}
+.fb{font-size:.92rem;color:var(--muted)}
+.score{font-family:var(--f-mono);font-weight:600;color:var(--accent)}
+
+.task{background:var(--gold-soft);border-radius:8px;padding:18px;display:grid;gap:8px}
+.task h3{color:var(--gold)}
+.task ol{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+.rubric td:not(:first-child){font-size:.9rem}
+.next{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.92rem;color:var(--muted)}
+.next b{color:var(--ink)}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem;display:grid;gap:10px}
+
+@media (max-width:760px){
+  .wrow{grid-template-columns:1fr 48px}
+  .wrow .bar{grid-column:1/-1;order:3}
+  .ayat2{grid-template-columns:1fr}
+  .two,.sim,.calc .grid2{grid-template-columns:1fr}
+  body{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* identitas mata kuliah & garis waktu (dari Bab 1 Jilid 1) */
+tr.exam td{background:var(--gold-soft)}
+.tag{display:inline-block;font-family:var(--f-mono);font-size:.7rem;padding:1px 7px;border-radius:4px;background:var(--accent-soft);color:var(--accent);font-weight:600;margin-left:6px;white-space:nowrap}
+.tag.g{background:var(--gold-soft);color:var(--gold)}
+.idgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.idgrid div{background:var(--surface);padding:12px 16px;display:grid;gap:2px}
+.idgrid span{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.idgrid b{font-weight:600}
+ol.cp{margin:0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:cp}
+ol.cp li{counter-increment:cp;display:grid;grid-template-columns:62px 1fr;gap:12px;align-items:baseline}
+ol.cp li::before{content:"CPMK-" counter(cp);font-family:var(--f-mono);font-size:.75rem;color:var(--accent);font-weight:600}
+.weights{display:grid;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px}
+.wrow{display:grid;grid-template-columns:minmax(120px,190px) 1fr 48px;gap:12px;align-items:center;font-size:.95rem}
+.bar{height:12px;background:var(--bg);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent)}
+.wrow b{font-family:var(--f-mono);text-align:right;font-variant-numeric:tabular-nums}
+ul.rules{margin:0;padding-left:1.2em;display:grid;gap:6px;max-width:70ch}
+ul.refs{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+ul.refs li{padding-left:1.6em;text-indent:-1.6em}
+.timeline{display:grid;gap:0;border-left:2px solid var(--line);margin-left:6px}
+.timeline div{position:relative;padding:0 0 18px 22px;display:grid;gap:2px}
+.timeline div::before{content:"";position:absolute;left:-7px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--gold)}
+.timeline span{font-family:var(--f-mono);font-size:.78rem;color:var(--gold);font-weight:600}
+
+/* tambahan Jilid 2 */
+.ar-block{font-family:var(--f-arab);font-size:1.6rem;line-height:1.9;direction:rtl;text-align:right}
+.chart{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px;min-width:0}
+.chart svg{width:100%;height:auto;display:block}
+svg .ax{stroke:var(--muted);stroke-width:1}
+svg .gl{stroke:var(--line);stroke-width:1}
+svg .lbl{fill:var(--ink);font-family:var(--f-mono);font-size:13px;font-weight:600}
+svg .sm{fill:var(--muted);font-family:var(--f-body);font-size:11.5px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.88rem;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.ok{color:var(--accent);font-weight:700}
+.no{color:var(--warn);font-weight:700}
+.crit{display:grid;gap:8px}
+.crit div{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:baseline;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:10px 14px}
+.crit div b{font-family:var(--f-display)}
+.crit div span:not(.badge){grid-column:1/-1;font-size:.9rem;color:var(--muted)}
+.crit .yes{border-color:var(--accent);background:var(--accent-soft)}
+.badge{font-family:var(--f-mono);font-size:.78rem;font-weight:700;padding:2px 8px;border-radius:4px;background:var(--bg);color:var(--muted);white-space:nowrap}
+.crit .yes .badge{background:var(--accent);color:var(--bg)}
+.cal7{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal7 div{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:4px 6px;min-height:52px;font-size:.78rem;line-height:1.25}
+.cal7 div b{display:block;font-family:var(--f-mono);font-size:.95rem}
+.cal7 div i{font-style:normal;color:var(--gold);font-family:var(--f-mono)}
+.cal7 .h{background:transparent;border:0;min-height:0;text-align:center;font-weight:700;color:var(--muted)}
+.cal7 .x{opacity:.35}
+.cal7 .t{border-color:var(--accent);background:var(--accent-soft)}
+.cal7 .f{border-color:var(--gold)}
+.play{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+html.falak-app .sim,html.falak-app .calc{margin-top:4px}
+
+/* glosarium */
+.gl-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.gl-tools input{font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);flex:1 1 240px;min-width:0}
+.gl-tools .chips{display:flex;gap:6px;flex-wrap:wrap}
+.gl-tools button{font:inherit;font-size:.85rem;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;font-weight:600}
+.gl-tools button[aria-pressed="true"]{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+dl.gl{margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+dl.gl > div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:grid;gap:4px;align-content:start}
+dl.gl dt{font-weight:700;display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+dl.gl dt i{font-style:normal;font-family:var(--f-arab);font-size:1.15rem;color:var(--gold);font-weight:400}
+dl.gl dd{margin:0;font-size:.95rem;color:var(--muted)}
+dl.gl dd em{color:var(--ink);font-style:normal;font-family:var(--f-mono);font-size:.8rem}
+.empty{color:var(--muted);font-style:italic}
+
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">Astronomi Islam Jilid 2 · Bab 13</div>
+  <h1>Geometri Gerhana: Titik Simpul, Musim Gerhana, dan Saros</h1>
+  <p class="lead">Gerhana adalah ijtimak dan istiqbal yang terjadi tepat di dekat titik simpul orbit Bulan. Bab ini menjelaskan mengapa gerhana tidak terjadi setiap bulan, kapan musim gerhana tiba, jenis-jenis gerhana, siklus Saros, dan cara memprediksi gerhana dengan metode Meeus.</p>
+  <div class="meta">
+    <div>Dosen: <b>Dr. Ea Cahya Septia Mahen, S.Pd., M.Si.</b></div>
+    <div>Prodi: <b>Pendidikan Fisika, UIN Sunan Gunung Djati Bandung</b></div>
+  </div>
+</header>
+
+<nav class="sec" aria-label="Bagian materi">
+  <ul><li><a href="#tujuan">Tujuan</a></li><li><a href="#dalil">Dalil</a></li><li><a href="#simpul">Titik simpul</a></li><li><a href="#musim">Musim gerhana</a></li><li><a href="#jenis">Jenis gerhana</a></li><li><a href="#saros">Saros</a></li><li><a href="#meeus">Metode Meeus</a></li><li><a href="#contoh">Contoh soal</a></li><li><a href="#latihan">Latihan pemahaman</a></li></ul>
+</nav>
+
+<section id="tujuan"><div class="goals"><div class="eyebrow">Tujuan pertemuan</div><p>Setelah pertemuan ini, mahasiswa mampu:</p><ol type="1">
+<li>menjelaskan dalil Al-Qur’an dan hadis tentang gerhana serta sikap yang diajarkan Rasulullah ﷺ;</li>
+<li>menjelaskan peran titik simpul dan kemiringan orbit Bulan dalam terjadinya gerhana;</li>
+<li>menghitung batas ekliptika, panjang musim gerhana, dan tahun gerhana;</li>
+<li>membedakan jenis-jenis gerhana Matahari dan gerhana Bulan dari geometri bayangan;</li>
+<li>menjelaskan siklus Saros dan memakainya untuk memperkirakan gerhana;</li>
+<li>memprediksi gerhana dan jenisnya dengan metode Meeus, baik dengan tangan maupun dengan Excel.</li>
+</ol>
+</div></section>
+
+<section id="dalil">
+<div class="sec-head"><div class="eyebrow">13.1</div><h2>Gerhana dalam Al-Qur’an dan hadis</h2></div>
+<div class="ayat"><figure><p class="ar" lang="ar">فَإِذَا بَرِقَ الْبَصَرُ (٧) وَخَسَفَ الْقَمَرُ (٨) وَجُمِعَ الشَّمْسُ وَالْقَمَرُ (٩)</p><figcaption><b>QS Al-Qiyamah [75]: 7–9</b>“Maka apabila mata terbelalak (ketakutan), dan bulan pun telah hilang cahayanya, dan matahari dan bulan dikumpulkan.”</figcaption></figure>
+<figure><p class="ar" lang="ar">إِنَّ الشَّمْسَ وَالْقَمَرَ لَا يَنْكَسِفَانِ لِمَوْتِ أَحَدٍ وَلَا لِحَيَاتِهِ، فَإِذَا رَأَيْتُمْ فَصَلُّوا وَادْعُوا اللَّهَ</p><figcaption><b>HR Al-Bukhari no. 1043, dari Al-Mughirah bin Syu&#x27;bah</b>“Sesungguhnya Matahari dan Bulan tidak mengalami gerhana karena kematian atau kelahiran seseorang. Apabila kalian melihatnya, salatlah dan berdoalah kepada Allah.”</figcaption></figure></div>
+<p>Hadis ini disampaikan Rasulullah ﷺ ketika terjadi gerhana Matahari pada hari wafatnya putra beliau, Ibrahim. Sebagian orang mengaitkan gerhana itu dengan kematian Ibrahim, lalu Rasulullah ﷺ meluruskannya: gerhana adalah tanda kekuasaan Allah (<em>ayat min ayatillah</em>) yang berjalan menurut ketetapan-Nya, bukan pertanda nasib manusia. Perhitungan astronomi modern menunjukkan bahwa gerhana itu kemungkinan besar adalah gerhana Matahari cincin <strong>27 Januari 632 M</strong> (28 Syawal 10 H menurut hisab urfi). Hisab aplikasi ini memberikan gerhana sebagian besar di Madinah, dengan magnitudo sekitar 0,82, mulai pukul 07.15 dan berakhir pukul 09.53 waktu setempat.</p>
+<p>Sikap yang diajarkan hadis ini adalah dasar falak gerhana: gerhana dapat dihitung dengan teliti karena mengikuti hukum yang tetap, dan perhitungan itu dipakai untuk mempersiapkan salat gerhana (<em>salat kusuf</em> dan <em>salat khusuf</em>, Bab 15), bukan untuk meramal.</p>
+
+</section>
+
+<section id="simpul">
+<div class="sec-head"><div class="eyebrow">13.2</div><h2>Mengapa gerhana tidak terjadi setiap bulan</h2><p>Ijtimak terjadi setiap bulan, tetapi gerhana Matahari tidak. Sebabnya, orbit Bulan miring sekitar <strong>5,145°</strong> terhadap ekliptika. Pada kebanyakan ijtimak, Bulan lewat di atas atau di bawah Matahari dilihat dari Bumi, sehingga bayangannya tidak mengenai Bumi. Hal yang sama berlaku untuk purnama: Bulan biasanya lewat di atas atau di bawah bayangan Bumi.</p>
+</div>
+<p>Orbit Bulan memotong ekliptika di dua titik yang disebut <strong>titik simpul</strong> (<em>al-’uqdah</em>): <strong>simpul naik</strong> (Bulan bergerak dari selatan ke utara ekliptika) dan <strong>simpul turun</strong>. Gerhana hanya terjadi bila ijtimak atau istiqbal berlangsung ketika Bulan berada <strong>di dekat salah satu titik simpul</strong>, yaitu ketika Matahari juga berada di dekat garis simpul.</p>
+
+<div class="eq"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>sin</mo><msub><mi>β</mi><mtext mathvariant="normal">☾</mtext></msub><mo>≈</mo><mo>sin</mo><mi>i</mi><mspace width="0.167em"></mspace><mo>sin</mo><mi>F</mi><mo>,</mo><mspace width="2.0em"></mspace><mi>i</mi><mo>≈</mo><mn>5</mn><mo>,</mo><msup><mn>145</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">\sin\beta_\text{☾} \approx \sin i\,\sin F,\qquad i \approx 5{,}145^\circ</annotation></semantics></math>
+<div class="cap">β = lintang ekliptika Bulan; F = argumen lintang, yaitu jarak sudut Bulan dari simpul naik diukur sepanjang orbitnya (Bab 3). Bila F = 0° atau 180°, Bulan tepat di titik simpul (β = 0).</div></div>
+<p>Garis simpul tidak diam. Akibat tarikan Matahari, garis simpul bergeser ke <strong>barat</strong> (mundur) satu putaran penuh dalam <strong>18,61 tahun</strong>, atau sekitar 19,3° per tahun. Karena itu, Matahari kembali ke simpul yang sama bukan setelah 365,25 hari, tetapi setelah <strong>346,62 hari</strong>. Selang ini disebut <strong>tahun gerhana</strong> (tahun drakonik).</p>
+<div class="tbl"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Periode</th>
+<th>Panjang</th>
+<th>Keterangan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Bulan sinodis</td>
+<td>29,530589 hari</td>
+<td>ijtimak ke ijtimak; penentu fase dan bulan Hijriyah</td>
+</tr>
+<tr class="even">
+<td>Bulan drakonik</td>
+<td>27,212221 hari</td>
+<td>simpul naik ke simpul naik; penentu kapan Bulan di dekat simpul</td>
+</tr>
+<tr class="odd">
+<td>Bulan anomalistik</td>
+<td>27,554550 hari</td>
+<td>perigee ke perigee; penentu jarak dan ukuran tampak Bulan</td>
+</tr>
+<tr class="even">
+<td>Tahun gerhana</td>
+<td>346,620 hari</td>
+<td>Matahari dari simpul naik ke simpul naik</td>
+</tr>
+<tr class="odd">
+<td>Presesi simpul</td>
+<td>18,61 tahun</td>
+<td>satu putaran garis simpul ke arah barat</td>
+</tr>
+</tbody>
+</table></div>
+
+</section>
+
+<section id="musim">
+<div class="sec-head"><div class="eyebrow">13.3</div><h2>Batas ekliptika dan musim gerhana</h2><p>Seberapa dekat ijtimak harus terjadi ke titik simpul agar ada gerhana? Untuk gerhana Matahari, piringan Bulan harus menyentuh piringan Matahari dilihat dari suatu tempat di Bumi. Dengan paralaks, syarat geosentrisnya adalah</p>
+</div>
+<div class="eq"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">|</mo><msub><mi>β</mi><mtext mathvariant="normal">☾</mtext></msub><mo stretchy="true" form="postfix">|</mo></mrow><mo>&lt;</mo><msub><mi>π</mi><mtext mathvariant="normal">☾</mtext></msub><mo>−</mo><msub><mi>π</mi><mo>⊙</mo></msub><mo>+</mo><msub><mi>s</mi><mtext mathvariant="normal">☾</mtext></msub><mo>+</mo><msub><mi>s</mi><mo>⊙</mo></msub><mo>≈</mo><mn>1</mn><mo>,</mo><msup><mn>4</mn><mo>∘</mo></msup><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> sampai </mtext><mspace width="0.333em"></mspace></mrow><mn>1</mn><mo>,</mo><msup><mn>6</mn><mo>∘</mo></msup></mrow><annotation encoding="application/x-tex">|\beta_\text{☾}| &lt; \pi_\text{☾} - \pi_\odot + s_\text{☾} + s_\odot \approx 1{,}4^\circ \text{ sampai } 1{,}6^\circ</annotation></semantics></math>
+<div class="cap">π = paralaks horizontal (Bulan 0,90°–1,02°, Matahari 0,0024°), s = semidiameter (Bulan 0,245°–0,279°, Matahari 0,262°–0,271°). Batas ini bergantung pada jarak Bulan dan jarak Matahari saat itu.</div></div>
+<p>Lintang 1,5° dicapai Bulan ketika ia berjarak sekitar 17° dari titik simpul (sin F ≈ sin 1,5°/sin 5,145°). Jarak maksimum Matahari dari simpul saat ijtimak agar masih terjadi gerhana disebut <strong>batas ekliptika</strong>. Nilainya berubah-ubah menurut jarak Bulan dan Matahari, sehingga dinyatakan sebagai rentang:</p>
+<div class="tbl"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Jenis gerhana</th>
+<th>Batas ekliptika (jarak dari titik simpul)</th>
+<th>Panjang jendela</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Gerhana Matahari (sebagian atau sentral)</td>
+<td>sekitar 15,4° sampai 18,5°</td>
+<td>30–36 hari</td>
+</tr>
+<tr class="even">
+<td>Gerhana Bulan umbra (sebagian atau total)</td>
+<td>sekitar 9,5° sampai 12,2°</td>
+<td>18–24 hari</td>
+</tr>
+<tr class="odd">
+<td>Gerhana Bulan penumbra</td>
+<td>sekitar 16° sampai 18,5°</td>
+<td>31–36 hari</td>
+</tr>
+</tbody>
+</table></div>
+<p>Matahari bergerak relatif terhadap garis simpul dengan laju 360°/346,62 hari = <strong>1,0386° per hari</strong>. Jendela waktu ketika Matahari berada dalam batas ekliptika disebut <strong>musim gerhana</strong>. Musim gerhana datang dua kali setahun, sekali di sekitar setiap simpul, dengan selang sekitar 173,3 hari (setengah tahun gerhana).</p>
+<p>Dua kesimpulan penting dapat diturunkan dari tabel di atas:</p>
+<ol type="1">
+<li>Jendela gerhana Matahari (30–36 hari) lebih panjang daripada satu bulan sinodis (29,53 hari), sehingga <strong>setiap musim gerhana pasti memuat sedikitnya satu gerhana Matahari</strong>. Kadang-kadang ada dua gerhana Matahari sebagian di awal dan di akhir musim.</li>
+<li>Jendela gerhana Bulan umbra (18–24 hari) lebih pendek daripada satu bulan sinodis, sehingga <strong>satu musim gerhana dapat lewat tanpa gerhana Bulan umbra</strong>; yang terjadi hanya gerhana penumbra atau tidak ada sama sekali.</li>
+</ol>
+<p>Akibatnya, dalam satu tahun Masehi terjadi paling sedikit 2 dan paling banyak 5 gerhana Matahari, serta 4 sampai 7 gerhana seluruhnya (Matahari dan Bulan, termasuk penumbra). Pasangan gerhana Matahari dan gerhana Bulan dalam satu musim selalu berselang sekitar dua minggu, karena keduanya terjadi pada ijtimak dan istiqbal yang berurutan.</p>
+
+<div class="sim">
+  <div class="stage"><svg id="musSvg" viewBox="0 0 560 470" role="img" aria-label="Arah Matahari terhadap garis simpul dan lintang Bulan pada setiap ijtimak dan purnama"></svg></div>
+  <div class="ctrl">
+    <label class="field" for="musY">Tahun<select id="musY"></select></label>
+    <label for="musD">Tanggal <span id="vmusD">—</span><input id="musD" type="range" min="0" max="365" step="1" value="47"></label>
+    <div class="play"><button class="btn pri" type="button" id="musPlay">Jalankan</button></div>
+    <div class="legend"><span><i style="background:var(--ink)"></i>ijtimak</span><span><i style="background:var(--surface);border:1.5px solid var(--ink)"></i>purnama</span><span><i style="background:var(--gold-soft)"></i>batas gerhana Matahari (±1,5°)</span><span><i style="background:var(--sky-soft)"></i>batas gerhana Bulan umbra (±1,0°)</span></div>
+    <div class="readout" id="musOut"></div>
+  </div>
+</div>
+</section>
+
+<section id="jenis">
+<div class="sec-head"><div class="eyebrow">13.4</div><h2>Jenis gerhana dan geometri bayangan</h2><p>Benda gelap yang disinari sumber cahaya yang lebih besar menghasilkan dua bagian bayangan: <strong>umbra</strong> (bayangan inti) yang berbentuk kerucut menyempit, tempat seluruh cahaya sumber terhalang, dan <strong>penumbra</strong> (bayangan kabur) yang melebar, tempat hanya sebagian cahaya terhalang.</p>
+</div>
+<div class="two"><div class="box"><span class="pill a">Gerhana Matahari (kusuf)</span><p>Terjadi pada ijtimak. Bayangan Bulan jatuh ke Bumi.</p>
+<ul>
+<li><strong>Total</strong>: pengamat di dalam umbra; piringan Matahari tertutup seluruhnya; korona tampak.</li>
+<li><strong>Cincin</strong>: ujung umbra tidak mencapai Bumi; pengamat di perpanjangan kerucut (antumbra) melihat cincin terang.</li>
+<li><strong>Hibrida</strong>: total di sebagian jalur dan cincin di bagian lain, karena jarak permukaan Bumi ke Bulan berubah sepanjang jalur.</li>
+<li><strong>Sebagian</strong>: pengamat hanya di dalam penumbra, atau sumbu bayangan tidak mengenai Bumi.</li>
+</ul>
+</div>
+<div class="box"><span class="pill g">Gerhana Bulan (khusuf)</span><p>Terjadi pada istiqbal (purnama). Bulan masuk bayangan Bumi.</p>
+<ul>
+<li><strong>Total</strong>: seluruh piringan Bulan di dalam umbra; Bulan tampak merah tembaga karena cahaya Matahari dibiaskan atmosfer Bumi.</li>
+<li><strong>Sebagian</strong>: hanya sebagian piringan masuk umbra.</li>
+<li><strong>Penumbra</strong>: Bulan hanya masuk penumbra; peredupannya halus dan sering tidak disadari.</li>
+</ul>
+</div></div>
+<p>Panjang kerucut umbra Bulan dapat dihitung dari segitiga sebangun:</p>
+
+<div class="eq"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><mtext mathvariant="normal">umbra</mtext></msub><mo>=</mo><mfrac><mrow><msub><mi>d</mi><mo>⊙</mo></msub><mspace width="0.167em"></mspace><msub><mi>R</mi><mtext mathvariant="normal">☾</mtext></msub></mrow><mrow><msub><mi>R</mi><mo>⊙</mo></msub><mo>−</mo><msub><mi>R</mi><mtext mathvariant="normal">☾</mtext></msub></mrow></mfrac><mo>≈</mo><mfrac><mrow><mn>149,6</mn><mo>×</mo><msup><mn>10</mn><mn>6</mn></msup><mo>×</mo><mn>1737,4</mn></mrow><mrow><mn>696</mn><mspace width="0.167em"></mspace><mn>000</mn><mo>−</mo><mn>1737,4</mn></mrow></mfrac><mspace width="0.222em"></mspace><mtext mathvariant="normal">km</mtext><mo>≈</mo><mn>374</mn><mspace width="0.167em"></mspace><mn>000</mn><mspace width="0.222em"></mspace><mtext mathvariant="normal">km</mtext></mrow><annotation encoding="application/x-tex">L_\text{umbra} = \frac{d_\odot\,R_\text{☾}}{R_\odot - R_\text{☾}} \approx \frac{149{,}6\times10^6 \times 1737{,}4}{696\,000 - 1737{,}4}\ \text{km} \approx 374\,000\ \text{km}</annotation></semantics></math>
+<div class="cap">d☉ = jarak Bumi–Matahari (147,1–152,1 juta km), R☾ = 1737,4 km, R☉ = 696.000 km. Panjang umbra berubah antara sekitar 368.000 km dan 381.000 km.</div></div>
+<p>Jarak dari pusat Bulan ke permukaan Bumi yang terdekat adalah jarak Bulan dikurangi jari-jari Bumi, yaitu 350.000–400.000 km. Bila umbra lebih panjang daripada jarak itu, terjadi gerhana total; bila lebih pendek, gerhana cincin. Karena panjang umbra rata-rata (374.000 km) sedikit lebih pendek daripada jarak rata-rata (378.000 km), <strong>gerhana cincin sedikit lebih sering daripada gerhana total</strong>.</p>
+<p>Untuk gerhana Bulan, ukuran bayangan Bumi di jarak Bulan dinyatakan sebagai sudut dilihat dari pusat Bumi:</p>
+
+<div class="eq"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>ρ</mi><mtext mathvariant="normal">umbra</mtext></msub><mo>=</mo><mn>1,02</mn><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>π</mi><mtext mathvariant="normal">☾</mtext></msub><mo>−</mo><msub><mi>s</mi><mo>⊙</mo></msub><mo>+</mo><msub><mi>π</mi><mo>⊙</mo></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>ρ</mi><mtext mathvariant="normal">penumbra</mtext></msub><mo>=</mo><mn>1,02</mn><mspace width="0.167em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>π</mi><mtext mathvariant="normal">☾</mtext></msub><mo>+</mo><msub><mi>s</mi><mo>⊙</mo></msub><mo>+</mo><msub><mi>π</mi><mo>⊙</mo></msub><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\rho_\text{umbra} = 1{,}02\,(\pi_\text{☾} - s_\odot + \pi_\odot),\qquad \rho_\text{penumbra} = 1{,}02\,(\pi_\text{☾} + s_\odot + \pi_\odot)</annotation></semantics></math>
+<div class="cap">Faktor 1,02 (aturan Chauvenet, pembesaran 1/50) memperhitungkan atmosfer Bumi yang memperbesar bayangan; aturan Danjon yang lebih baru memakai 1 + 1/85 hanya pada suku paralaks Bulan (Bab 14). Nilai khasnya: ρ_umbra ≈ 0,70° ≈ 2,7 kali semidiameter Bulan; ρ_penumbra ≈ 1,24°.</div></div>
+<p>Karena umbra Bumi jauh lebih lebar daripada Bulan, gerhana Bulan total dapat berlangsung sampai sekitar 1 jam 46 menit, sedangkan totalitas gerhana Matahari di satu tempat paling lama sekitar 7,5 menit. Gerhana Bulan juga tampak dari seluruh belahan Bumi yang sedang malam, sedangkan gerhana Matahari total hanya tampak di jalur sempit yang lebarnya umumnya kurang dari 270 km.</p>
+
+<div class="sim">
+  <div class="stage"><svg id="baySvg" viewBox="0 0 560 400" role="img" aria-label="Kerucut umbra Bulan dan bayangan Bumi di jarak Bulan"></svg></div>
+  <div class="ctrl">
+    <label for="bDm">Jarak Bumi–Bulan <span id="vbDm">—</span><input id="bDm" type="range" min="356400" max="406700" step="100" value="384400"></label>
+    <label for="bDs">Jarak Bumi–Matahari <span id="vbDs">—</span><input id="bDs" type="range" min="147.1" max="152.1" step="0.05" value="149.6"></label>
+    <label for="bG">Jarak pusat Bulan dari pusat bayangan Bumi (gerhana Bulan) <span id="vbG">—</span><input id="bG" type="range" min="0" max="1.7" step="0.01" value="0.2"></label>
+    <div class="presets"><button type="button" data-b="356400,147.1">Bulan di perigee, Januari</button><button type="button" data-b="406700,152.1">Bulan di apogee, Juli</button><button type="button" data-b="384400,149.6">Jarak rata-rata</button></div>
+    <div class="readout" id="bOut"></div>
+  </div>
+</div>
+</section>
+
+<section id="saros">
+<div class="sec-head"><div class="eyebrow">13.5</div><h2>Siklus Saros</h2><p>Sejak zaman Babilonia, para pengamat mengetahui bahwa gerhana berulang dengan pola yang hampir sama setelah sekitar 18 tahun. Siklus ini disebut <strong>Saros</strong>. Dasarnya adalah kebetulan bahwa tiga periode Bulan hampir sama panjang setelah kelipatan tertentu:</p>
+</div>
+<div class="tbl"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Kelipatan</th>
+<th>Panjang (hari)</th>
+<th>Artinya</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>223 bulan sinodis</td>
+<td>6585,3212</td>
+<td>fase sama (ijtimak kembali menjadi ijtimak)</td>
+</tr>
+<tr class="even">
+<td>242 bulan drakonik</td>
+<td>6585,3575</td>
+<td>posisi terhadap titik simpul hampir sama</td>
+</tr>
+<tr class="odd">
+<td>239 bulan anomalistik</td>
+<td>6585,5375</td>
+<td>jarak Bulan (dan ukuran tampaknya) hampir sama</td>
+</tr>
+<tr class="even">
+<td>19 tahun gerhana</td>
+<td>6585,78</td>
+<td>Matahari hampir di titik simpul yang sama</td>
+</tr>
+</tbody>
+</table></div>
+<p>Satu Saros = 6585,32 hari = <strong>18 tahun 11⅓ hari</strong> (atau 18 tahun 10⅓ hari bila ada lima tahun kabisat di dalamnya). Sepertiga hari tambahan menyebabkan gerhana berikutnya dalam satu Saros terjadi sekitar 8 jam lebih lambat, sehingga jalurnya bergeser sekitar <strong>120° ke arah barat</strong>. Setelah tiga Saros (54 tahun 33 hari, disebut <em>exeligmos</em>), gerhana kembali ke wilayah bujur yang hampir sama.</p>
+<p>Contoh: gerhana Matahari total <strong>9 Maret 2016</strong> yang tampak di Palembang, Bangka Belitung, Kalimantan, Sulawesi, dan Maluku termasuk Saros 130. Anggota berikutnya adalah gerhana total 20 Maret 2034 (Afrika, Timur Tengah, dan Asia Tengah) dan 30 Maret 2052 (Samudra Pasifik dan Amerika). Nilai γ, jarak sumbu bayangan dari pusat Bumi, berubah sedikit demi sedikit: 0,26 → 0,29 → 0,32. Dalam satu Saros, γ bergeser perlahan dari satu kutub ke kutub lain selama 12–15 abad (sekitar 70–80 anggota) sebelum seri itu berakhir.</p>
+<p>Selain Saros, ada siklus <strong>Inex</strong> (358 bulan sinodis = 10.571,95 hari ≈ 29 tahun kurang 20 hari) yang menghubungkan seri-seri Saros berurutan. Nomor Saros suatu gerhana dapat dihitung dari nomor lunasinya dengan dua siklus ini; SIM II-13.3 memakai cara tersebut.</p>
+
+<div class="calc">
+  <div class="fields">
+    <label class="field" for="gY">Mulai tahun<select id="gY"></select></label>
+    <label class="field" for="gN">Rentang<select id="gN"><option value="1">1 tahun</option><option value="2">2 tahun</option><option value="5" selected>5 tahun</option><option value="10">10 tahun</option></select></label>
+    <label class="field" for="gP">Keterlihatan dari<select id="gP"></select></label>
+    <div class="field"><span>&nbsp;</span><button class="btn pri" type="button" id="gGo">Tampilkan</button></div>
+  </div>
+  <div class="tbl"><table><thead><tr><th>Puncak (UT)</th><th>Gerhana</th><th class="n r">γ</th><th class="n r">Magnitudo</th><th class="n r">Saros</th><th id="gPh">Di tempat</th></tr></thead><tbody id="gTab"></tbody></table></div>
+  <p class="small muted" id="gNote">Magnitudo gerhana Bulan adalah magnitudo umbra (negatif bila hanya penumbra). Magnitudo gerhana Matahari sentral tidak ditampilkan karena bergantung pada tempat; kolom terakhir memberikan magnitudo di tempat terpilih bila Matahari di atas ufuk. Tanda * berarti gerhana sentral tak berbatas atau sebagian (|γ| antara 0,9972 dan 1,026). Ketuk satu baris untuk melihat keluarga Sarosnya.</p>
+  <div id="gFam"></div>
+</div>
+</section>
+
+<section id="meeus">
+<div class="sec-head"><div class="eyebrow">13.6</div><h2>Memprediksi gerhana dengan metode Meeus</h2><p>Metode Meeus (1998, bab 54) memakai rumus ijtimak dan istiqbal dari Bab 5, ditambah besaran yang menyatakan seberapa jauh sumbu bayangan dari pusat Bumi. Langkah-langkahnya:</p>
+</div>
+<ol class="steps"><li><div><p><strong>Nomor lunasi k.</strong> Hitung k ≈ (tahun − 2000) × 12,3685. Bulatkan ke bilangan bulat untuk gerhana Matahari (ijtimak), atau ke bilangan bulat + 0,5 untuk gerhana Bulan (istiqbal).</p>
+</div></li><li><div><p><strong>Saringan F.</strong> Hitung argumen lintang F. Bila |sin F| &gt; 0,36, tidak ada gerhana pada lunasi itu. Saringan ini setara dengan batas ekliptika sekitar 21°.</p>
+</div></li><li><div><p><strong>Saat puncak.</strong> Hitung JDE rata-rata, M, M′, Ω, dan E seperti Bab 5, lalu F₁ = F − 0,02665° sin Ω dan A₁ = 299,77° + 0,107408° k − 0,009173° T². Jumlahkan koreksi periodik untuk mendapat JDE puncak gerhana.</p>
+</div></li><li><div><p><strong>Nilai γ dan u.</strong> Hitung P, Q, W, lalu γ dan u dengan rumus di bawah.</p>
+</div></li><li><div><p><strong>Jenis gerhana.</strong> Bandingkan |γ| dan u dengan batas-batas pada tabel.</p>
+</div></li></ol>
+<div class="eq"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mi>P</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>0,2070</mn><mspace width="0.167em"></mspace><mi>E</mi><mo>sin</mo><mi>M</mi><mo>+</mo><mn>0,0024</mn><mspace width="0.167em"></mspace><mi>E</mi><mo>sin</mo><mn>2</mn><mi>M</mi><mo>−</mo><mn>0,0392</mn><mo>sin</mo><mi>M</mi><mi>′</mi><mo>+</mo><mn>0,0116</mn><mo>sin</mo><mn>2</mn><mi>M</mi><mi>′</mi><mo>−</mo><mn>0,0073</mn><mspace width="0.167em"></mspace><mi>E</mi><mo>sin</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mi>′</mi><mo>+</mo><mi>M</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mn>0,0067</mn><mspace width="0.167em"></mspace><mi>E</mi><mo>sin</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mi>′</mi><mo>−</mo><mi>M</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mn>0,0118</mn><mo>sin</mo><mn>2</mn><msub><mi>F</mi><mn>1</mn></msub></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>Q</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>5,2207</mn><mo>−</mo><mn>0,0048</mn><mspace width="0.167em"></mspace><mi>E</mi><mo>cos</mo><mi>M</mi><mo>+</mo><mn>0,0020</mn><mspace width="0.167em"></mspace><mi>E</mi><mo>cos</mo><mn>2</mn><mi>M</mi><mo>−</mo><mn>0,3299</mn><mo>cos</mo><mi>M</mi><mi>′</mi><mo>−</mo><mn>0,0060</mn><mspace width="0.167em"></mspace><mi>E</mi><mo>cos</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mi>′</mi><mo>+</mo><mi>M</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mn>0,0041</mn><mspace width="0.167em"></mspace><mi>E</mi><mo>cos</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mi>′</mi><mo>−</mo><mi>M</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>W</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mrow><mo stretchy="true" form="prefix">|</mo><mo>cos</mo><msub><mi>F</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">|</mo></mrow><mo>,</mo><mspace width="2.0em"></mspace><mi>γ</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>P</mi><mo>cos</mo><msub><mi>F</mi><mn>1</mn></msub><mo>+</mo><mi>Q</mi><mo>sin</mo><msub><mi>F</mi><mn>1</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mn>0,0048</mn><mspace width="0.167em"></mspace><mi>W</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>u</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mn>0,0059</mn><mo>+</mo><mn>0,0046</mn><mspace width="0.167em"></mspace><mi>E</mi><mo>cos</mo><mi>M</mi><mo>−</mo><mn>0,0182</mn><mo>cos</mo><mi>M</mi><mi>′</mi><mo>+</mo><mn>0,0004</mn><mo>cos</mo><mn>2</mn><mi>M</mi><mi>′</mi><mo>−</mo><mn>0,0005</mn><mo>cos</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>M</mi><mo>+</mo><mi>M</mi><mi>′</mi><mo stretchy="true" form="postfix">)</mo></mrow></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{aligned}
+P &amp;= 0{,}2070\,E\sin M + 0{,}0024\,E\sin 2M - 0{,}0392\sin M&#39; + 0{,}0116\sin 2M&#39; - 0{,}0073\,E\sin(M&#39;+M) + 0{,}0067\,E\sin(M&#39;-M) + 0{,}0118\sin 2F_1\\
+Q &amp;= 5{,}2207 - 0{,}0048\,E\cos M + 0{,}0020\,E\cos 2M - 0{,}3299\cos M&#39; - 0{,}0060\,E\cos(M&#39;+M) + 0{,}0041\,E\cos(M&#39;-M)\\
+W &amp;= |\cos F_1|,\qquad \gamma = (P\cos F_1 + Q\sin F_1)(1 - 0{,}0048\,W)\\
+u &amp;= 0{,}0059 + 0{,}0046\,E\cos M - 0{,}0182\cos M&#39; + 0{,}0004\cos 2M&#39; - 0{,}0005\cos(M+M&#39;)
+\end{aligned}</annotation></semantics></math>
+<div class="cap">γ = jarak terdekat sumbu bayangan Bulan (gerhana Matahari) atau pusat Bulan (gerhana Bulan) dari pusat Bumi, dalam jari-jari Bumi; positif bila di utara. u = jari-jari umbra Bulan pada bidang fundamental (gerhana Matahari) atau besaran untuk jari-jari bayangan Bumi (gerhana Bulan).</div></div>
+<div class="tbl"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Syarat</th>
+<th>Gerhana Matahari</th>
+<th>Syarat</th>
+<th>Gerhana Bulan</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>|γ| &gt; 1,5433 + u</td>
+<td>tidak ada gerhana</td>
+<td>m_pen ≤ 0</td>
+<td>tidak ada gerhana</td>
+</tr>
+<tr class="even">
+<td>0,9972 &lt; |γ| &lt; 1,5433 + u</td>
+<td>sebagian (atau total/cincin tak sentral bila |γ| &lt; 1,0260)</td>
+<td>m_umb ≤ 0 &lt; m_pen</td>
+<td>penumbra</td>
+</tr>
+<tr class="odd">
+<td>|γ| &lt; 0,9972 dan u &lt; 0</td>
+<td>total</td>
+<td>0 &lt; m_umb &lt; 1</td>
+<td>sebagian</td>
+</tr>
+<tr class="even">
+<td>|γ| &lt; 0,9972 dan u &gt; 0,0047</td>
+<td>cincin</td>
+<td>m_umb ≥ 1</td>
+<td>total</td>
+</tr>
+<tr class="odd">
+<td>|γ| &lt; 0,9972 dan 0 &lt; u &lt; 0,0047</td>
+<td>cincin atau hibrida</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Untuk gerhana Bulan, magnitudo penumbra dan umbra pada puncak gerhana adalah</p>
+
+<div class="eq"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mtext mathvariant="normal">pen</mtext></msub><mo>=</mo><mfrac><mrow><mn>1,5573</mn><mo>+</mo><mi>u</mi><mo>−</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>γ</mi><mo stretchy="true" form="postfix">|</mo></mrow></mrow><mrow><mn>0,5450</mn></mrow></mfrac><mo>,</mo><mspace width="2.0em"></mspace><msub><mi>m</mi><mtext mathvariant="normal">umb</mtext></msub><mo>=</mo><mfrac><mrow><mn>1,0128</mn><mo>−</mo><mi>u</mi><mo>−</mo><mrow><mo stretchy="true" form="prefix">|</mo><mi>γ</mi><mo stretchy="true" form="postfix">|</mo></mrow></mrow><mrow><mn>0,5450</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">m_\text{pen} = \frac{1{,}5573 + u - |\gamma|}{0{,}5450},\qquad m_\text{umb} = \frac{1{,}0128 - u - |\gamma|}{0{,}5450}</annotation></semantics></math>
+<div class="cap">Lama setengah fase (menit): fase penumbra 60/n · √(h² − γ²), fase sebagian 60/n · √(p² − γ²), fase total 60/n · √(t² − γ²), dengan h = 1,5573 + u, p = 1,0128 − u, t = 0,4678 − u, dan n = 0,5458 + 0,0400 cos M′. Rumus ini dipakai lagi di Bab 14.</div></div>
+<p>Metode Meeus memberikan saat puncak dengan galat beberapa menit dan jenis gerhana yang hampir selalu benar. Waktu kontak yang teliti dan keadaan gerhana di suatu tempat dihitung dengan posisi Bulan dan Matahari yang lengkap (Bab 14 dan 15).</p>
+
+</section>
+
+<section id="contoh">
+<div class="sec-head"><div class="eyebrow">13.8</div><h2>Contoh soal</h2></div>
+<div class="ex"><p class="q">Soal 1. Gerhana Matahari terjadi pada 17 Februari 2026. Kira-kira kapan gerhana Bulan terdekat sesudahnya, dan kapan musim gerhana berikutnya?</p><details><summary>Lihat penyelesaian</summary><div class="sol"><p>Gerhana Bulan pasangannya terjadi pada istiqbal berikutnya, sekitar setengah bulan sinodis kemudian: 17 Februari + 14,8 hari ≈ <strong>3 Maret 2026</strong> (gerhana Bulan total).</p>
+<p>Musim gerhana berikutnya datang setengah tahun gerhana kemudian: 17 Februari + 173,3 hari ≈ <strong>9–10 Agustus 2026</strong>. Ijtimak terdekat adalah 12 Agustus 2026 (gerhana Matahari total) dan istiqbal 28 Agustus 2026 (gerhana Bulan sebagian).</p>
+</div></details></div>
+<div class="ex"><p class="q">Soal 2. Untuk k = 329 diperoleh F = 171,306°. Apakah ijtimak ini mungkin disertai gerhana Matahari? Kira-kira berapa lintang Bulan saat itu?</p><details><summary>Lihat penyelesaian</summary><div class="sol"><p>sin 171,306° = 0,1512. Karena |sin F| = 0,15 &lt; 0,36, <strong>mungkin ada gerhana</strong>. Bulan berada 180° − 171,3° = 8,7° dari simpul turun.</p>
+<p>β ≈ 5,145° × 0,1512 ≈ <strong>0,78°</strong>. Nilai ini jauh di bawah batas sekitar 1,5°, sehingga gerhana pasti terjadi. Perhitungan γ memastikan jenisnya total.</p>
+</div></details></div>
+<div class="ex"><p class="q">Soal 3. Gerhana Matahari total 9 Maret 2016 terjadi pukul 01.58 UT. Perkirakan tanggal dan jam gerhana berikutnya dalam Saros yang sama.</p><details><summary>Lihat penyelesaian</summary><div class="sol"><p>Tambahkan 6585,32 hari. Delapan belas tahun dari 9 Maret 2016 adalah 18 × 365 + 4 = 6574 hari (ada empat 29 Februari: 2020, 2024, 2028, 2032). Sisa 6585 − 6574 = 11 hari, sehingga tanggalnya <strong>20 Maret 2034</strong>.</p>
+<p>0,3212 hari = 7 jam 43 menit; 01.58 + 7.43 = <strong>09.41 UT, 20 Maret 2034</strong>. Metode Meeus memberikan puncak sekitar 10.18 UT; selisihnya berasal dari perbedaan kecil antara bulan sinodis, drakonik, dan anomalistik.</p>
+</div></details></div>
+</section>
+
+<section id="latihan">
+<div class="sec-head"><div class="eyebrow">Penutup</div><h2>Latihan pemahaman</h2><p>Lima soal untuk memeriksa pemahaman. Skor tidak disimpan.</p></div>
+<div class="quiz" id="quiz"></div>
+<p class="score" id="score"></p>
+<div class="task"><h3>Tugas Bab 13 (kelompok)</h3><ol type="1">
+<li>Dengan SIM II-13.3, susun daftar gerhana Matahari dan Bulan tahun 2027–2030 yang dapat diamati dari Indonesia. Kelompokkan menurut musim gerhana dan tunjukkan pasangan gerhana Matahari–Bulan dalam setiap musim.</li>
+<li>Pilih satu gerhana yang pernah tampak di Indonesia (misalnya 9 Maret 2016 atau 20 April 2023). Hitung dengan sheet Gerhana tiga anggota Saros sebelumnya dan sesudahnya, lalu buat tabel tanggal, jenis, dan γ. Jelaskan arah pergeseran γ.</li>
+</ol>
+</div>
+</section>
+
+<script type="application/json" id="quizdata">[
+{
+"q": "Gerhana tidak terjadi setiap bulan karena …",
+"o": [
+"Bulan terlalu kecil",
+"Orbit Bulan miring sekitar 5° terhadap ekliptika",
+"Bumi berotasi",
+"Matahari terlalu jauh"
+],
+"a": 1,
+"e": "Kebanyakan ijtimak dan purnama terjadi ketika Bulan di atas atau di bawah ekliptika."
+},
+{
+"q": "Tahun gerhana panjangnya sekitar …",
+"o": [
+"365,25 hari",
+"354,37 hari",
+"346,62 hari",
+"27,21 hari"
+],
+"a": 2,
+"e": "Lebih pendek dari tahun tropis karena garis simpul bergeser ke barat."
+},
+{
+"q": "Setiap musim gerhana pasti memuat sedikitnya satu …",
+"o": [
+"Gerhana Bulan total",
+"Gerhana Matahari",
+"Gerhana Bulan umbra",
+"Gerhana cincin"
+],
+"a": 1,
+"e": "Jendela gerhana Matahari (30–36 hari) lebih panjang daripada bulan sinodis."
+},
+{
+"q": "Gerhana cincin terjadi bila …",
+"o": [
+"Ujung umbra Bulan tidak mencapai Bumi",
+"Bulan masuk penumbra Bumi",
+"Bulan di perigee",
+"Matahari di aphelion"
+],
+"a": 0,
+"e": "Bulan tampak lebih kecil daripada Matahari sehingga tersisa cincin terang."
+},
+{
+"q": "Satu Saros sama dengan …",
+"o": [
+"223 bulan sinodis",
+"235 bulan sinodis",
+"12 bulan sinodis",
+"358 bulan sinodis"
+],
+"a": 0,
+"e": "223 bulan sinodis ≈ 242 bulan drakonik ≈ 239 bulan anomalistik ≈ 6585,32 hari."
+},
+{
+"q": "Dalam metode Meeus, γ = −0,30 dan u = −0,01 berarti gerhana Matahari …",
+"o": [
+"Sebagian",
+"Cincin",
+"Total",
+"Tidak terjadi"
+],
+"a": 2,
+"e": "|γ| < 0,9972 (sentral) dan u < 0 (umbra mencapai Bumi)."
+}
+]</script>
+
+<footer>
+  <div class="next"><span>Sebelumnya: <b>Bab 12 · Studi Kasus: Perbedaan Awal Ramadan, Syawal, dan Zulhijah di Indonesia</b></span><span>Berikutnya: <b>Bab 14 · Perhitungan Gerhana Bulan</b></span></div>
+  <div>Astronomi Islam Jilid 2 · Bab 13 · Program Studi Pendidikan Fisika, UIN Sunan Gunung Djati Bandung</div>
+</footer>
+</div>
+
+<script>
+/* Pustaka bersama Astronomi Islam Jilid 2: kalender, Matahari (VSOP87 ringkas), Bulan (ELP-2000/82 ringkas, Meeus bab 47),
+   ijtimak, data hilal, kriteria visibilitas, kalender Hijriyah, dan gerhana (elemen Besselian).
+   Semua sudut dalam derajat kecuali disebut lain. JD = Julian Day (UT), JDE = Julian Ephemeris Day (TT). */
+var A = (function () {
+  var RAD = Math.PI / 180, DEG = 180 / Math.PI, PI2 = 2 * Math.PI;
+  function mod(a, n) { return ((a % n) + n) % n; }
+  function n180(a) { return mod(a + 180, 360) - 180; }
+  function sind(x) { return Math.sin(x * RAD); }
+  function cosd(x) { return Math.cos(x * RAD); }
+  function tand(x) { return Math.tan(x * RAD); }
+  function asind(x) { return Math.asin(Math.max(-1, Math.min(1, x))) * DEG; }
+  function acosd(x) { return Math.acos(Math.max(-1, Math.min(1, x))) * DEG; }
+  function atan2d(y, x) { return Math.atan2(y, x) * DEG; }
+
+  /* ---------- format ---------- */
+  function fnum(x, d) { if (!isFinite(x)) return '—'; var s = Math.abs(x).toFixed(d).replace('.', ','); return (x < 0 && +s.replace(',', '.') !== 0 ? '−' : '') + s; }
+  function sgn(x, d) { return (x > 0 ? '+' : '') + fnum(x, d); }
+  function dms(x, secs, dec) {
+    if (!isFinite(x)) return '—';
+    var s = x < 0 ? '−' : ''; x = Math.abs(x);
+    var d = Math.floor(x), mf = (x - d) * 60, m = Math.floor(mf), sc = (mf - m) * 60;
+    if (!secs) { m = Math.round(mf); if (m === 60) { d++; m = 0; } return s + d + '°' + (m < 10 ? '0' : '') + m + '′'; }
+    var k = Math.pow(10, dec || 0); sc = Math.round(sc * k) / k; if (sc >= 60) { sc = 0; m++; } if (m === 60) { m = 0; d++; }
+    var ss = (dec ? sc.toFixed(dec) : String(sc)).replace('.', ',');
+    return s + d + '°' + (m < 10 ? '0' : '') + m + '′' + (sc < 10 ? '0' : '') + ss + '″';
+  }
+  function hm(h, mode) {
+    if (!isFinite(h)) return '—';
+    h = mod(h, 24); var m = h * 60;
+    m = mode === 'up' ? Math.ceil(m - 1e-9) : mode === 'down' ? Math.floor(m + 1e-9) : Math.round(m);
+    var hh = Math.floor(m / 60) % 24, mm = m % 60;
+    return (hh < 10 ? '0' : '') + hh + ':' + (mm < 10 ? '0' : '') + mm;
+  }
+  function hms(h) {
+    if (!isFinite(h)) return '—';
+    h = mod(h, 24); var s = Math.round(h * 3600), hh = Math.floor(s / 3600) % 24, mm = Math.floor(s % 3600 / 60), ss = s % 60;
+    return (hh < 10 ? '0' : '') + hh + ':' + (mm < 10 ? '0' : '') + mm + ':' + (ss < 10 ? '0' : '') + ss;
+  }
+  function dur(hours) { /* durasi jam desimal -> "5 j 12 m" */
+    if (!isFinite(hours)) return '—';
+    var s = hours < 0 ? '−' : ''; var m = Math.round(Math.abs(hours) * 60);
+    return s + Math.floor(m / 60) + ' j ' + (m % 60) + ' m';
+  }
+
+  /* ---------- kalender Masehi & Julian Day ---------- */
+  function jd(y, mo, d, hUT) { /* Gregorius sejak 15 Okt 1582, Julius sebelumnya */
+    var Y = y, M = mo;
+    if (M <= 2) { Y -= 1; M += 12; }
+    var greg = (y > 1582) || (y === 1582 && (mo > 10 || (mo === 10 && d >= 15)));
+    var B = 0; if (greg) { var A0 = Math.floor(Y / 100); B = 2 - A0 + Math.floor(A0 / 4); }
+    return Math.floor(365.25 * (Y + 4716)) + Math.floor(30.6001 * (M + 1)) + d + B - 1524.5 + (hUT || 0) / 24;
+  }
+  function cal(J) { /* JD -> {y,m,d,h} (h = jam desimal) */
+    var Z = Math.floor(J + 0.5), F = J + 0.5 - Z, Aa = Z;
+    if (Z >= 2299161) { var al = Math.floor((Z - 1867216.25) / 36524.25); Aa = Z + 1 + al - Math.floor(al / 4); }
+    var B = Aa + 1524, C = Math.floor((B - 122.1) / 365.25), D = Math.floor(365.25 * C), E = Math.floor((B - D) / 30.6001);
+    var day = B - D - Math.floor(30.6001 * E), m = E < 14 ? E - 1 : E - 13, y = m > 2 ? C - 4716 : C - 4715;
+    return { y: y, m: m, d: day, h: F * 24 };
+  }
+  var HARI = ['Ahad', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+  var PASARAN = ['Legi', 'Pahing', 'Pon', 'Wage', 'Kliwon'];
+  var BULAN = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+  var BLN = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+  var HIJRI = ['Muharam', 'Safar', 'Rabiulawal', 'Rabiulakhir', 'Jumadilawal', 'Jumadilakhir', 'Rajab', 'Syakban', 'Ramadan', 'Syawal', 'Zulkaidah', 'Zulhijah'];
+  function dow(J) { return mod(Math.floor(J + 1.5), 7); }            /* 0 = Ahad */
+  function pasaran(J) { return mod(Math.floor(J + 0.5), 5); }         /* 0 = Legi; 18 Feb 2026 = Rabu Legi */
+  function tgl(J, tz, opt) { /* JD (UT) -> "Rabu, 18 Februari 2026" waktu lokal */
+    var c = cal(J + (tz || 0) / 24), J0 = jd(c.y, c.m, c.d, 0);
+    var s = c.d + ' ' + BULAN[c.m - 1] + ' ' + c.y;
+    if (opt !== 'nohari') s = HARI[dow(J0)] + (opt === 'pasaran' ? ' ' + PASARAN[pasaran(J0)] : '') + ', ' + s;
+    return s;
+  }
+
+  /* ΔT = TT − UT (detik). Espenak & Meeus (2006); 2005–2050 memakai nilai pengamatan IERS dan ekstrapolasi halus. */
+  function deltaT(y) {
+    var t, u;
+    if (y < -500) { u = (y - 1820) / 100; return -20 + 32 * u * u; }
+    if (y < 500) { u = y / 100; return 10583.6 - 1014.41 * u + 33.78311 * u * u - 5.952053 * u * u * u - 0.1798452 * Math.pow(u, 4) + 0.022174192 * Math.pow(u, 5) + 0.0090316521 * Math.pow(u, 6); }
+    if (y < 1600) { u = (y - 1000) / 100; return 1574.2 - 556.01 * u + 71.23472 * u * u + 0.319781 * u * u * u - 0.8503463 * Math.pow(u, 4) - 0.005050998 * Math.pow(u, 5) + 0.0083572073 * Math.pow(u, 6); }
+    if (y < 1700) { t = y - 1600; return 120 - 0.9808 * t - 0.01532 * t * t + t * t * t / 7129; }
+    if (y < 1800) { t = y - 1700; return 8.83 + 0.1603 * t - 0.0059285 * t * t + 0.00013336 * t * t * t - Math.pow(t, 4) / 1174000; }
+    if (y < 1860) { t = y - 1800; return 13.72 - 0.332447 * t + 0.0068612 * t * t + 0.0041116 * t * t * t - 0.00037436 * Math.pow(t, 4) + 0.0000121272 * Math.pow(t, 5) - 0.0000001699 * Math.pow(t, 6) + 0.000000000875 * Math.pow(t, 7); }
+    if (y < 1900) { t = y - 1860; return 7.62 + 0.5737 * t - 0.251754 * t * t + 0.01680668 * t * t * t - 0.0004473624 * Math.pow(t, 4) + Math.pow(t, 5) / 233174; }
+    if (y < 1920) { t = y - 1900; return -2.79 + 1.494119 * t - 0.0598939 * t * t + 0.0061966 * t * t * t - 0.000197 * Math.pow(t, 4); }
+    if (y < 1941) { t = y - 1920; return 21.20 + 0.84493 * t - 0.076100 * t * t + 0.0020936 * t * t * t; }
+    if (y < 1961) { t = y - 1950; return 29.07 + 0.407 * t - t * t / 233 + t * t * t / 2547; }
+    if (y < 1986) { t = y - 1975; return 45.45 + 1.067 * t - t * t / 260 - t * t * t / 718; }
+    if (y < 2005) { t = y - 2000; return 63.86 + 0.3345 * t - 0.060374 * t * t + 0.0017275 * t * t * t + 0.000651814 * Math.pow(t, 4) + 0.00002373599 * Math.pow(t, 5); }
+    if (y < 2050) {
+      var T = [[2005, 64.69], [2010, 66.07], [2015, 67.64], [2020, 69.36], [2023, 69.2], [2026, 69.1], [2030, 70.0], [2040, 78.0], [2050, 93.0]];
+      for (var i = 0; i < T.length - 1; i++) if (y < T[i + 1][0]) return T[i][1] + (T[i + 1][1] - T[i][1]) * (y - T[i][0]) / (T[i + 1][0] - T[i][0]);
+    }
+    if (y < 2150) { u = (y - 1820) / 100; return -20 + 32 * u * u - 0.5628 * (2150 - y); }
+    u = (y - 1820) / 100; return -20 + 32 * u * u;
+  }
+  function jde(J) { var c = cal(J); return J + deltaT(c.y + (c.m - 0.5) / 12) / 86400; }
+  function ut(JE) { var c = cal(JE); return JE - deltaT(c.y + (c.m - 0.5) / 12) / 86400; }
+
+  /* ---------- nutasi & kemiringan ekliptika (Meeus bab 22, ketelitian 0,5″) ---------- */
+  function nutation(JE) {
+    var T = (JE - 2451545) / 36525;
+    var Om = 125.04452 - 1934.136261 * T, L = 280.4665 + 36000.7698 * T, Lp = 218.3165 + 481267.8813 * T;
+    var dpsi = (-17.20 * sind(Om) - 1.32 * sind(2 * L) - 0.23 * sind(2 * Lp) + 0.21 * sind(2 * Om)) / 3600;
+    var deps = (9.20 * cosd(Om) + 0.57 * cosd(2 * L) + 0.10 * cosd(2 * Lp) - 0.09 * cosd(2 * Om)) / 3600;
+    var eps0 = 23 + 26 / 60 + (21.448 - 46.8150 * T - 0.00059 * T * T + 0.001813 * T * T * T) / 3600;
+    return { dpsi: dpsi, deps: deps, eps0: eps0, eps: eps0 + deps };
+  }
+  function ecl2eq(lam, bet, eps) {
+    var ra = mod(atan2d(sind(lam) * cosd(eps) - tand(bet) * sind(eps), cosd(lam)), 360);
+    var dec = asind(sind(bet) * cosd(eps) + cosd(bet) * sind(eps) * sind(lam));
+    return { ra: ra, dec: dec };
+  }
+
+  /* ---------- Matahari: VSOP87 ringkas (Meeus, Lampiran III), galat < 1″ ---------- */
+  var VL = [
+    [[175347046, 0, 0], [3341656, 4.6692568, 6283.07585], [34894, 4.6261, 12566.1517], [3497, 2.7441, 5753.3849], [3418, 2.8289, 3.5231], [3136, 3.6277, 77713.7715], [2676, 4.4181, 7860.4194], [2343, 6.1352, 3930.2097], [1324, 0.7425, 11506.7698], [1273, 2.0371, 529.691], [1199, 1.1096, 1577.3435], [990, 5.233, 5884.927], [902, 2.045, 26.298], [857, 3.508, 398.149], [780, 1.179, 5223.694], [753, 2.533, 5507.553], [505, 4.583, 18849.228], [492, 4.205, 775.523], [357, 2.92, 0.067], [317, 5.849, 11790.629], [284, 1.899, 796.298], [271, 0.315, 10977.079], [243, 0.345, 5486.778], [206, 4.806, 2544.314], [205, 1.869, 5573.143], [202, 2.458, 6069.777], [156, 0.833, 213.299], [132, 3.411, 2942.463], [126, 1.083, 20.775], [115, 0.645, 0.98], [103, 0.636, 4694.003], [102, 0.976, 15720.839], [102, 4.267, 7.114], [99, 6.21, 2146.17], [98, 0.68, 155.42], [86, 5.98, 161000.69], [85, 1.3, 6275.96], [85, 3.67, 71430.7], [80, 1.81, 17260.15], [79, 3.04, 12036.46], [75, 1.76, 5088.63], [74, 3.5, 3154.69], [74, 4.68, 801.82], [70, 0.83, 9437.76], [62, 3.98, 8827.39], [61, 1.82, 7084.9], [57, 2.78, 6286.6], [56, 4.39, 14143.5], [56, 3.47, 6279.55], [52, 0.19, 12139.55], [52, 1.33, 1748.02], [51, 0.28, 5856.48], [49, 0.49, 1194.45], [41, 5.37, 8429.24], [41, 2.4, 19651.05], [39, 6.17, 10447.39], [37, 6.04, 10213.29], [37, 2.57, 1059.38], [36, 1.71, 2352.87], [36, 1.78, 6812.77], [33, 0.59, 17789.85], [30, 0.44, 83996.85], [30, 2.74, 1349.87], [25, 3.16, 4690.48]],
+    [[628331966747, 0, 0], [206059, 2.678235, 6283.07585], [4303, 2.6351, 12566.1517], [425, 1.59, 3.523], [119, 5.796, 26.298], [109, 2.966, 1577.344], [93, 2.59, 18849.23], [72, 1.14, 529.69], [68, 1.87, 398.15], [67, 4.41, 5507.55], [59, 2.89, 5223.69], [56, 2.17, 155.42], [45, 0.4, 796.3], [36, 0.47, 775.52], [29, 2.65, 7.11], [21, 5.34, 0.98], [19, 1.85, 5486.78], [19, 4.97, 213.3], [17, 2.99, 6275.96], [16, 0.03, 2544.31], [16, 1.43, 2146.17], [15, 1.21, 10977.08], [12, 2.83, 1748.02], [12, 3.26, 5088.63], [12, 5.27, 1194.45], [12, 2.08, 4694], [11, 0.77, 553.57], [10, 1.3, 6286.6], [10, 4.24, 1349.87], [9, 2.7, 242.73], [9, 5.64, 951.72], [8, 5.3, 2352.87], [6, 2.65, 9437.76], [6, 4.67, 4690.48]],
+    [[52919, 0, 0], [8720, 1.0721, 6283.0758], [309, 0.867, 12566.152], [27, 0.05, 3.52], [16, 5.19, 26.3], [16, 3.68, 155.42], [10, 0.76, 18849.23], [9, 2.06, 77713.77], [7, 0.83, 775.52], [5, 4.66, 1577.34], [4, 1.03, 7.11], [4, 3.44, 5573.14], [3, 5.14, 796.3], [3, 6.05, 5507.55], [3, 1.19, 242.73], [3, 6.12, 529.69], [3, 0.31, 398.15], [3, 2.28, 553.57], [2, 4.38, 5223.69], [2, 3.75, 0.98]],
+    [[289, 5.844, 6283.076], [35, 0, 0], [17, 5.49, 12566.15], [3, 5.2, 155.42], [1, 4.72, 3.52], [1, 5.3, 18849.23], [1, 5.97, 242.73]],
+    [[114, 3.142, 0], [8, 4.13, 6283.08], [1, 3.84, 12566.15]],
+    [[1, 3.14, 0]]
+  ];
+  var VB = [[[280, 3.199, 84334.662], [102, 5.422, 5507.553], [80, 3.88, 5223.69], [44, 3.7, 2352.87], [32, 4, 1577.34]], [[9, 3.9, 5507.55], [6, 1.73, 5223.69]]];
+  var VR = [
+    [[100013989, 0, 0], [1670700, 3.0984635, 6283.07585], [13956, 3.05525, 12566.1517], [3084, 5.1985, 77713.7715], [1628, 1.1739, 5753.3849], [1576, 2.8469, 7860.4194], [925, 5.453, 11506.77], [542, 4.564, 3930.21], [472, 3.661, 5884.927], [346, 0.964, 5507.553], [329, 5.9, 5223.694], [307, 0.299, 5573.143], [243, 4.273, 11790.629], [212, 5.847, 1577.344], [186, 5.022, 10977.079], [175, 3.012, 18849.228], [110, 5.055, 5486.778], [98, 0.89, 6069.78], [86, 5.69, 15720.84], [86, 1.27, 161000.69], [65, 0.27, 17260.15], [63, 0.92, 529.69], [57, 2.01, 83996.85], [56, 5.24, 71430.7], [49, 3.25, 2544.31], [47, 2.58, 775.52], [45, 5.54, 9437.76], [43, 6.01, 6275.96], [39, 5.36, 4694], [38, 2.39, 8827.39], [37, 0.83, 19651.05], [37, 4.9, 12139.55], [36, 1.67, 12036.46], [35, 1.84, 2942.46], [33, 0.24, 7084.9], [32, 0.18, 5088.63], [32, 1.78, 398.15], [28, 1.21, 6286.6], [28, 1.9, 6279.55], [26, 4.59, 10447.39]],
+    [[103019, 1.10749, 6283.07585], [1721, 1.0644, 12566.1517], [702, 3.142, 0], [32, 1.02, 18849.23], [31, 2.84, 5507.55], [25, 1.32, 5223.69], [18, 1.42, 1577.34], [10, 5.91, 10977.08], [9, 1.42, 6275.96], [9, 0.27, 5486.78]],
+    [[4359, 5.7846, 6283.0758], [124, 5.579, 12566.152], [12, 3.14, 0], [9, 3.63, 77713.77], [6, 1.87, 5573.14], [3, 5.47, 18849.23]],
+    [[145, 4.273, 6283.076], [7, 3.92, 12566.15]],
+    [[4, 2.56, 6283.08]]
+  ];
+  function vsop(S, tau) {
+    var r = 0, tp = 1;
+    for (var i = 0; i < S.length; i++) {
+      var s = 0, a = S[i];
+      for (var j = 0; j < a.length; j++) s += a[j][0] * Math.cos(a[j][1] + a[j][2] * tau);
+      r += s * tp; tp *= tau;
+    }
+    return r / 1e8;
+  }
+  function sun(JE) { /* posisi geosentris tampak Matahari pada JDE */
+    var tau = (JE - 2451545) / 365250;
+    var L = vsop(VL, tau) * DEG, B = vsop(VB, tau) * DEG, R = vsop(VR, tau);
+    var lam = mod(L + 180, 360), bet = -B;
+    var T = 10 * tau, lp = lam - 1.397 * T - 0.00031 * T * T;               /* koreksi FK5 */
+    lam += -0.09033 / 3600; bet += 0.03916 * (cosd(lp) - sind(lp)) / 3600;
+    var nu = nutation(JE);
+    var lamApp = lam + nu.dpsi - 20.4898 / 3600 / R;
+    var eq = ecl2eq(lamApp, bet, nu.eps);
+    return { lam: mod(lamApp, 360), lamGeo: lam, beta: bet, R: R, ra: eq.ra, dec: eq.dec, eps: nu.eps, dpsi: nu.dpsi,
+      sd: 959.63 / 3600 / R, par: 8.794 / 3600 / R, distKm: R * 149597870.7 };
+  }
+  /* perata waktu (menit) dari bujur rata-rata dan asensio rekta tampak */
+  function eot(JE) {
+    var s = sun(JE), t = (JE - 2451545) / 365250;
+    var L0 = mod(280.4664567 + 360007.6982779 * t + 0.03032028 * t * t + t * t * t / 49931, 360);
+    return n180(L0 - 0.0057183 - s.ra + s.dpsi * cosd(s.eps)) * 4;
+  }
+
+  /* ---------- Bulan: Meeus bab 47 (ELP-2000/82 ringkas), galat ≈ 10″ bujur, 4″ lintang ---------- */
+  var ML = [ /* D M M' F  Σl  Σr */
+    [0, 0, 1, 0, 6288774, -20905355], [2, 0, -1, 0, 1274027, -3699111], [2, 0, 0, 0, 658314, -2955968], [0, 0, 2, 0, 213618, -569925],
+    [0, 1, 0, 0, -185116, 48888], [0, 0, 0, 2, -114332, -3149], [2, 0, -2, 0, 58793, 246158], [2, -1, -1, 0, 57066, -152138],
+    [2, 0, 1, 0, 53322, -170733], [2, -1, 0, 0, 45758, -204586], [0, 1, -1, 0, -40923, -129620], [1, 0, 0, 0, -34720, 108743],
+    [0, 1, 1, 0, -30383, 104755], [2, 0, 0, -2, 15327, 10321], [0, 0, 1, 2, -12528, 0], [0, 0, 1, -2, 10980, 79661],
+    [4, 0, -1, 0, 10675, -34782], [0, 0, 3, 0, 10034, -23210], [4, 0, -2, 0, 8548, -21636], [2, 1, -1, 0, -7888, 24208],
+    [2, 1, 0, 0, -6766, 30824], [1, 0, -1, 0, -5163, -8379], [1, 1, 0, 0, 4987, -16675], [2, -1, 1, 0, 4036, -12831],
+    [2, 0, 2, 0, 3994, -10445], [4, 0, 0, 0, 3861, -11650], [2, 0, -3, 0, 3665, 14403], [0, 1, -2, 0, -2689, -7003],
+    [2, 0, -1, 2, -2602, 0], [2, -1, -2, 0, 2390, 10056], [1, 0, 1, 0, -2348, 6322], [2, -2, 0, 0, 2236, -9884],
+    [0, 1, 2, 0, -2120, 5751], [0, 2, 0, 0, -2069, 0], [2, -2, -1, 0, 2048, -4950], [2, 0, 1, -2, -1773, 4130],
+    [2, 0, 0, 2, -1595, 0], [4, -1, -1, 0, 1215, -3958], [0, 0, 2, 2, -1110, 0], [3, 0, -1, 0, -892, 3258],
+    [2, 1, 1, 0, -810, 2616], [4, -1, -2, 0, 759, -1897], [0, 2, -1, 0, -713, -2117], [2, 2, -1, 0, -700, 2354],
+    [2, 1, -2, 0, 691, 0], [2, -1, 0, -2, 596, 0], [4, 0, 1, 0, 549, -1423], [0, 0, 4, 0, 537, -1117],
+    [4, -1, 0, 0, 520, -1571], [1, 0, -2, 0, -487, -1739], [2, 1, 0, -2, -399, 0], [0, 0, 2, -2, -381, -4421],
+    [1, 1, 1, 0, 351, 0], [3, 0, -2, 0, -340, 0], [4, 0, -3, 0, 330, 0], [2, -1, 2, 0, 327, 0],
+    [0, 2, 1, 0, -323, 1165], [1, 1, -1, 0, 299, 0], [2, 0, 3, 0, 294, 0], [2, 0, -1, -2, 0, 8752]
+  ];
+  var MB = [ /* D M M' F  Σb */
+    [0, 0, 0, 1, 5128122], [0, 0, 1, 1, 280602], [0, 0, 1, -1, 277693], [2, 0, 0, -1, 173237], [2, 0, -1, 1, 55413],
+    [2, 0, -1, -1, 46271], [2, 0, 0, 1, 32573], [0, 0, 2, 1, 17198], [2, 0, 1, -1, 9266], [0, 0, 2, -1, 8822],
+    [2, -1, 0, -1, 8216], [2, 0, -2, -1, 4324], [2, 0, 1, 1, 4200], [2, 1, 0, -1, -3359], [2, -1, -1, 1, 2463],
+    [2, -1, 0, 1, 2211], [2, -1, -1, -1, 2065], [0, 1, -1, -1, -1870], [4, 0, -1, -1, 1828], [0, 1, 0, 1, -1794],
+    [0, 0, 0, 3, -1749], [0, 1, -1, 1, -1565], [1, 0, 0, 1, -1491], [0, 1, 1, 1, -1475], [0, 1, 1, -1, -1410],
+    [0, 1, 0, -1, -1344], [1, 0, 0, -1, -1335], [0, 0, 3, 1, 1107], [4, 0, 0, -1, 1021], [4, 0, -1, 1, 833],
+    [0, 0, 1, -3, 777], [4, 0, -2, 1, 671], [2, 0, 0, -3, 607], [2, 0, 2, -1, 596], [2, -1, 1, -1, 491],
+    [2, 0, -2, 1, -451], [0, 0, 3, -1, 439], [2, 0, 2, 1, 422], [2, 0, -3, -1, 421], [2, 1, -1, 1, -366],
+    [2, 1, 0, 1, -351], [4, 0, 0, 1, 331], [2, -1, 1, 1, 315], [2, -2, 0, -1, 302], [0, 0, 1, 3, -283],
+    [2, 1, 1, -1, -229], [1, 1, 0, -1, 223], [1, 1, 0, 1, 223], [0, 1, -2, -1, -220], [2, 1, -1, -1, -220],
+    [1, 0, 1, 1, -185], [2, -1, -2, -1, 181], [0, 1, 2, 1, -177], [4, 0, -2, -1, 176], [4, -1, -1, -1, 166],
+    [1, 0, 1, -1, -164], [4, 0, 1, -1, 132], [1, 0, -1, -1, -119], [4, -1, 0, -1, 115], [2, -2, 0, 1, 107]
+  ];
+  function moonArgs(T) {
+    return {
+      Lp: mod(218.3164477 + 481267.88123421 * T - 0.0015786 * T * T + T * T * T / 538841 - T * T * T * T / 65194000, 360),
+      D: mod(297.8501921 + 445267.1114034 * T - 0.0018819 * T * T + T * T * T / 545868 - T * T * T * T / 113065000, 360),
+      M: mod(357.5291092 + 35999.0502909 * T - 0.0001536 * T * T + T * T * T / 24490000, 360),
+      Mp: mod(134.9633964 + 477198.8675055 * T + 0.0087414 * T * T + T * T * T / 69699 - T * T * T * T / 14712000, 360),
+      F: mod(93.2720950 + 483202.0175233 * T - 0.0036539 * T * T - T * T * T / 3526000 + T * T * T * T / 863310000, 360)
+    };
+  }
+  function moon(JE) { /* posisi geosentris tampak Bulan pada JDE */
+    var T = (JE - 2451545) / 36525, a = moonArgs(T);
+    var E = 1 - 0.002516 * T - 0.0000074 * T * T, E2 = E * E;
+    var A1 = 119.75 + 131.849 * T, A2 = 53.09 + 479264.290 * T, A3 = 313.45 + 481266.484 * T;
+    var sl = 0, sr = 0, sb = 0, i, t, arg, e;
+    for (i = 0; i < ML.length; i++) {
+      t = ML[i]; arg = t[0] * a.D + t[1] * a.M + t[2] * a.Mp + t[3] * a.F;
+      e = Math.abs(t[1]) === 1 ? E : Math.abs(t[1]) === 2 ? E2 : 1;
+      sl += t[4] * e * sind(arg); sr += t[5] * e * cosd(arg);
+    }
+    for (i = 0; i < MB.length; i++) {
+      t = MB[i]; arg = t[0] * a.D + t[1] * a.M + t[2] * a.Mp + t[3] * a.F;
+      e = Math.abs(t[1]) === 1 ? E : Math.abs(t[1]) === 2 ? E2 : 1;
+      sb += t[4] * e * sind(arg);
+    }
+    sl += 3958 * sind(A1) + 1962 * sind(a.Lp - a.F) + 318 * sind(A2);
+    sb += -2235 * sind(a.Lp) + 382 * sind(A3) + 175 * sind(A1 - a.F) + 175 * sind(A1 + a.F) + 127 * sind(a.Lp - a.Mp) - 115 * sind(a.Lp + a.Mp);
+    var lamGeo = mod(a.Lp + sl / 1e6, 360), bet = sb / 1e6, dist = 385000.56 + sr / 1000;
+    var nu = nutation(JE), lam = mod(lamGeo + nu.dpsi, 360), eq = ecl2eq(lam, bet, nu.eps);
+    var par = asind(6378.14 / dist);
+    return { lam: lam, lamGeo: lamGeo, beta: bet, dist: dist, ra: eq.ra, dec: eq.dec, par: par, sd: 0.272481 * par, eps: nu.eps, dpsi: nu.dpsi, args: a };
+  }
+
+  /* ---------- waktu sideris, koordinat tempat, topocentris ---------- */
+  function gmst(J) { var T = (J - 2451545) / 36525; return mod(280.46061837 + 360.98564736629 * (J - 2451545) + 0.000387933 * T * T - T * T * T / 38710000, 360); }
+  function gast(J, dpsi, eps) { return mod(gmst(J) + dpsi * cosd(eps), 360); }
+  function geoc(phi, H) { /* ρ sin φ′, ρ cos φ′ (jari-jari ekuator = 1) */
+    var u = Math.atan(0.99664719 * tand(phi));
+    return { s: 0.99664719 * Math.sin(u) + (H || 0) / 6378140 * sind(phi), c: Math.cos(u) + (H || 0) / 6378140 * cosd(phi) };
+  }
+  function altaz(Hdeg, dec, phi) {
+    var alt = asind(sind(phi) * sind(dec) + cosd(phi) * cosd(dec) * cosd(Hdeg));
+    var az = mod(atan2d(-cosd(dec) * sind(Hdeg), cosd(phi) * sind(dec) - sind(phi) * cosd(dec) * cosd(Hdeg)), 360);
+    return { alt: alt, az: az };
+  }
+  function topo(ra, dec, par, Hdeg, phi, Helev) { /* paralaks (Meeus bab 40) */
+    var g = geoc(phi, Helev), sp = sind(par);
+    var dra = atan2d(-g.c * sp * sind(Hdeg), cosd(dec) - g.c * sp * cosd(Hdeg));
+    var dect = atan2d((sind(dec) - g.s * sp) * cosd(dra), cosd(dec) - g.c * sp * cosd(Hdeg));
+    return { ra: mod(ra + dra, 360), dec: dect, H: Hdeg - dra };
+  }
+  function refr(h) { /* refraksi (derajat) untuk tinggi sejati h, rumus Sæmundsson, 1010 mbar 10 °C */
+    if (h < -2) h = -2;
+    return 1.02 / Math.tan((h + 10.3 / (h + 5.11)) * RAD) / 60;
+  }
+  function dip(H) { return 1.76 * Math.sqrt(Math.max(0, H || 0)) / 60; }
+
+  /* keadaan Matahari & Bulan di suatu tempat pada JD (UT) */
+  function state(J, p) {
+    var JE = jde(J), s = sun(JE), m = moon(JE);
+    var th = gast(J, s.dpsi, s.eps), lst = th + p.lam;
+    var Hs = n180(lst - s.ra), Hm = n180(lst - m.ra);
+    var sTop = topo(s.ra, s.dec, s.par, Hs, p.phi, p.H), mTop = topo(m.ra, m.dec, m.par, Hm, p.phi, p.H);
+    var sa = altaz(sTop.H, sTop.dec, p.phi), ma = altaz(mTop.H, mTop.dec, p.phi), mg = altaz(Hm, m.dec, p.phi), sg = altaz(Hs, s.dec, p.phi);
+    var elongGeo = acosd(sind(s.dec) * sind(m.dec) + cosd(s.dec) * cosd(m.dec) * cosd(s.ra - m.ra));
+    var elongTop = acosd(sind(sTop.dec) * sind(mTop.dec) + cosd(sTop.dec) * cosd(mTop.dec) * cosd(sTop.ra - mTop.ra));
+    var sdTop = m.sd * (1 + sind(ma.alt) * sind(m.par)); /* semidiameter toposentris */
+    return { J: J, JE: JE, sun: s, moon: m, sunAlt: sa.alt, sunAz: sa.az, sunAltGeo: sg.alt, moonAlt: ma.alt, moonAz: ma.az, moonAltGeo: mg.alt, moonAzGeo: mg.az,
+      elongGeo: elongGeo, elongTop: elongTop, sdTop: sdTop, lst: lst };
+  }
+
+  /* ---------- pencarian akar & terbit/terbenam ---------- */
+  function bisect(f, a, b, fa, fb, tol) {
+    if (fa === undefined) fa = f(a); if (fb === undefined) fb = f(b);
+    for (var i = 0; i < 60 && b - a > tol; i++) { var c = (a + b) / 2, fc = f(c); if ((fa <= 0) === (fc <= 0)) { a = c; fa = fc; } else { b = c; fb = fc; } }
+    return (a + b) / 2;
+  }
+  /* saat terbenam (sign=+1) atau terbit (sign=−1) Matahari/Bulan pada tanggal lokal (y,m,d).
+     body 'sun'|'moon'; ufuk mar'i: piringan atas menyentuh ufuk tampak (refraksi 34′ + kerendahan ufuk). Mengembalikan JD (UT) atau NaN. */
+  function riseSet(body, y, mo, d, p, sign, opt) {
+    opt = opt || {};
+    var J0 = jd(y, mo, d, 0) - p.tz / 24, from = sign > 0 ? 12 : 0, to = sign > 0 ? 30 : 13;
+    if (opt.from != null) from = opt.from; if (opt.to != null) to = opt.to;
+    var dp = opt.noDip ? 0 : dip(p.H);
+    function f(J) {
+      var st = state(J, p), alt = body === 'sun' ? st.sunAlt : st.moonAlt, sd = body === 'sun' ? st.sun.sd : st.sdTop;
+      var limb = opt.center ? 0 : sd;
+      return alt + limb + (opt.noRefr ? 0 : 34 / 60) + dp;
+    }
+    var step = 20 / 1440, prevJ = J0 + from / 24, prev = f(prevJ);
+    for (var J = prevJ + step; J <= J0 + to / 24 + 1e-9; J += step) {
+      var v = f(J);
+      if (sign > 0 ? (prev > 0 && v <= 0) : (prev <= 0 && v > 0)) return bisect(f, prevJ, J, prev, v, 0.5 / 86400);
+      prev = v; prevJ = J;
+    }
+    return NaN;
+  }
+  function transit(y, mo, d, p) { /* kulminasi Matahari, JD (UT) */
+    var J = jd(y, mo, d, 12 - p.tz);
+    for (var i = 0; i < 3; i++) { var JE = jde(J), s = sun(JE), H = n180(gast(J, s.dpsi, s.eps) + p.lam - s.ra); J -= H / 360.9856; }
+    return J;
+  }
+
+  /* ---------- ijtimak (konjungsi) ---------- */
+  function conjunction(Jguess) { /* JD (UT) saat bujur ekliptika tampak Bulan = Matahari, dekat Jguess */
+    var JE = jde(Jguess);
+    for (var i = 0; i < 12; i++) {
+      var dl = n180(moon(JE).lam - sun(JE).lam);
+      JE -= dl / 12.19;                     /* laju relatif ≈ 12,19°/hari */
+      if (Math.abs(dl) < 1e-7) break;
+    }
+    return ut(JE);
+  }
+  function opposition(Jguess) {
+    var JE = jde(Jguess);
+    for (var i = 0; i < 12; i++) { var dl = n180(moon(JE).lam - sun(JE).lam - 180); JE -= dl / 12.19; if (Math.abs(dl) < 1e-7) break; }
+    return ut(JE);
+  }
+  function phaseTime(Jguess, target) { /* target 0,90,180,270 */
+    var JE = jde(Jguess);
+    for (var i = 0; i < 12; i++) { var dl = n180(moon(JE).lam - sun(JE).lam - target); JE -= dl / 12.19; if (Math.abs(dl) < 1e-7) break; }
+    return ut(JE);
+  }
+  /* Meeus bab 49: fase rata-rata + koreksi. type 0 = bulan baru, 0.5 = purnama. Mengembalikan JDE. */
+  function meeusPhase(k, type) {
+    k = Math.floor(k) + (type || 0);
+    var T = k / 1236.85, T2 = T * T, T3 = T2 * T, T4 = T3 * T;
+    var JE = 2451550.09766 + 29.530588861 * k + 0.00015437 * T2 - 0.000000150 * T3 + 0.00000000073 * T4;
+    var E = 1 - 0.002516 * T - 0.0000074 * T2;
+    var M = 2.5534 + 29.10535670 * k - 0.0000014 * T2 - 0.00000011 * T3;
+    var Mp = 201.5643 + 385.81693528 * k + 0.0107582 * T2 + 0.00001238 * T3 - 0.000000058 * T4;
+    var F = 160.7108 + 390.67050284 * k - 0.0016118 * T2 - 0.00000227 * T3 + 0.000000011 * T4;
+    var Om = 124.7746 - 1.56375588 * k + 0.0020672 * T2 + 0.00000215 * T3;
+    var c;
+    if (!type) c = -0.40720 * sind(Mp) + 0.17241 * E * sind(M) + 0.01608 * sind(2 * Mp) + 0.01039 * sind(2 * F) + 0.00739 * E * sind(Mp - M) - 0.00514 * E * sind(Mp + M) + 0.00208 * E * E * sind(2 * M);
+    else c = -0.40614 * sind(Mp) + 0.17302 * E * sind(M) + 0.01614 * sind(2 * Mp) + 0.01043 * sind(2 * F) + 0.00734 * E * sind(Mp - M) - 0.00515 * E * sind(Mp + M) + 0.00209 * E * E * sind(2 * M);
+    c += -0.00111 * sind(Mp - 2 * F) - 0.00057 * sind(Mp + 2 * F) + 0.00056 * E * sind(2 * Mp + M) - 0.00042 * sind(3 * Mp) + 0.00042 * E * sind(M + 2 * F)
+      + 0.00038 * E * sind(M - 2 * F) - 0.00024 * E * sind(2 * Mp - M) - 0.00017 * sind(Om) - 0.00007 * sind(Mp + 2 * M) + 0.00004 * sind(2 * Mp - 2 * F)
+      + 0.00004 * sind(3 * M) + 0.00003 * sind(Mp + M - 2 * F) + 0.00003 * sind(2 * Mp + 2 * F) - 0.00003 * sind(Mp + M + 2 * F) + 0.00003 * sind(Mp - M + 2 * F)
+      - 0.00002 * sind(Mp - M - 2 * F) - 0.00002 * sind(3 * Mp + M) + 0.00002 * sind(4 * Mp);
+    var Ap = [[299.77, 0.107408, 325], [251.88, 0.016321, 165], [251.83, 26.651886, 164], [349.42, 36.412478, 126], [84.66, 18.206239, 110], [141.74, 53.303771, 62], [207.14, 2.453732, 60],
+      [154.84, 7.306860, 56], [34.52, 27.261239, 47], [207.19, 0.121824, 42], [291.34, 1.844379, 40], [161.72, 24.198154, 37], [239.56, 25.513099, 35], [331.55, 3.592518, 23]];
+    var w = 0;
+    for (var i = 0; i < Ap.length; i++) { var arg = Ap[i][0] + Ap[i][1] * k + (i === 0 ? -0.009173 * T2 : 0); w += Ap[i][2] * sind(arg); }
+    return { JDE: JE + c + w * 1e-6, k: k, mean: JE, M: mod(M, 360), Mp: mod(Mp, 360), F: mod(F, 360), Om: mod(Om, 360), E: E, T: T };
+  }
+  function kFromDate(y, mo, d) { var yr = y + (jd(y, mo, d, 0) - jd(y, 1, 1, 0)) / 365.25; return (yr - 2000) * 12.3685; }
+  /* ijtimak terdekat sebelum/ sesudah JD */
+  function conjBefore(J) { var c = conjunction(J); if (c > J) c = conjunction(c - 29.53); return c; }
+  function conjAfter(J) { var c = conjunction(J); if (c < J) c = conjunction(c + 29.53); return c; }
+
+  /* ---------- data hilal saat Matahari terbenam ---------- */
+  /* p = {phi, lam, H, tz}; tanggal (y,m,d) = tanggal pengamatan (sore hari ke-29). */
+  function hilal(y, mo, d, p) {
+    var Jss = riseSet('sun', y, mo, d, p, 1);
+    if (isNaN(Jss)) return null;
+    var st = state(Jss, p), JE = st.JE;
+    var Jc = conjBefore(Jss + 0.5); var conjBeforeSunset = Jc <= Jss;
+    if (!conjBeforeSunset && Jc - Jss > 0.5) Jc = conjBefore(Jss); /* ijtimak terdekat */
+    var Jms = riseSet('moon', y, mo, d, p, 1, { from: 12, to: 36 });
+    var age = (Jss - Jc) * 24;
+    /* Bulan tampak (dengan refraksi) dan relatif terhadap ufuk mar'i */
+    var altApp = st.moonAlt + refr(st.moonAlt);
+    var altUpperMari = st.moonAlt + st.sdTop + refr(st.moonAlt) + dip(p.H);
+    /* iluminasi dari elongasi geosentris (Meeus bab 48) */
+    var psi = st.elongGeo, R = st.sun.distKm, Dm = st.moon.dist;
+    var iang = atan2d(R * sind(psi), Dm - R * cosd(psi));
+    var illum = (1 + cosd(iang)) / 2;
+    /* lebar sabit (Yallop): W = SD′ (1 − cos ARCL), dalam menit busur */
+    var W = st.sdTop * 60 * (1 - cosd(st.elongTop));
+    var arcv = st.moonAltGeo - st.sunAltGeo, daz = n180(st.sunAz - st.moonAz);
+    /* waktu terbaik (Yallop): terbenam + 4/9 lag */
+    var lag = (Jms - Jss) * 24;
+    var res = { Jss: Jss, Jc: Jc, Jms: Jms, conjBeforeSunset: conjBeforeSunset, age: age, lag: lag, st: st,
+      sunAz: st.sunAz, moonAz: st.moonAz, moonAltTopo: st.moonAlt, moonAltGeo: st.moonAltGeo, moonAltApp: altApp, moonAltMari: altUpperMari,
+      elongGeo: st.elongGeo, elongTop: st.elongTop, illum: illum, W: W, arcv: arcv, daz: daz, sd: st.sdTop, dist: Dm, par: st.moon.par,
+      phase: iang, decM: st.moon.dec, decS: st.sun.dec, beta: st.moon.beta };
+    /* parameter Odeh dan Yallop memakai waktu terbaik */
+    if (isFinite(lag) && lag > 0) {
+      var Jb = Jss + lag * 4 / 9 / 24, sb = state(Jb, p);
+      var Wb = sb.sdTop * 60 * (1 - cosd(sb.elongTop));
+      res.best = { J: Jb, arcv: sb.moonAltGeo - sb.sunAltGeo, W: Wb, elongTop: sb.elongTop, moonAlt: sb.moonAlt, sunAlt: sb.sunAlt };
+    }
+    return res;
+  }
+
+  /* ---------- versi cepat untuk peta (ribuan titik): efemeris diinterpolasi ---------- */
+  function ephCache(J1, J2, stepH) {
+    var step = (stepH || 0.5) / 24, n = Math.ceil((J2 - J1) / step) + 1, S = [], M = [];
+    for (var i = 0; i < n; i++) { var J = J1 + i * step, JE = jde(J), s = sun(JE), m = moon(JE); s.gst = gast(J, s.dpsi, s.eps); S.push(s); M.push(m); }
+    function lerpA(a, b, f) { return a + n180(b - a) * f; }
+    return {
+      J1: J1, step: step, n: n,
+      at: function (J) {
+        var x = (J - J1) / step, i = Math.max(0, Math.min(n - 2, Math.floor(x))), f = x - i, s0 = S[i], s1 = S[i + 1], m0 = M[i], m1 = M[i + 1];
+        return {
+          s: { ra: lerpA(s0.ra, s1.ra, f), dec: s0.dec + (s1.dec - s0.dec) * f, sd: s0.sd, par: s0.par, lam: lerpA(s0.lam, s1.lam, f) },
+          m: { ra: lerpA(m0.ra, m1.ra, f), dec: m0.dec + (m1.dec - m0.dec) * f, par: m0.par + (m1.par - m0.par) * f, sd: m0.sd + (m1.sd - m0.sd) * f, lam: lerpA(m0.lam, m1.lam, f), dist: m0.dist + (m1.dist - m0.dist) * f },
+          gst: mod(s0.gst + 360.98564736629 * (J - (J1 + i * step)), 360)
+        };
+      }
+    };
+  }
+  /* data hilal ringkas saat Matahari terbenam di (phi, lam) untuk tanggal sipil yang JD 00 UT-nya J0 (bujur menentukan jam lokal) */
+  function hilalFast(C, J0, phi, lam) {
+    var J = J0 + (18 - lam / 15) / 24, e, H, ok = true;
+    for (var i = 0; i < 3; i++) {
+      e = C.at(J);
+      var h0 = -0.8333, cH = (sind(h0) - sind(phi) * sind(e.s.dec)) / (cosd(phi) * cosd(e.s.dec));
+      if (cH < -1 || cH > 1) { ok = false; break; }
+      H = acosd(cH);
+      var Hnow = n180(e.gst + lam - e.s.ra);
+      J += (H - Hnow) / 360.9856;
+    }
+    if (!ok) return null;
+    e = C.at(J);
+    var lst = e.gst + lam, Hm = n180(lst - e.m.ra), Hs = n180(lst - e.s.ra);
+    var t = topo(e.m.ra, e.m.dec, e.m.par, Hm, phi, 0), mA = altaz(t.H, t.dec, phi), mG = altaz(Hm, e.m.dec, phi), sG = altaz(Hs, e.s.dec, phi);
+    var elG = acosd(sind(e.s.dec) * sind(e.m.dec) + cosd(e.s.dec) * cosd(e.m.dec) * cosd(e.s.ra - e.m.ra));
+    var elT = acosd(sind(e.s.dec) * sind(t.dec) + cosd(e.s.dec) * cosd(t.dec) * cosd(e.s.ra - t.ra));
+    var sdT = e.m.sd * (1 + sind(mA.alt) * sind(e.m.par));
+    var W = sdT * 60 * (1 - cosd(elT));
+    return { J: J, alt: mA.alt, altGeo: mG.alt, arcv: mG.alt - sG.alt, elongGeo: elG, elongTop: elT, W: W, dlam: n180(e.m.lam - e.s.lam) };
+  }
+
+  /* data hilal pada saat J tertentu (memakai cache) */
+  function hilalAt(C, J, phi, lam) {
+    var e = C.at(J), lst = e.gst + lam, Hm = n180(lst - e.m.ra), Hs = n180(lst - e.s.ra);
+    var t = topo(e.m.ra, e.m.dec, e.m.par, Hm, phi, 0), mA = altaz(t.H, t.dec, phi), mG = altaz(Hm, e.m.dec, phi), sG = altaz(Hs, e.s.dec, phi);
+    var elT = acosd(sind(e.s.dec) * sind(t.dec) + cosd(e.s.dec) * cosd(t.dec) * cosd(e.s.ra - t.ra));
+    var sdT = e.m.sd * (1 + sind(mA.alt) * sind(e.m.par));
+    return { alt: mA.alt, arcv: mG.alt - sG.alt, W: sdT * 60 * (1 - cosd(elT)), elongTop: elT, Hm: Hm, dec: e.m.dec, par: e.m.par };
+  }
+  /* versi cepat dengan waktu terbaik Yallop/Odeh (terbenam + 4/9 lag) */
+  function hilalBest(C, J0, phi, lam) {
+    var f = hilalFast(C, J0, phi, lam); if (!f) return null;
+    var a = hilalAt(C, f.J, phi, lam), h0 = 0.7275 * a.par - 0.5667;
+    var c = (sind(h0) - sind(phi) * sind(a.dec)) / (cosd(phi) * cosd(a.dec));
+    if (c > 1) { f.lag = -1; return f; }
+    var lag = c < -1 ? 6 : (acosd(c) - a.Hm) / 14.49;
+    f.lag = lag;
+    if (lag <= 0) return f;
+    var b = hilalAt(C, f.J + lag * 4 / 9 / 24, phi, lam); f.best = b;
+    return f;
+  }
+  /* peta dunia (butuh WORLD dari src/world.js) */
+  function worldPaths(svg, X, Y, style) {
+    var WD = typeof window !== 'undefined' ? window.WORLD : null;
+    if (!WD) return;
+    var d = '';
+    for (var i = 0; i < WD.length; i++) {
+      var r = WD[i], prev = null;
+      for (var k = 0; k < r.length; k += 2) {
+        var lo = r[k] / 10, la = r[k + 1] / 10, x = X(lo), y = Y(la);
+        d += (k === 0 || (prev !== null && Math.abs(lo - prev) > 180) ? 'M' : 'L') + x.toFixed(1) + ' ' + y.toFixed(1);
+        prev = lo;
+      }
+      d += 'Z';
+    }
+    mk(svg, 'path', { d: d, style: style || 'fill:var(--line);stroke:var(--muted);stroke-width:.5' });
+  }
+
+  /* daratan Amerika (poligon kasar, lon,lat) untuk ketentuan KHGT setelah 24.00 UTC */
+  /* daratan benua Amerika: poligon negara-negara Amerika (lon, lat berselang-seling), dari world.geo.json */
+  var AMERIKA = [[-65.0,-22.1,-64.4,-22.8,-64.0,-22.0,-62.8,-22.0,-60.8,-23.9,-57.8,-25.2,-57.6,-25.6,-58.6,-27.1,-56.5,-27.5,-55.7,-27.4,-54.8,-26.6,-54.6,-25.7,-54.1,-25.5,-53.6,-26.1,-53.6,-26.9,-55.2,-27.9,-57.6,-30.2,-58.5,-34.4,-57.2,-35.3,-57.4,-36.0,-56.7,-36.4,-56.8,-36.9,-57.7,-38.2,-59.2,-38.7,-62.3,-38.8,-62.1,-40.7,-62.7,-41.0,-63.8,-41.2,-64.7,-40.8,-65.1,-41.1,-65.0,-42.1,-64.3,-42.4,-63.8,-42.0,-63.5,-42.6,-65.2,-43.5,-65.6,-45.0,-66.5,-45.0,-67.3,-45.6,-67.6,-46.3,-66.6,-47.0,-65.6,-47.2,-66.0,-48.1,-67.2,-48.7,-67.8,-49.9,-69.1,-50.7,-68.8,-51.8,-68.1,-52.3,-71.9,-52.0,-72.3,-51.4,-72.3,-50.7,-73.0,-50.7,-73.3,-50.4,-73.4,-49.3,-72.6,-48.9,-72.3,-48.2,-72.4,-47.7,-71.6,-45.6,-71.7,-45.0,-71.2,-44.8,-71.8,-44.2,-71.5,-43.8,-71.9,-43.4,-72.1,-42.3,-71.7,-42.1,-71.9,-40.8,-71.4,-38.9,-70.8,-38.6,-71.1,-36.7,-70.4,-36.0,-70.4,-35.2,-69.8,-34.2,-69.8,-33.3,-70.5,-31.4,-69.9,-30.3,-70.0,-29.4,-69.7,-28.5,-68.3,-26.9,-68.6,-26.5,-68.4,-24.5,-67.3,-24.0,-67.1,-22.7,-66.3,-21.8,-65.0,-22.1],[-89.1,17.8,-88.5,18.5,-88.1,18.3,-88.4,16.5,-88.9,15.9,-89.2,15.9,-89.1,17.8],[-62.8,-22.0,-64.0,-22.0,-64.4,-22.8,-65.0,-22.1,-66.3,-21.8,-67.1,-22.7,-67.8,-22.9,-68.8,-20.4,-68.4,-19.4,-69.0,-19.0,-69.6,-17.6,-69.0,-16.5,-69.4,-15.7,-69.2,-15.3,-69.3,-15.0,-68.9,-14.5,-68.7,-12.6,-69.5,-11.0,-68.3,-11.0,-66.6,-9.9,-65.3,-9.8,-65.4,-11.6,-64.3,-12.5,-63.2,-12.6,-61.7,-13.5,-60.5,-13.8,-60.3,-15.1,-60.5,-15.1,-60.2,-16.3,-58.2,-16.3,-58.3,-17.3,-57.7,-17.6,-57.5,-18.2,-57.9,-19.4,-57.9,-20.0,-58.2,-20.2,-58.2,-19.9,-59.1,-19.4,-61.8,-19.6,-62.7,-22.2,-62.8,-22.0],[-57.6,-30.2,-55.2,-27.9,-53.6,-26.9,-53.6,-26.1,-54.1,-25.5,-54.6,-25.7,-54.3,-24.0,-55.4,-24.0,-55.8,-22.4,-57.9,-22.1,-57.9,-20.7,-58.2,-20.2,-57.9,-20.0,-57.9,-19.4,-57.5,-18.2,-57.7,-17.6,-58.3,-17.3,-58.2,-16.3,-60.2,-16.3,-60.5,-15.1,-60.3,-15.1,-60.5,-13.8,-61.7,-13.5,-63.2,-12.6,-64.3,-12.5,-65.4,-11.6,-65.3,-9.8,-66.6,-9.9,-68.3,-11.0,-70.5,-11.0,-70.5,-9.5,-71.3,-10.1,-72.2,-10.1,-72.6,-9.5,-73.2,-9.5,-73.0,-9.0,-74.0,-7.5,-73.7,-6.9,-73.1,-6.6,-72.9,-5.3,-70.8,-4.3,-69.9,-4.3,-69.4,-1.1,-70.0,-0.2,-70.0,0.5,-69.3,0.6,-69.2,1.0,-69.8,1.1,-69.8,1.7,-67.9,1.7,-67.5,2.0,-67.1,1.1,-66.3,0.7,-65.5,0.8,-63.4,2.2,-64.3,2.5,-64.4,3.8,-64.8,4.1,-63.1,3.8,-61.0,4.5,-60.6,4.9,-60.7,5.2,-60.2,5.2,-60.1,4.6,-59.5,4.0,-60.0,2.8,-59.6,1.8,-59.0,1.3,-58.5,1.3,-57.3,1.9,-56.0,1.8,-56.0,2.5,-52.9,2.1,-51.7,4.2,-51.3,4.2,-50.5,1.9,-50.0,1.7,-49.9,1.0,-50.7,0.2,-50.4,-0.1,-48.6,-0.2,-48.6,-1.2,-47.8,-0.6,-44.9,-1.6,-44.4,-2.1,-44.6,-2.7,-43.4,-2.4,-41.5,-2.9,-40.0,-2.9,-37.2,-4.8,-35.6,-5.1,-35.2,-5.5,-34.7,-7.3,-35.1,-9.0,-38.7,-13.1,-39.3,-17.9,-39.8,-19.6,-40.8,-20.9,-40.9,-21.9,-41.8,-22.4,-42.0,-23.0,-44.6,-23.4,-47.6,-24.9,-48.5,-25.9,-48.5,-27.2,-48.9,-28.7,-53.4,-33.8,-53.7,-33.2,-53.2,-32.7,-53.8,-32.0,-57.0,-30.1,-57.6,-30.2],[-90.5,69.5,-90.6,68.5,-89.2,69.3,-88.0,68.6,-88.3,67.9,-87.4,67.2,-85.6,68.8,-85.5,69.9,-82.6,69.7,-81.3,69.2,-81.2,68.7,-82.0,68.1,-81.3,67.6,-81.4,67.1,-83.3,66.4,-84.7,66.3,-85.8,66.6,-87.3,64.8,-88.5,64.1,-89.9,64.0,-90.7,63.6,-90.8,63.0,-91.9,62.8,-94.2,60.9,-94.6,60.1,-94.7,58.9,-93.2,58.8,-92.3,57.1,-90.9,57.3,-85.0,55.3,-82.3,55.1,-82.4,54.3,-82.1,53.3,-81.4,52.2,-79.9,51.2,-79.1,51.5,-78.6,52.6,-79.1,54.1,-79.8,54.7,-78.2,55.1,-76.5,56.5,-76.6,57.2,-77.3,58.1,-78.5,58.8,-77.3,59.9,-78.1,62.3,-77.4,62.6,-74.7,62.2,-73.8,62.4,-71.7,61.5,-71.4,61.1,-69.6,61.1,-69.3,59.0,-68.4,58.8,-67.6,58.2,-66.2,58.8,-64.6,60.3,-61.4,57.0,-61.8,56.3,-59.6,55.2,-57.3,54.6,-56.9,53.8,-55.8,53.3,-55.7,52.1,-57.1,51.4,-58.8,51.1,-60.0,50.2,-66.4,50.2,-67.2,49.5,-68.5,49.1,-71.1,46.8,-70.3,47.0,-68.7,48.3,-66.6,49.1,-65.1,49.2,-64.2,48.7,-65.1,48.1,-64.5,46.2,-63.2,45.7,-61.5,45.9,-60.5,47.0,-60.4,46.3,-59.8,45.9,-64.2,44.3,-65.4,43.5,-66.1,43.6,-66.2,44.5,-64.4,45.3,-67.1,45.1,-67.8,45.7,-67.8,47.1,-68.2,47.4,-68.9,47.2,-69.2,47.4,-70.7,45.5,-71.5,45.0,-74.9,45.0,-76.8,43.6,-78.7,43.6,-79.2,43.5,-78.9,42.9,-82.7,41.7,-83.1,42.1,-82.1,43.6,-82.6,45.3,-83.6,45.8,-83.5,46.0,-84.1,46.5,-84.6,46.4,-84.9,46.9,-88.4,48.3,-89.3,48.0,-91.6,48.1,-94.3,48.7,-94.8,49.4,-95.2,49.4,-95.2,49,-123.0,49.0,-125.6,50.4,-127.4,50.8,-128.0,51.7,-127.9,52.3,-129.1,52.8,-129.3,53.6,-130.5,54.3,-130.5,54.8,-130.0,55.3,-130.0,55.9,-131.7,56.6,-133.4,58.4,-135.5,59.8,-137.5,58.9,-139.0,60,-141.0,60.3,-141.0,69.7,-136.5,68.9,-134.4,69.6,-132.9,69.5,-129.8,70.2,-129.1,69.8,-128.4,70.0,-128.1,70.5,-125.8,69.5,-124.4,70.2,-124.3,69.4,-122.7,69.9,-121.5,69.8,-117.6,69.0,-115.2,68.9,-113.9,68.4,-115.3,67.9,-113.5,67.7,-109.9,68.0,-108.9,67.4,-107.8,67.9,-108.8,68.3,-108.2,68.7,-106.2,68.8,-104.3,68.0,-103.2,68.1,-101.5,67.6,-98.4,67.8,-98.6,68.4,-97.7,68.6,-96.1,68.2,-96.1,67.3,-95.5,68.1,-94.7,68.1,-94.2,69.1,-96.5,70.1,-96.4,71.2,-95.2,71.9,-92.9,71.3,-91.5,70.2,-92.4,69.7,-90.5,69.5],[-68.2,-21.5,-67.8,-22.9,-67.1,-22.7,-67.0,-23.0,-67.3,-24.0,-68.4,-24.5,-68.6,-26.5,-68.3,-26.9,-69.7,-28.5,-70.0,-29.4,-69.9,-30.3,-70.5,-31.4,-69.8,-33.3,-69.8,-34.2,-70.4,-35.2,-70.4,-36.0,-71.1,-36.7,-70.8,-38.6,-71.4,-38.9,-71.9,-40.8,-71.7,-42.1,-72.1,-42.3,-71.9,-43.4,-71.5,-43.8,-71.8,-44.2,-71.2,-44.8,-71.7,-45.0,-71.6,-45.6,-72.4,-47.7,-72.3,-48.2,-72.6,-48.9,-73.4,-49.3,-73.3,-50.4,-73.0,-50.7,-72.3,-50.7,-72.3,-51.4,-71.9,-52.0,-68.6,-52.3,-69.5,-52.3,-70.8,-52.9,-71.0,-53.8,-71.4,-53.9,-74.9,-52.3,-75.6,-48.7,-75.2,-47.7,-74.1,-46.9,-75.6,-46.6,-74.7,-45.8,-74.4,-44.1,-73.2,-44.5,-72.7,-42.4,-73.4,-42.1,-73.7,-43.4,-74.3,-43.2,-73.7,-39.9,-73.2,-39.3,-73.6,-37.2,-73.2,-37.1,-71.4,-32.4,-71.7,-30.9,-71.4,-30.1,-71.5,-28.9,-70.9,-27.6,-70.1,-21.4,-70.4,-18.3,-69.6,-17.6,-69.1,-18.3,-69.0,-19.0,-68.4,-19.4,-68.8,-20.4,-68.2,-21.5],[-75.4,-0.2,-76.3,0.4,-77.4,0.4,-79.0,1.7,-78.6,1.8,-78.4,2.6,-77.9,2.7,-77.1,3.8,-77.5,4.1,-77.3,5.8,-77.9,7.2,-77.8,7.7,-77.2,7.9,-77.4,8.7,-76.8,8.6,-75.7,9.4,-75.5,10.6,-74.9,11.1,-73.4,11.2,-71.8,12.4,-71.4,12.4,-71.1,12.1,-71.3,11.8,-72.0,11.6,-72.9,10.5,-73.3,9.2,-72.8,9.1,-72.4,8.4,-72.4,7.4,-72.0,7.0,-70.1,7.0,-69.4,6.1,-67.3,6.1,-67.8,4.5,-67.3,3.3,-67.8,2.8,-67.2,2.3,-66.9,1.3,-67.1,1.1,-67.5,2.0,-67.9,1.7,-69.8,1.7,-69.8,1.1,-69.2,1.0,-69.3,0.6,-70.0,0.5,-70.0,-0.2,-69.4,-1.1,-69.9,-4.3,-70.7,-3.7,-70.0,-2.7,-70.8,-2.3,-73.1,-2.3,-73.7,-1.3,-75.1,-0.1,-75.4,-0.2],[-83.0,8.2,-83.5,8.4,-83.6,9.1,-85.0,10.1,-85.1,9.6,-85.7,9.9,-85.7,10.8,-85.9,10.9,-85.6,11.2,-83.9,10.7,-83.7,10.9,-82.5,9.6,-82.9,9.5,-82.7,8.9,-83.0,8.2],[-80.3,-3.4,-79.8,-2.7,-80.0,-2.2,-80.4,-2.7,-81.0,-2.2,-80.9,-1.1,-80.6,-0.9,-80.1,0.8,-78.9,1.4,-77.7,0.8,-77.4,0.4,-76.3,0.4,-75.4,-0.2,-75.2,-0.9,-75.5,-1.6,-76.6,-2.6,-77.8,-3.0,-78.6,-4.5,-79.2,-5.0,-79.6,-4.5,-80.4,-4.4,-80.3,-3.4],[-90.1,13.7,-91.7,14.1,-92.2,14.5,-92.2,15.3,-91.7,16.1,-90.5,16.1,-90.4,16.4,-91.5,17.3,-91.0,17.3,-91.0,17.8,-89.1,17.8,-89.2,15.9,-88.2,15.7,-89.2,15.1,-89.1,14.7,-90.1,13.7],[-52.6,2.5,-53.4,2.1,-53.6,2.3,-54.1,2.1,-54.5,2.3,-54.0,3.6,-54.5,4.9,-54.0,5.8,-52.9,5.4,-51.8,4.6,-51.7,4.2,-52.6,2.5],[-59.8,8.4,-58.5,7.3,-58.5,6.8,-57.1,6.0,-57.3,5.1,-57.9,4.8,-58.0,4.1,-57.6,3.3,-57.3,3.3,-56.5,1.9,-57.3,1.9,-58.5,1.3,-59.6,1.8,-60.0,2.8,-59.5,4.0,-60.1,4.6,-60.0,5.0,-60.7,5.2,-61.4,6.0,-61.2,6.7,-60.3,7.0,-60.6,7.4,-60.6,7.8,-59.8,8.4],[-87.3,13.0,-87.8,13.4,-87.9,13.9,-88.5,13.8,-89.4,14.4,-89.2,15.1,-88.2,15.7,-85.0,16.0,-83.1,15.0,-84.4,14.6,-84.9,14.8,-85.8,13.8,-86.1,14.0,-86.8,13.8,-86.7,13.3,-87.3,13.0],[-97.1,25.9,-97.7,24.3,-97.9,22.4,-97.2,20.6,-95.9,18.8,-94.8,18.6,-94.4,18.1,-91.4,18.9,-90.8,19.3,-90.3,21.0,-89.6,21.3,-87.1,21.5,-86.8,20.8,-87.6,19.6,-87.4,19.5,-87.8,18.3,-88.5,18.5,-88.8,17.9,-91.0,17.8,-91.0,17.3,-91.5,17.3,-90.4,16.4,-90.5,16.1,-91.7,16.1,-92.2,15.3,-92.2,14.5,-93.4,15.6,-94.7,16.2,-96.6,15.7,-98.0,16.1,-100.8,17.2,-101.9,17.9,-103.5,18.3,-105.0,19.3,-105.7,20.4,-105.4,20.5,-105.3,21.4,-106.0,22.8,-108.4,25.2,-109.3,25.6,-109.3,26.4,-110.4,27.2,-110.6,27.9,-111.2,27.9,-112.2,29.0,-113.1,31.2,-114.8,31.8,-114.7,30.2,-111.6,26.7,-110.7,24.3,-110.2,24.3,-109.4,23.4,-110.0,22.8,-110.3,23.4,-112.2,24.7,-112.3,26.0,-115.1,27.7,-114.6,27.7,-114.2,28.6,-115.5,29.6,-117.1,32.5,-114.7,32.7,-114.8,32.5,-111.0,31.3,-108.2,31.3,-108.2,31.8,-106.5,31.8,-105.0,30.6,-104.5,29.6,-103.9,29.3,-103.1,29.0,-102.5,29.8,-101.7,29.8,-101.0,29.4,-99.5,27.5,-99.0,26.4,-97.1,25.9],[-85.7,11.1,-87.7,12.9,-86.7,13.3,-86.8,13.8,-86.1,14.0,-85.8,13.8,-84.9,14.8,-84.4,14.6,-83.1,15.0,-83.9,11.4,-83.7,10.9,-83.9,10.7,-85.7,11.1],[-77.9,7.2,-78.4,8.1,-78.2,8.3,-79.1,9.0,-80.4,8.3,-80.0,7.5,-80.4,7.3,-80.9,7.2,-81.1,7.8,-81.5,7.7,-81.7,8.1,-82.8,8.3,-82.9,8.1,-82.9,9.5,-82.5,9.6,-82.2,9.0,-81.4,8.8,-79.6,9.6,-78.1,9.2,-77.4,8.7,-77.2,7.9,-77.8,7.7,-77.9,7.2],[-69.6,-17.6,-70.4,-18.3,-71.4,-17.8,-71.5,-17.4,-76.0,-14.6,-76.4,-13.8,-76.3,-13.5,-79.8,-7.2,-81.2,-6.1,-80.9,-5.7,-81.4,-4.7,-81.1,-4.0,-80.3,-3.4,-80.4,-4.4,-79.6,-4.5,-79.2,-5.0,-78.6,-4.5,-77.8,-3.0,-76.6,-2.6,-75.5,-1.6,-75.2,-0.9,-75.4,-0.2,-75.1,-0.1,-73.7,-1.3,-73.1,-2.3,-70.8,-2.3,-70.0,-2.7,-70.7,-3.7,-69.9,-4.3,-70.8,-4.3,-72.9,-5.3,-73.1,-6.6,-73.7,-6.9,-74.0,-7.5,-73.0,-9.0,-73.2,-9.5,-72.6,-9.5,-72.2,-10.1,-71.3,-10.1,-70.5,-9.5,-70.5,-11.0,-69.5,-11.0,-68.7,-12.6,-68.9,-14.5,-69.3,-15.0,-69.2,-15.3,-69.4,-15.7,-69.0,-16.5,-69.6,-17.6],[-62.7,-22.2,-61.8,-19.6,-59.1,-19.4,-58.2,-19.9,-57.9,-20.7,-57.9,-22.1,-55.8,-22.4,-55.4,-24.0,-54.3,-24.0,-54.8,-26.6,-55.7,-27.4,-56.5,-27.5,-58.6,-27.1,-57.6,-25.6,-57.8,-25.2,-60.8,-23.9,-62.7,-22.2],[-87.8,13.4,-88.5,13.2,-90.1,13.7,-89.4,14.4,-88.5,13.8,-87.9,13.9,-87.8,13.4],[-57.1,6.0,-54.0,5.8,-54.5,4.9,-54.0,3.6,-54.5,2.3,-56.0,2.5,-56.0,1.8,-56.5,1.9,-57.3,3.3,-57.6,3.3,-58.0,4.1,-57.9,4.8,-57.3,5.1,-57.1,6.0],[-57.6,-30.2,-57.0,-30.1,-53.8,-32.0,-53.2,-32.7,-53.7,-33.2,-53.4,-33.8,-53.8,-34.4,-54.9,-35.0,-56.2,-34.9,-57.8,-34.5,-58.4,-33.9,-57.6,-30.2],[-94.8,49.4,-94.3,48.7,-91.6,48.1,-89.3,48.0,-88.4,48.3,-84.9,46.9,-84.6,46.4,-84.1,46.5,-83.5,46.0,-83.6,45.8,-82.6,45.3,-82.1,43.6,-83.1,42.1,-82.7,41.7,-78.9,42.9,-79.2,43.5,-78.7,43.6,-76.8,43.6,-74.9,45.0,-71.5,45.0,-70.7,45.5,-69.2,47.4,-67.8,47.1,-67.8,45.7,-67.0,44.8,-70.1,43.7,-70.8,42.9,-70.8,42.3,-70.5,41.8,-70.1,41.8,-70.2,42.1,-69.9,41.9,-70.0,41.6,-73.7,40.9,-71.9,40.9,-74.0,40.8,-74.3,40.5,-74.0,40.4,-74.2,39.7,-74.9,38.9,-75.5,39.5,-75.1,38.4,-75.9,37.2,-75.7,37.9,-76.2,38.3,-76.3,39.1,-76.5,38.7,-76.3,38.1,-77.0,38.2,-76.3,37.9,-75.7,35.6,-76.4,34.8,-79.1,33.5,-81.3,31.4,-81.3,30.0,-80.1,26.9,-80.1,25.8,-80.7,25.1,-81.2,25.2,-82.7,27.5,-82.7,28.6,-82.9,29.1,-84.1,30.1,-85.1,29.6,-86.4,30.4,-89.2,30.3,-89.6,30.2,-89.2,29.3,-89.4,29.2,-90.9,29.1,-91.6,29.7,-93.2,29.8,-94.7,29.5,-97.1,27.8,-97.4,26.7,-97.1,25.9,-97.5,25.8,-99.0,26.4,-99.5,27.5,-101.0,29.4,-101.7,29.8,-102.5,29.8,-103.1,29.0,-103.9,29.3,-104.5,29.6,-105.0,30.6,-106.5,31.8,-108.2,31.8,-108.2,31.3,-111.0,31.3,-114.8,32.5,-114.7,32.7,-117.1,32.5,-117.3,33.0,-118.5,34.0,-120.6,34.6,-120.7,35.2,-121.7,36.2,-122.5,37.8,-123.7,39.0,-123.9,39.8,-124.4,40.3,-124.2,42.0,-124.5,42.8,-123.9,45.5,-124.1,46.9,-124.7,48.2,-124.6,48.4,-123.1,48.0,-122.6,47.1,-122.3,47.4,-122.8,49,-95.2,49,-95.2,49.4,-94.8,49.4],[-155.1,71.1,-154.3,70.7,-152.2,70.8,-152.3,70.6,-150.7,70.4,-144.9,70.0,-143.6,70.2,-141.0,69.7,-141.0,60.3,-139.0,60.0,-137.5,58.9,-135.5,59.8,-133.4,58.4,-131.7,56.6,-130.0,55.9,-130.0,55.3,-130.5,54.8,-132.0,55.5,-132.3,56.4,-133.5,57.2,-134.1,58.1,-136.6,58.2,-139.9,59.5,-142.6,60.1,-144.0,60.0,-147.1,60.9,-148.2,60.7,-148.0,60.0,-151.7,59.2,-151.9,59.7,-151.4,60.7,-150.3,61.0,-150.6,61.3,-154.0,59.4,-153.3,58.9,-154.2,58.1,-156.3,57.4,-156.6,57.0,-158.1,56.5,-158.4,56.0,-164.8,54.4,-164.9,54.6,-161.8,55.9,-160.6,56.0,-157.7,57.6,-157.0,58.9,-158.5,58.8,-159.1,58.4,-159.7,58.9,-160.0,58.6,-160.4,59.1,-162.0,58.7,-161.9,59.6,-162.5,60.0,-163.8,59.8,-165.3,60.5,-165.4,61.1,-166.1,61.5,-165.7,62.1,-164.6,63.1,-163.1,63.1,-162.3,63.5,-160.8,63.8,-161.0,64.2,-161.5,64.4,-160.8,64.8,-162.8,64.3,-165.0,64.4,-166.4,64.7,-168.1,65.7,-164.5,66.6,-163.7,66.6,-163.8,66.1,-161.7,66.1,-165.4,68.0,-166.8,68.4,-166.2,68.9,-164.4,68.9,-163.2,69.4,-162.9,69.9,-161.9,70.3,-158.1,70.8,-156.6,71.4,-155.1,71.1],[-71.3,11.8,-71.9,11.4,-71.6,10.4,-72.1,9.9,-71.7,9.1,-71.3,9.1,-71.0,9.9,-71.4,11.0,-70.2,11.4,-70.3,11.8,-69.9,12.2,-69.6,11.5,-68.9,11.4,-68.2,10.6,-66.2,10.6,-64.9,10.1,-64.3,10.6,-61.9,10.7,-62.7,10.4,-62.4,9.9,-61.6,9.9,-60.8,9.4,-60.7,8.6,-59.8,8.4,-60.6,7.8,-60.6,7.4,-60.3,7.0,-61.2,6.7,-61.4,6.0,-60.6,4.9,-63.1,3.8,-64.8,4.1,-64.4,3.8,-64.3,2.5,-63.4,2.2,-65.5,0.8,-66.3,0.7,-67.8,2.8,-67.3,3.3,-67.8,4.5,-67.3,6.1,-69.4,6.1,-70.1,7.0,-72.0,7.0,-72.4,7.4,-72.4,8.4,-72.8,9.1,-73.3,9.2,-72.9,10.5,-72.0,11.6,-71.3,11.8]];
+  function inRing(x, y, R) { var c = false, n = R.length / 2; for (var i = 0, j = n - 1; i < n; j = i++) { var xi = R[2 * i], yi = R[2 * i + 1], xj = R[2 * j], yj = R[2 * j + 1]; if (((yi > y) !== (yj > y)) && (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) c = !c; } return c; }
+  function inPoly(x, y, M) { for (var k = 0; k < M.length; k++) if (inRing(x, y, M[k])) return true; return false; }
+  /* Kalender Hijriah Global Tunggal (Turki 2016): tanggal (y,m,d) = hari ke-29 (tanggal sipil).
+     Bulan baru dimulai keesokan harinya bila di mana pun tinggi geosentris ≥ 5° dan elongasi geosentris ≥ 8° saat Matahari terbenam sebelum 24.00 UTC;
+     atau sesudah 24.00 UTC di daratan Amerika asalkan ijtimak terjadi sebelum fajar di Selandia Baru. */
+  function khgt(y, mo, d, step) {
+    step = step || 1;
+    var J0 = jd(y, mo, d, 0), C = ephCache(J0 - 0.6, J0 + 1.6, 0.5), Jc = conjBefore(J0 + 1.5);
+    var best = null, americas = null;
+    for (var la = -60; la <= 66; la += step) for (var lo = -180; lo < 180; lo += step) {
+      var f = hilalFast(C, J0, la, lo); if (!f || f.J < Jc) continue;
+      if (f.altGeo >= 5 && f.elongGeo >= 8) {
+        if (f.J < J0 + 1) { if (!best || f.J < best.J) best = { J: f.J, phi: la, lam: lo, alt: f.altGeo, el: f.elongGeo }; }
+        else if (inPoly(lo, la, AMERIKA) && (!americas || f.J < americas.J)) americas = { J: f.J, phi: la, lam: lo, alt: f.altGeo, el: f.elongGeo };
+      }
+    }
+    var nz = { phi: -41.29, lam: 174.78, H: 0, tz: 12 }, cn = cal(J0 + 1), Jfajr = fajr(cn.y, cn.m, cn.d, nz, -18);
+    var r = { Jc: Jc, before24: best, americas: americas, Jfajr: Jfajr };
+    r.ok = !!best || (!!americas && Jc < Jfajr);
+    r.rule = best ? 'terpenuhi sebelum 24.00 UTC' : americas ? (Jc < Jfajr ? 'terpenuhi di daratan Amerika; ijtimak sebelum fajar Selandia Baru' : 'terpenuhi di Amerika, tetapi ijtimak sesudah fajar Selandia Baru') : 'tidak terpenuhi di mana pun';
+    return r;
+  }
+  /* awal bulan menurut KHGT untuk ijtimak Jc: mengembalikan JD 00 UT tanggal 1 */
+  function khgtStart(Jc, step) {
+    var c = cal(Jc), J0 = jd(c.y, c.m, c.d, 0);
+    var r = khgt(c.y, c.m, c.d, step || 2);
+    return { J1: r.ok ? J0 + 1 : J0 + 2, r: r };
+  }
+  function fajr(y, mo, d, p, h) { /* saat Matahari bertinggi h (negatif) di pagi hari, JD (UT) */
+    var J0 = jd(y, mo, d, 0) - p.tz / 24;
+    function f(J) { return state(J, p).sunAltGeo - h; }
+    for (var t = 0; t < 12; t += 0.25) { var a = J0 + t / 24, b = a + 0.25 / 24, fa = f(a), fb = f(b); if (fa <= 0 && fb > 0) return bisect(f, a, b, fa, fb, 1 / 86400); }
+    return NaN;
+  }
+
+  /* ---------- kriteria visibilitas ---------- */
+  function yallopQ(arcv, W) { return (arcv - (11.8371 - 6.3226 * W + 0.7319 * W * W - 0.1018 * W * W * W)) / 10; }
+  function yallopClass(q) { return q > 0.216 ? 'A' : q > -0.014 ? 'B' : q > -0.160 ? 'C' : q > -0.232 ? 'D' : q > -0.293 ? 'E' : 'F'; }
+  var YALLOP_TXT = { A: 'mudah terlihat mata telanjang', B: 'terlihat mata telanjang bila cuaca sempurna', C: 'perlu alat optik untuk menemukan, lalu mungkin terlihat mata telanjang', D: 'hanya terlihat dengan alat optik', E: 'tidak terlihat dengan teleskop biasa', F: 'tidak terlihat (di bawah batas Danjon)' };
+  function odehV(arcv, W) { return arcv - (-0.1018 * W * W * W + 0.7319 * W * W - 6.3226 * W + 7.1651); }
+  function odehClass(V) { return V >= 5.65 ? 'A' : V >= 2 ? 'B' : V >= -0.96 ? 'C' : 'D'; }
+  var ODEH_TXT = { A: 'terlihat mata telanjang', B: 'terlihat dengan alat optik, mungkin mata telanjang', C: 'hanya terlihat dengan alat optik', D: 'tidak terlihat, bahkan dengan alat optik' };
+  /* setiap kriteria: {id, nama, cek(h) -> {ok, alasan}} ; h = hasil hilal() */
+  var CRITERIA = [
+    { id: 'wh', nama: 'Wujudul hilal', ket: 'Ijtimak sebelum Matahari terbenam dan Bulan terbenam sesudah Matahari (piringan atas di atas ufuk).',
+      cek: function (h) { var ok = h.conjBeforeSunset && h.moonAltMari > 0; return { ok: ok, why: !h.conjBeforeSunset ? 'ijtimak sesudah terbenam' : h.moonAltMari > 0 ? 'hilal di atas ufuk' : 'hilal di bawah ufuk' }; } },
+    { id: 'mabims1', nama: 'MABIMS lama (2-3-8)', ket: 'Tinggi ≥ 2° dan elongasi ≥ 3°, atau umur Bulan ≥ 8 jam.',
+      cek: function (h) { var ok = h.conjBeforeSunset && ((h.moonAltTopo >= 2 && h.elongGeo >= 3) || h.age >= 8); return { ok: ok, why: 'h = ' + fnum(h.moonAltTopo, 2) + '°, e = ' + fnum(h.elongGeo, 2) + '°, umur ' + fnum(h.age, 1) + ' jam' }; } },
+    { id: 'mabims', nama: 'MABIMS baru (3–6,4)', ket: 'Tinggi hilal toposentris ≥ 3° dan elongasi toposentris ≥ 6,4°. Disepakati Desember 2021; dipakai Kementerian Agama RI sejak 1443 H (2022).',
+      cek: function (h) { var ok = h.conjBeforeSunset && h.moonAltTopo >= 3 && h.elongTop >= 6.4; return { ok: ok, why: 'h = ' + fnum(h.moonAltTopo, 2) + '° (≥ 3°), e = ' + fnum(h.elongTop, 2) + '° (≥ 6,4°)' }; } },
+    { id: 'mabimsg', nama: 'MABIMS baru (praktik sidang isbat)', ket: 'Tinggi toposentris ≥ 3° dan elongasi geosentris ≥ 6,4°, sesuai data yang dipakai dalam sidang isbat Kementerian Agama.',
+      cek: function (h) { var ok = h.conjBeforeSunset && h.moonAltTopo >= 3 && h.elongGeo >= 6.4; return { ok: ok, why: 'h = ' + fnum(h.moonAltTopo, 2) + '° (≥ 3°), e geosentris = ' + fnum(h.elongGeo, 2) + '° (≥ 6,4°)' }; } },
+    { id: 'danjon', nama: 'Batas Danjon', ket: 'Elongasi ≥ 7°; di bawah ini sabit tidak terbentuk utuh.',
+      cek: function (h) { var ok = h.elongTop >= 7; return { ok: ok, why: 'elongasi toposentris ' + fnum(h.elongTop, 2) + '°' }; } },
+    { id: 'odeh', nama: 'Odeh (2004)', ket: 'V = ARCV − f(W); terlihat dengan alat optik bila V ≥ −0,96.',
+      cek: function (h) { if (!h.best) return { ok: false, why: 'Bulan terbenam lebih dulu' }; var V = odehV(h.best.arcv, h.best.W), c = odehClass(V); return { ok: c !== 'D', why: 'V = ' + fnum(V, 2) + ' (zona ' + c + ': ' + ODEH_TXT[c] + ')', cls: c, val: V }; } },
+    { id: 'yallop', nama: 'Yallop (1997)', ket: 'q = [ARCV − f(W′)]/10; kelas A–F.',
+      cek: function (h) { if (!h.best) return { ok: false, why: 'Bulan terbenam lebih dulu' }; var q = yallopQ(h.best.arcv, h.best.W), c = yallopClass(q); return { ok: c <= 'D', why: 'q = ' + fnum(q, 3) + ' (kelas ' + c + ': ' + YALLOP_TXT[c] + ')', cls: c, val: q }; } },
+    { id: 'turki', nama: 'Turki 2016 (lokal)', ket: 'Tinggi ≥ 5° dan elongasi ≥ 8° di tempat ini. Dalam KHGT syarat ini cukup terpenuhi di mana saja di dunia.',
+      cek: function (h) { var ok = h.conjBeforeSunset && h.moonAltTopo >= 5 && h.elongGeo >= 8; return { ok: ok, why: 'h = ' + fnum(h.moonAltTopo, 2) + '° (≥ 5°), e = ' + fnum(h.elongGeo, 2) + '° (≥ 8°)' }; } }
+  ];
+  function critById(id) { for (var i = 0; i < CRITERIA.length; i++) if (CRITERIA[i].id === id) return CRITERIA[i]; return null; }
+
+  /* ---------- kalender Hijriyah urfi (aritmetika, 30 tahun, kabisat 2,5,7,10,13,16,18,21,24,26,29) ---------- */
+  var HEPOCH = 1948439.5; /* 1 Muharam 1 H = Jumat 16 Juli 622 M (Julius) */
+  function hLeap(y) { return mod(14 + 11 * y, 30) < 11; }
+  function h2jd(y, m, d, epoch) { return (epoch || HEPOCH) + 354 * (y - 1) + Math.floor((3 + 11 * y) / 30) + 29 * (m - 1) + Math.floor(m / 2) + d - 1; }
+  function jd2h(J, epoch) {
+    var e = epoch || HEPOCH, n = Math.floor(J + 0.5) - Math.floor(e + 0.5);
+    var y = Math.floor((30 * n + 10646) / 10631);
+    while (h2jd(y + 1, 1, 1, e) <= J + 1e-9) y++;
+    while (h2jd(y, 1, 1, e) > J + 1e-9) y--;
+    var m = 1; while (m < 12 && h2jd(y, m + 1, 1, e) <= J + 1e-9) m++;
+    return { y: y, m: m, d: Math.floor(J - h2jd(y, m, 1, e) + 1e-9) + 1 };
+  }
+  function hMonthLen(y, m) { return m % 2 === 1 ? 30 : (m === 12 && hLeap(y)) ? 30 : 29; }
+
+  /* awal bulan Hijriyah menurut kriteria lokal (Indonesia: dicek di tempat acuan).
+     Mengembalikan {J1 (JD 00 UT tanggal 1), Jc, obsDate, h, ok} untuk bulan (hy, hm). */
+  function monthStart(hy, hm, p, critId) {
+    var Jt = h2jd(hy, hm, 1);                                  /* perkiraan urfi */
+    var Jc = conjunction(Jt - 1);                              /* ijtimak terdekat */
+    var c = cal(Jc + p.tz / 24), crit = critById(critId || 'mabims');
+    var h = hilal(c.y, c.m, c.d, p);
+    if (h && !h.conjBeforeSunset) { var c2 = cal(Jc + p.tz / 24 + 1); c = c2; h = hilal(c.y, c.m, c.d, p); }
+    var r = crit.cek(h), J0 = jd(c.y, c.m, c.d, 0);
+    return { J1: r.ok ? J0 + 1 : J0 + 2, Jc: Jc, obs: { y: c.y, m: c.m, d: c.d }, h: h, ok: r.ok, why: r.why };
+  }
+
+  /* model keputusan pemerintah RI: MABIMS praktik sidang isbat (tinggi toposentris ≥ 3°, elongasi geosentris ≥ 6,4°)
+     diperiksa di titik-titik paling barat Indonesia dengan tinggi tempat 0 atau 30 m (prinsip wilayatul hukmi) */
+  var ISBAT_SITES = [['Sabang', 5.8933, 95.3214], ['Banda Aceh', 5.5483, 95.3238], ['Lhoknga', 5.4667, 95.2433], ['Meulaboh', 4.1363, 96.1285], ['Simeulue', 2.6, 95.9]];
+  function isbatCheck(y, mo, d) {
+    var best = null;
+    for (var i = 0; i < ISBAT_SITES.length; i++) for (var H = 0; H <= 30; H += 30) {
+      var s = ISBAT_SITES[i], h = hilal(y, mo, d, { phi: s[1], lam: s[2], H: H, tz: 7 });
+      if (!h) continue;
+      var ok = h.conjBeforeSunset && h.moonAltTopo >= 3 && h.elongGeo >= 6.4;
+      if (ok) return { ok: true, site: s[0], H: H, h: h };
+      if (!best || h.moonAltTopo > best.h.moonAltTopo) best = { ok: false, site: s[0], H: H, h: h };
+    }
+    return best;
+  }
+  function isbatStart(hy, hm) {
+    var Jt = h2jd(hy, hm, 1), Jc = conjunction(Jt - 1), c = cal(Jc + 7 / 24);
+    var r = isbatCheck(c.y, c.m, c.d);
+    if (r && !r.h.conjBeforeSunset) { c = cal(Jc + 7 / 24 + 1); r = isbatCheck(c.y, c.m, c.d); }
+    var J0 = jd(c.y, c.m, c.d, 0);
+    return { J1: r.ok ? J0 + 1 : J0 + 2, Jc: Jc, obs: c, r: r };
+  }
+
+  /* ---------- gerhana: metode Meeus bab 54 (cocok untuk Excel) ---------- */
+  function meeusEclipse(k, lunar) {
+    k = Math.floor(k) + (lunar ? 0.5 : 0);
+    var T = k / 1236.85, T2 = T * T, T3 = T2 * T, T4 = T3 * T;
+    var F = mod(160.7108 + 390.67050284 * k - 0.0016118 * T2 - 0.00000227 * T3 + 0.000000011 * T4, 360);
+    if (Math.abs(sind(F)) > 0.36) return { k: k, F: F, none: true };
+    var JE = 2451550.09766 + 29.530588861 * k + 0.00015437 * T2 - 0.000000150 * T3 + 0.00000000073 * T4;
+    var M = 2.5534 + 29.10535670 * k - 0.0000014 * T2 - 0.00000011 * T3;
+    var Mp = 201.5643 + 385.81693528 * k + 0.0107582 * T2 + 0.00001238 * T3 - 0.000000058 * T4;
+    var Om = 124.7746 - 1.56375588 * k + 0.0020672 * T2 + 0.00000215 * T3;
+    var E = 1 - 0.002516 * T - 0.0000074 * T2, F1 = F - 0.02665 * sind(Om), A1 = 299.77 + 0.107408 * k - 0.009173 * T2;
+    var c = (lunar ? -0.4065 : -0.4075) * sind(Mp) + (lunar ? 0.1727 : 0.1721) * E * sind(M) + 0.0161 * sind(2 * Mp) - 0.0097 * sind(2 * F1)
+      + 0.0073 * E * sind(Mp - M) - 0.0050 * E * sind(Mp + M) - 0.0023 * sind(Mp - 2 * F1) + 0.0021 * E * sind(2 * M) + 0.0012 * sind(Mp + 2 * F1)
+      + 0.0006 * E * sind(2 * Mp + M) - 0.0004 * sind(3 * Mp) - 0.0003 * E * sind(M + 2 * F1) + 0.0003 * sind(A1) - 0.0002 * E * sind(M - 2 * F1)
+      - 0.0002 * E * sind(2 * Mp - M) - 0.0002 * sind(Om);
+    var P = 0.2070 * E * sind(M) + 0.0024 * E * sind(2 * M) - 0.0392 * sind(Mp) + 0.0116 * sind(2 * Mp) - 0.0073 * E * sind(Mp + M) + 0.0067 * E * sind(Mp - M) + 0.0118 * sind(2 * F1);
+    var Q = 5.2207 - 0.0048 * E * cosd(M) + 0.0020 * E * cosd(2 * M) - 0.3299 * cosd(Mp) - 0.0060 * E * cosd(Mp + M) + 0.0041 * E * cosd(Mp - M);
+    var W = Math.abs(cosd(F1)), g = (P * cosd(F1) + Q * sind(F1)) * (1 - 0.0048 * W);
+    var u = 0.0059 + 0.0046 * E * cosd(M) - 0.0182 * cosd(Mp) + 0.0004 * cosd(2 * Mp) - 0.0005 * cosd(M + Mp);
+    var r = { k: k, F: F, F1: F1, JDE: JE + c, gamma: g, u: u, M: mod(M, 360), Mp: mod(Mp, 360), E: E, P: P, Q: Q, mean: JE };
+    r.J = ut(r.JDE);
+    var ag = Math.abs(g);
+    if (!lunar) {
+      if (ag > 1.5433 + u) { r.none = true; return r; }
+      if (ag < 0.9972) { r.type = u < 0 ? 'total' : u > 0.0047 ? 'cincin' : (u < 0.00464 * Math.sqrt(1 - g * g) ? 'hibrida' : 'cincin'); r.central = true; }
+      else if (ag < 1.0260) { r.type = 'sentral tak-berbatas atau parsial'; r.mag = (1.5433 + u - ag) / (0.5461 + 2 * u); }
+      else { r.type = 'sebagian'; r.mag = (1.5433 + u - ag) / (0.5461 + 2 * u); }
+    } else {
+      r.magPen = (1.5573 + u - ag) / 0.5450; r.magUmb = (1.0128 - u - ag) / 0.5450;
+      if (r.magPen <= 0) { r.none = true; return r; }
+      var p = 1.0128 - u, t = 0.4678 - u, n = 0.5458 + 0.0400 * cosd(Mp), h = 1.5573 + u;
+      r.sdPen = 60 / n * Math.sqrt(Math.max(0, h * h - g * g)); r.sdPar = r.magUmb > 0 ? 60 / n * Math.sqrt(Math.max(0, p * p - g * g)) : 0; r.sdTot = r.magUmb >= 1 ? 60 / n * Math.sqrt(Math.max(0, t * t - g * g)) : 0;
+      r.type = r.magUmb >= 1 ? 'total' : r.magUmb > 0 ? 'sebagian' : 'penumbra';
+    }
+    return r;
+  }
+  function eclipsesInRange(J1, J2, lunar) { /* daftar gerhana antara dua JD */
+    var c1 = cal(J1), k = Math.floor(kFromDate(c1.y, c1.m, c1.d)) - 1, out = [];
+    for (; ; k++) {
+      var e = meeusEclipse(k, lunar); var Jm = 2451550.09766 + 29.530588861 * (k + (lunar ? 0.5 : 0));
+      if (Jm > J2 + 30) break;
+      if (!e.none && e.J >= J1 && e.J <= J2) out.push(e);
+    }
+    return out;
+  }
+
+  /* ---------- gerhana Bulan teliti: geometri bayangan Bumi ---------- */
+  function lunarGeom(J) {
+    var JE = jde(J), s = sun(JE), m = moon(JE);
+    var ara = mod(s.ra + 180, 360), adec = -s.dec;            /* titik antimatahari */
+    var sep = acosd(sind(adec) * sind(m.dec) + cosd(adec) * cosd(m.dec) * cosd(ara - m.ra));
+    var piM = m.par, piS = s.par, sS = s.sd;
+    var pe = 0.998340 * piM * (1 + 1 / 85);                     /* metode Danjon: atmosfer Bumi memperbesar bayangan */
+    var rU = pe - sS + piS, rP = pe + sS + piS;
+    return { sep: sep, rU: rU, rP: rP, sdM: m.sd, moon: m, sun: s, ara: ara, adec: adec };
+  }
+  function lunarEclipse(Jguess) { /* Jguess ≈ saat purnama; mengembalikan kontak P1,U1,U2,max,U3,U4,P4 */
+    var Jo = opposition(Jguess);
+    /* puncak: minimum jarak */
+    var a = Jo - 0.2, b = Jo + 0.2, g = 0.618033988749895;
+    for (var i = 0; i < 50; i++) { var c1 = b - g * (b - a), c2 = a + g * (b - a); if (lunarGeom(c1).sep < lunarGeom(c2).sep) b = c2; else a = c1; }
+    var Jmax = (a + b) / 2, G = lunarGeom(Jmax);
+    var r = { Jmax: Jmax, Jopp: Jo, geom: G, magU: (G.rU + G.sdM - G.sep) / (2 * G.sdM), magP: (G.rP + G.sdM - G.sep) / (2 * G.sdM) };
+    function contact(fn, before) {
+      var lo = before ? Jmax - 0.25 : Jmax, hi = before ? Jmax : Jmax + 0.25;
+      var f = function (J) { var q = lunarGeom(J); return fn(q); };
+      var flo = f(lo), fhi = f(hi);
+      if ((flo <= 0) === (fhi <= 0)) return NaN;
+      return bisect(f, lo, hi, flo, fhi, 1 / 86400);
+    }
+    var P = function (q) { return q.sep - (q.rP + q.sdM); }, U = function (q) { return q.sep - (q.rU + q.sdM); }, T = function (q) { return q.sep - (q.rU - q.sdM); };
+    r.P1 = contact(P, true); r.P4 = contact(P, false);
+    r.U1 = r.magU > 0 ? contact(U, true) : NaN; r.U4 = r.magU > 0 ? contact(U, false) : NaN;
+    r.U2 = r.magU >= 1 ? contact(T, true) : NaN; r.U3 = r.magU >= 1 ? contact(T, false) : NaN;
+    r.type = r.magU >= 1 ? 'total' : r.magU > 0 ? 'sebagian' : r.magP > 0 ? 'penumbra' : 'tidak terjadi';
+    return r;
+  }
+  function moonAltAt(J, p) { var st = state(J, p); return st.moonAlt; }
+
+  /* ---------- gerhana Matahari: elemen Besselian dihitung langsung dari posisi ---------- */
+  function besselian(J) {
+    var JE = jde(J), s = sun(JE), m = moon(JE);
+    var rS = s.distKm / 6378.137, rM = m.dist / 6378.137;           /* dalam jari-jari Bumi */
+    var Xs = rS * cosd(s.dec) * cosd(s.ra), Ys = rS * cosd(s.dec) * sind(s.ra), Zs = rS * sind(s.dec);
+    var Xm = rM * cosd(m.dec) * cosd(m.ra), Ym = rM * cosd(m.dec) * sind(m.ra), Zm = rM * sind(m.dec);
+    var gx = Xs - Xm, gy = Ys - Ym, gz = Zs - Zm, G = Math.sqrt(gx * gx + gy * gy + gz * gz);
+    var a = mod(atan2d(gy, gx), 360), d = asind(gz / G);             /* arah sumbu bayangan */
+    var x = rM * (cosd(m.dec) * sind(m.ra - a));
+    var y = rM * (sind(m.dec) * cosd(d) - cosd(m.dec) * sind(d) * cosd(m.ra - a));
+    var z = rM * (sind(m.dec) * sind(d) + cosd(m.dec) * cosd(d) * cosd(m.ra - a));
+    var k = 0.272281, Rs = 109.1222;                                 /* jari-jari Bulan & Matahari (jari-jari Bumi) */
+    var sinf1 = (Rs + k) / G, sinf2 = (Rs - k) / G;
+    var f1 = asind(sinf1), f2 = asind(sinf2);
+    var c1 = z + k / sinf1, c2 = z - k / sinf2;
+    var l1 = c1 * tand(f1), l2 = c2 * tand(f2);
+    var mu = mod(gast(J, s.dpsi, s.eps) - a, 360);
+    return { x: x, y: y, z: z, d: d, a: a, mu: mu, l1: l1, l2: l2, f1: f1, f2: f2, J: J };
+  }
+  /* keadaan gerhana di satu tempat pada J: magnitudo & obskurasi */
+  function solarAt(J, p, B) {
+    B = B || besselian(J);
+    var g = geoc(p.phi, p.H), H = B.mu + p.lam;
+    var xi = g.c * sind(H), eta = g.s * cosd(B.d) - g.c * cosd(H) * sind(B.d), zeta = g.s * sind(B.d) + g.c * cosd(H) * cosd(B.d);
+    var u = B.x - xi, v = B.y - eta, L1 = B.l1 - zeta * tand(B.f1), L2 = B.l2 - zeta * tand(B.f2);
+    var m = Math.sqrt(u * u + v * v), mag = (L1 - m) / (L1 + L2);
+    return { m: m, L1: L1, L2: L2, mag: mag, zeta: zeta, inPen: m < L1, inUmb: m < Math.abs(L2), total: L2 < 0 && m < Math.abs(L2), annular: L2 > 0 && m < L2 };
+  }
+  /* keadaan lokal teliti dari pemisahan toposentris Matahari–Bulan (tanpa pendekatan) */
+  function solarSep(J, p) {
+    var st = state(J, p), s = st.sun, mm = st.moon, Hs = n180(st.lst - s.ra), Hm = n180(st.lst - mm.ra);
+    var a = topo(s.ra, s.dec, s.par, Hs, p.phi, p.H), b = topo(mm.ra, mm.dec, mm.par, Hm, p.phi, p.H);
+    var sep = acosd(sind(a.dec) * sind(b.dec) + cosd(a.dec) * cosd(b.dec) * cosd(a.ra - b.ra));
+    return { sep: sep, rs: s.sd, rm: st.sdTop, sunAlt: st.sunAlt, sunAz: st.sunAz, pa: atan2d(cosd(b.dec) * sind(b.ra - a.ra), sind(b.dec) * cosd(a.dec) - cosd(b.dec) * sind(a.dec) * cosd(b.ra - a.ra)) };
+  }
+  function solarLocal(Jguess, p) {
+    var a = Jguess - 0.25, b = Jguess + 0.25, g = 0.618033988749895;
+    for (var i = 0; i < 60; i++) { var c1 = b - g * (b - a), c2 = a + g * (b - a); if (solarSep(c1, p).sep < solarSep(c2, p).sep) b = c2; else a = c1; }
+    var Jmax = (a + b) / 2, S = solarSep(Jmax, p);
+    var r = { Jmax: Jmax, sep: S.sep, rs: S.rs, rm: S.rm, sunAlt: S.sunAlt, sunAz: S.sunAz };
+    r.mag = (S.rs + S.rm - S.sep) / (2 * S.rs);
+    if (r.mag <= 0) { r.type = 'tidak terjadi'; return r; }
+    r.obsc = obscuration(S.rs, S.rm, S.sep);
+    function f1(J) { var q = solarSep(J, p); return q.sep - (q.rs + q.rm); }
+    function f2(J) { var q = solarSep(J, p); return q.sep - Math.abs(q.rs - q.rm); }
+    r.C1 = bisect(f1, Jmax - 0.15, Jmax, undefined, undefined, 0.5 / 86400); r.C4 = bisect(f1, Jmax, Jmax + 0.15, undefined, undefined, 0.5 / 86400);
+    if (S.sep < Math.abs(S.rs - S.rm)) {
+      r.C2 = bisect(f2, Jmax - 0.01, Jmax, undefined, undefined, 0.1 / 86400); r.C3 = bisect(f2, Jmax, Jmax + 0.01, undefined, undefined, 0.1 / 86400);
+      r.type = S.rm > S.rs ? 'total' : 'cincin';
+    } else r.type = 'sebagian';
+    r.altC1 = solarSep(r.C1, p).sunAlt; r.altC4 = solarSep(r.C4, p).sunAlt;
+    return r;
+  }
+  function obscuration(rs, rm, d) { /* fraksi luas piringan Matahari yang tertutup */
+    if (d >= rs + rm) return 0;
+    if (d <= Math.abs(rm - rs)) return rm >= rs ? 1 : (rm * rm) / (rs * rs);
+    var r1 = rs, r2 = rm;
+    var a1 = Math.acos((d * d + r1 * r1 - r2 * r2) / (2 * d * r1)), a2 = Math.acos((d * d + r2 * r2 - r1 * r1) / (2 * d * r2));
+    var A = r1 * r1 * (a1 - Math.sin(2 * a1) / 2) + r2 * r2 * (a2 - Math.sin(2 * a2) / 2);
+    return A / (Math.PI * r1 * r1);
+  }
+  /* titik garis sentral (lintang, bujur) pada J; null bila sumbu tidak mengenai Bumi */
+  function centralPoint(J, B) {
+    B = B || besselian(J);
+    var e2 = 0.00669438, rho1 = Math.sqrt(1 - e2 * cosd(B.d) * cosd(B.d)), y1 = B.y / rho1;
+    var s = 1 - B.x * B.x - y1 * y1; if (s < 0) return null;
+    var z1 = Math.sqrt(s), d1 = asind(sind(B.d) / rho1);
+    var sinphi1 = y1 * cosd(d1) + z1 * sind(d1);
+    var H = atan2d(B.x, z1 * cosd(d1) - y1 * sind(d1));
+    var phi = atand(1.00336409 * tand(asind(sinphi1)));
+    var lam = n180(H - B.mu);
+    var zeta = B.z !== undefined ? z1 : 0;
+    var L2 = B.l2 - z1 * rho1 * tand(B.f2); /* pendekatan */
+    return { phi: phi, lam: lam, width: Math.abs(2 * L2) * 6378.137 / Math.max(0.2, z1) };
+  }
+  function atand(x) { return Math.atan(x) * DEG; }
+  /* waktu puncak gerhana Matahari global (minimum jarak sumbu ke pusat Bumi) */
+  function solarGlobal(Jguess) {
+    var a = Jguess - 0.3, b = Jguess + 0.3, g = 0.618033988749895;
+    function gm(J) { var B = besselian(J); return B.x * B.x + B.y * B.y; }
+    for (var i = 0; i < 60; i++) { var c1 = b - g * (b - a), c2 = a + g * (b - a); if (gm(c1) < gm(c2)) b = c2; else a = c1; }
+    var Jm = (a + b) / 2, B = besselian(Jm), gamma = Math.sqrt(B.x * B.x + B.y * B.y) * (B.y < 0 ? -1 : 1);
+    var r = { Jmax: Jm, B: B, gamma: gamma, central: Math.abs(gamma) < 0.9972 };
+    r.type = 'sebagian';
+    if (r.central) { r.point = centralPoint(Jm, B); var at = solarAt(Jm, { phi: r.point.phi, lam: r.point.lam, H: 0 }, B); r.type = at.L2 < 0 ? 'total' : 'cincin'; r.L2 = at.L2; }
+    return r;
+  }
+
+  /* ---------- UI bersama (sama dengan Jilid 1) ---------- */
+  function $(id) { return document.getElementById(id); }
+  function num(id) { var v = $(id).value; return parseFloat(String(v).replace(',', '.').replace('−', '-')); }
+  function quiz() {
+    var data = $('quizdata'), box = $('quiz'), sc = $('score');
+    if (!data || !box) return;
+    var Q = JSON.parse(data.textContent), score = 0, done = 0;
+    if (sc) sc.textContent = 'Skor: 0 / ' + Q.length;
+    Q.forEach(function (it, i) {
+      var d = document.createElement('div'); d.className = 'qz';
+      d.innerHTML = '<p>' + (i + 1) + '. ' + it.q + '</p><div class="opts"></div><div class="fb" hidden></div>';
+      var opts = d.querySelector('.opts'), fb = d.querySelector('.fb');
+      it.o.forEach(function (o, j) {
+        var b = document.createElement('button'); b.type = 'button'; b.textContent = String.fromCharCode(65 + j) + '. ' + o;
+        b.addEventListener('click', function () {
+          opts.querySelectorAll('button').forEach(function (x, k) { x.disabled = true; if (k === it.a) x.classList.add('ok'); });
+          if (j === it.a) { score++; fb.textContent = 'Benar. ' + it.e; } else { b.classList.add('bad'); fb.textContent = 'Kurang tepat. ' + it.e; }
+          fb.hidden = false; done++;
+          if (sc) sc.textContent = 'Skor: ' + score + ' / ' + Q.length + (done === Q.length ? ' · selesai' : '');
+        });
+        opts.appendChild(b);
+      });
+      box.appendChild(d);
+    });
+  }
+  function copy(text, btn) {
+    var done = function () { if (btn) { var t = btn.textContent; btn.textContent = 'Tersalin'; setTimeout(function () { btn.textContent = t; }, 1500); } };
+    try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+    function fallback() { var ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); done(); } catch (_) { } ta.remove(); }
+  }
+  var PLACES = [
+    ['UIN SGD Bandung', -6.9312, 107.7175, 700, 7],
+    ['Kota Bandung', -6.9175, 107.6191, 768, 7],
+    ['Observatorium Bosscha, Lembang', -6.8248, 107.6158, 1310, 7],
+    ['POB Cibeas, Pelabuhanratu', -7.0264, 106.5326, 50, 7],
+    ['Jakarta', -6.1754, 106.8272, 8, 7],
+    ['Yogyakarta', -7.7956, 110.3695, 113, 7],
+    ['Surabaya', -7.2575, 112.7521, 5, 7],
+    ['Banda Aceh (Lhoknga)', 5.4667, 95.2433, 30, 7],
+    ['Makassar', -5.1477, 119.4327, 5, 8],
+    ['Kupang', -10.1772, 123.6070, 50, 8],
+    ['Jayapura', -2.5337, 140.7181, 10, 9],
+    ['Makkah', 21.4225, 39.8262, 277, 3],
+    ['Kairo', 30.0444, 31.2357, 23, 2],
+    ['Istanbul', 41.0082, 28.9784, 40, 3],
+    ['Rabat', 34.0209, -6.8416, 75, 1],
+    ['Rio de Janeiro', -22.9068, -43.1729, 5, -3],
+    ['Los Angeles', 34.0522, -118.2437, 90, -8]
+  ];
+  function placeSelect(sel, onPick, filter) {
+    PLACES.forEach(function (p, i) { if (filter && !filter(p)) return; var o = document.createElement('option'); o.value = i; o.textContent = p[0]; sel.appendChild(o); });
+    sel.addEventListener('change', function () { var p = PLACES[+sel.value]; onPick({ name: p[0], phi: p[1], lam: p[2], H: p[3], tz: p[4] }); });
+  }
+  function today() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function parseDate(s) { var a = String(s).split('-'); return { y: +a[0], m: +a[1], d: +a[2] }; }
+  function isoDate(c) { return c.y + '-' + String(c.m).padStart(2, '0') + '-' + String(c.d).padStart(2, '0'); }
+  function zona(tz) { return tz === 7 ? 'WIB' : tz === 8 ? 'WITA' : tz === 9 ? 'WIT' : 'UTC' + (tz >= 0 ? '+' : '−') + Math.abs(tz); }
+  function local(J, tz) { return hms((J - Math.floor(J - 0.5) - 0.5) * 24 + tz); } /* JD -> hh:mm:ss lokal */
+  function localHM(J, tz) { return hm((J - Math.floor(J - 0.5) - 0.5) * 24 + tz); }
+
+  /* SVG kecil */
+  var NS = 'http://www.w3.org/2000/svg';
+  function mk(svg, tag, a) { var e = document.createElementNS(NS, tag); for (var k in a) e.setAttribute(k, a[k]); svg.appendChild(e); return e; }
+  function tx(svg, x, y, c, s, anc, st) { var t = mk(svg, 'text', { x: x, y: y, 'class': c }); if (anc) t.setAttribute('text-anchor', anc); if (st) t.setAttribute('style', st); t.textContent = s; return t; }
+  function clear(svg) { while (svg.firstChild) svg.removeChild(svg.firstChild); }
+
+  return {
+    RAD: RAD, DEG: DEG, mod: mod, n180: n180, sind: sind, cosd: cosd, tand: tand, asind: asind, acosd: acosd, atan2d: atan2d,
+    fnum: fnum, sgn: sgn, dms: dms, hm: hm, hms: hms, dur: dur, jd: jd, cal: cal, dow: dow, pasaran: pasaran, tgl: tgl,
+    HARI: HARI, PASARAN: PASARAN, BULAN: BULAN, BLN: BLN, HIJRI: HIJRI, deltaT: deltaT, jde: jde, ut: ut,
+    nutation: nutation, ecl2eq: ecl2eq, sun: sun, eot: eot, moon: moon, moonArgs: moonArgs, gmst: gmst, gast: gast, geoc: geoc,
+    altaz: altaz, topo: topo, refr: refr, dip: dip, state: state, bisect: bisect, riseSet: riseSet, transit: transit,
+    conjunction: conjunction, opposition: opposition, phaseTime: phaseTime, meeusPhase: meeusPhase, kFromDate: kFromDate, conjBefore: conjBefore, conjAfter: conjAfter,
+    hilal: hilal, ephCache: ephCache, hilalFast: hilalFast, hilalAt: hilalAt, hilalBest: hilalBest, worldPaths: worldPaths, khgt: khgt, khgtStart: khgtStart, fajr: fajr, inPoly: inPoly, AMERIKA: AMERIKA, yallopQ: yallopQ, yallopClass: yallopClass, YALLOP_TXT: YALLOP_TXT, odehV: odehV, odehClass: odehClass, ODEH_TXT: ODEH_TXT,
+    CRITERIA: CRITERIA, critById: critById, ISBAT_SITES: ISBAT_SITES, isbatCheck: isbatCheck, isbatStart: isbatStart, HEPOCH: HEPOCH, hLeap: hLeap, h2jd: h2jd, jd2h: jd2h, hMonthLen: hMonthLen, monthStart: monthStart,
+    meeusEclipse: meeusEclipse, eclipsesInRange: eclipsesInRange, lunarGeom: lunarGeom, lunarEclipse: lunarEclipse, moonAltAt: moonAltAt,
+    besselian: besselian, solarAt: solarAt, solarSep: solarSep, solarLocal: solarLocal, obscuration: obscuration, centralPoint: centralPoint, solarGlobal: solarGlobal,
+    $: $, num: num, quiz: quiz, copy: copy, PLACES: PLACES, placeSelect: placeSelect, today: today, parseDate: parseDate, isoDate: isoDate, zona: zona, local: local, localHM: localHM,
+    mk: mk, tx: tx, clear: clear
+  };
+})();
+
+
+</script>
+<script>
+(function(){
+/* Bab 13: musim gerhana, geometri bayangan, daftar gerhana dan Saros */
+var f = A.fnum, RAD = A.RAD;
+function dstr(J) { var c = A.cal(J); return c.d + ' ' + A.BLN[c.m - 1] + ' ' + c.y; }
+function omega(J) { var T = (A.jde(J) - 2451545) / 36525; return A.mod(125.04452 - 1934.136261 * T, 360); }
+function ecName(e, lunar) {
+  if (lunar) return 'Bulan ' + e.type;
+  return 'Matahari ' + (e.type.indexOf('sentral tak') === 0 ? 'sebagian*' : e.type);
+}
+function saros(e, lunar) {
+  var k = Math.round(lunar ? e.k - 0.5 : e.k), b = ((38 * k) % 223 + 223) % 223, s = b + (lunar ? 124 : 112);
+  if (s > (lunar ? 200 : 190)) s -= 223;
+  return s;
+}
+
+/* ---- SIM II-13.1 musim gerhana ---- */
+var MS = A.$('musSvg'), MY = A.$('musY'), MD = A.$('musD'), MDATA = null;
+for (var y = 2024; y <= 2035; y++) { var o = document.createElement('option'); o.value = y; o.textContent = y; if (y === 2026) o.selected = true; MY.appendChild(o); }
+function prepYear(yr) {
+  var J0 = A.jd(yr, 1, 1, 0), J1 = A.jd(yr + 1, 1, 1, 0), k0 = Math.floor(A.kFromDate(yr, 1, 1)) - 1, ph = [];
+  for (var k = k0; k < k0 + 15; k++) {
+    [0, 0.5].forEach(function (t) {
+      var J = A.ut(A.meeusPhase(k, t).JDE);
+      if (J >= J0 && J < J1) ph.push({ J: J, full: t > 0, beta: A.moon(A.jde(J)).beta });
+    });
+  }
+  var ecl = A.eclipsesInRange(J0, J1, false).map(function (e) { return { e: e, lunar: false }; })
+    .concat(A.eclipsesInRange(J0, J1, true).map(function (e) { return { e: e, lunar: true }; }))
+    .sort(function (a, b) { return a.e.J - b.e.J; });
+  MDATA = { y: yr, J0: J0, ph: ph, ecl: ecl, len: Math.round(J1 - J0) };
+  MD.max = MDATA.len - 1;
+}
+function drawM() {
+  var yr = +MY.value; if (!MDATA || MDATA.y !== yr) prepYear(yr);
+  var d = Math.min(+MD.value, MDATA.len - 1), J = MDATA.J0 + d + 0.5, JE = A.jde(J);
+  var s = A.sun(JE), m = A.moon(JE), Om = omega(J);
+  var dn = A.n180(s.lam - Om), dd = A.n180(s.lam - Om - 180), dist = Math.min(Math.abs(dn), Math.abs(dd)), near = Math.abs(dn) < Math.abs(dd) ? 'naik' : 'turun';
+  A.$('vmusD').textContent = dstr(J);
+  A.clear(MS);
+  /* tampak atas */
+  var cx = 150, cy = 125, ro = 68, rs = 104;
+  function P(r, lam) { return [cx + r * Math.cos(lam * RAD), cy - r * Math.sin(lam * RAD)]; }
+  A.mk(MS, 'circle', { cx: cx, cy: cy, r: rs, style: 'fill:none;stroke:var(--line);stroke-width:1' });
+  [Om, Om + 180].forEach(function (n) { /* jendela musim gerhana ±18,5° di sekitar simpul */
+    var a = P(rs, n - 18.5), b = P(rs, n + 18.5);
+    A.mk(MS, 'path', { d: 'M' + a[0] + ' ' + a[1] + ' A' + rs + ' ' + rs + ' 0 0 0 ' + b[0] + ' ' + b[1], style: 'fill:none;stroke:var(--gold);stroke-width:9;opacity:.35' });
+  });
+  var na = P(ro, Om), nd = P(ro, Om + 180), mid = P(ro, Om + 90), mid2 = P(ro, Om + 270);
+  A.mk(MS, 'path', { d: 'M' + na[0] + ' ' + na[1] + ' A' + ro + ' ' + ro + ' 0 0 0 ' + nd[0] + ' ' + nd[1], style: 'fill:none;stroke:var(--accent);stroke-width:2' });
+  A.mk(MS, 'path', { d: 'M' + nd[0] + ' ' + nd[1] + ' A' + ro + ' ' + ro + ' 0 0 0 ' + na[0] + ' ' + na[1], style: 'fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:4 4' });
+  var la = P(rs + 6, Om), ld = P(rs + 6, Om + 180);
+  A.mk(MS, 'line', { x1: la[0], y1: la[1], x2: ld[0], y2: ld[1], style: 'stroke:var(--muted);stroke-width:1;stroke-dasharray:2 3' });
+  A.mk(MS, 'circle', { cx: na[0], cy: na[1], r: 5, style: 'fill:var(--accent)' });
+  A.mk(MS, 'circle', { cx: nd[0], cy: nd[1], r: 5, style: 'fill:var(--surface);stroke:var(--accent);stroke-width:2' });
+  var tn = P(ro - 16, Om), td = P(ro - 16, Om + 180);
+  A.tx(MS, tn[0], tn[1] + 4, 'sm', '☊', 'middle'); A.tx(MS, td[0], td[1] + 4, 'sm', '☋', 'middle');
+  var tu = P(ro + 12, Om + 90), ts = P(ro + 12, Om + 270);
+  A.tx(MS, tu[0], tu[1] + 4, 'tick', 'U', 'middle'); A.tx(MS, ts[0], ts[1] + 4, 'tick', 'S', 'middle');
+  A.mk(MS, 'circle', { cx: cx, cy: cy, r: 9, style: 'fill:var(--sky)' });
+  var sp = P(rs, s.lam), mp = P(ro, m.lam);
+  A.mk(MS, 'line', { x1: cx, y1: cy, x2: sp[0], y2: sp[1], style: 'stroke:var(--gold);stroke-width:1.5' });
+  A.mk(MS, 'circle', { cx: sp[0], cy: sp[1], r: 11, style: 'fill:var(--gold)' });
+  A.mk(MS, 'circle', { cx: mp[0], cy: mp[1], r: 6, style: 'fill:var(--ink)' });
+  var aries = P(rs + 14, 0); A.tx(MS, aries[0], aries[1] + 4, 'tick', '♈', 'middle');
+  A.tx(MS, cx, 248, 'tick', 'Tampak dari kutub utara ekliptika', 'middle');
+  /* keterangan di kanan */
+  var info = [['Bujur Matahari', f(s.lam, 1) + '°'], ['Simpul naik Ω', f(Om, 1) + '°'], ['Jarak Matahari ke simpul ' + near, f(dist, 1) + '°'], ['Lintang Bulan saat ini', f(m.beta, 2) + '°']];
+  info.forEach(function (r, i) { A.tx(MS, 290, 40 + i * 38, 'tick', r[0]); A.tx(MS, 290, 58 + i * 38, 'lbl', r[1]); });
+  var inSeason = dist < 18.5;
+  A.mk(MS, 'rect', { x: 286, y: 190, width: 262, height: 30, rx: 6, style: inSeason ? 'fill:var(--gold-soft);stroke:var(--gold)' : 'fill:var(--surface);stroke:var(--line)' });
+  A.tx(MS, 296, 210, 'lbl', inSeason ? 'Musim gerhana' : 'Di luar musim gerhana');
+  /* grafik lintang Bulan pada ijtimak & purnama */
+  var L = 46, R = 545, T = 272, B = 440, n = MDATA.len;
+  function X(day) { return L + day / n * (R - L); } function Y(b) { return (T + B) / 2 - b / 5.5 * (B - T) / 2; }
+  A.mk(MS, 'rect', { x: L, y: Y(1.5), width: R - L, height: Y(-1.5) - Y(1.5), style: 'fill:var(--gold-soft)' });
+  A.mk(MS, 'rect', { x: L, y: Y(1.0), width: R - L, height: Y(-1.0) - Y(1.0), style: 'fill:var(--sky-soft)' });
+  [-5, -2.5, 0, 2.5, 5].forEach(function (b) { A.mk(MS, 'line', { x1: L, x2: R, y1: Y(b), y2: Y(b), 'class': 'gl' }); A.tx(MS, L - 4, Y(b) + 4, 'tick', f(b, 1) + '°', 'end'); });
+  for (var mo = 1; mo <= 12; mo++) { var xd = A.jd(MDATA.y, mo, 1, 0) - MDATA.J0; A.mk(MS, 'line', { x1: X(xd), x2: X(xd), y1: T, y2: B, 'class': 'gl' }); A.tx(MS, X(xd + 15), B + 14, 'tick', A.BLN[mo - 1].slice(0, 3), 'middle'); }
+  A.tx(MS, L, T - 6, 'tick', 'Lintang Bulan β pada setiap ijtimak dan purnama');
+  MDATA.ph.forEach(function (p) {
+    var x = X(p.J - MDATA.J0), yy = Y(p.beta);
+    A.mk(MS, 'line', { x1: x, x2: x, y1: Y(0), y2: yy, style: 'stroke:var(--muted);stroke-width:.8' });
+    A.mk(MS, 'circle', { cx: x, cy: yy, r: 4, style: p.full ? 'fill:var(--surface);stroke:var(--ink);stroke-width:1.5' : 'fill:var(--ink)' });
+  });
+  MDATA.ecl.forEach(function (q, qi) {
+    var x = X(q.e.J - MDATA.J0), b = A.moon(q.e.JDE).beta;
+    A.mk(MS, 'circle', { cx: x, cy: Y(b), r: 8, style: 'fill:none;stroke:' + (q.lunar ? 'var(--sky)' : 'var(--gold)') + ';stroke-width:2.5' });
+    A.tx(MS, Math.max(L + 30, Math.min(R - 30, x)), T + 12 + (qi % 2) * 12, 'sm', (q.lunar ? 'GB ' : 'GM ') + q.e.type.split(' ')[0].replace('sentral', 'sebagian'), 'middle');
+  });
+  A.mk(MS, 'line', { x1: X(d + 0.5), x2: X(d + 0.5), y1: T, y2: B, style: 'stroke:var(--accent);stroke-width:2' });
+  /* keluaran */
+  var next = MDATA.ecl.filter(function (q) { return q.e.J >= J - 0.5; })[0];
+  A.$('musOut').innerHTML = '<span class="big">' + (inSeason ? 'Musim gerhana' : 'Bukan musim gerhana') + '</span>' +
+    '<span>Matahari dari simpul ' + near + '</span><b>' + f(dist, 1) + '°</b>' +
+    '<span>Garis simpul bergeser</span><b>−19,3° per tahun</b>' +
+    '<span>Gerhana berikutnya tahun ini</span><b>' + (next ? dstr(next.e.J) + ', ' + ecName(next.e, next.lunar) : 'tidak ada') + '</b>' +
+    '<span>Jumlah gerhana ' + MDATA.y + '</span><b>' + MDATA.ecl.filter(function (q) { return !q.lunar; }).length + ' Matahari, ' + MDATA.ecl.filter(function (q) { return q.lunar; }).length + ' Bulan</b>';
+}
+var mTimer = null;
+A.$('musPlay').addEventListener('click', function () {
+  if (mTimer) { clearInterval(mTimer); mTimer = null; this.textContent = 'Jalankan'; return; }
+  this.textContent = 'Berhenti';
+  mTimer = setInterval(function () { MD.value = (+MD.value + 1) % MDATA.len; drawM(); }, 70);
+});
+MY.addEventListener('change', drawM); MD.addEventListener('input', drawM);
+drawM();
+
+/* ---- SIM II-13.2 geometri bayangan ---- */
+var BS = A.$('baySvg'), RE = 6378.14, RM = 1737.4, RS = 696000;
+function drawB() {
+  var dm = +A.$('bDm').value, ds = +A.$('bDs').value * 1e6, g = +A.$('bG').value;
+  A.$('vbDm').textContent = f(dm, 0) + ' km'; A.$('vbDs').textContent = f(ds / 1e6, 2) + ' juta km'; A.$('vbG').textContent = f(g, 2) + '°';
+  var Lu = ds * RM / (RS - RM), surf = dm - RE, margin = Lu - surf, total = margin > 0;
+  var sdM = Math.asin(RM / surf) / RAD * 60, sdS = Math.asin(RS / ds) / RAD * 60, width = 2 * RM * Math.abs(margin) / Lu;
+  A.clear(BS);
+  /* bagian atas: kerucut bayangan Bulan */
+  var x0 = 40, ax = 108, k = 380 / 410000, kv = 52 / RM;
+  function X(km) { return x0 + km * k; } function Yv(km) { return ax - km * kv; }
+  var df = A.mk(BS, 'defs', {}), cp = A.mk(df, 'clipPath', { id: 'bClip' }); A.mk(cp, 'rect', { x: 0, y: 8, width: 440, height: 196 });
+  var grp = A.mk(BS, 'g', { 'clip-path': 'url(#bClip)' });
+  var pw = function (x) { return RM + x * (RS + RM) / ds; };
+  A.mk(grp, 'polygon', { points: [X(0), Yv(RM), X(dm), Yv(pw(dm)), X(dm), Yv(-pw(dm)), X(0), Yv(-RM)].join(' '), style: 'fill:var(--gold-soft);opacity:.7' });
+  var tipX = X(Math.min(Lu, dm + RE));
+  A.mk(grp, 'polygon', { points: [X(0), Yv(RM), X(Lu), ax, X(0), Yv(-RM)].join(' '), style: 'fill:#111827;opacity:.6' });
+  if (!total) A.mk(grp, 'polygon', { points: [X(Lu), ax, X(dm), Yv(RM * (dm - Lu) / Lu), X(dm), Yv(-RM * (dm - Lu) / Lu)].join(' '), style: 'fill:var(--warn);opacity:.35' });
+  A.mk(grp, 'ellipse', { cx: X(dm), cy: ax, rx: RE * k, ry: RE * kv, style: 'fill:var(--sky-soft);stroke:var(--sky);stroke-width:1.5' });
+  A.mk(grp, 'ellipse', { cx: X(0), cy: ax, rx: Math.max(2, RM * k), ry: RM * kv, style: 'fill:var(--muted)' });
+  A.mk(BS, 'line', { x1: X(0), x2: 440, y1: ax, y2: ax, style: 'stroke:var(--muted);stroke-width:.6;stroke-dasharray:3 3' });
+  A.mk(BS, 'circle', { cx: X(Lu), cy: ax, r: 3.5, style: 'fill:var(--warn)' });
+  A.tx(BS, X(0) + 6, 22, 'tick', 'Bulan'); A.tx(BS, X(dm) - 8, 22, 'tick', 'Bumi', 'end');
+  A.tx(BS, X(Lu) - 10, ax + 24, 'sm', 'ujung umbra', 'end');
+  A.tx(BS, 10, 198, 'tick', '← cahaya Matahari · skala mendatar sebenarnya, skala tegak diperbesar ' + f(kv / k, 0) + '×');
+  /* sisipan: ukuran tampak piringan dari titik di bawah Bulan */
+  var ic = 500, sc = 1.9;
+  A.mk(BS, 'circle', { cx: ic, cy: ax, r: sdS * sc, style: 'fill:var(--gold)' });
+  A.mk(BS, 'circle', { cx: ic, cy: ax, r: sdM * sc, style: 'fill:#151b28;stroke:var(--muted);stroke-width:.8' });
+  A.tx(BS, ic, ax - 42, 'tick', 'tampak dari Bumi', 'middle');
+  A.tx(BS, ic, ax + 50, 'lbl', total ? 'TOTAL' : 'CINCIN', 'middle');
+  /* bagian bawah: penampang bayangan Bumi di jarak Bulan */
+  var piM = Math.asin(RE / dm) / RAD, sS = Math.asin(RS / ds) / RAD, piS = Math.asin(RE / ds) / RAD, sdm = Math.asin(RM / dm) / RAD;
+  var rU = 1.02 * (piM - sS + piS), rP = 1.02 * (piM + sS + piS), magU = (rU + sdm - g) / (2 * sdm), magP = (rP + sdm - g) / (2 * sdm);
+  var lt = magU >= 1 ? 'total' : magU > 0 ? 'sebagian' : magP > 0 ? 'penumbra' : 'tidak terjadi';
+  var lc = 130, lyc = 312, ps = 70;
+  A.mk(BS, 'line', { x1: 0, x2: 560, y1: 218, y2: 218, style: 'stroke:var(--line)' });
+  A.mk(BS, 'circle', { cx: lc, cy: lyc, r: rP * ps, style: 'fill:#6b7280;opacity:.45' });
+  A.mk(BS, 'circle', { cx: lc, cy: lyc, r: rU * ps, style: 'fill:#111827;opacity:.8' });
+  A.mk(BS, 'circle', { cx: lc + g * ps, cy: lyc, r: sdm * ps, style: 'fill:' + (lt === 'total' ? '#a3472a' : 'var(--gold)') + ';stroke:var(--surface);stroke-width:1;opacity:.95' });
+  A.tx(BS, lc, 236, 'tick', 'Penampang bayangan Bumi di jarak Bulan', 'middle');
+  var rows = [['ρ umbra', f(rU, 3) + '° = ' + f(rU / sdm, 2) + ' × SD Bulan'], ['ρ penumbra', f(rP, 3) + '°'], ['Magnitudo umbra', f(magU, 3)], ['Gerhana Bulan', lt]];
+  rows.forEach(function (r, i) { A.tx(BS, 300, 252 + i * 36, 'tick', r[0]); A.tx(BS, 300, 269 + i * 36, 'lbl', r[1]); });
+  A.$('bOut').innerHTML = '<span class="big">Gerhana Matahari ' + (total ? 'total' : 'cincin') + '</span>' +
+    '<span>Panjang umbra Bulan</span><b>' + f(Lu, 0) + ' km</b>' +
+    '<span>Jarak pusat Bulan ke permukaan Bumi</span><b>' + f(surf, 0) + ' km</b>' +
+    '<span>' + (total ? 'Umbra melewati permukaan sejauh' : 'Umbra kurang panjang') + '</span><b>' + f(Math.abs(margin), 0) + ' km</b>' +
+    '<span>Lebar ' + (total ? 'umbra' : 'antumbra') + ' di permukaan (tegak lurus sumbu)</span><b>± ' + f(width, 0) + ' km</b>' +
+    '<span>Semidiameter Bulan : Matahari</span><b>' + f(sdM, 2) + '′ : ' + f(sdS, 2) + '′</b>';
+}
+['bDm', 'bDs', 'bG'].forEach(function (i) { A.$(i).addEventListener('input', drawB); });
+document.querySelectorAll('[data-b]').forEach(function (b) { b.addEventListener('click', function () { var v = b.dataset.b.split(','); A.$('bDm').value = v[0]; A.$('bDs').value = v[1]; drawB(); }); });
+drawB();
+
+/* ---- SIM II-13.3 daftar gerhana dan Saros ---- */
+var GP = { name: 'Jakarta', phi: -6.1754, lam: 106.8272, H: 8, tz: 7 };
+for (y = 1990; y <= 2060; y++) { o = document.createElement('option'); o.value = y; o.textContent = y; if (y === 2026) o.selected = true; A.$('gY').appendChild(o); }
+A.placeSelect(A.$('gP'), function (p) { GP = p; });
+A.$('gP').value = 4;
+function visib(e, lunar) {
+  if (lunar) { var st = A.state(e.J, GP); return st.moonAlt > 0 ? 'puncak tampak (Bulan ' + f(st.moonAlt, 0) + '°)' : 'puncak di bawah ufuk'; }
+  var r = A.solarLocal(e.J, GP);
+  if (!(r.mag > 0)) return 'tidak terjadi';
+  if (r.sunAlt <= 0) return 'Matahari di bawah ufuk';
+  return r.type + ', mag. ' + f(r.mag, 2) + ' (' + A.localHM(r.Jmax, GP.tz) + ')';
+}
+function family(e, lunar, tr) {
+  document.querySelectorAll('#gTab tr').forEach(function (r) { r.style.background = ''; });
+  tr.style.background = 'var(--accent-soft)';
+  var kb = Math.floor(e.k), rows = '';
+  for (var n = -3; n <= 3; n++) {
+    var q = A.meeusEclipse(kb + 223 * n, lunar);
+    rows += '<tr' + (n === 0 ? ' style="font-weight:600"' : '') + '><td>' + (n > 0 ? '+' : '') + n + '</td><td>' + (q.none ? '—' : dstr(q.J)) + '</td><td>' + (q.none ? 'tidak ada gerhana' : ecName(q, lunar)) + '</td><td class="n r">' + (q.none ? '—' : f(q.gamma, 4)) + '</td></tr>';
+  }
+  A.$('gFam').innerHTML = '<h4 style="margin:14px 0 6px">Keluarga Saros ' + saros(e, lunar) + ' (selang 223 bulan sinodis = 6585,32 hari)</h4><div class="tbl"><table><thead><tr><th>n</th><th>Puncak</th><th>Jenis</th><th class="n r">γ</th></tr></thead><tbody>' + rows + '</tbody></table></div><p class="small muted">Perhatikan γ yang bergeser sedikit demi sedikit, dan jam puncak yang mundur sekitar 8 jam (sepertiga hari) dari satu anggota ke anggota berikutnya.</p>';
+}
+A.$('gGo').addEventListener('click', function () {
+  var b = this, y0 = +A.$('gY').value, N = +A.$('gN').value, J0 = A.jd(y0, 1, 1, 0), J1 = A.jd(y0 + N, 1, 1, 0);
+  b.disabled = true; b.textContent = 'Menghitung…'; A.$('gPh').textContent = 'Di ' + GP.name; A.$('gFam').innerHTML = '';
+  var list = A.eclipsesInRange(J0, J1, false).map(function (e) { return { e: e, lunar: false }; })
+    .concat(A.eclipsesInRange(J0, J1, true).map(function (e) { return { e: e, lunar: true }; }))
+    .sort(function (a, c) { return a.e.J - c.e.J; });
+  var tb = A.$('gTab'); tb.innerHTML = ''; var i = 0;
+  (function step() {
+    if (i >= list.length) { b.disabled = false; b.textContent = 'Tampilkan'; return; }
+    var q = list[i++], e = q.e, mag = q.lunar ? f(e.magUmb, 3) : (e.mag !== undefined ? f(e.mag, 3) : '—');
+    var tr = document.createElement('tr'); tr.style.cursor = 'pointer'; tr.style.whiteSpace = 'nowrap';
+    var cc = A.cal(e.J); tr.innerHTML = '<td>' + cc.d + ' ' + A.BLN[cc.m - 1].slice(0, 3) + ' ' + cc.y + ' ' + A.localHM(e.J, 0) + '</td><td>' + ecName(e, q.lunar) + '</td><td class="n r">' + f(e.gamma, 4) + '</td><td class="n r">' + mag + '</td><td class="n r">' + saros(e, q.lunar) + '</td><td>' + visib(e, q.lunar) + '</td>';
+    tr.addEventListener('click', function () { family(e, q.lunar, tr); });
+    tb.appendChild(tr); setTimeout(step, 5);
+  })();
+});
+A.$('gGo').click();
+
+A.quiz();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bab 12 · Waktu Salat: Zuhur dan Ashar</title>
+<meta name="falak-bab" content="12">
+<link rel="stylesheet" href="../falak.css">
+<script src="../data.js"></script>
+<script src="../falak.js"></script>
+<script src="../kunci.js"></script>
+</head>
+<body>
+<style>
+/* Layout: lembar kuliah satu kolom, navigasi bagian lengket di atas; simulasi dan kalkulator dua kolom di layar besar */
+:root{
+  --bg:#f2f4f6; --surface:#ffffff; --ink:#15213a; --muted:#56627a; --line:#d5dbe4;
+  --accent:#0d6b5f; --accent-soft:#e1f0ec; --gold:#a8701a; --gold-soft:#f6ecd9;
+  --sky:#2c4a86; --sky-soft:#e3e9f6; --warn:#a33a2a; --warn-soft:#f7e3df;
+  --f-display:"Spectral",Georgia,"Times New Roman",serif;
+  --f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --f-arab:"Amiri","Traditional Arabic","Scheherazade New",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1522; --surface:#172033; --ink:#e6eaf2; --muted:#9aa6bd; --line:#2b3850;
+  --accent:#4fc2ad; --accent-soft:#163a37; --gold:#e3b464; --gold-soft:#3a2f1c;
+  --sky:#8eaaf0; --sky-soft:#1d2a47; --warn:#f08a78; --warn-soft:#3b211d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1522; --surface:#172033; --ink:#e6eaf2; --muted:#9aa6bd; --line:#2b3850;
+  --accent:#4fc2ad; --accent-soft:#163a37; --gold:#e3b464; --gold-soft:#3a2f1c;
+  --sky:#8eaaf0; --sky-soft:#1d2a47; --warn:#f08a78; --warn-soft:#3b211d; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65}
+.wrap{max-width:980px;margin:0 auto;padding-inline:20px;padding-block:0 64px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,5vw,3.1rem);font-weight:700}
+h2{font-size:clamp(1.55rem,3.4vw,2.1rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0;max-width:68ch}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.ar-in{font-family:var(--f-arab);font-size:1.15em}
+.muted{color:var(--muted)}
+.small{font-size:.92rem}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+header.top{padding-block:44px 28px;display:grid;gap:14px;border-bottom:1px solid var(--line)}
+header.top .meta{display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--muted);font-size:.95rem}
+header.top .meta b{color:var(--ink);font-weight:600}
+.lead{font-size:1.12rem;color:var(--muted)}
+
+nav.sec{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-20px;padding-inline:20px}
+nav.sec ul{display:flex;gap:4px;list-style:none;margin:0;padding:8px 0;overflow-x:auto;scrollbar-width:none}
+nav.sec a{display:block;white-space:nowrap;padding:6px 12px;border-radius:6px;text-decoration:none;color:var(--muted);font-weight:600;font-size:.93rem}
+nav.sec a:hover{color:var(--ink);background:var(--surface)}
+
+section{padding-block:48px 8px;display:grid;grid-template-columns:minmax(0,1fr);gap:20px;scroll-margin-top:60px}
+.sec-head{display:grid;gap:6px}
+
+.goals{background:var(--accent-soft);border-radius:8px;padding:18px 20px;display:grid;gap:8px}
+.goals ol,.goals ul{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.three{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.box ul,.box ol{margin:0;padding-left:1.15em;display:grid;gap:4px}
+.note{border-left:3px solid var(--gold);padding:4px 0 4px 14px;color:var(--muted);font-size:.95rem;max-width:72ch}
+.note b{color:var(--ink)}
+.warn{background:var(--gold-soft);color:var(--ink);border-radius:8px;padding:12px 16px;font-size:.95rem}
+.warn b{color:var(--gold)}
+.prose{display:grid;gap:12px}
+.prose ul,.prose ol{margin:0;padding-left:1.2em;display:grid;gap:4px;max-width:70ch}
+
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--bg)}
+td.n,th.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td.r,th.r{text-align:right}
+td i[lang=ar]{font-style:normal;font-family:var(--f-arab);font-size:1.12rem;color:var(--gold)}
+tr.hl td{background:var(--gold-soft)}
+tr.today td{background:var(--accent-soft)}
+
+.eq{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 18px;overflow-x:auto;display:grid;gap:6px}
+.eq .cap{font-size:.88rem;color:var(--muted)}
+math{font-size:1.12em}
+
+.ayat{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.ayat figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px}
+.ar{font-family:var(--f-arab);font-size:1.6rem;line-height:1.9;direction:rtl;text-align:right;color:var(--ink)}
+.ayat figcaption{font-size:.93rem;color:var(--muted)}
+.ayat figcaption b{color:var(--gold);font-family:var(--f-mono);font-size:.78rem;font-weight:600;display:block;margin-bottom:2px}
+
+.sim{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:start}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px;min-width:0}
+.stage svg{width:100%;height:auto;display:block;touch-action:none}
+svg .c{fill:none;stroke:var(--muted);stroke-width:1.3}
+svg .back{stroke-dasharray:4 5;opacity:.45}
+svg .grid{stroke:var(--line);stroke-width:1}
+svg .axisl{stroke:var(--muted);stroke-width:1.2}
+svg .lbl{fill:var(--ink);font-family:var(--f-mono);font-size:13px;font-weight:600}
+svg .sm{fill:var(--muted);font-family:var(--f-body);font-size:11.5px}
+svg .tick{fill:var(--muted);font-family:var(--f-mono);font-size:10.5px}
+.ctrl{display:grid;gap:14px;min-width:0}
+.ctrl label,.field{display:grid;gap:4px;font-weight:600;font-size:.95rem}
+.ctrl label span,.field span.v{font-family:var(--f-mono);color:var(--accent)}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+select,input[type=number],input[type=text],input[type=date]{font:inherit;font-weight:400;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);min-width:0;width:100%}
+input[type=number],input[type=text]{font-family:var(--f-mono)}
+.readout{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:.93rem;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px;align-content:start}
+.readout b{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right;overflow-wrap:anywhere;min-width:0}
+.readout .big{grid-column:1/-1;font-family:var(--f-display);font-size:1.6rem;font-weight:700;color:var(--accent);text-align:left}
+.presets{display:flex;flex-wrap:wrap;gap:6px}
+.presets button,.btn{font:inherit;font-size:.88rem;font-weight:600;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.presets button:hover,.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.85rem;font-weight:600;background:var(--sky-soft);color:var(--sky)}
+.pill.g{background:var(--gold-soft);color:var(--gold)}
+.pill.a{background:var(--accent-soft);color:var(--accent)}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;grid-template-columns:minmax(0,1fr);gap:16px;min-width:0}
+.calc .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+.worked{display:grid;gap:6px;font-size:.95rem;counter-reset:w}
+.worked div{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:baseline}
+.worked div::before{counter-increment:w;content:counter(w);font-family:var(--f-mono);font-size:.75rem;color:var(--accent);font-weight:600}
+.worked code{font-family:var(--f-mono);font-size:.88rem;background:var(--bg);padding:1px 6px;border-radius:4px;overflow-wrap:anywhere}
+.worked div>span{min-width:0}
+
+.steps{margin:0;padding:0;list-style:none;display:grid;gap:12px;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:baseline}
+.steps li::before{content:counter(s);font-family:var(--f-mono);font-weight:600;color:var(--bg);background:var(--accent);border-radius:50%;width:26px;height:26px;display:grid;place-items:center;font-size:.8rem}
+
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px}
+.ex .q{font-weight:600}
+.ex details summary{cursor:pointer;color:var(--accent);font-weight:600}
+.ex details[open] summary{margin-bottom:8px}
+.ex .sol{display:grid;gap:8px;font-size:.96rem}
+
+.quiz{display:grid;gap:14px}
+.qz{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px;display:grid;gap:10px}
+.qz p{font-weight:600}
+.opts{display:grid;gap:6px}
+.opts button{font:inherit;text-align:left;padding:8px 12px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--accent)}
+.opts button.ok{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+.opts button.bad{border-color:var(--warn);color:var(--warn)}
+.opts button:disabled{cursor:default}
+.fb{font-size:.92rem;color:var(--muted)}
+.score{font-family:var(--f-mono);font-weight:600;color:var(--accent)}
+
+.task{background:var(--gold-soft);border-radius:8px;padding:18px;display:grid;gap:8px}
+.task h3{color:var(--gold)}
+.task ol{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+.rubric td:not(:first-child){font-size:.9rem}
+.next{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:.92rem;color:var(--muted)}
+.next b{color:var(--ink)}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem;display:grid;gap:10px}
+
+@media (max-width:760px){
+  .two,.sim,.calc .grid2{grid-template-columns:1fr}
+  body{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">Astronomi Islam (Ilmu Falak) · Bab 12</div>
+  <h1>Waktu Salat: Zuhur & Ashar</h1>
+  <p class="lead">Zuhur dan Ashar adalah dua waktu salat yang ditandai langsung oleh bayangan benda. Pertemuan ini menerjemahkan tanda dalam hadis menjadi rumus, lalu menghitungnya langkah demi langkah sampai menjadi jam WIB.</p>
+  <div class="meta">
+    <div>Dosen: <b>Dr. Ea Cahya Septia Mahen, S.Pd., M.Si.</b></div>
+    <div>Prodi: <b>Pendidikan Fisika, UIN Sunan Gunung Djati Bandung</b></div>
+  </div>
+</header>
+
+<nav class="sec" aria-label="Bagian materi">
+  <ul>
+    <li><a href="#tujuan">Tujuan</a></li>
+    <li><a href="#dalil">Dalil</a></li>
+    <li><a href="#zuhur">Waktu Zuhur</a></li>
+    <li><a href="#ashar">Waktu Ashar</a></li>
+    <li><a href="#kalkulator">Kalkulator</a></li>
+    <li><a href="#setahun">Sepanjang tahun</a></li>
+    <li><a href="#contoh">Contoh soal</a></li>
+    <li><a href="#latihan">Latihan</a></li>
+  </ul>
+</nav>
+
+
+<section id="tujuan">
+  <div class="goals">
+    <div class="eyebrow">Tujuan pertemuan</div>
+    <p>Setelah pertemuan ini, mahasiswa mampu:</p>
+    <ol>
+      <li>menjelaskan dalil awal dan akhir waktu Zuhur dan Ashar;</li>
+      <li>menghitung awal waktu Zuhur dari saat kulminasi;</li>
+      <li>menurunkan rumus tinggi Matahari awal Ashar dari panjang bayangan;</li>
+      <li>menghitung awal waktu Ashar menurut jumhur dan menurut mazhab Hanafi;</li>
+      <li>menjelaskan pola perubahan waktu Zuhur dan Ashar sepanjang tahun.</li>
+    </ol>
+  </div>
+</section>
+
+<section id="dalil">
+  <div class="sec-head"><div class="eyebrow">1</div><h2>Dalil</h2></div>
+  <div class="ayat">
+    <figure>
+      <div class="ar">أَقِمِ الصَّلَاةَ لِدُلُوكِ الشَّمْسِ</div>
+      <figcaption><b>QS Al-Isra' [17]: 78</b>"Dirikanlah salat sejak Matahari tergelincir …" Para mufasir menafsirkan <i>duluk asy-syams</i> sebagai tergelincirnya Matahari dari tengah langit, yaitu awal Zuhur.</figcaption>
+    </figure>
+    <figure>
+      <div class="ar">فَصَلَّى بِيَ الظُّهْرَ حِينَ زَالَتِ الشَّمْسُ … وَصَلَّى بِيَ الْعَصْرَ حِينَ كَانَ ظِلُّهُ مِثْلَهُ</div>
+      <figcaption><b>Hadis Jibril, HR Abu Dawud dan At-Tirmidzi</b>"Ia (Jibril) mengimamiku salat Zuhur ketika Matahari tergelincir … dan salat Ashar ketika bayangan setiap benda sama dengan panjangnya." Pada hari kedua, Zuhur ketika bayangan sama panjang benda dan Ashar ketika bayangan dua kali panjang benda.</figcaption>
+    </figure>
+  </div>
+  <div class="tbl"><table>
+    <thead><tr><th>Waktu</th><th>Awal</th><th>Akhir</th></tr></thead>
+    <tbody>
+      <tr><td><b>Zuhur</b></td><td>Matahari tergelincir dari meridian (zawal)</td><td>Masuk waktu Ashar</td></tr>
+      <tr><td><b>Ashar</b></td><td>Bayangan = bayangan saat zawal + 1 × panjang benda (jumhur: Syafi'i, Maliki, Hanbali); + 2 × panjang benda (Hanafi)</td><td>Matahari terbenam; setelah Matahari menguning termasuk waktu makruh</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="zuhur">
+  <div class="sec-head"><div class="eyebrow">2</div><h2>Waktu Zuhur</h2>
+  <p>Matahari tergelincir sesaat setelah pusatnya melewati meridian. Saat kulminasi sudah kita hitung di Bab 5:</p></div>
+  <div class="eq">
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>T</mi><mtext>Zuhur</mtext></msub><mo>=</mo><munder><munder><mrow><mn>12</mn><mo>&#x2212;</mo><mi>e</mi><mo>+</mo><mfrac><mrow><msub><mi>&#x3BB;</mi><mi>d</mi></msub><mo>&#x2212;</mo><mi>&#x3BB;</mi></mrow><mn>15</mn></mfrac></mrow><mo>&#x23DF;</mo></munder><mtext>kulminasi (MP)</mtext></munder><mo>+</mo><mtext>ihtiyat</mtext></mrow></math>
+    <div class="cap">Ihtiyat (kehati-hatian) yang lazim dipakai Kementerian Agama adalah sekitar 2 menit. Selain sebagai pengaman, tambahan ini memastikan seluruh piringan Matahari (diameter sekitar 32′, butuh sekitar 1 menit) sudah melewati meridian.</div>
+  </div>
+</section>
+
+<section id="ashar">
+  <div class="sec-head"><div class="eyebrow">3</div><h2>Waktu Ashar</h2>
+  <p>Misalkan tinggi benda 1. Saat kulminasi, panjang bayangan adalah tan|φ − δ| (Bab 1 dan 3). Awal Ashar ketika bayangan bertambah sepanjang benda:</p></div>
+  <div class="sim">
+    <div class="stage"><svg id="ashSvg" viewBox="0 0 440 230" role="img" aria-label="Diagram bayangan saat zawal dan awal Ashar"></svg></div>
+    <div class="ctrl">
+      <label for="aD">Selisih |φ − δ| <span id="vD">8°</span><input id="aD" type="range" min="0" max="45" step="0.5" value="8"></label>
+      <label for="aK">Mazhab<select id="aK"><option value="1">Jumhur (bayangan + 1×)</option><option value="2">Hanafi (bayangan + 2×)</option></select></label>
+      <div class="readout">
+        <span>Bayangan saat zawal</span><b id="oZ">—</b>
+        <span>Bayangan awal Ashar</span><b id="oA">—</b>
+        <span>Tinggi Matahari awal Ashar</span><b id="oH">—</b>
+      </div>
+    </div>
+  </div>
+  <div class="eq">
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mtable columnalign="left"><mtr><mtd><mi>cot</mi><mo>&#x2061;</mo><mspace width="0.17em"/><msub><mi>h</mi><mi>A</mi></msub><mo>=</mo><mi>tan</mi><mo>&#x2061;</mo><mspace width="0.17em"/><mrow><mo>|</mo><mi>&#x3C6;</mi><mo>&#x2212;</mo><mi>&#x3B4;</mi><mo>|</mo></mrow><mo>+</mo><mi>k</mi><mspace width="1.5em"/><mo>(</mo><mi>k</mi><mo>=</mo><mn>1</mn><mtext>&#xA0;jumhur,&#xA0;</mtext><mi>k</mi><mo>=</mo><mn>2</mn><mtext>&#xA0;Hanafi</mtext><mo>)</mo></mtd></mtr><mtr><mtd><mi>cos</mi><mo>&#x2061;</mo><mspace width="0.17em"/><msub><mi>t</mi><mi>A</mi></msub><mo>=</mo><mfrac><mrow><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.17em"/><msub><mi>h</mi><mi>A</mi></msub><mo>&#x2212;</mo><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.17em"/><mi>&#x3C6;</mi><mspace width="0.2em"/><mi>sin</mi><mo>&#x2061;</mo><mspace width="0.17em"/><mi>&#x3B4;</mi></mrow><mrow><mi>cos</mi><mo>&#x2061;</mo><mspace width="0.17em"/><mi>&#x3C6;</mi><mspace width="0.2em"/><mi>cos</mi><mo>&#x2061;</mo><mspace width="0.17em"/><mi>&#x3B4;</mi></mrow></mfrac></mtd></mtr><mtr><mtd><msub><mi>T</mi><mtext>Ashar</mtext></msub><mo>=</mo><mtext>MP</mtext><mo>+</mo><mfrac><msub><mi>t</mi><mi>A</mi></msub><mn>15</mn></mfrac><mo>+</mo><mtext>ihtiyat</mtext></mtd></mtr></mtable></math>
+    <div class="cap">Langkah ini menjadi pola untuk semua waktu salat lain: tentukan tinggi Matahari h dari kriteria, hitung sudut waktu t, lalu ubah ke jam dengan MP ± t/15.</div>
+  </div>
+  <p class="note"><b>Deklinasi yang dipakai.</b> Untuk ketelitian sampai menit, gunakan δ pada jam kira-kira peristiwa (misalnya pukul 15.00 untuk Ashar), bukan pada pukul 00.00. Perbedaannya bisa mencapai beberapa detik busur hingga beberapa menit busur, yang berarti beberapa detik waktu.</p>
+</section>
+
+<section id="kalkulator">
+  <div class="sec-head"><div class="eyebrow">4</div><h2>Kalkulator Zuhur dan Ashar</h2></div>
+  <div class="calc">
+    <div class="grid2">
+      <div class="ctrl">
+        <label for="cPlace">Tempat<select id="cPlace"></select></label>
+        <div class="fields">
+          <label class="field" for="cPhi">Lintang φ<input id="cPhi" type="text" value="-6.9312"></label>
+          <label class="field" for="cLam">Bujur λ<input id="cLam" type="text" value="107.7175"></label>
+          <label class="field" for="cTz">Zona (UTC+)<input id="cTz" type="number" value="7"></label>
+          <label class="field" for="cDate">Tanggal<input id="cDate" type="date"></label>
+          <label class="field" for="cIh">Ihtiyat (menit)<input id="cIh" type="number" value="2"></label>
+          <label class="field" for="cK">Mazhab Ashar<select id="cK"><option value="1">Jumhur</option><option value="2">Hanafi</option></select></label>
+        </div>
+      </div>
+      <div class="readout">
+        <span>Zuhur</span><b class="big" id="rZ" style="grid-column:auto;text-align:right">—</b>
+        <span>Ashar</span><b class="big" id="rA" style="grid-column:auto;text-align:right">—</b>
+        <span>Kulminasi (MP)</span><b id="rMP">—</b>
+        <span>Tinggi Matahari awal Ashar</span><b id="rH">—</b>
+      </div>
+    </div>
+    <div class="worked" id="cSteps"></div>
+    <p class="small muted">Jadwal akhir dibulatkan ke menit berikutnya setelah ditambah ihtiyat. Bandingkan hasilnya dengan jadwal resmi di situs Bimas Islam Kementerian Agama; selisih 1–2 menit wajar karena perbedaan data koordinat dan aturan pembulatan.</p>
+  </div>
+</section>
+
+<section id="setahun">
+  <div class="sec-head"><div class="eyebrow">5</div><h2>Zuhur dan Ashar sepanjang tahun</h2>
+  <p>Grafik untuk tempat di kalkulator. Bentuk kurva Zuhur mengikuti perata waktu (Bab 5). Kurva Ashar dipengaruhi perata waktu dan juga |φ − δ|. Titik tajam pada kurva Ashar terjadi pada hari tanpa bayangan, ketika |φ − δ| = 0 dan bayangan zawal bernilai nol.</p></div>
+  <div class="stage"><svg id="yr" viewBox="0 0 640 302" role="img" aria-label="Grafik waktu Zuhur dan Ashar sepanjang tahun"></svg></div>
+</section>
+
+<section id="contoh">
+  <div class="sec-head"><div class="eyebrow">6</div><h2>Contoh soal</h2></div>
+  <div class="ex">
+    <p class="q">Hitung awal Zuhur dan Ashar (jumhur) di Kota Bandung (φ = −6,9175°, λ = 107,6191°) pada 2 November 2026. Data: δ = −14,75°, e = +16 menit 29 detik, ihtiyat 2 menit.</p>
+    <details><summary>Lihat penyelesaian</summary><div class="sol">
+      <p><b>Zuhur.</b> MP = 12 − 0,27472 + (105 − 107,6191)/15 = 12 − 0,27472 − 0,17461 = 11,55067 jam = 11.33.02. Ditambah ihtiyat: 11.35.02, dibulatkan <b>11.36 WIB</b>.</p>
+      <p><b>Tinggi Ashar.</b> |φ − δ| = |−6,9175 + 14,75| = 7,8325°. cot h = tan 7,8325° + 1 = 1,13756, sehingga h = <b>41,32°</b>.</p>
+      <p><b>Sudut waktu.</b> cos t = (sin 41,32° − sin(−6,9175°) sin(−14,75°)) / (cos 6,9175° cos 14,75°) = (0,66024 − 0,03066) / 0,96001 = 0,65580, sehingga t = 49,02° = 3,2680 jam.</p>
+      <p><b>Ashar.</b> 11,55067 + 3,2680 = 14,8187 jam = 14.49.07. Ditambah ihtiyat: 14.51.07, dibulatkan <b>14.52 WIB</b>.</p>
+    </div></details>
+  </div>
+</section>
+
+<section id="latihan">
+  <div class="sec-head"><div class="eyebrow">Penutup</div><h2>Latihan pemahaman</h2><p>Lima soal untuk memeriksa pemahaman. Skor tidak disimpan.</p></div>
+  <div class="quiz" id="quiz"></div>
+  <p class="score" id="score"></p>
+  <div class="task">
+    <h3>Tugas Bab 12</h3>
+    <ol>
+      <li>Hitung secara manual awal Zuhur dan Ashar di masjid proyek untuk tanggal 1 dan 15 bulan ini. Bandingkan dengan kalkulator dan jadwal Kemenag.</li>
+      <li>Pengamatan: pada hari cerah, ukur bayangan tongkat 1 m saat zawal dan tandai panjang batas Ashar (zawal + 1 m). Catat jam saat ujung bayangan mencapai tanda itu, lalu bandingkan dengan hasil hitungan.</li>
+    </ol>
+    <p class="small muted">Dikumpulkan pada Bab 13.</p>
+  </div>
+</section>
+
+<script type="application/json" id="quizdata">[
+ {"q":"Awal waktu Zuhur ditandai oleh …","o":["Matahari terbit","Matahari tergelincir dari meridian","Bayangan sama panjang benda","Matahari terbenam"],"a":1,"e":"Zawal: Matahari baru saja melewati meridian."},
+ {"q":"Menurut jumhur, awal Ashar ketika panjang bayangan …","o":["Sama dengan panjang benda","Bayangan zawal + 1 × panjang benda","Dua kali panjang benda","Nol"],"a":1,"e":"Bayangan zawal ditambah satu kali panjang benda. Mazhab Hanafi: ditambah dua kali."},
+ {"q":"Jika |φ − δ| = 0 (Matahari di zenit saat zawal), tinggi Matahari awal Ashar (jumhur) adalah …","o":["30°","45°","60°","90°"],"a":1,"e":"cot h = 0 + 1 = 1, sehingga h = 45°."},
+ {"q":"Jika MP = 11.40 dan sudut waktu Ashar t = 48°, Ashar sebelum ihtiyat pukul …","o":["14.52","14.48","15.12","14.28"],"a":0,"e":"48°/15 = 3,2 jam = 3 jam 12 menit; 11.40 + 3.12 = 14.52."},
+ {"q":"Waktu Ashar menurut mazhab Hanafi dibanding jumhur …","o":["Lebih awal","Lebih lambat","Sama","Tergantung bujur"],"a":1,"e":"Bayangan harus lebih panjang, jadi Matahari harus lebih rendah, sehingga waktunya lebih lambat."}
+]</script>
+
+
+<footer>
+  <div class="next"><span>Sebelumnya: <b>Bab 10 · Mengukur Arah Kiblat dengan Smartphone</b></span><span>Berikutnya: <b>Bab 13 · Waktu Salat: Maghrib, Isya, Subuh, Terbit & Imsak</b></span></div>
+  <div>Astronomi Islam · Bab 12 · Program Studi Pendidikan Fisika, UIN Sunan Gunung Djati Bandung</div>
+</footer>
+</div>
+
+<script>
+/* Pustaka bersama Astronomi Islam: format angka, posisi Matahari, arah kiblat, waktu sholat, kuis */
+var F = (function(){
+  var RAD = Math.PI/180, DEG = 180/Math.PI;
+  var KABAH = {phi: 21 + 25/60 + 21/3600, lam: 39 + 49/60 + 34/3600};
+  function mod(a,n){ return ((a%n)+n)%n; }
+  function fnum(x,d){ if(!isFinite(x)) return '—'; return x.toFixed(d).replace('.',',').replace('-','−'); }
+  function sgn(x,d){ return (x>0?'+':'')+fnum(x,d); }
+  function dms(x, secs){
+    if(!isFinite(x)) return '—';
+    var s = x<0?'−':''; x=Math.abs(x);
+    var d=Math.floor(x), mf=(x-d)*60, m=Math.floor(mf), sc=(mf-m)*60;
+    if(!secs){ m=Math.round(mf); if(m===60){d++;m=0;} return s+d+'°'+(m<10?'0':'')+m+'′'; }
+    sc=Math.round(sc); if(sc===60){sc=0;m++;} if(m===60){m=0;d++;}
+    return s+d+'°'+(m<10?'0':'')+m+'′'+(sc<10?'0':'')+sc+'″';
+  }
+  function hm(h, mode){ /* jam desimal -> "hh:mm"; mode 'up' bulatkan ke atas, 'down' ke bawah */
+    if(!isFinite(h)) return '—';
+    h = mod(h,24); var m = h*60;
+    m = mode==='up' ? Math.ceil(m-1e-9) : mode==='down' ? Math.floor(m+1e-9) : Math.round(m);
+    var hh=Math.floor(m/60)%24, mm=m%60;
+    return (hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm;
+  }
+  function hms(h){
+    if(!isFinite(h)) return '—';
+    h = mod(h,24); var s=Math.round(h*3600), hh=Math.floor(s/3600)%24, mm=Math.floor(s%3600/60), ss=s%60;
+    return (hh<10?'0':'')+hh+':'+(mm<10?'0':'')+mm+':'+(ss<10?'0':'')+ss;
+  }
+  function minsec(m){ var s=m<0?'−':'+'; m=Math.abs(m); var mm=Math.floor(m), ss=Math.round((m-mm)*60); if(ss===60){mm++;ss=0;} return s+mm+' m '+(ss<10?'0':'')+ss+' d'; }
+  function jd(y,mo,d,hUT){ /* Kalender Gregorius */
+    if(mo<=2){ y-=1; mo+=12; }
+    var A=Math.floor(y/100), B=2-A+Math.floor(A/4);
+    return Math.floor(365.25*(y+4716))+Math.floor(30.6001*(mo+1))+d+B-1524.5+(hUT||0)/24;
+  }
+  function sun(JD){ /* algoritma NOAA (Meeus, ketelitian sekitar 0,01°) */
+    var T=(JD-2451545)/36525;
+    var L0=mod(280.46646+T*(36000.76983+0.0003032*T),360);
+    var M=357.52911+T*(35999.05029-0.0001537*T);
+    var e=0.016708634-T*(0.000042037+0.0000001267*T);
+    var Mr=M*RAD;
+    var C=Math.sin(Mr)*(1.914602-T*(0.004817+0.000014*T))+Math.sin(2*Mr)*(0.019993-0.000101*T)+Math.sin(3*Mr)*0.000289;
+    var trueL=L0+C;
+    var om=125.04-1934.136*T;
+    var lam=trueL-0.00569-0.00478*Math.sin(om*RAD);
+    var eps0=23+(26+(21.448-T*(46.815+T*(0.00059-T*0.001813)))/60)/60;
+    var eps=eps0+0.00256*Math.cos(om*RAD);
+    var dec=Math.asin(Math.sin(eps*RAD)*Math.sin(lam*RAD))*DEG;
+    var ra=mod(Math.atan2(Math.cos(eps*RAD)*Math.sin(lam*RAD),Math.cos(lam*RAD))*DEG,360);
+    var y=Math.pow(Math.tan(eps*RAD/2),2);
+    var E=y*Math.sin(2*L0*RAD)-2*e*Math.sin(Mr)+4*e*y*Math.sin(Mr)*Math.cos(2*L0*RAD)-0.5*y*y*Math.sin(4*L0*RAD)-1.25*e*e*Math.sin(2*Mr);
+    var R=1.000001018*(1-e*e)/(1+e*Math.cos((M+C)*RAD));
+    return {dec:dec, eot:4*E*DEG, ra:ra, lam:mod(lam,360), eps:eps, sd:0.2666/R, R:R};
+  }
+  function altaz(JD, phi, lam){ /* tinggi & azimut Matahari (geometris, tanpa refraksi) */
+    var s=sun(JD), T=(JD-2451545)/36525;
+    var gmst=mod(280.46061837+360.98564736629*(JD-2451545)+T*T*(0.000387933-T/38710000),360);
+    var H=mod(gmst+lam-s.ra+180,360)-180;
+    var p=phi*RAD, d=s.dec*RAD, h=H*RAD;
+    var alt=Math.asin(Math.sin(p)*Math.sin(d)+Math.cos(p)*Math.cos(d)*Math.cos(h))*DEG;
+    var az=mod(Math.atan2(-Math.cos(d)*Math.sin(h), Math.cos(p)*Math.sin(d)-Math.sin(p)*Math.cos(d)*Math.cos(h))*DEG,360);
+    return {alt:alt, az:az, H:H, dec:s.dec};
+  }
+  function qibla(phi, lam){
+    var p=phi*RAD, pk=KABAH.phi*RAD, dl=(KABAH.lam-lam)*RAD;
+    var A=mod(Math.atan2(Math.sin(dl), Math.cos(p)*Math.tan(pk)-Math.sin(p)*Math.cos(dl))*DEG,360);
+    var c=Math.sin(p)*Math.sin(pk)+Math.cos(p)*Math.cos(pk)*Math.cos(dl);
+    var ang=Math.acos(Math.max(-1,Math.min(1,c)))*DEG;
+    return {A:A, dist:ang*RAD*6371, ang:ang};
+  }
+  function falak(A){
+    A=mod(A,360);
+    if(Math.abs(A)<1e-9) return 'U'; if(Math.abs(A-180)<1e-9) return 'S';
+    if(Math.abs(A-90)<1e-9) return 'T'; if(Math.abs(A-270)<1e-9) return 'B';
+    if(A>180){ var d=A-270; return 'B '+dms(Math.abs(d),false)+' '+(d>0?'U':'S'); }
+    var e=90-A; return 'T '+dms(Math.abs(e),false)+' '+(e>0?'U':'S');
+  }
+  function hourAngle(h, phi, dec){ /* sudut waktu (derajat) saat Matahari bertinggi h */
+    var p=phi*RAD, d=dec*RAD;
+    var c=(Math.sin(h*RAD)-Math.sin(p)*Math.sin(d))/(Math.cos(p)*Math.cos(d));
+    if(c<-1||c>1) return NaN;
+    return Math.acos(c)*DEG;
+  }
+  /* Waktu sholat. o = {phi, lam, tz, H (m), y, m, d, ihtiyat (menit), subuh, isya, ashar(1|2)} */
+  function prayer(o){
+    var ih = o.ihtiyat==null?2:o.ihtiyat, sub=o.subuh==null?-20:o.subuh, isy=o.isya==null?-18:o.isya, k=o.ashar||1;
+    var base=jd(o.y,o.m,o.d,0);
+    function at(localH){ return sun(base+(localH-o.tz)/24); }
+    var s=at(12), transit=12+o.tz-o.lam/15-s.eot/60;
+    for(var i=0;i<2;i++){ s=at(transit); transit=12+o.tz-o.lam/15-s.eot/60; }
+    var hSet=-(16/60+34/60+1.76*Math.sqrt(Math.max(0,o.H||0))/60);
+    function ev(h, sign){
+      var t=transit;
+      for(var i=0;i<3;i++){ var ss=at(t); var H=hourAngle(typeof h==='function'?h(ss.dec):h, o.phi, ss.dec); if(isNaN(H)) return NaN; t=transit+sign*H/15; }
+      return t;
+    }
+    var asharH=function(dec){ return Math.atan(1/(Math.tan(Math.abs(o.phi-dec)*RAD)+k))*DEG; };
+    var r={transit:transit, dec:s.dec, eot:s.eot, hSet:hSet,
+      subuh:ev(sub,-1), terbit:ev(hSet,-1), dhuha:ev(4.5,-1), ashar:ev(asharH,1), maghrib:ev(hSet,1), isya:ev(isy,1)};
+    r.asharAlt=asharH(sun(base+(r.ashar-o.tz)/24).dec);
+    r.final={
+      imsak: r.subuh+ih/60-10/60, subuh:r.subuh+ih/60, terbit:r.terbit-ih/60, dhuha:r.dhuha+ih/60,
+      zuhur:r.transit+ih/60, ashar:r.ashar+ih/60, maghrib:r.maghrib+ih/60, isya:r.isya+ih/60
+    };
+    return r;
+  }
+  /* Saat Matahari berazimut tertentu (untuk bayangan kiblat). Mengembalikan daftar jam lokal. */
+  function azimuthTimes(o, targetAz){
+    var base=jd(o.y,o.m,o.d,0), out=[], prev=null, prevT=null;
+    for(var mnt=5*60; mnt<=19*60; mnt+=1){
+      var t=mnt/60, a=altaz(base+(t-o.tz)/24, o.phi, o.lam);
+      var dd=mod(a.az-targetAz+540,360)-180;
+      if(prev!==null && Math.abs(dd-prev)<20 && (prev<=0&&dd>0 || prev>=0&&dd<0)){
+        var f=prev/(prev-dd), tt=prevT+f/60, aa=altaz(base+(tt-o.tz)/24, o.phi, o.lam);
+        if(aa.alt>0) out.push({t:tt, alt:aa.alt});
+      }
+      prev=dd; prevT=t;
+    }
+    return out;
+  }
+  /* Kuis bersama */
+  function quiz(){
+    var data=document.getElementById('quizdata'), box=document.getElementById('quiz'), sc=document.getElementById('score');
+    if(!data||!box) return;
+    var Q=JSON.parse(data.textContent), score=0, done=0;
+    if(sc) sc.textContent='Skor: 0 / '+Q.length;
+    Q.forEach(function(it,i){
+      var d=document.createElement('div'); d.className='qz';
+      d.innerHTML='<p>'+(i+1)+'. '+it.q+'</p><div class="opts"></div><div class="fb" hidden></div>';
+      var opts=d.querySelector('.opts'), fb=d.querySelector('.fb');
+      it.o.forEach(function(o,j){
+        var b=document.createElement('button'); b.type='button'; b.textContent=String.fromCharCode(65+j)+'. '+o;
+        b.addEventListener('click',function(){
+          opts.querySelectorAll('button').forEach(function(x,k){ x.disabled=true; if(k===it.a) x.classList.add('ok'); });
+          if(j===it.a){ score++; fb.textContent='Benar. '+it.e; } else { b.classList.add('bad'); fb.textContent='Kurang tepat. '+it.e; }
+          fb.hidden=false; done++;
+          if(sc) sc.textContent='Skor: '+score+' / '+Q.length+(done===Q.length?' · selesai':'');
+        });
+        opts.appendChild(b);
+      });
+      box.appendChild(d);
+    });
+  }
+  function $(id){ return document.getElementById(id); }
+  function num(id){ var v=$(id).value; return parseFloat(String(v).replace(',','.').replace('−','-')); }
+  function copy(text, btn){
+    var done=function(){ if(btn){ var t=btn.textContent; btn.textContent='Tersalin'; setTimeout(function(){btn.textContent=t;},1500);} };
+    try{ navigator.clipboard.writeText(text).then(done, function(){ fallback(); }); }catch(e){ fallback(); }
+    function fallback(){ var ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy'); done();}catch(_){} ta.remove(); }
+  }
+  var PLACES=[
+    ["UIN SGD Bandung",-6.9312,107.7175,700],
+    ["Kota Bandung",-6.9175,107.6191,768],
+    ["Jakarta",-6.1754,106.8272,8],
+    ["Surabaya",-7.2575,112.7521,5],
+    ["Yogyakarta",-7.7956,110.3695,113],
+    ["Banda Aceh",5.5483,95.3238,10],
+    ["Makassar",-5.1477,119.4327,5],
+    ["Jayapura",-2.5337,140.7181,10],
+    ["Makkah",21.4225,39.8262,277]
+  ];
+  var TZ={"Jayapura":9,"Makassar":8,"Makkah":3};
+  function placeSelect(sel, onPick){
+    PLACES.forEach(function(p,i){ var o=document.createElement('option'); o.value=i; o.textContent=p[0]; sel.appendChild(o); });
+    sel.addEventListener('change',function(){ var p=PLACES[+sel.value]; onPick({name:p[0],phi:p[1],lam:p[2],H:p[3],tz:TZ[p[0]]||7}); });
+  }
+  function today(){ var d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+  function parseDate(s){ var a=String(s).split('-'); return {y:+a[0],m:+a[1],d:+a[2]}; }
+  var BULAN=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  return {RAD:RAD,DEG:DEG,KABAH:KABAH,mod:mod,fnum:fnum,sgn:sgn,dms:dms,hm:hm,hms:hms,minsec:minsec,jd:jd,sun:sun,altaz:altaz,qibla:qibla,falak:falak,hourAngle:hourAngle,prayer:prayer,azimuthTimes:azimuthTimes,quiz:quiz,$:$,num:num,copy:copy,PLACES:PLACES,placeSelect:placeSelect,today:today,parseDate:parseDate,BULAN:BULAN};
+})();
+
+(function(){
+var RAD=F.RAD, NS='http://www.w3.org/2000/svg';
+function mk(svg,tag,a){ var e=document.createElementNS(NS,tag); for(var k in a) e.setAttribute(k,a[k]); svg.appendChild(e); return e; }
+function tx(svg,x,y,c,s,anc,st){ var t=mk(svg,'text',{x:x,y:y,'class':c}); if(anc) t.setAttribute('text-anchor',anc); if(st) t.setAttribute('style',st); t.textContent=s; }
+var AS=F.$('ashSvg');
+function updA(){
+  var d=+F.$('aD').value, k=+F.$('aK').value, z=Math.tan(d*RAD), a=z+k, h=Math.atan(1/a)/RAD;
+  F.$('vD').textContent=F.fnum(d,1)+'°'; F.$('oZ').textContent=F.fnum(z,3)+' × tinggi'; F.$('oA').textContent=F.fnum(a,3)+' × tinggi'; F.$('oH').textContent=F.fnum(h,2)+'°';
+  while(AS.firstChild) AS.removeChild(AS.firstChild);
+  var X0=50, Y0=180, U=Math.min(110, 360/Math.max(a,1));
+  mk(AS,'line',{x1:10,y1:Y0,x2:430,y2:Y0,'class':'axisl'});
+  mk(AS,'line',{x1:X0,y1:Y0,x2:X0,y2:Y0-U,style:'stroke:var(--ink);stroke-width:5;stroke-linecap:round'});
+  mk(AS,'rect',{x:X0,y:Y0+4,width:z*U,height:8,style:'fill:var(--sky);opacity:.6'});
+  mk(AS,'rect',{x:X0,y:Y0+14,width:a*U,height:6,style:'fill:var(--gold)'});
+  mk(AS,'line',{x1:X0,y1:Y0-U,x2:X0+a*U,y2:Y0,style:'stroke:var(--gold);stroke-width:1.2;stroke-dasharray:5 4'});
+  tx(AS,X0+a*U-30,Y0-8,'sm','h = '+F.fnum(h,1)+'°','end');
+  tx(AS,X0-8,Y0-U/2,'sm','1','end');
+  tx(AS,12,222,'sm','Biru: bayangan zawal · Emas: bayangan awal Ashar · Putus: sinar');
+}
+['aD','aK'].forEach(function(i){ F.$(i).addEventListener('input',updA); }); updA();
+
+var cDate=F.$('cDate'); cDate.value=F.today();
+F.placeSelect(F.$('cPlace'),function(p){ F.$('cPhi').value=p.phi; F.$('cLam').value=p.lam; F.$('cTz').value=p.tz; updC(); });
+var ZL={7:105,8:120,9:135,3:45};
+function updC(){
+  var phi=F.num('cPhi'), lam=F.num('cLam'), tz=F.num('cTz'), ih=F.num('cIh'), k=+F.$('cK').value, p=F.parseDate(cDate.value);
+  if([phi,lam,tz,ih].some(isNaN)||!p.y) return;
+  var r=F.prayer({phi:phi,lam:lam,tz:tz,y:p.y,m:p.m,d:p.d,ihtiyat:ih,ashar:k});
+  var sA=F.sun(F.jd(p.y,p.m,p.d,r.ashar-tz)), s12=F.sun(F.jd(p.y,p.m,p.d,r.transit-tz));
+  var hA=r.asharAlt, tA=F.hourAngle(hA,phi,sA.dec), ld=(tz*15);
+  F.$('rZ').textContent=F.hm(r.final.zuhur,'up'); F.$('rA').textContent=F.hm(r.final.ashar,'up');
+  F.$('rMP').textContent=F.hms(r.transit); F.$('rH').textContent=F.fnum(hA,3)+'°';
+  F.$('cSteps').innerHTML=
+   '<div><span>Data saat kulminasi: <code>δ = '+F.fnum(s12.dec,4)+'°</code>, <code>e = '+F.fnum(s12.eot,3)+' menit</code></span></div>'+
+   '<div><span><code>MP = 12 − '+F.fnum(s12.eot/60,5)+' + ('+ld+' − '+F.fnum(lam,4)+')/15 = '+F.fnum(r.transit,5)+' jam = '+F.hms(r.transit)+'</code></span></div>'+
+   '<div><span>Zuhur: <code>'+F.hms(r.transit)+' + '+ih+' menit = '+F.hms(r.final.zuhur)+'</code> → <b>'+F.hm(r.final.zuhur,'up')+'</b></span></div>'+
+   '<div><span>δ sekitar waktu Ashar: <code>'+F.fnum(sA.dec,4)+'°</code>; <code>|φ − δ| = '+F.fnum(Math.abs(phi-sA.dec),4)+'°</code></span></div>'+
+   '<div><span><code>cot h = tan '+F.fnum(Math.abs(phi-sA.dec),4)+'° + '+k+' = '+F.fnum(Math.tan(Math.abs(phi-sA.dec)*RAD)+k,5)+'</code> → <code>h = '+F.fnum(hA,4)+'°</code></span></div>'+
+   '<div><span><code>cos t = '+F.fnum(Math.cos(tA*RAD),5)+'</code> → <code>t = '+F.fnum(tA,4)+'° = '+F.fnum(tA/15,5)+' jam</code></span></div>'+
+   '<div><span>Ashar: <code>'+F.hms(r.transit)+' + '+F.hms(tA/15)+' + '+ih+' menit = '+F.hms(r.final.ashar)+'</code> → <b>'+F.hm(r.final.ashar,'up')+'</b></span></div>';
+  drawYear(phi,lam,tz,p.y,ih,k);
+}
+['cPhi','cLam','cTz','cDate','cIh','cK'].forEach(function(i){ F.$(i).addEventListener('input',updC); });
+
+var YS=F.$('yr');
+function drawYear(phi,lam,tz,Y,ih,k){
+  while(YS.firstChild) YS.removeChild(YS.firstChild);
+  var X0=56,X1=620, zs=[], as=[];
+  for(var i=0;i<365;i+=2){ var dt=new Date(Date.UTC(Y,0,1+i)); var r=F.prayer({phi:phi,lam:lam,tz:tz,y:Y,m:dt.getUTCMonth()+1,d:dt.getUTCDate(),ihtiyat:ih,ashar:k}); zs.push([i,r.final.zuhur]); as.push([i,r.final.ashar]); }
+  function x(i){ return X0+i/364*(X1-X0); }
+  var mons=['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  function panel(arr,T,B,name,col){
+    var vals=arr.map(function(p){return p[1];}), lo=Math.floor(Math.min.apply(null,vals)*12)/12, hi=Math.ceil(Math.max.apply(null,vals)*12)/12;
+    if(hi-lo<0.25){ var mid=(hi+lo)/2; lo=mid-0.125; hi=mid+0.125; }
+    function y(v){ return B-(v-lo)/(hi-lo)*(B-T); }
+    for(var v=lo; v<=hi+1e-9; v+=(hi-lo>0.6?1/6:1/12)){ mk(YS,'line',{x1:X0,x2:X1,y1:y(v),y2:y(v),'class':'grid'}); tx(YS,X0-6,y(v)+4,'tick',F.hm(v),'end'); }
+    for(var m=0;m<12;m++){ var di=Math.round(F.jd(Y,m+1,1,0)-F.jd(Y,1,1,0)); mk(YS,'line',{x1:x(di),x2:x(di),y1:T,y2:B,'class':'grid'}); }
+    var d=''; arr.forEach(function(p,j){ d+=(j?' L':'M')+x(p[0]).toFixed(1)+' '+y(p[1]).toFixed(1); });
+    mk(YS,'path',{d:d,style:'fill:none;stroke:'+col+';stroke-width:2.4'});
+    tx(YS,X1,T-6,'lbl',name,'end','fill:'+col);
+  }
+  panel(zs,24,124,'Zuhur','var(--accent)');
+  panel(as,156,256,'Ashar','var(--gold)');
+  for(var m=0;m<12;m++){ var di=Math.round(F.jd(Y,m+1,1,0)-F.jd(Y,1,1,0)); tx(YS,x(di)+3,274,'tick',mons[m]); }
+  tx(YS,X0,294,'sm','Jam pada zona yang dipilih, sudah termasuk ihtiyat. Skala tiap panel berbeda.');
+}
+updC();
+
+F.quiz();
+})();
+</script>
+
+</body>
+</html>

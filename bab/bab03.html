@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bab 3 · Koordinat Geografis dan Sistem Koordinat Ekuator</title>
+<meta name="falak-bab" content="3">
+<link rel="stylesheet" href="../falak.css">
+<script src="../data.js"></script>
+<script src="../falak.js"></script>
+<script src="../kunci.js"></script>
+</head>
+<body>
+<style>
+/* Layout: lembar kuliah satu kolom, navigasi bagian lengket di atas; simulasi melebar dua kolom di layar besar */
+:root{
+  --bg:#f2f4f6; --surface:#ffffff; --ink:#15213a; --muted:#56627a; --line:#d5dbe4;
+  --accent:#0d6b5f; --accent-soft:#e1f0ec; --gold:#a8701a; --gold-soft:#f6ecd9;
+  --sky:#2c4a86; --sky-soft:#e3e9f6; --warn:#a33a2a;
+  --f-display:"Spectral",Georgia,"Times New Roman",serif;
+  --f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --f-arab:"Amiri","Traditional Arabic","Scheherazade New",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1522; --surface:#172033; --ink:#e6eaf2; --muted:#9aa6bd; --line:#2b3850;
+  --accent:#4fc2ad; --accent-soft:#163a37; --gold:#e3b464; --gold-soft:#3a2f1c;
+  --sky:#8eaaf0; --sky-soft:#1d2a47; --warn:#f08a78; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1522; --surface:#172033; --ink:#e6eaf2; --muted:#9aa6bd; --line:#2b3850;
+  --accent:#4fc2ad; --accent-soft:#163a37; --gold:#e3b464; --gold-soft:#3a2f1c;
+  --sky:#8eaaf0; --sky-soft:#1d2a47; --warn:#f08a78; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65}
+.wrap{max-width:980px;margin:0 auto;padding-inline:20px;padding-block:0 64px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,5vw,3.1rem);font-weight:700}
+h2{font-size:clamp(1.55rem,3.4vw,2.1rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0;max-width:68ch}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.ar-in{font-family:var(--f-arab);font-size:1.15em}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+header.top{padding-block:44px 28px;display:grid;gap:14px;border-bottom:1px solid var(--line)}
+header.top .meta{display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--muted);font-size:.95rem}
+header.top .meta b{color:var(--ink);font-weight:600}
+.lead{font-size:1.12rem;color:var(--muted)}
+
+nav.sec{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-20px;padding-inline:20px}
+nav.sec ul{display:flex;gap:4px;list-style:none;margin:0;padding:8px 0;overflow-x:auto;scrollbar-width:none}
+nav.sec a{display:block;white-space:nowrap;padding:6px 12px;border-radius:6px;text-decoration:none;color:var(--muted);font-weight:600;font-size:.93rem}
+nav.sec a:hover{color:var(--ink);background:var(--surface)}
+
+section{padding-block:48px 8px;display:grid;gap:20px;scroll-margin-top:60px}
+.sec-head{display:grid;gap:6px}
+
+.goals{background:var(--accent-soft);border-radius:8px;padding:18px 20px;display:grid;gap:8px}
+.goals ol{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px;align-content:start;min-width:0}
+.box ul{margin:0;padding-left:1.1em;display:grid;gap:4px}
+.note{border-left:3px solid var(--gold);padding:4px 0 4px 14px;color:var(--muted);font-size:.95rem;max-width:70ch}
+.note b{color:var(--ink)}
+
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--bg)}
+td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+td i[lang=ar]{font-style:normal;font-family:var(--f-arab);font-size:1.12rem;color:var(--gold)}
+tr.hl td{background:var(--gold-soft)}
+
+.eq{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 18px;overflow-x:auto;display:grid;gap:6px}
+.eq .cap{font-size:.88rem;color:var(--muted)}
+math{font-size:1.12em}
+
+.sim{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:start}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px}
+.stage svg{width:100%;height:auto;display:block;touch-action:none}
+svg .c{fill:none;stroke:var(--muted);stroke-width:1.3}
+svg .back{stroke-dasharray:4 5;opacity:.45}
+svg .hor{stroke:var(--ink);stroke-width:2}
+svg .mer{stroke:var(--muted)}
+svg .eqt{stroke:var(--sky);stroke-width:2}
+svg .day{stroke:var(--gold);stroke-width:2.2}
+svg .grat{stroke:var(--line);stroke-width:1}
+svg .pm{stroke:var(--sky);stroke-width:1.6}
+svg .arcA{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;opacity:.85}
+svg .arcH{fill:none;stroke:var(--gold);stroke-width:5;stroke-linecap:round;opacity:.9}
+svg .axis{stroke:var(--sky);stroke-width:1.2;stroke-dasharray:6 4}
+svg .lbl{fill:var(--ink);font-family:var(--f-mono);font-size:13px;font-weight:600}
+svg .sm{fill:var(--muted);font-family:var(--f-body);font-size:11.5px}
+.ctrl{display:grid;gap:14px;min-width:0}
+.ctrl label{display:grid;gap:4px;font-weight:600;font-size:.95rem}
+.ctrl label span{font-family:var(--f-mono);color:var(--accent)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+select,input[type=number],input[type=text]{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);min-width:0}
+input[type=number],input[type=text]{font-family:var(--f-mono)}
+.readout{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:.93rem;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.readout b{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right}
+.presets{display:flex;flex-wrap:wrap;gap:6px}
+.presets button,.btn{font:inherit;font-size:.88rem;font-weight:600;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.presets button:hover,.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.pill{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.85rem;font-weight:600;background:var(--sky-soft);color:var(--sky)}
+
+.conv{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.conv .row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.conv .row input{width:72px}
+.conv .out{font-family:var(--f-mono);font-size:1.15rem;font-weight:600;color:var(--accent)}
+
+.map{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.map div{background:var(--surface);padding:12px 16px;display:grid;gap:2px}
+.map span{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.map b{font-weight:600}
+.map i{font-style:normal;color:var(--sky);font-weight:600}
+
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px}
+.ex .q{font-weight:600}
+.ex details summary{cursor:pointer;color:var(--accent);font-weight:600}
+.ex details[open] summary{margin-bottom:8px}
+.ex .sol{display:grid;gap:8px;font-size:.96rem}
+
+.quiz{display:grid;gap:14px}
+.qz{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px;display:grid;gap:10px}
+.qz p{font-weight:600}
+.opts{display:grid;gap:6px}
+.opts button{font:inherit;text-align:left;padding:8px 12px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--accent)}
+.opts button.ok{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+.opts button.bad{border-color:var(--warn);color:var(--warn)}
+.opts button:disabled{cursor:default}
+.fb{font-size:.92rem;color:var(--muted)}
+.score{font-family:var(--f-mono);font-weight:600;color:var(--accent)}
+
+.task{background:var(--gold-soft);border-radius:8px;padding:18px;display:grid;gap:8px}
+.task h3{color:var(--gold)}
+.task ol{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+
+@media (max-width:760px){
+  .two,.sim,.conv{grid-template-columns:1fr}
+  body{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">Astronomi Islam (Ilmu Falak) · Bab 3</div>
+  <h1>Koordinat Geografis &amp; Sistem Koordinat Ekuator</h1>
+  <p class="lead">Dari letak sebuah kota di Bumi ke letak Matahari di langit. Lintang, bujur, deklinasi, dan sudut waktu adalah empat besaran yang muncul di setiap rumus arah kiblat dan waktu salat.</p>
+  <div class="meta">
+    <div>Dosen: <b>Dr. Ea Cahya Septia Mahen, S.Pd., M.Si.</b></div>
+    <div>Prodi: <b>Pendidikan Fisika, UIN Sunan Gunung Djati Bandung</b></div>
+  </div>
+</header>
+
+<nav class="sec" aria-label="Bagian materi">
+  <ul>
+    <li><a href="#tujuan">Tujuan</a></li>
+    <li><a href="#geo">Lintang &amp; bujur</a></li>
+    <li><a href="#dms">Derajat-menit-detik</a></li>
+    <li><a href="#kutub">Tinggi kutub</a></li>
+    <li><a href="#ekuator">Koordinat ekuator</a></li>
+    <li><a href="#harian">Gerak harian</a></li>
+    <li><a href="#kulminasi">Kulminasi</a></li>
+    <li><a href="#contoh">Contoh soal</a></li>
+    <li><a href="#latihan">Latihan</a></li>
+  </ul>
+</nav>
+
+<section id="tujuan">
+  <div class="goals">
+    <div class="eyebrow">Tujuan pertemuan</div>
+    <p>Setelah pertemuan ini, mahasiswa mampu:</p>
+    <ol>
+      <li>menjelaskan lintang (<i>φ</i>) dan bujur (<i>λ</i>) serta menuliskannya dengan benar;</li>
+      <li>mengubah sudut antara format desimal dan derajat-menit-detik;</li>
+      <li>menjelaskan hubungan lintang tempat dengan tinggi kutub langit;</li>
+      <li>menyatakan posisi benda langit dengan deklinasi (<i>δ</i>) dan sudut waktu (<i>t</i>);</li>
+      <li>menghitung tinggi Matahari saat berkulminasi dan menentukan hari tanpa bayangan.</li>
+    </ol>
+  </div>
+  <p class="note"><b>Mengingat kembali.</b> Pada Bab 2, posisi benda dinyatakan dengan tinggi dan azimut. Kelemahannya, kedua nilai itu berubah setiap saat dan berbeda di setiap tempat. Dalam bab ini kita memakai acuan yang tidak ikut berubah: ekuator.</p>
+</section>
+
+<section id="geo">
+  <div class="sec-head"><div class="eyebrow">1</div><h2>Koordinat geografis: lintang dan bujur</h2>
+  <p>Setiap tempat di permukaan Bumi ditentukan oleh dua sudut. Keduanya diukur dari pusat Bumi.</p></div>
+  <div class="two">
+    <div class="box">
+      <div class="eyebrow">Koordinat pertama</div>
+      <h3>Lintang (<i>φ</i>) · ‘ardhul balad <span class="ar-in">عَرْض البَلَد</span></h3>
+      <p>Jarak sudut suatu tempat dari ekuator Bumi, diukur sepanjang meridian tempat itu.</p>
+      <ul>
+        <li>Rentang <span class="mono">−90° sampai +90°</span></li>
+        <li>Lintang Utara (LU) bernilai <b>positif</b></li>
+        <li>Lintang Selatan (LS) bernilai <b>negatif</b></li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="eyebrow">Koordinat kedua</div>
+      <h3>Bujur (<i>λ</i>) · thulul balad <span class="ar-in">طُول البَلَد</span></h3>
+      <p>Jarak sudut antara meridian Greenwich (bujur 0°) dan meridian tempat itu, diukur sepanjang ekuator.</p>
+      <ul>
+        <li>Rentang <span class="mono">−180° sampai +180°</span></li>
+        <li>Bujur Timur (BT) bernilai <b>positif</b></li>
+        <li>Bujur Barat (BB) bernilai <b>negatif</b></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sim">
+    <div class="stage"><svg id="globe" viewBox="0 0 420 400" role="img" aria-label="Bola Bumi dengan garis lintang dan bujur serta posisi kota terpilih"></svg></div>
+    <div class="ctrl">
+      <label for="city">Pilih kota
+        <select id="city"></select></label>
+      <div class="readout">
+        <span>Lintang φ</span><b id="gPhi">−6°55′</b>
+        <span>Bujur λ</span><b id="gLam">107°36′</b>
+        <span>Desimal</span><b id="gDec">−6,917 ; 107,600</b>
+      </div>
+      <p style="font-size:.93rem;color:var(--muted)">Busur <b style="color:var(--gold)">emas</b> menunjukkan lintang, diukur dari ekuator. Busur <b style="color:var(--accent)">hijau</b> menunjukkan bujur, diukur dari meridian Greenwich. Titik hitam adalah Ka'bah.</p>
+    </div>
+  </div>
+
+  <div class="tbl"><table>
+    <thead><tr><th>Tempat</th><th>Lintang φ</th><th>Bujur λ</th><th>Keterangan</th></tr></thead>
+    <tbody id="cityTbl"></tbody>
+  </table></div>
+  <p class="note"><b>Sumber koordinat.</b> Nilai kota di atas adalah titik pusat kota yang dibulatkan ke menit busur, cukup untuk latihan. Untuk menghitung arah kiblat sebuah masjid, gunakan koordinat masjid itu sendiri dari GPS atau peta daring, dengan ketelitian sampai detik busur.</p>
+</section>
+
+<section id="dms">
+  <div class="sec-head"><div class="eyebrow">2</div><h2>Format derajat-menit-detik</h2>
+  <p>Kitab falak, tabel ephemeris, dan peta menulis sudut dalam derajat (°), menit busur (′), dan detik busur (″). Kalkulator dan aplikasi memakai desimal. Kita harus lancar mengubah keduanya.</p></div>
+  <div class="eq">
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mn>1</mn><mo>&#xB0;</mo><mo>=</mo><mn>60</mn><mo>&#x2032;</mo><mspace width="1.2em"/><mn>1</mn><mo>&#x2032;</mo><mo>=</mo><mn>60</mn><mo>&#x2033;</mo><mspace width="1.2em"/><mi>x</mi><mo>=</mo><mi>d</mi><mo>+</mo><mfrac><mi>m</mi><mn>60</mn></mfrac><mo>+</mo><mfrac><mi>s</mi><mn>3600</mn></mfrac></mrow></math>
+    <div class="cap">Contoh: 21°25′21″ = 21 + 25/60 + 21/3600 = 21,4225°.</div>
+  </div>
+  <div class="conv">
+    <div class="box">
+      <h3>Derajat-menit-detik → desimal</h3>
+      <div class="row">
+        <select id="sg" aria-label="Tanda"><option value="1">+</option><option value="-1">−</option></select>
+        <input id="dd" type="number" value="21" aria-label="Derajat"><span>°</span>
+        <input id="mm" type="number" value="25" aria-label="Menit"><span>′</span>
+        <input id="ss" type="number" value="21" step="0.1" aria-label="Detik"><span>″</span>
+      </div>
+      <div class="out" id="o1">21,42250°</div>
+    </div>
+    <div class="box">
+      <h3>Desimal → derajat-menit-detik</h3>
+      <div class="row"><input id="dec" type="text" inputmode="decimal" value="-6.9175" style="width:140px" aria-label="Sudut desimal"><span>°</span></div>
+      <div class="out" id="o2">−6°55′03″</div>
+      <p style="font-size:.88rem;color:var(--muted)">Ambil bagian bulat sebagai derajat, kalikan sisanya dengan 60 untuk menit, lalu kalikan sisa menit dengan 60 untuk detik.</p>
+    </div>
+  </div>
+  <p class="note"><b>Perhatikan tanda negatif.</b> −6°55′ berarti −(6° + 55′) = −6,9167°, bukan −6 + 0,9167. Kesalahan ini sangat sering terjadi saat memasukkan lintang Indonesia ke kalkulator.</p>
+</section>
+
+<section id="kutub">
+  <div class="sec-head"><div class="eyebrow">3</div><h2>Dari Bumi ke langit: tinggi kutub langit</h2>
+  <p>Ekuator Bumi dan sumbu rotasinya bisa "diperpanjang" sampai menembus bola langit. Hasilnya adalah <b>ekuator langit</b> dan <b>kutub langit utara/selatan</b>. Karena Bumi berputar pada sumbu itu, seluruh langit tampak berputar mengelilingi kutub langit.</p></div>
+  <div class="map">
+    <div><span>Di Bumi</span><b>Ekuator</b><i>→ ekuator langit</i></div>
+    <div><span>Di Bumi</span><b>Kutub Utara/Selatan</b><i>→ kutub langit (KU/KS)</i></div>
+    <div><span>Di Bumi</span><b>Lintang φ</b><i>→ deklinasi δ</i></div>
+    <div><span>Di Bumi</span><b>Bujur λ</b><i>→ sudut waktu t / asensio rekta α</i></div>
+  </div>
+  <p>Hubungan terpenting antara pengamat dan langit adalah:</p>
+  <div class="eq">
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mtext>tinggi kutub langit di atas horizon</mtext><mo>=</mo><mrow><mo>|</mo><mi>&#x3C6;</mi><mo>|</mo></mrow></mrow></math>
+    <div class="cap">Di belahan utara yang terlihat adalah kutub langit utara (di atas titik U); di belahan selatan, kutub langit selatan (di atas titik S). Ekuator langit memotong horizon tepat di titik Timur dan Barat, dan miring 90° − |φ| terhadap horizon.</div>
+  </div>
+  <div class="two">
+    <div class="box"><h3>Di Banda Aceh (φ ≈ +5,5°)</h3><p>Kutub langit utara 5,5° di atas titik Utara. Bintang Polaris tampak sangat rendah, hampir menyentuh horizon.</p></div>
+    <div class="box"><h3>Di Bandung (φ ≈ −6,9°)</h3><p>Kutub langit selatan 6,9° di atas titik Selatan. Polaris tidak pernah terlihat, karena berada sekitar 6° di bawah horizon utara.</p></div>
+  </div>
+  <p class="note"><b>Tinggi kutub</b> dalam kitab falak disebut <i>irtifa' al-quthb</i>. Dahulu, inilah cara para ahli falak mengukur lintang sebuah kota: mengukur tinggi kutub langit pada malam hari.</p>
+</section>
+
+<section id="ekuator">
+  <div class="sec-head"><div class="eyebrow">4</div><h2>Sistem koordinat ekuator</h2>
+  <p>Dalam sistem ini bidang acuannya adalah <b>ekuator langit</b>, bukan horizon. Karena itu koordinat sebuah bintang hampir tidak berubah dari waktu ke waktu dan sama bagi semua pengamat.</p></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Besaran</th><th>Istilah falak</th><th>Pengertian</th><th>Rentang</th></tr></thead>
+    <tbody>
+      <tr><td><b>Deklinasi (δ)</b></td><td><i lang="ar">المَيْل</i> mail</td><td>Jarak sudut benda dari ekuator langit, diukur sepanjang lingkaran deklinasi. Positif ke utara, negatif ke selatan. Setara dengan lintang di Bumi.</td><td class="n">−90° … +90°</td></tr>
+      <tr><td><b>Sudut waktu (t)</b></td><td><i lang="ar">فَضْل الدَّائِر</i> fadhlud da'ir</td><td>Sudut antara meridian pengamat dan lingkaran deklinasi benda, diukur sepanjang ekuator langit ke arah barat. Nol saat benda di meridian.</td><td class="n">−180° … +180°</td></tr>
+      <tr><td><b>Asensio rekta (α)</b></td><td><i lang="ar">المَطَالِع المُسْتَقِيمَة</i></td><td>Sudut dari titik Aries (titik musim semi) ke arah timur sepanjang ekuator langit. Dipakai di katalog bintang; dibahas singkat di Bab 4.</td><td class="n">0 … 24 jam</td></tr>
+      <tr><td><b>Lingkaran deklinasi</b></td><td>dairatul mail</td><td>Lingkaran besar yang melalui kedua kutub langit dan benda.</td><td>—</td></tr>
+      <tr><td><b>Lingkaran harian</b></td><td>madar</td><td>Lingkaran kecil sejajar ekuator langit yang dilalui benda dalam sehari akibat rotasi Bumi. Semua titiknya berdeklinasi sama.</td><td>—</td></tr>
+    </tbody>
+  </table></div>
+  <div class="two">
+    <div class="box">
+      <h3>Sudut waktu dan jam</h3>
+      <p>Bumi berputar 360° dalam sekitar 24 jam, sehingga:</p>
+      <div class="eq" style="border:0;padding:4px 0"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mn>15</mn><mo>&#xB0;</mo><mo>=</mo><mn>1</mn><mtext>&#xA0;jam</mtext><mspace width="1em"/><mn>1</mn><mo>&#xB0;</mo><mo>=</mo><mn>4</mn><mtext>&#xA0;menit</mtext><mspace width="1em"/><mn>1</mn><mo>&#x2032;</mo><mo>=</mo><mn>4</mn><mtext>&#xA0;detik</mtext></mrow></math></div>
+      <p>Saat Matahari berkulminasi, <i>t</i> = 0. Dua jam kemudian <i>t</i> = +30°. Inilah sebabnya sudut waktu menjadi jembatan antara posisi Matahari dan jam dinding.</p>
+    </div>
+    <div class="box">
+      <h3>Deklinasi Matahari</h3>
+      <p>Bintang memiliki deklinasi hampir tetap. Matahari tidak: deklinasinya berubah sepanjang tahun karena sumbu Bumi miring 23,44°.</p>
+      <ul>
+        <li>±21 Maret dan ±23 September: <span class="mono">δ ≈ 0°</span></li>
+        <li>±21 Juni: <span class="mono">δ ≈ +23,44°</span></li>
+        <li>±22 Desember: <span class="mono">δ ≈ −23,44°</span></li>
+      </ul>
+      <p style="font-size:.93rem;color:var(--muted)">Nilai harian δ diambil dari tabel ephemeris atau dihitung dengan rumus (Bab 4).</p>
+    </div>
+  </div>
+</section>
+
+<section id="harian">
+  <div class="sec-head"><div class="eyebrow">5</div><h2>Simulasi: gerak harian benda langit</h2>
+  <p>Atur lintang pengamat, deklinasi benda, dan sudut waktunya. Garis <b style="color:var(--gold)">emas</b> adalah lingkaran harian, garis <b style="color:var(--sky)">biru</b> adalah ekuator langit. Tekan <b>Jalankan</b> untuk melihat benda bergerak sepanjang hari. Gambar bisa diputar dengan diseret.</p></div>
+  <div class="sim">
+    <div class="stage"><svg id="sky" viewBox="0 0 440 400" role="img" aria-label="Bola langit dengan ekuator langit, kutub langit, dan lingkaran harian sebuah benda"></svg></div>
+    <div class="ctrl">
+      <label for="sPhi">Lintang pengamat φ <span id="vPhi">−6,9°</span><input id="sPhi" type="range" min="-90" max="90" step="0.1" value="-6.9"></label>
+      <label for="sDel">Deklinasi benda δ <span id="vDel">+23,4°</span><input id="sDel" type="range" min="-90" max="90" step="0.1" value="23.4"></label>
+      <label for="sT">Sudut waktu t <span id="vT">−45° (3 jam sebelum kulminasi)</span><input id="sT" type="range" min="-180" max="180" step="1" value="-45"></label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button type="button" class="btn pri" id="play">Jalankan</button>
+        <label for="sV" style="flex:1 1 140px;font-size:.85rem">Putar tampilan<input id="sV" type="range" min="0" max="359" value="35"></label>
+      </div>
+      <div class="presets" role="group" aria-label="Contoh deklinasi">
+        <button type="button" data-d="23.44">Matahari ±21 Juni</button>
+        <button type="button" data-d="0">Matahari ekuinoks</button>
+        <button type="button" data-d="-23.44">Matahari ±22 Des</button>
+        <button type="button" data-d="89.26">Polaris</button>
+        <button type="button" data-d="-60.84">Alpha Centauri</button>
+      </div>
+      <div class="readout">
+        <span>Tinggi h</span><b id="oH">—</b>
+        <span>Azimut A</span><b id="oA">—</b>
+        <span>Tinggi saat kulminasi atas</span><b id="oK">—</b>
+        <span>Lama di atas horizon</span><b id="oL">—</b>
+        <span>Jenis gerak</span><b id="oJ">—</b>
+      </div>
+    </div>
+  </div>
+  <p>Tinggi dan azimut yang muncul di kotak atas dihitung dari tiga besaran saja (<i>φ</i>, <i>δ</i>, <i>t</i>) dengan rumus segitiga bola berikut. Rumus ini akan diturunkan pada Bab 6 dan menjadi rumus utama waktu salat.</p>
+  <div class="eq">
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><mi>sin</mi><mo>&#x2061;</mo><mi>h</mi><mo>=</mo><mi>sin</mi><mo>&#x2061;</mo><mi>&#x3C6;</mi><mspace width="0.2em"/><mi>sin</mi><mo>&#x2061;</mo><mi>&#x3B4;</mi><mo>+</mo><mi>cos</mi><mo>&#x2061;</mo><mi>&#x3C6;</mi><mspace width="0.2em"/><mi>cos</mi><mo>&#x2061;</mo><mi>&#x3B4;</mi><mspace width="0.2em"/><mi>cos</mi><mo>&#x2061;</mo><mi>t</mi></mrow></math>
+    <div class="cap">Untuk waktu salat, rumus ini dibalik: tinggi Matahari h sudah diketahui dari kriteria (misalnya −18° untuk Isya), lalu dicari sudut waktu t, kemudian t diubah menjadi jam.</div>
+  </div>
+  <div class="two">
+    <div class="box"><h3>Sirkumpolar</h3><p>Benda yang lingkaran hariannya seluruhnya di atas horizon; tidak pernah terbenam. Syaratnya |δ| &gt; 90° − |φ| dengan δ sejenis (sama-sama utara atau selatan) dengan φ.</p></div>
+    <div class="box"><h3>Tidak pernah terbit</h3><p>Lingkaran harian seluruhnya di bawah horizon. Contoh: Polaris bagi pengamat di Bandung. Di Indonesia yang dekat ekuator, hampir semua bintang terbit dan terbenam.</p></div>
+  </div>
+</section>
+
+<section id="kulminasi">
+  <div class="sec-head"><div class="eyebrow">6</div><h2>Kulminasi dan hari tanpa bayangan</h2>
+  <p>Saat berkulminasi atas (<i>t</i> = 0), benda mencapai tinggi maksimum di meridian. Rumus di atas menjadi sangat sederhana:</p></div>
+  <div class="eq">
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><mrow><msub><mi>h</mi><mtext>maks</mtext></msub><mo>=</mo><mn>90</mn><mo>&#xB0;</mo><mo>&#x2212;</mo><mrow><mo>|</mo><mi>&#x3C6;</mi><mo>&#x2212;</mo><mi>&#x3B4;</mi><mo>|</mo></mrow></mrow></math>
+    <div class="cap">Jika δ &gt; φ, Matahari berkulminasi di sebelah utara zenit; jika δ &lt; φ, di sebelah selatan. Inilah suku |φ − δ| yang muncul pada rumus Ashar di Bab 1.</div>
+  </div>
+  <p>Jika <i>δ</i> = <i>φ</i>, maka <i>h</i><sub>maks</sub> = 90°: Matahari tepat di zenit saat tengah hari dan benda tegak tidak berbayang. Peristiwa ini disebut <b>hari tanpa bayangan</b> (<i>istiwa' a'zham</i>). Di wilayah antara 23,44° LS dan 23,44° LU, peristiwa ini terjadi dua kali setahun.</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Tempat</th><th>Syarat</th><th>Perkiraan tanggal</th><th>Kegunaan</th></tr></thead>
+    <tbody>
+      <tr class="hl"><td><b>Makkah (Ka'bah)</b></td><td class="n">δ = +21,42°</td><td>±27/28 Mei dan ±15/16 Juli</td><td>Matahari di atas Ka'bah: <b>rashdul kiblat</b>. Bayangan tegak di seluruh dunia yang masih siang menunjuk arah kiblat.</td></tr>
+      <tr><td><b>Bandung</b></td><td class="n">δ = −6,92°</td><td>±akhir Februari–awal Maret dan ±awal–pertengahan Oktober</td><td>Kesempatan memeriksa ketegakan tongkat dan arah meridian.</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note"><b>Untuk diamati.</b> Hari tanpa bayangan Bandung yang berikutnya jatuh pada pekan-pekan ini, sekitar awal sampai pertengahan Oktober. Tanggal dan jam pastinya dihitung pada Bab 5 setelah kita membahas perata waktu.</p>
+</section>
+
+<section id="contoh">
+  <div class="sec-head"><div class="eyebrow">7</div><h2>Contoh soal</h2></div>
+  <div class="ex">
+    <p class="q">Soal 1. Ubah lintang Bandung −6°55′03″ ke bentuk desimal.</p>
+    <details><summary>Lihat penyelesaian</summary><div class="sol">
+      <p>Hitung besarnya dulu, baru beri tanda: 6 + 55/60 + 3/3600 = 6 + 0,91667 + 0,00083 = 6,9175. Jadi <i>φ</i> = <b>−6,9175°</b>.</p>
+    </div></details>
+  </div>
+  <div class="ex">
+    <p class="q">Soal 2. Berapa tinggi kutub langit di Makkah, dan kutub mana yang terlihat?</p>
+    <details><summary>Lihat penyelesaian</summary><div class="sol">
+      <p>Makkah berada di <i>φ</i> = +21,42°, belahan utara. Kutub langit <b>utara</b> terlihat setinggi <b>21,42°</b> di atas titik Utara. Polaris tampak cukup tinggi di langit Makkah.</p>
+    </div></details>
+  </div>
+  <div class="ex">
+    <p class="q">Soal 3. Pada 21 Juni (δ = +23,44°), berapa tinggi Matahari saat berkulminasi di Bandung (φ = −6,92°)? Di sisi mana Matahari berada?</p>
+    <details><summary>Lihat penyelesaian</summary><div class="sol">
+      <p><i>h</i><sub>maks</sub> = 90° − |−6,92° − 23,44°| = 90° − 30,36° = <b>59,64°</b>.</p>
+      <p>Karena <i>δ</i> &gt; <i>φ</i>, Matahari berkulminasi di sebelah <b>utara</b> zenit. Bayangan benda tegak saat tengah hari menunjuk ke selatan.</p>
+    </div></details>
+  </div>
+  <div class="ex">
+    <p class="q">Soal 4. Matahari berkulminasi pukul 11.50 WIB. Berapa sudut waktu Matahari pada pukul 14.30 WIB?</p>
+    <details><summary>Lihat penyelesaian</summary><div class="sol">
+      <p>Selisih waktu = 2 jam 40 menit = 2,667 jam. Sudut waktu <i>t</i> = 2,667 × 15° = <b>+40°</b> (positif karena Matahari sudah lewat meridian, ke arah barat).</p>
+    </div></details>
+  </div>
+</section>
+
+<section id="latihan">
+  <div class="sec-head"><div class="eyebrow">Penutup</div><h2>Latihan pemahaman</h2>
+  <p>Lima soal untuk memeriksa pemahaman. Skor tidak disimpan.</p></div>
+  <div class="quiz" id="quiz"></div>
+  <p class="score" id="score">Skor: 0 / 5</p>
+  <div class="task">
+    <h3>Tugas Bab 3</h3>
+    <ol>
+      <li>Catat koordinat rumah, masjid terdekat, dan Ka'bah sampai detik busur. Tuliskan dalam format derajat-menit-detik dan desimal.</li>
+      <li>Hitung tinggi kutub langit di tempat Anda dan sebutkan kutub mana yang terlihat.</li>
+      <li>Hitung tinggi Matahari saat kulminasi di tempat Anda pada 21 Maret, 21 Juni, dan 22 Desember. Tentukan juga sisi (utara/selatan zenit) dan arah bayangan tengah hari.</li>
+      <li>Pengamatan: sekitar pukul 11.30–12.15 WIB pada hari cerah, amati bayangan tongkat tegak setiap 5 menit. Tandai ujung bayangan terpendek. Bandingkan arahnya dengan jawaban nomor 3.</li>
+    </ol>
+    <p style="font-size:.93rem;color:var(--muted)">Dikumpulkan pada Bab 4.</p>
+  </div>
+</section>
+
+<footer>Astronomi Islam · Bab 3 · Program Studi Pendidikan Fisika, UIN Sunan Gunung Djati Bandung</footer>
+</div>
+
+<script>
+(function(){
+  var RAD=Math.PI/180, NS='http://www.w3.org/2000/svg';
+  function fnum(x,d){ return x.toFixed(d).replace('.',',').replace('-','−'); }
+  function sgn(x,d){ return (x>0?'+':'')+fnum(x,d); }
+  function dms(x, secs){
+    var s = x<0?'−':''; x=Math.abs(x);
+    var d=Math.floor(x), mf=(x-d)*60, m=Math.floor(mf), sc=(mf-m)*60;
+    if(!secs){ m=Math.round(mf); if(m===60){d++;m=0;} return s+d+'°'+(m<10?'0':'')+m+'′'; }
+    sc=Math.round(sc); if(sc===60){sc=0;m++;} if(m===60){m=0;d++;}
+    return s+d+'°'+(m<10?'0':'')+m+'′'+(sc<10?'0':'')+sc+'″';
+  }
+  function el(svg,tag,attrs){ var e=document.createElementNS(NS,tag); for(var k in attrs) e.setAttribute(k,attrs[k]); svg.appendChild(e); return e; }
+  function txt(svg,x,y,cls,s,style){ var t=el(svg,'text',{x:x,y:y,'class':cls}); if(style) t.setAttribute('style',style); t.textContent=s; return t; }
+
+  /* ---------- Data kota ---------- */
+  var CITIES=[
+    ["Bandung",-6.9175,107.6,"Kota kampus"],
+    ["Jakarta",-6.1667,106.8167,"Ibu kota"],
+    ["Surabaya",-7.25,112.75,""],
+    ["Banda Aceh",5.55,95.3167,"Ujung barat, di belahan utara"],
+    ["Makassar",-5.1333,119.4167,""],
+    ["Jayapura",-2.5333,140.7167,"Ujung timur"],
+    ["Ka'bah, Makkah",21.4225,39.8261,"Kiblat; 21°25′21″ LU, 39°49′34″ BT"],
+    ["Greenwich, London",51.4769,0,"Acuan bujur 0°"]
+  ];
+  var tb=document.getElementById('cityTbl'), sel=document.getElementById('city');
+  CITIES.forEach(function(c,i){
+    var tr=document.createElement('tr'); if(i===6) tr.className='hl';
+    tr.innerHTML='<td><b>'+c[0]+'</b></td><td class="n">'+dms(Math.abs(c[1]),false)+' '+(c[1]>=0?'LU':'LS')+'</td><td class="n">'+dms(Math.abs(c[2]),false)+' '+(c[2]>=0?'BT':'BB')+'</td><td>'+c[3]+'</td>';
+    tb.appendChild(tr);
+    var o=document.createElement('option'); o.value=i; o.textContent=c[0]; sel.appendChild(o);
+  });
+
+  /* ---------- Bola Bumi ---------- */
+  var globe=document.getElementById('globe'), GX=210, GY=195, GR=160;
+  function gproj(phi,lam,phi0,lam0){
+    var p=phi*RAD,l=(lam-lam0)*RAD,p0=phi0*RAD;
+    var cosc=Math.sin(p0)*Math.sin(p)+Math.cos(p0)*Math.cos(p)*Math.cos(l);
+    return {X:GX+GR*Math.cos(p)*Math.sin(l), Y:GY-GR*(Math.cos(p0)*Math.sin(p)-Math.sin(p0)*Math.cos(p)*Math.cos(l)), v:cosc>=0};
+  }
+  function gpath(fn,n,phi0,lam0){ var d='',pen=false; for(var i=0;i<=n;i++){ var a=fn(i/n), q=gproj(a[0],a[1],phi0,lam0); if(q.v){ d+=(pen?' L':' M')+q.X.toFixed(1)+' '+q.Y.toFixed(1); pen=true;} else pen=false; } return d; }
+  function drawGlobe(){
+    var c=CITIES[+sel.value], phi=c[1], lam=c[2];
+    var lam0 = lam/2, phi0 = 15;
+    while(globe.firstChild) globe.removeChild(globe.firstChild);
+    el(globe,'circle',{cx:GX,cy:GY,r:GR,style:'fill:var(--sky-soft);stroke:var(--muted);stroke-width:1.5'});
+    for(var la=-60;la<=60;la+=30){ if(la===0) continue; (function(la){ el(globe,'path',{d:gpath(function(u){return [la,-180+360*u];},180,phi0,lam0),'class':'c grat'}); })(la); }
+    for(var lo=-180;lo<180;lo+=30){ if(lo===0) continue; (function(lo){ el(globe,'path',{d:gpath(function(u){return [-90+180*u,lo];},90,phi0,lam0),'class':'c grat'}); })(lo); }
+    el(globe,'path',{d:gpath(function(u){return [0,-180+360*u];},240,phi0,lam0),'class':'c eqt'});
+    el(globe,'path',{d:gpath(function(u){return [-90+180*u,0];},120,phi0,lam0),'class':'c pm'});
+    el(globe,'path',{d:gpath(function(u){return [-90+180*u,lam];},120,phi0,lam0),'class':'c',style:'stroke:var(--ink);opacity:.5'});
+    if(Math.abs(lam)>0.01) el(globe,'path',{d:gpath(function(u){return [0,lam*u];},80,phi0,lam0),'class':'arcA'});
+    if(Math.abs(phi)>0.01) el(globe,'path',{d:gpath(function(u){return [phi*u,lam];},60,phi0,lam0),'class':'arcH'});
+    var e0=gproj(0,-58,phi0,lam0); if(e0.v) txt(globe,e0.X-4,e0.Y-6,'sm','ekuator');
+    var g0=gproj(52,0,phi0,lam0); if(g0.v) txt(globe,g0.X+6,g0.Y,'sm','Greenwich 0°');
+    var k=gproj(21.4225,39.8261,phi0,lam0);
+    if(k.v){ el(globe,'rect',{x:k.X-4.5,y:k.Y-4.5,width:9,height:9,style:'fill:var(--ink)'}); if(+sel.value!==6) txt(globe,k.X+8,k.Y-6,'sm',"Ka'bah"); }
+    var q=gproj(phi,lam,phi0,lam0);
+    el(globe,'circle',{cx:q.X,cy:q.Y,r:6.5,style:'fill:var(--gold);stroke:var(--surface);stroke-width:2'});
+    txt(globe,q.X+10,q.Y+16,'lbl',c[0].split(',')[0]);
+    txt(globe,12,390,'sm','Garis biru: ekuator dan meridian Greenwich.');
+    document.getElementById('gPhi').textContent=dms(phi,false)+' '+(phi>=0?'LU':'LS');
+    document.getElementById('gLam').textContent=dms(lam,false)+' '+(lam>=0?'BT':'BB');
+    document.getElementById('gDec').textContent=fnum(phi,3)+' ; '+fnum(lam,3);
+  }
+  sel.addEventListener('change',drawGlobe); drawGlobe();
+
+  /* ---------- Konversi ---------- */
+  var sg=document.getElementById('sg'),dd=document.getElementById('dd'),mm=document.getElementById('mm'),ss=document.getElementById('ss'),dec=document.getElementById('dec');
+  function c1(){ var v=(Math.abs(+dd.value||0)+(+mm.value||0)/60+(+ss.value||0)/3600)*(+sg.value); document.getElementById('o1').textContent=fnum(v,5)+'°'; }
+  function c2(){ var v=parseFloat(String(dec.value).replace(',','.').replace('−','-')); document.getElementById('o2').textContent=isNaN(v)?'Masukkan angka, misalnya -6.9175':dms(v,true); }
+  [sg,dd,mm,ss].forEach(function(e){ e.addEventListener('input',c1); }); dec.addEventListener('input',c2); c1(); c2();
+
+  /* ---------- Bola langit: gerak harian ---------- */
+  var sky=document.getElementById('sky'), CX=220, CY=200, R=150, EL=20*RAD;
+  var sPhi=document.getElementById('sPhi'), sDel=document.getElementById('sDel'), sT=document.getElementById('sT'), sV=document.getElementById('sV');
+  function proj(p,th){
+    var xr=p[0]*Math.cos(th)-p[1]*Math.sin(th), yr=p[0]*Math.sin(th)+p[1]*Math.cos(th);
+    var up=p[2]*Math.cos(EL)+yr*Math.sin(EL), depth=-yr*Math.cos(EL)+p[2]*Math.sin(EL);
+    return {X:CX+R*xr, Y:CY-R*up, f:depth>=-1e-6};
+  }
+  function eqVec(phi,del,t){ // x=Timur, y=Utara, z=atas; t positif ke barat
+    var P=[0,Math.cos(phi),Math.sin(phi)], M=[0,-Math.sin(phi),Math.cos(phi)], W=[-1,0,0];
+    var sd=Math.sin(del), cd=Math.cos(del);
+    return [sd*P[0]+cd*(Math.cos(t)*M[0]+Math.sin(t)*W[0]), sd*P[1]+cd*(Math.cos(t)*M[1]+Math.sin(t)*W[1]), sd*P[2]+cd*(Math.cos(t)*M[2]+Math.sin(t)*W[2])];
+  }
+  function curve(fn,n,th,cls,extra){
+    var f='',b='',pf=false,pb=false;
+    for(var i=0;i<=n;i++){ var q=proj(fn(i/n),th), pt=q.X.toFixed(1)+' '+q.Y.toFixed(1);
+      if(q.f){ f+=(pf?' L':' M')+pt; pf=true; pb=false; } else { b+=(pb?' L':' M')+pt; pb=true; pf=false; } }
+    if(b) el(sky,'path',{d:b,'class':'c back '+cls,style:extra||''});
+    if(f) el(sky,'path',{d:f,'class':'c '+cls,style:extra||''});
+  }
+  function render(){
+    var phi=+sPhi.value*RAD, del=+sDel.value*RAD, t=+sT.value*RAD, th=+sV.value*RAD;
+    while(sky.firstChild) sky.removeChild(sky.firstChild);
+    el(sky,'circle',{cx:CX,cy:CY,r:R,'class':'c',style:'opacity:.25'});
+    curve(function(u){var a=u*2*Math.PI; return [Math.sin(a),Math.cos(a),0];},180,th,'hor');
+    curve(function(u){var a=u*2*Math.PI; return [0,Math.cos(a),Math.sin(a)];},180,th,'mer');
+    curve(function(u){return eqVec(phi,0,u*2*Math.PI);},180,th,'eqt');
+    if(Math.abs(Math.abs(del)-Math.PI/2)>0.002) curve(function(u){return eqVec(phi,del,u*2*Math.PI);},180,th,'day');
+    // sumbu kutub
+    var KU=proj([0,Math.cos(phi),Math.sin(phi)],th), KS=proj([0,-Math.cos(phi),-Math.sin(phi)],th);
+    el(sky,'line',{x1:KS.X,y1:KS.Y,x2:KU.X,y2:KU.Y,'class':'axis'});
+    // busur tinggi kutub
+    var pole = phi>=0 ? [0,1,0] : [0,-1,0], pt=phi>=0?phi:-phi, dir=phi>=0?1:-1;
+    if(pt>0.002){ var d='',n=30; for(var i=0;i<=n;i++){ var a=pt*i/n, q=proj([0,dir*Math.cos(a),Math.sin(a)],th); d+=(i?' L':'M')+q.X.toFixed(1)+' '+q.Y.toFixed(1);} el(sky,'path',{d:d,'class':'arcH',style:'stroke:var(--sky);opacity:.7'}); }
+    // titik
+    [["U",[0,1,0]],["T",[1,0,0]],["S",[0,-1,0]],["B",[-1,0,0]],["Z",[0,0,1]]].forEach(function(p){
+      var q=proj(p[1],th); el(sky,'circle',{cx:q.X,cy:q.Y,r:3.2,style:'fill:var(--ink);opacity:'+(q.f?1:.45)});
+      txt(sky,q.X+(q.X>=CX?7:-17),q.Y+(p[0]==='Z'?-8:-6),'lbl',p[0],'opacity:'+(q.f?1:.55));
+    });
+    el(sky,'circle',{cx:KU.X,cy:KU.Y,r:4,style:'fill:var(--sky);opacity:'+(KU.f?1:.5)});
+    txt(sky,KU.X+7,KU.Y+14,'lbl','KU','fill:var(--sky);opacity:'+(KU.f?1:.55));
+    el(sky,'circle',{cx:KS.X,cy:KS.Y,r:4,style:'fill:var(--sky);opacity:'+(KS.f?1:.5)});
+    txt(sky,KS.X+7,KS.Y+14,'lbl','KS','fill:var(--sky);opacity:'+(KS.f?1:.55));
+    el(sky,'circle',{cx:CX,cy:CY,r:3.5,style:'fill:var(--accent)'});
+    var v=eqVec(phi,del,t), S=proj(v,th);
+    el(sky,'circle',{cx:S.X,cy:S.Y,r:7.5,style:'fill:var(--gold);stroke:var(--surface);stroke-width:2;opacity:'+(S.f?1:.55)});
+    txt(sky,12,392,'sm','Biru: ekuator langit & sumbu kutub. Emas: lingkaran harian. Busur biru: tinggi kutub = |φ|.');
+    // hitung
+    var h=Math.asin(Math.max(-1,Math.min(1,v[2])))/RAD, A=Math.atan2(v[0],v[1])/RAD; if(A<0)A+=360;
+    var phiD=+sPhi.value, delD=+sDel.value, tD=+sT.value;
+    var hk=90-Math.abs(phiD-delD);
+    var x=-Math.tan(phi)*Math.tan(del), L, J;
+    if(Math.abs(phiD)>=89.99){ L= (phiD*delD>0)?'24 jam':'0 jam'; J=(phiD*delD>0)?'sirkumpolar':'tidak pernah terbit'; }
+    else if(x<=-1){ L='24 jam'; J='sirkumpolar'; }
+    else if(x>=1){ L='0 jam'; J='tidak pernah terbit'; }
+    else { var t0=Math.acos(x)/RAD, hrs=2*t0/15, hh=Math.floor(hrs), mi=Math.round((hrs-hh)*60); if(mi===60){hh++;mi=0;} L=hh+' jam '+mi+' menit'; J='terbit dan terbenam'; }
+    document.getElementById('oH').textContent=fnum(h,1)+'°'+(h<0?' (di bawah horizon)':'');
+    document.getElementById('oA').textContent=fnum(A,1)+'°';
+    document.getElementById('oK').textContent=fnum(hk,1)+'° di '+(Math.abs(phiD-delD)<0.05?'zenit':(delD>phiD?'utara':'selatan')+' zenit');
+    document.getElementById('oL').textContent=L;
+    document.getElementById('oJ').textContent=J;
+    document.getElementById('vPhi').textContent=sgn(phiD,1)+'°';
+    document.getElementById('vDel').textContent=sgn(delD,1)+'°';
+    var jam=Math.abs(tD)/15, jh=Math.floor(jam), jm=Math.round((jam-jh)*60); if(jm===60){jh++;jm=0;}
+    var js=(jh?jh+' jam ':'')+(jm?jm+' menit':''); if(!js) js='0';
+    document.getElementById('vT').textContent=sgn(tD,0)+'° ('+(tD===0?'kulminasi':js+(tD<0?' sebelum':' sesudah')+' kulminasi')+')';
+  }
+  [sPhi,sDel,sT,sV].forEach(function(s){ s.addEventListener('input',render); });
+  document.querySelectorAll('#harian .presets button').forEach(function(b){ b.addEventListener('click',function(){ sDel.value=b.dataset.d; render(); }); });
+  var timer=null, play=document.getElementById('play');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  play.addEventListener('click',function(){
+    if(timer){ clearInterval(timer); timer=null; play.textContent='Jalankan'; return; }
+    play.textContent='Hentikan';
+    timer=setInterval(function(){ var v=+sT.value+(reduce?6:2); if(v>180) v-=360; sT.value=v; render(); }, reduce?200:50);
+  });
+  var drag=null;
+  sky.addEventListener('pointerdown',function(e){ drag={x:e.clientX,v:+sV.value}; try{sky.setPointerCapture(e.pointerId);}catch(_){} });
+  sky.addEventListener('pointermove',function(e){ if(!drag) return; var v=(drag.v-(e.clientX-drag.x)*0.6)%360; if(v<0)v+=360; sV.value=Math.round(v); render(); });
+  ['pointerup','pointercancel','pointerleave'].forEach(function(ev){ sky.addEventListener(ev,function(){drag=null;}); });
+  render();
+
+  /* ---------- Kuis ---------- */
+  var Q=[
+    ["Lintang 5°33′ LS ditulis dalam desimal sebagai …",["+5,55°","−5,33°","−5,55°","+5,33°"],2,"33′ = 33/60 = 0,55°. Lintang Selatan bernilai negatif, jadi −5,55°."],
+    ["Bagi pengamat di Bandung (φ ≈ −6,9°), kutub langit yang terlihat adalah …",["Kutub langit utara, setinggi 6,9°","Kutub langit selatan, setinggi 6,9°","Kutub langit selatan, setinggi 83,1°","Tidak ada kutub yang terlihat"],1,"Tinggi kutub langit = |φ|. Bandung di belahan selatan, sehingga kutub langit selatan terlihat 6,9° di atas titik Selatan."],
+    ["Besaran di langit yang setara dengan lintang di Bumi adalah …",["Azimut","Sudut waktu","Deklinasi","Tinggi"],2,"Deklinasi diukur dari ekuator langit ke utara atau selatan, persis seperti lintang diukur dari ekuator Bumi."],
+    ["Tiga jam setelah Matahari berkulminasi, sudut waktunya adalah …",["+15°","+45°","−45°","+90°"],1,"15° per jam × 3 jam = 45°, bertanda positif karena Matahari sudah di sebelah barat meridian."],
+    ["Matahari berada tepat di atas Ka'bah ketika deklinasinya sama dengan …",["0°","+23,44°","lintang Ka'bah, sekitar +21,4°","bujur Ka'bah, sekitar 39,8°"],2,"Benda berada di zenit suatu tempat saat δ = φ tempat itu. Untuk Ka'bah, δ = +21,42°, terjadi sekitar 28 Mei dan 16 Juli."]
+  ];
+  var quiz=document.getElementById('quiz'), score=0, done=0;
+  Q.forEach(function(it,i){
+    var d=document.createElement('div'); d.className='qz';
+    d.innerHTML='<p>'+(i+1)+'. '+it[0]+'</p><div class="opts"></div><div class="fb" hidden></div>';
+    var opts=d.querySelector('.opts'), fb=d.querySelector('.fb');
+    it[1].forEach(function(o,j){
+      var b=document.createElement('button'); b.type='button'; b.textContent=String.fromCharCode(65+j)+'. '+o;
+      b.addEventListener('click',function(){
+        opts.querySelectorAll('button').forEach(function(x,k){ x.disabled=true; if(k===it[2]) x.classList.add('ok'); });
+        if(j===it[2]){ score++; fb.textContent='Benar. '+it[3]; } else { b.classList.add('bad'); fb.textContent='Kurang tepat. '+it[3]; }
+        fb.hidden=false; done++;
+        document.getElementById('score').textContent='Skor: '+score+' / '+Q.length+(done===Q.length?' · selesai':'');
+      });
+      opts.appendChild(b);
+    });
+    quiz.appendChild(d);
+  });
+})();
+</script>
+
+</body>
+</html>
