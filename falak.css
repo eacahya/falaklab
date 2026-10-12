@@ -1,0 +1,22 @@
+/* Falak Lab: bilah atas dan navigasi di halaman materi */
+html.falak-app body{padding-top:0}
+.fl-bar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:10px;
+  padding:10px 16px;background:var(--accent,#0d6b5f);color:#fff;box-shadow:0 1px 6px rgba(0,0,0,.18)}
+:root[data-theme="dark"] .fl-bar{background:#123f3a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .fl-bar{background:#123f3a}}
+.fl-back{flex:none;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.16);
+  color:#fff;font-size:28px;line-height:36px;cursor:pointer;padding:0}
+.fl-back:active{background:rgba(255,255,255,.3)}
+.fl-title{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.fl-title b{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fl-code{font-size:12px;letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+.fl-info{margin:18px 0 6px}
+.fl-info p{margin:0 0 6px}
+.fl-ref{display:inline-block;font-size:13px;font-weight:600;color:var(--accent);background:var(--accent-soft);
+  border-radius:999px;padding:3px 10px}
+.fl-desc{color:var(--muted);font-size:15px}
+.fl-nav{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 40px}
+.fl-btn{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;
+  padding:10px 14px;font:inherit;font-size:15px;cursor:pointer;min-height:44px}
+.fl-btn:active{background:var(--accent-soft)}
+html.falak-app section{scroll-margin-top:70px}

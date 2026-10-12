@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bab 1 · Pendahuluan Ilmu Falak</title>
+<meta name="falak-bab" content="1">
+<link rel="stylesheet" href="../falak.css">
+<script src="../data.js"></script>
+<script src="../falak.js"></script>
+<script src="../kunci.js"></script>
+</head>
+<body>
+<style>
+/* Layout: lembar kuliah satu kolom, navigasi bagian lengket di atas; diagram interaktif melebar di layar besar */
+:root{
+  --bg:#f2f4f6; --surface:#ffffff; --ink:#15213a; --muted:#56627a; --line:#d5dbe4;
+  --accent:#0d6b5f; --accent-soft:#e1f0ec; --gold:#a8701a; --gold-soft:#f6ecd9;
+  --sky:#2c4a86; --warn:#a33a2a;
+  --f-display:"Spectral",Georgia,"Times New Roman",serif;
+  --f-body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --f-arab:"Amiri","Traditional Arabic","Scheherazade New",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1522; --surface:#172033; --ink:#e6eaf2; --muted:#9aa6bd; --line:#2b3850;
+  --accent:#4fc2ad; --accent-soft:#163a37; --gold:#e3b464; --gold-soft:#3a2f1c;
+  --sky:#8eaaf0; --warn:#f08a78; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1522; --surface:#172033; --ink:#e6eaf2; --muted:#9aa6bd; --line:#2b3850;
+  --accent:#4fc2ad; --accent-soft:#163a37; --gold:#e3b464; --gold-soft:#3a2f1c;
+  --sky:#8eaaf0; --warn:#f08a78; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.65}
+.wrap{max-width:980px;margin:0 auto;padding-inline:20px;padding-block:0 64px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:clamp(2rem,5vw,3.1rem);font-weight:700}
+h2{font-size:clamp(1.55rem,3.4vw,2.1rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0;max-width:68ch}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* Header */
+header.top{padding-block:44px 28px;display:grid;gap:14px;border-bottom:1px solid var(--line)}
+header.top .meta{display:flex;flex-wrap:wrap;gap:8px 22px;color:var(--muted);font-size:.95rem}
+header.top .meta b{color:var(--ink);font-weight:600}
+.lead{font-size:1.12rem;color:var(--muted)}
+
+/* Nav */
+nav.sec{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-20px;padding-inline:20px}
+nav.sec ul{display:flex;gap:4px;list-style:none;margin:0;padding:8px 0;overflow-x:auto;scrollbar-width:none}
+nav.sec a{display:block;white-space:nowrap;padding:6px 12px;border-radius:6px;text-decoration:none;color:var(--muted);font-weight:600;font-size:.93rem}
+nav.sec a:hover{color:var(--ink);background:var(--surface)}
+
+section{padding-block:48px 8px;display:grid;gap:20px;scroll-margin-top:60px}
+.sec-head{display:grid;gap:6px}
+.part{margin-top:36px;padding-top:28px;border-top:2px solid var(--ink)}
+.part > .eyebrow{color:var(--gold)}
+
+/* Tables & blocks */
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;background:var(--bg)}
+td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap}
+tr.exam td{background:var(--gold-soft)}
+.tag{display:inline-block;font-family:var(--f-mono);font-size:.7rem;padding:1px 7px;border-radius:4px;background:var(--accent-soft);color:var(--accent);font-weight:600;margin-left:6px;white-space:nowrap}
+.tag.g{background:var(--gold-soft);color:var(--gold)}
+
+.idgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.idgrid div{background:var(--surface);padding:12px 16px;display:grid;gap:2px}
+.idgrid span{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.idgrid b{font-weight:600}
+
+ol.cp{margin:0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:cp}
+ol.cp li{counter-increment:cp;display:grid;grid-template-columns:62px 1fr;gap:12px;align-items:baseline}
+ol.cp li::before{content:"CPMK-" counter(cp);font-family:var(--f-mono);font-size:.75rem;color:var(--accent);font-weight:600}
+
+.weights{display:grid;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px}
+.wrow{display:grid;grid-template-columns:minmax(120px,190px) 1fr 48px;gap:12px;align-items:center;font-size:.95rem}
+.bar{height:12px;background:var(--bg);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent)}
+.wrow b{font-family:var(--f-mono);text-align:right;font-variant-numeric:tabular-nums}
+
+ul.rules{margin:0;padding-left:1.2em;display:grid;gap:6px;max-width:70ch}
+ul.refs{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+ul.refs li{padding-left:1.6em;text-indent:-1.6em}
+
+/* Dalil */
+.ayat{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.ayat figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px}
+.ar{font-family:var(--f-arab);font-size:1.6rem;line-height:1.9;direction:rtl;text-align:right;color:var(--ink)}
+.ayat figcaption{font-size:.93rem;color:var(--muted)}
+.ayat figcaption b{color:var(--gold);font-family:var(--f-mono);font-size:.78rem;font-weight:600;display:block;margin-bottom:2px}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;display:grid;gap:10px;min-width:0}
+.box ul{margin:0;padding-left:1.1em;display:grid;gap:4px}
+
+.timeline{display:grid;gap:0;border-left:2px solid var(--line);margin-left:6px}
+.timeline div{position:relative;padding:0 0 18px 22px;display:grid;gap:2px}
+.timeline div::before{content:"";position:absolute;left:-7px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--surface);border:2px solid var(--gold)}
+.timeline span{font-family:var(--f-mono);font-size:.78rem;color:var(--gold);font-weight:600}
+
+/* Bola langit */
+.sphere{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:22px;align-items:start}
+.sphere .stage{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px}
+.sphere svg{width:100%;height:auto;display:block}
+svg .ln{fill:none;stroke:var(--muted);stroke-width:1.5}
+svg .dash{stroke-dasharray:5 5;opacity:.6}
+svg .lbl{fill:var(--ink);font-family:var(--f-mono);font-size:13px;font-weight:600}
+svg .sm{fill:var(--muted);font-family:var(--f-body);font-size:11.5px}
+svg [data-t]{transition:stroke .2s,stroke-width .2s,fill .2s,opacity .2s}
+svg .on{stroke:var(--gold)!important;stroke-width:4!important;opacity:1!important}
+svg circle.on{fill:var(--gold)!important}
+.terms{display:flex;flex-wrap:wrap;gap:6px}
+.terms button{font:inherit;font-size:.9rem;font-weight:600;padding:6px 12px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.terms button:hover{border-color:var(--accent)}
+.terms button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.def{background:var(--accent-soft);border-radius:8px;padding:14px 16px;min-height:96px}
+.def h3{font-size:1.1rem;margin-bottom:4px}
+
+/* Glosarium */
+.gl-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.gl-tools input{font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);flex:1 1 240px;min-width:0}
+.gl-tools .chips{display:flex;gap:6px;flex-wrap:wrap}
+.gl-tools button{font:inherit;font-size:.85rem;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;font-weight:600}
+.gl-tools button[aria-pressed="true"]{color:var(--accent);border-color:var(--accent);background:var(--accent-soft)}
+dl.gl{margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+dl.gl > div{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:grid;gap:4px;align-content:start}
+dl.gl dt{font-weight:700;display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}
+dl.gl dt i{font-style:normal;font-family:var(--f-arab);font-size:1.15rem;color:var(--gold);font-weight:400}
+dl.gl dd{margin:0;font-size:.95rem;color:var(--muted)}
+dl.gl dd em{color:var(--ink);font-style:normal;font-family:var(--f-mono);font-size:.8rem}
+.empty{color:var(--muted);font-style:italic}
+
+/* Waktu sholat */
+.prayer{overflow-x:auto}
+math{font-size:1.12em}
+.eq{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 18px;overflow-x:auto;display:grid;gap:6px}
+.eq .cap{font-size:.88rem;color:var(--muted)}
+
+/* Bayangan Ashar */
+.lab{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:22px;align-items:start}
+.lab .stage{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px}
+.ctrl{display:grid;gap:14px}
+.ctrl label{display:grid;gap:4px;font-weight:600;font-size:.95rem}
+.ctrl label span{font-family:var(--f-mono);color:var(--accent)}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.readout{display:grid;grid-template-columns:1fr auto;gap:4px 12px;font-size:.93rem;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px}
+.readout b{font-family:var(--f-mono);font-variant-numeric:tabular-nums;text-align:right}
+.status{padding:10px 14px;border-radius:8px;font-weight:600}
+.status.no{background:var(--bg);color:var(--muted);border:1px dashed var(--line)}
+.status.yes{background:var(--gold-soft);color:var(--gold)}
+
+/* Kuis */
+.quiz{display:grid;gap:14px}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px;display:grid;gap:10px}
+.q p{font-weight:600}
+.opts{display:grid;gap:6px}
+.opts button{font:inherit;text-align:left;padding:8px 12px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.opts button:hover:not(:disabled){border-color:var(--accent)}
+.opts button.ok{background:var(--accent-soft);border-color:var(--accent);color:var(--accent);font-weight:600}
+.opts button.bad{border-color:var(--warn);color:var(--warn)}
+.opts button:disabled{cursor:default}
+.fb{font-size:.92rem;color:var(--muted)}
+.score{font-family:var(--f-mono);font-weight:600;color:var(--accent)}
+
+.task{background:var(--gold-soft);border-radius:8px;padding:18px;display:grid;gap:8px}
+.task h3{color:var(--gold)}
+.task ol{margin:0;padding-left:1.2em;display:grid;gap:4px}
+
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem}
+
+@media (max-width:760px){
+  .two,.sphere,.lab{grid-template-columns:1fr}
+  .wrow{grid-template-columns:1fr 48px}
+  .wrow .bar{grid-column:1/-1;order:3}
+  body{font-size:16px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="eyebrow">Astronomi Islam (Ilmu Falak) · Bab 1</div>
+  <h1>Kontrak Perkuliahan &amp; Pendahuluan</h1>
+  <p class="lead">Mengenal arah mata kuliah, aturan main selama satu semester, serta mengapa penentuan arah kiblat dan waktu salat memerlukan ilmu astronomi.</p>
+  <div class="meta">
+    <div>Dosen: <b>Dr. Ea Cahya Septia Mahen, S.Pd., M.Si.</b></div>
+    <div>Prodi: <b>Pendidikan Fisika, UIN Sunan Gunung Djati Bandung</b></div>
+    <div>Semester: <b>Ganjil 2026/2027</b></div>
+  </div>
+</header>
+
+<nav class="sec" aria-label="Bagian materi">
+  <ul>
+    <li><a href="#identitas">Identitas</a></li>
+    <li><a href="#capaian">Capaian</a></li>
+    <li><a href="#rencana">Rencana 16 Pertemuan</a></li>
+    <li><a href="#penilaian">Penilaian</a></li>
+    <li><a href="#pendahuluan">Pendahuluan</a></li>
+    <li><a href="#bola">Bola Langit</a></li>
+    <li><a href="#istilah">Glosarium</a></li>
+    <li><a href="#sholat">Gambaran Waktu Salat</a></li>
+    <li><a href="#latihan">Latihan</a></li>
+  </ul>
+</nav>
+
+<!-- ============ BAGIAN A: KONTRAK ============ -->
+<div class="part"><div class="eyebrow">Bagian A</div><h2>Kontrak Perkuliahan</h2></div>
+
+<section id="identitas">
+  <div class="sec-head"><div class="eyebrow">A.1</div><h3>Identitas Mata Kuliah</h3></div>
+  <div class="idgrid">
+    <div><span>Mata kuliah</span><b>Astronomi Islam</b></div>
+    <div><span>Beban</span><b>2 SKS · 16 pertemuan</b></div>
+    <div><span>Fokus</span><b>Arah kiblat &amp; waktu salat</b></div>
+    <div><span>Prasyarat</span><b>Trigonometri dasar, Fisika Dasar</b></div>
+    <div><span>Alat bantu</span><b>Kalkulator ilmiah, smartphone, kompas</b></div>
+    <div><span>Metode</span><b>Ceramah, diskusi, praktik lapangan, proyek</b></div>
+  </div>
+  <p><b>Deskripsi singkat.</b> Mata kuliah ini membahas dasar-dasar astronomi bola (bola langit, sistem koordinat, gerak harian dan tahunan Matahari, sistem waktu) sebagai landasan untuk menghitung arah kiblat dan jadwal waktu salat. Mahasiswa tidak hanya menghitung di atas kertas, tetapi juga mengukur langsung di lapangan menggunakan bayangan Matahari, kompas, dan sensor smartphone.</p>
+</section>
+
+<section id="capaian">
+  <div class="sec-head"><div class="eyebrow">A.2</div><h3>Capaian Pembelajaran Mata Kuliah</h3></div>
+  <p>Setelah mengikuti perkuliahan ini, mahasiswa mampu:</p>
+  <ol class="cp">
+    <li>menjelaskan dasar syar'i dan dasar astronomis penentuan arah kiblat dan waktu salat;</li>
+    <li>menggunakan istilah astronomi (bola langit, koordinat horizon, koordinat ekuator, deklinasi, perata waktu, dan lain-lain) dengan tepat;</li>
+    <li>menerapkan trigonometri bola untuk menghitung arah kiblat suatu tempat;</li>
+    <li>menentukan arah kiblat di lapangan dengan metode bayangan Matahari (rashdul kiblat), kompas, dan smartphone;</li>
+    <li>menghitung waktu salat harian (Subuh, Terbit, Zuhur, Ashar, Maghrib, Isya) untuk lokasi tertentu;</li>
+    <li>menyusun jadwal waktu salat dan menyajikannya secara ilmiah.</li>
+  </ol>
+</section>
+
+<section id="rencana">
+  <div class="sec-head"><div class="eyebrow">A.3</div><h3>Rencana 16 Pertemuan</h3></div>
+  <div class="tbl"><table>
+    <thead><tr><th>Ke</th><th>Topik</th><th>Kegiatan</th></tr></thead>
+    <tbody>
+      <tr><td class="n">01</td><td>Kontrak perkuliahan &amp; pendahuluan</td><td>Ceramah, diskusi</td></tr>
+      <tr><td class="n">02</td><td>Bola langit &amp; sistem koordinat horizon (tinggi, azimut)</td><td>Ceramah, simulasi</td></tr>
+      <tr><td class="n">03</td><td>Koordinat geografis &amp; koordinat ekuator (deklinasi, sudut waktu)</td><td>Ceramah, latihan</td></tr>
+      <tr><td class="n">04</td><td>Gerak harian &amp; tahunan Matahari, ekliptika, musim</td><td>Simulasi</td></tr>
+      <tr><td class="n">05</td><td>Sistem waktu: waktu lokal, WIB/WITA/WIT, perata waktu</td><td>Latihan hitung</td></tr>
+      <tr><td class="n">06</td><td>Dasar trigonometri bola</td><td>Latihan hitung</td></tr>
+      <tr><td class="n">07</td><td>Arah kiblat: konsep, dalil, rumus segitiga bola</td><td>Latihan hitung</td></tr>
+      <tr class="exam"><td class="n">08</td><td>Ujian Tengah Semester <span class="tag g">UTS</span></td><td>Tes tertulis</td></tr>
+      <tr><td class="n">09</td><td>Arah kiblat: azimut, kompas, deklinasi magnetik</td><td>Praktik</td></tr>
+      <tr><td class="n">10</td><td>Rashdul kiblat &amp; bayangan kiblat harian</td><td>Praktik lapangan</td></tr>
+      <tr><td class="n">11</td><td>Pengukuran arah kiblat dengan smartphone &amp; aplikasi</td><td>Praktik lapangan</td></tr>
+      <tr><td class="n">12</td><td>Waktu salat: Zuhur &amp; Ashar</td><td>Latihan hitung</td></tr>
+      <tr><td class="n">13</td><td>Waktu salat: Maghrib, Isya, Subuh, Terbit, Imsak</td><td>Latihan hitung</td></tr>
+      <tr><td class="n">14</td><td>Ihtiyat, ketinggian tempat, penyusunan jadwal salat</td><td>Proyek</td></tr>
+      <tr><td class="n">15</td><td>Presentasi proyek jadwal salat &amp; arah kiblat</td><td>Presentasi</td></tr>
+      <tr class="exam"><td class="n">16</td><td>Ujian Akhir Semester <span class="tag g">UAS</span></td><td>Tes tertulis</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="penilaian">
+  <div class="sec-head"><div class="eyebrow">A.4</div><h3>Komponen Penilaian</h3></div>
+  <div class="weights">
+    <div class="wrow"><span>Kehadiran &amp; keaktifan</span><div class="bar"><i style="width:10%"></i></div><b>10%</b></div>
+    <div class="wrow"><span>Tugas &amp; latihan</span><div class="bar"><i style="width:20%"></i></div><b>20%</b></div>
+    <div class="wrow"><span>Praktik &amp; proyek</span><div class="bar"><i style="width:20%"></i></div><b>20%</b></div>
+    <div class="wrow"><span>UTS</span><div class="bar"><i style="width:25%"></i></div><b>25%</b></div>
+    <div class="wrow"><span>UAS</span><div class="bar"><i style="width:25%"></i></div><b>25%</b></div>
+  </div>
+  <div class="two">
+    <div class="box">
+      <h3>Tata tertib</h3>
+      <ul>
+        <li>Kehadiran minimal 75% sebagai syarat mengikuti UAS.</li>
+        <li>Keterlambatan lebih dari 15 menit dihitung tidak hadir, kecuali ada alasan yang dapat diterima.</li>
+        <li>Tugas dikumpulkan tepat waktu; keterlambatan mengurangi nilai.</li>
+        <li>Membawa kalkulator ilmiah setiap pertemuan hitungan.</li>
+        <li>Plagiarisme dan menyalin pekerjaan teman tidak ditoleransi.</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h3>Hak dan kewajiban</h3>
+      <ul>
+        <li>Mahasiswa berhak memperoleh materi, umpan balik tugas, dan penilaian yang transparan.</li>
+        <li>Dosen menyediakan materi tiap pertemuan dan jadwal praktik lapangan.</li>
+        <li>Perubahan jadwal disepakati bersama dan diumumkan paling lambat satu hari sebelumnya.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="sec-head" style="margin-top:8px"><h3>Referensi utama</h3></div>
+  <ul class="refs">
+    <li>Khazin, M. (2004). <i>Ilmu Falak dalam Teori dan Praktik</i>. Yogyakarta: Buana Pustaka.</li>
+    <li>Azhari, S. (2007). <i>Ilmu Falak: Perjumpaan Khazanah Islam dan Sains Modern</i>. Yogyakarta: Suara Muhammadiyah.</li>
+    <li>Hambali, S. (2011). <i>Ilmu Falak 1: Penentuan Awal Waktu Shalat dan Arah Kiblat Seluruh Dunia</i>. Semarang: Program Pascasarjana IAIN Walisongo.</li>
+    <li>Anugraha, R. (2012). <i>Mekanika Benda Langit</i>. Yogyakarta: Jurusan Fisika FMIPA UGM.</li>
+    <li>Meeus, J. (1998). <i>Astronomical Algorithms</i> (2nd ed.). Richmond: Willmann-Bell.</li>
+    <li>Kementerian Agama RI. <i>Ephemeris Hisab Rukyat</i> (terbitan tahunan). Jakarta: Direktorat Urusan Agama Islam dan Pembinaan Syariah.</li>
+  </ul>
+</section>
+
+<!-- ============ BAGIAN B: PENDAHULUAN ============ -->
+<div class="part"><div class="eyebrow">Bagian B</div><h2>Pendahuluan</h2></div>
+
+<section id="pendahuluan">
+  <div class="sec-head"><div class="eyebrow">B.1</div><h3>Apa itu Astronomi Islam?</h3></div>
+  <p>Dalam khazanah Islam, ilmu ini dikenal sebagai <b>Ilmu Falak</b> (<span style="font-family:var(--f-arab);font-size:1.15em">عِلْمُ الفَلَك</span>). Kata <i>falak</i> berarti lintasan atau orbit benda langit. Ilmu Falak mempelajari posisi dan gerak benda langit, terutama Matahari, Bulan, dan Bumi, untuk keperluan ibadah. Karena itu ia sering disebut juga <b>ilmu hisab</b> (perhitungan) dan <b>ilmu rukyat</b> (pengamatan).</p>
+  <p>Ada empat persoalan pokok yang dijawab Ilmu Falak: <b>arah kiblat</b>, <b>waktu salat</b>, <b>awal bulan Hijriah</b>, dan <b>gerhana</b>. Semester ini kita memusatkan perhatian pada dua yang pertama, karena keduanya dipakai setiap hari oleh setiap Muslim.</p>
+
+  <div class="sec-head" style="margin-top:12px"><div class="eyebrow">B.2</div><h3>Dasar syar'i</h3></div>
+  <div class="ayat">
+    <figure>
+      <div class="ar">فَوَلِّ وَجْهَكَ شَطْرَ الْمَسْجِدِ الْحَرَامِ</div>
+      <figcaption><b>QS Al-Baqarah [2]: 144</b>"Maka hadapkanlah wajahmu ke arah Masjidil Haram." Dasar kewajiban menghadap kiblat ketika salat.</figcaption>
+    </figure>
+    <figure>
+      <div class="ar">إِنَّ الصَّلَاةَ كَانَتْ عَلَى الْمُؤْمِنِينَ كِتَابًا مَوْقُوتًا</div>
+      <figcaption><b>QS An-Nisa' [4]: 103</b>"Sesungguhnya salat itu kewajiban yang ditentukan waktunya bagi orang-orang beriman."</figcaption>
+    </figure>
+    <figure>
+      <div class="ar">أَقِمِ الصَّلَاةَ لِدُلُوكِ الشَّمْسِ إِلَىٰ غَسَقِ اللَّيْلِ وَقُرْآنَ الْفَجْرِ</div>
+      <figcaption><b>QS Al-Isra' [17]: 78</b>"Dirikanlah salat sejak Matahari tergelincir sampai gelap malam, dan (dirikanlah) salat Subuh." Waktu salat ditandai oleh posisi Matahari.</figcaption>
+    </figure>
+  </div>
+  <p>Penjelasan rinci tentang awal dan akhir tiap waktu salat terdapat dalam hadis, misalnya hadis tentang Jibril yang mengimami Nabi ﷺ selama dua hari (HR Abu Dawud dan At-Tirmidzi). Semua tanda waktu itu, seperti tergelincirnya Matahari, panjang bayangan, hilangnya mega merah, dan terbitnya fajar, adalah <b>fenomena astronomi</b>. Di sinilah ilmu astronomi berperan: mengubah tanda-tanda alam itu menjadi angka yang dapat dihitung.</p>
+
+  <div class="sec-head" style="margin-top:12px"><div class="eyebrow">B.3</div><h3>Dua pertanyaan besar semester ini</h3></div>
+  <div class="two">
+    <div class="box">
+      <h3>Ke mana menghadap?</h3>
+      <p>Arah kiblat adalah arah terpendek dari suatu tempat ke Ka'bah, diukur sepanjang <b>lingkaran besar</b> di permukaan Bumi. Karena Bumi bulat, arah ini tidak bisa ditentukan dengan menarik garis lurus di peta datar.</p>
+      <p style="color:var(--muted);font-size:.93rem">Koordinat Ka'bah yang lazim dipakai: <span style="font-family:var(--f-mono)">φ = 21°25′21″ LU, λ = 39°49′34″ BT</span>.</p>
+    </div>
+    <div class="box">
+      <h3>Kapan melaksanakan?</h3>
+      <p>Waktu salat ditentukan oleh <b>posisi Matahari</b> terhadap horizon setempat. Karena posisi Matahari berubah setiap hari dan berbeda di setiap tempat, jadwal salat harus dihitung untuk tanggal dan lokasi tertentu.</p>
+      <p style="color:var(--muted);font-size:.93rem">Contoh: Bandung dan Jakarta sama-sama memakai WIB, tetapi waktu Zuhurnya berselisih sekitar 2–3 menit.</p>
+    </div>
+  </div>
+
+  <div class="sec-head" style="margin-top:12px"><div class="eyebrow">B.4</div><h3>Sekilas sejarah</h3></div>
+  <div class="timeline">
+    <div><span>Abad ke-8–9 M</span><p>Penerjemahan karya astronomi India, Persia, dan Yunani di Baitul Hikmah, Baghdad. Al-Khawarizmi menyusun tabel astronomi (<i>zij</i>).</p></div>
+    <div><span>Abad ke-9–10 M</span><p>Al-Battani mengukur kemiringan ekliptika dan panjang tahun dengan teliti. Para ahli mulai memakai trigonometri bola untuk arah kiblat.</p></div>
+    <div><span>Abad ke-11 M</span><p>Al-Biruni menulis metode penentuan arah kiblat dan mengukur jari-jari Bumi.</p></div>
+    <div><span>Abad ke-13–15 M</span><p>Observatorium Maragha (Nasiruddin at-Tusi) dan Samarkand (Ulugh Beg) menghasilkan tabel bintang yang sangat teliti. Muncul profesi <i>muwaqqit</i>, penjaga waktu salat di masjid.</p></div>
+    <div><span>Abad ke-19–20 M</span><p>Ilmu Falak berkembang di Nusantara melalui ulama seperti Syekh Ahmad Khatib al-Minangkabawi dan K.H. Ahmad Dahlan, yang dikenal karena upayanya meluruskan arah kiblat.</p></div>
+    <div><span>Kini</span><p>Perhitungan memakai algoritma astronomi modern, GPS, dan sensor smartphone, namun dasar geometrinya tetap sama.</p></div>
+  </div>
+</section>
+
+<section id="bola">
+  <div class="sec-head"><div class="eyebrow">B.5</div><h3>Bola langit: panggung semua perhitungan</h3>
+  <p>Bayangkan langit sebagai bola raksasa dengan pengamat di pusatnya. Semua benda langit seolah menempel di permukaan bola ini. Model ini disebut <b>bola langit</b>. Pilih istilah di bawah untuk melihat letaknya pada gambar.</p></div>
+  <div class="sphere">
+    <div class="stage">
+      <svg viewBox="0 0 420 390" role="img" aria-label="Diagram bola langit dengan horizon, zenit, nadir, meridian, kutub langit, ekuator langit, dan posisi sebuah bintang">
+        <!-- meridian -->
+        <circle data-t="meridian" class="ln" cx="210" cy="195" r="150"/>
+        <!-- ekuator langit -->
+        <ellipse data-t="ekuator" class="ln" cx="210" cy="195" rx="150" ry="38" transform="rotate(-60 210 195)" style="stroke:var(--sky);opacity:.55"/>
+        <!-- sumbu kutub -->
+        <line data-t="kutub" class="ln dash" x1="80.1" y1="120" x2="339.9" y2="270"/>
+        <!-- horizon -->
+        <path data-t="horizon" class="ln dash" d="M60 195 A150 40 0 0 1 360 195"/>
+        <path data-t="horizon" class="ln" d="M60 195 A150 40 0 0 0 360 195" style="stroke-width:2"/>
+        <!-- garis zenit-nadir -->
+        <line data-t="zenit" class="ln dash" x1="210" y1="45" x2="210" y2="345"/>
+        <!-- azimut -->
+        <path data-t="azimut" class="ln" d="M60 195 A150 40 0 0 0 300 227" style="stroke:transparent"/>
+        <!-- lingkaran vertikal -->
+        <path data-t="vertikal" class="ln" d="M210 45 Q320 95 300 227" style="stroke:var(--accent)"/>
+        <!-- tinggi -->
+        <path data-t="tinggi" class="ln" d="M287.5 115.5 Q313 170 300 227" style="stroke:transparent"/>
+        <!-- titik -->
+        <circle data-t="zenit" cx="210" cy="45" r="4.5" style="fill:var(--ink)"/>
+        <circle data-t="nadir" cx="210" cy="345" r="4.5" style="fill:var(--ink)"/>
+        <circle data-t="kutub" cx="80.1" cy="120" r="4.5" style="fill:var(--sky)"/>
+        <circle data-t="kutub" cx="339.9" cy="270" r="4.5" style="fill:var(--sky)"/>
+        <circle cx="210" cy="195" r="4" style="fill:var(--accent)"/>
+        <circle data-t="bintang" cx="287.5" cy="115.5" r="6" style="fill:var(--gold)"/>
+        <!-- label -->
+        <text class="lbl" x="218" y="38">Z (Zenit)</text>
+        <text class="lbl" x="218" y="364">N (Nadir)</text>
+        <text class="lbl" x="34" y="200">U</text>
+        <text class="lbl" x="368" y="200">S</text>
+        <text class="lbl" x="204" y="252">T</text>
+        <text class="lbl" x="204" y="148">B</text>
+        <text class="lbl" x="44" y="112" style="fill:var(--sky)">KU</text>
+        <text class="lbl" x="346" y="290" style="fill:var(--sky)">KS</text>
+        <text class="lbl" x="296" y="108" style="fill:var(--gold)">X</text>
+        <text class="sm" x="170" y="212">pengamat</text>
+        <text class="sm" x="12" y="384">U/S/T/B: Utara, Selatan, Timur, Barat · KU/KS: Kutub Langit Utara/Selatan</text>
+      </svg>
+    </div>
+    <div style="display:grid;gap:14px;min-width:0">
+      <div class="terms" role="group" aria-label="Pilih istilah">
+        <button type="button" data-k="horizon">Horizon</button>
+        <button type="button" data-k="zenit">Zenit</button>
+        <button type="button" data-k="nadir">Nadir</button>
+        <button type="button" data-k="meridian">Meridian</button>
+        <button type="button" data-k="kutub">Kutub langit</button>
+        <button type="button" data-k="ekuator">Ekuator langit</button>
+        <button type="button" data-k="vertikal">Lingkaran vertikal</button>
+        <button type="button" data-k="tinggi">Tinggi (h)</button>
+        <button type="button" data-k="azimut">Azimut (A)</button>
+      </div>
+      <div class="def" id="def" aria-live="polite">
+        <h3>Pilih sebuah istilah</h3>
+        <p>Definisi singkat akan muncul di sini, dan bagian yang bersangkutan akan disorot pada gambar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="istilah">
+  <div class="sec-head"><div class="eyebrow">B.6</div><h3>Glosarium istilah dasar</h3>
+  <p>Istilah-istilah ini akan dipakai sepanjang semester. Tidak perlu dihafal sekaligus; kembali ke daftar ini setiap kali menemukan istilah baru.</p></div>
+  <div class="gl-tools">
+    <label for="q" class="eyebrow" style="position:absolute;left:-9999px">Cari istilah</label>
+    <input id="q" type="search" placeholder="Cari istilah, misalnya deklinasi">
+    <div class="chips" role="group" aria-label="Kelompok istilah">
+      <button type="button" data-g="semua" aria-pressed="true">Semua</button>
+      <button type="button" data-g="bola">Bola langit</button>
+      <button type="button" data-g="koordinat">Koordinat</button>
+      <button type="button" data-g="waktu">Waktu</button>
+      <button type="button" data-g="ibadah">Kiblat &amp; salat</button>
+    </div>
+  </div>
+  <dl class="gl" id="gl"></dl>
+  <p class="empty" id="glEmpty" hidden>Tidak ada istilah yang cocok.</p>
+</section>
+
+<section id="sholat">
+  <div class="sec-head"><div class="eyebrow">B.7</div><h3>Gambaran awal: waktu salat dan posisi Matahari</h3>
+  <p>Setiap waktu salat ditandai oleh posisi Matahari tertentu. Tabel berikut memakai kriteria yang digunakan Kementerian Agama RI. Rumus lengkapnya akan dibahas pada Bab 12–14.</p></div>
+  <div class="tbl prayer"><table>
+    <thead><tr><th>Waktu</th><th>Tanda dalam hadis</th><th>Kriteria astronomis</th></tr></thead>
+    <tbody>
+      <tr><td><b>Subuh</b></td><td>Terbit fajar shadiq</td><td>Matahari <span style="font-family:var(--f-mono)">20°</span> di bawah horizon timur (h = −20°)</td></tr>
+      <tr><td><b>Terbit</b></td><td>Batas akhir Subuh</td><td>Piringan atas Matahari menyentuh horizon (h ≈ −0°50′ ditambah koreksi ketinggian tempat)</td></tr>
+      <tr><td><b>Zuhur</b></td><td>Matahari tergelincir dari tengah langit</td><td>Sesaat setelah Matahari berkulminasi (melintasi meridian)</td></tr>
+      <tr><td><b>Ashar</b></td><td>Bayangan benda sama dengan panjang bendanya</td><td>Panjang bayangan = bayangan saat Zuhur + panjang benda</td></tr>
+      <tr><td><b>Maghrib</b></td><td>Matahari terbenam</td><td>Piringan atas Matahari tepat di horizon barat (h ≈ −0°50′ dan koreksi)</td></tr>
+      <tr><td><b>Isya</b></td><td>Hilangnya mega merah</td><td>Matahari <span style="font-family:var(--f-mono)">18°</span> di bawah horizon barat (h = −18°)</td></tr>
+    </tbody>
+  </table></div>
+  <p>Sebagai contoh, kriteria Ashar dapat ditulis sebagai rumus. Jika <i>φ</i> adalah lintang tempat dan <i>δ</i> deklinasi Matahari, tinggi Matahari saat awal Ashar <i>h</i><sub>A</sub> memenuhi:</p>
+  <div class="eq">
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+      <mrow><mi>cot</mi><mo>&#x2061;</mo><msub><mi>h</mi><mi>A</mi></msub><mo>=</mo><mi>tan</mi><mo>&#x2061;</mo><mrow><mo>|</mo><mi>&#x3C6;</mi><mo>&#x2212;</mo><mi>&#x3B4;</mi><mo>|</mo></mrow><mo>+</mo><mn>1</mn></mrow>
+    </math>
+    <div class="cap">Suku tan|φ − δ| adalah panjang bayangan saat Zuhur (untuk benda setinggi 1), dan angka 1 adalah tambahan sepanjang benda.</div>
+  </div>
+
+  <div class="sec-head" style="margin-top:12px"><h3>Coba sendiri: bayangan tongkat dan awal Ashar</h3>
+  <p>Tongkat setinggi 1 meter berdiri tegak. Geser tinggi Matahari dan lihat kapan panjang bayangannya memenuhi syarat Ashar.</p></div>
+  <div class="lab">
+    <div class="stage">
+      <svg id="shadowSvg" viewBox="0 0 440 230" role="img" aria-label="Simulasi bayangan tongkat terhadap tinggi Matahari">
+        <line x1="10" y1="190" x2="430" y2="190" style="stroke:var(--muted);stroke-width:1.5"/>
+        <rect id="shZ" x="70" y="186" width="0" height="8" style="fill:var(--sky);opacity:.45"/>
+        <rect id="shA" x="70" y="196" width="0" height="4" style="fill:var(--gold)"/>
+        <rect id="shNow" x="70" y="184" width="0" height="6" style="fill:var(--ink);opacity:.7"/>
+        <line id="ray" x1="70" y1="130" x2="70" y2="190" style="stroke:var(--gold);stroke-width:1;stroke-dasharray:4 4"/>
+        <line x1="70" y1="190" x2="70" y2="130" style="stroke:var(--ink);stroke-width:4;stroke-linecap:round"/>
+        <circle id="sun" cx="40" cy="40" r="11" style="fill:var(--gold)"/>
+        <text class="sm" x="76" y="140">tongkat 1 m</text>
+        <text class="sm" x="12" y="218">■ biru: bayangan saat Zuhur · ■ emas: batas Ashar · ■ gelap: bayangan sekarang</text>
+      </svg>
+    </div>
+    <div class="ctrl">
+      <label for="dphi">Selisih lintang dan deklinasi |φ − δ| <span id="dphiV">10°</span>
+        <input id="dphi" type="range" min="0" max="45" value="10" step="1"></label>
+      <label for="halt">Tinggi Matahari sekarang (h) <span id="haltV">60°</span>
+        <input id="halt" type="range" min="10" max="90" value="60" step="1"></label>
+      <div class="readout">
+        <span>Bayangan saat Zuhur</span><b id="r0">0,18 m</b>
+        <span>Batas bayangan Ashar</span><b id="r1">1,18 m</b>
+        <span>Bayangan sekarang</span><b id="r2">0,58 m</b>
+        <span>Tinggi Matahari awal Ashar</span><b id="r3">40,3°</b>
+      </div>
+      <div class="status no" id="st">Belum masuk waktu Ashar</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LATIHAN ============ -->
+<section id="latihan">
+  <div class="sec-head"><div class="eyebrow">Penutup</div><h3>Latihan pemahaman</h3>
+  <p>Jawab lima soal berikut untuk memeriksa pemahaman. Skor tidak disimpan.</p></div>
+  <div class="quiz" id="quiz"></div>
+  <p class="score" id="score">Skor: 0 / 5</p>
+
+  <div class="task">
+    <h3>Tugas Bab 1</h3>
+    <ol>
+      <li>Tentukan lintang dan bujur rumah atau masjid terdekat Anda menggunakan aplikasi peta di smartphone. Tulis dalam format derajat-menit-detik.</li>
+      <li>Amati arah kiblat di masjid tersebut. Bandingkan dengan arah kiblat dari satu aplikasi smartphone, lalu catat selisihnya.</li>
+      <li>Pada siang hari yang cerah, tegakkan sebuah benda lurus dan amati arah bayangannya sekitar pukul 12.00. Ke arah mana bayangan itu menunjuk? Tuliskan dugaan Anda mengapa demikian.</li>
+    </ol>
+    <p style="font-size:.93rem;color:var(--muted)">Dikumpulkan pada Bab 2 dalam bentuk laporan singkat (maksimal 2 halaman) beserta foto pengamatan.</p>
+  </div>
+</section>
+
+<footer>Astronomi Islam · Bab 1 · Program Studi Pendidikan Fisika, UIN Sunan Gunung Djati Bandung</footer>
+</div>
+
+<script>
+(function(){
+  /* ---------- Bola langit ---------- */
+  var defs = {
+    horizon:["Horizon (ufuk)","Lingkaran besar pada bola langit yang memisahkan belahan langit yang tampak dan yang tidak tampak. Bidangnya tegak lurus garis zenit–nadir. Di horizon terdapat titik Utara, Timur, Selatan, dan Barat."],
+    zenit:["Zenit (samtur ra's)","Titik pada bola langit yang tepat berada di atas kepala pengamat. Tinggi zenit selalu 90°."],
+    nadir:["Nadir (nadhir)","Titik pada bola langit yang tepat berada di bawah kaki pengamat, berseberangan dengan zenit. Tingginya −90°."],
+    meridian:["Meridian langit","Lingkaran besar yang melalui zenit, nadir, titik Utara, dan titik Selatan. Saat Matahari melintasi meridian, ia berkulminasi; sesaat setelahnya masuk waktu Zuhur."],
+    kutub:["Kutub langit","Perpanjangan sumbu rotasi Bumi yang menembus bola langit. Tinggi kutub langit di atas horizon sama dengan lintang tempat pengamat."],
+    ekuator:["Ekuator langit","Perpanjangan ekuator Bumi pada bola langit. Jarak sudut sebuah benda langit dari ekuator langit disebut deklinasi (δ)."],
+    vertikal:["Lingkaran vertikal","Lingkaran besar yang melalui zenit, nadir, dan sebuah benda langit (di gambar: bintang X). Lingkaran ini memotong horizon tegak lurus."],
+    tinggi:["Tinggi (irtifa', h)","Jarak sudut benda langit dari horizon, diukur sepanjang lingkaran vertikal. Bernilai 0° di horizon, 90° di zenit, dan negatif jika di bawah horizon."],
+    azimut:["Azimut (as-samt, A)","Jarak sudut sepanjang horizon dari titik Utara searah jarum jam (U→T→S→B) sampai kaki lingkaran vertikal benda. Arah kiblat dinyatakan sebagai azimut."]
+  };
+  var svg = document.querySelector('.sphere svg');
+  var hl = {azimut:'#hlAz', tinggi:'#hlH'};
+  var btns = document.querySelectorAll('.terms button');
+  function pick(k){
+    btns.forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.k===k ? 'true':'false'); });
+    svg.querySelectorAll('[data-t]').forEach(function(el){
+      var on = el.dataset.t===k || (k==='tinggi'||k==='azimut') && el.dataset.t==='bintang';
+      el.classList.toggle('on', on);
+      if((el.dataset.t==='azimut'||el.dataset.t==='tinggi')) el.style.stroke = on ? '' : 'transparent';
+    });
+    var d = defs[k];
+    document.getElementById('def').innerHTML = '<h3>'+d[0]+'</h3><p>'+d[1]+'</p>';
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ pick(b.dataset.k); }); });
+
+  /* ---------- Glosarium ---------- */
+  var G = [
+    ["bola","Bola langit","الكُرَة السَّمَاوِيَّة","Bola khayal berjari-jari tak hingga dengan pengamat di pusatnya; tempat semua benda langit seolah menempel."],
+    ["bola","Horizon / ufuk","الأُفُق","Lingkaran batas pandang antara langit dan bumi. Horizon <em>hakiki</em> melalui pusat bumi; horizon <em>mar'i</em> adalah yang benar-benar terlihat."],
+    ["bola","Zenit","سَمْت الرَّأْس","Titik tepat di atas kepala pengamat."],
+    ["bola","Nadir","النَّظِير","Titik tepat di bawah kaki pengamat."],
+    ["bola","Meridian","دَائِرَة نِصْف النَّهَار","Lingkaran besar melalui zenit, nadir, titik Utara dan Selatan."],
+    ["bola","Kulminasi","الزَّوَال","Saat benda langit melintasi meridian dan mencapai tinggi maksimum. Kulminasi atas Matahari menandai tengah hari."],
+    ["bola","Ekliptika","دَائِرَة البُرُوج","Lintasan semu tahunan Matahari di bola langit. Miring sekitar <em>23,44°</em> terhadap ekuator langit."],
+    ["koordinat","Lintang tempat (φ)","عَرْض البَلَد","Jarak sudut suatu tempat dari ekuator Bumi. Positif di utara (LU), negatif di selatan (LS). Bandung sekitar <em>−6,9°</em>."],
+    ["koordinat","Bujur tempat (λ)","طُول البَلَد","Jarak sudut suatu tempat dari meridian Greenwich. Positif ke timur (BT). Bandung sekitar <em>107,6° BT</em>."],
+    ["koordinat","Tinggi (h)","الإِرْتِفَاع","Jarak sudut benda langit dari horizon, dari −90° sampai +90°."],
+    ["koordinat","Azimut (A)","السَّمْت","Sudut sepanjang horizon dari titik Utara searah jarum jam sampai arah benda."],
+    ["koordinat","Deklinasi (δ)","المَيْل","Jarak sudut benda langit dari ekuator langit. Deklinasi Matahari berubah antara <em>−23,44°</em> dan <em>+23,44°</em> sepanjang tahun."],
+    ["koordinat","Sudut waktu (t)","فَضْل الدَّائِر","Sudut antara meridian dan lingkaran deklinasi benda, diukur ke arah barat. Bernilai 0 saat kulminasi; 15° setara 1 jam."],
+    ["waktu","Waktu Matahari hakiki","الوَقْت الحَقِيقِي","Waktu menurut posisi Matahari sebenarnya; pukul 12.00 tepat saat Matahari berkulminasi."],
+    ["waktu","Waktu daerah (WIB)","الوَقْت المَحَلِّي","Waktu standar yang berlaku untuk satu zona. WIB mengacu pada bujur <em>105° BT</em> (UTC+7)."],
+    ["waktu","Perata waktu (e)","تَعْدِيل الوَقْت","Selisih antara waktu Matahari hakiki dan waktu Matahari rata-rata, akibat orbit Bumi yang lonjong dan kemiringan sumbunya. Berkisar sekitar <em>−14 sampai +16 menit</em>."],
+    ["waktu","Koreksi bujur","","Selisih waktu akibat beda bujur tempat dengan bujur standar zona: setiap <em>1° = 4 menit</em>."],
+    ["waktu","Ihtiyat","الاِحْتِيَاط","Tambahan waktu pengaman (biasanya 1–2 menit) agar jadwal sholat tidak mendahului waktu sebenarnya."],
+    ["ibadah","Kiblat","القِبْلَة","Arah Ka'bah di Masjidil Haram, Makkah, yang wajib dihadapi saat sholat."],
+    ["ibadah","Lingkaran besar","الدَّائِرَة العُظْمَى","Lingkaran pada permukaan bola yang pusatnya berimpit dengan pusat bola. Jalur terpendek antara dua titik di Bumi."],
+    ["ibadah","Rashdul kiblat","رَصْد القِبْلَة","Saat Matahari tepat di atas Ka'bah, sehingga bayangan benda tegak di mana pun (yang masih siang) menunjuk arah kiblat. Terjadi sekitar <em>27/28 Mei pukul 16.18 WIB</em> dan <em>15/16 Juli pukul 16.27 WIB</em>."],
+    ["ibadah","Fajar shadiq","الفَجْر الصَّادِق","Cahaya fajar yang menyebar mendatar di ufuk timur; tanda masuk waktu Subuh."],
+    ["ibadah","Syafaq","الشَّفَق","Mega merah di ufuk barat setelah Matahari terbenam. Hilangnya syafaq menandai masuk waktu Isya."]
+  ];
+  var gl = document.getElementById('gl'), q = document.getElementById('q'), group='semua';
+  function renderGl(){
+    var s = q.value.trim().toLowerCase(), html='', n=0;
+    G.forEach(function(r){
+      if(group!=='semua' && r[0]!==group) return;
+      var plain = (r[1]+' '+r[3]).toLowerCase().replace(/<[^>]+>/g,'');
+      if(s && plain.indexOf(s)<0) return;
+      n++;
+      html += '<div><dt><span>'+r[1]+'</span>'+(r[2]?'<i lang="ar">'+r[2]+'</i>':'')+'</dt><dd>'+r[3]+'</dd></div>';
+    });
+    gl.innerHTML = html;
+    document.getElementById('glEmpty').hidden = n>0;
+  }
+  q.addEventListener('input', renderGl);
+  document.querySelectorAll('.chips button').forEach(function(b){
+    b.addEventListener('click', function(){
+      group = b.dataset.g;
+      document.querySelectorAll('.chips button').forEach(function(x){ x.setAttribute('aria-pressed', x===b?'true':'false'); });
+      renderGl();
+    });
+  });
+  renderGl();
+
+  /* ---------- Bayangan Ashar ---------- */
+  var dphi = document.getElementById('dphi'), halt = document.getElementById('halt');
+  var X0 = 70, Y0 = 190, L = 60, maxW = 355; // 1 m = 60 px
+  function fmt(x,d){ return x.toFixed(d).replace('.',','); }
+  function upd(){
+    var a = +dphi.value * Math.PI/180, h = +halt.value * Math.PI/180;
+    var s0 = Math.tan(a), sA = s0 + 1, sN = 1/Math.tan(h);
+    var hA = Math.atan(1/sA)*180/Math.PI;
+    document.getElementById('dphiV').textContent = dphi.value+'°';
+    document.getElementById('haltV').textContent = halt.value+'°';
+    document.getElementById('r0').textContent = fmt(s0,2)+' m';
+    document.getElementById('r1').textContent = fmt(sA,2)+' m';
+    document.getElementById('r2').textContent = fmt(sN,2)+' m';
+    document.getElementById('r3').textContent = fmt(hA,1)+'°';
+    function w(x){ return Math.min(x*L, maxW); }
+    document.getElementById('shZ').setAttribute('width', w(s0));
+    document.getElementById('shA').setAttribute('width', w(sA));
+    document.getElementById('shNow').setAttribute('width', w(sN));
+    // Matahari di sebelah kiri-atas tongkat; bayangan ke kanan
+    var R = 150, sx = X0 - R*Math.cos(h), sy = 130 - R*Math.sin(h)*0.55;
+    sx = Math.max(16, sx); sy = Math.max(16, sy);
+    var sun = document.getElementById('sun'); sun.setAttribute('cx', sx); sun.setAttribute('cy', sy);
+    var ray = document.getElementById('ray');
+    ray.setAttribute('x1', X0); ray.setAttribute('y1', 130);
+    ray.setAttribute('x2', X0 + w(sN)); ray.setAttribute('y2', Y0);
+    var st = document.getElementById('st'), yes = sN >= sA - 1e-9;
+    st.className = 'status ' + (yes ? 'yes' : 'no');
+    st.textContent = yes ? 'Sudah masuk waktu Ashar (bayangan ≥ batas Ashar)' : 'Belum masuk waktu Ashar';
+  }
+  dphi.addEventListener('input', upd); halt.addEventListener('input', upd); upd();
+
+  /* ---------- Kuis ---------- */
+  var Q = [
+    ["Titik pada bola langit yang tepat berada di atas kepala pengamat disebut …", ["Nadir","Zenit","Kutub langit","Meridian"], 1, "Zenit (samtur ra's) berada tepat di atas kepala; nadir berseberangan dengannya."],
+    ["Arah kiblat di Indonesia dinyatakan dalam besaran …", ["Deklinasi","Tinggi","Azimut","Sudut waktu"], 2, "Arah kiblat adalah sudut di bidang horizon yang diukur dari titik Utara, yaitu azimut."],
+    ["Waktu Zuhur dimulai sesaat setelah Matahari …", ["Terbit","Mencapai tinggi 45°","Berkulminasi di meridian","Berada 18° di bawah horizon"], 2, "Zuhur ditandai tergelincirnya Matahari dari meridian (zawal)."],
+    ["Mengapa arah kiblat tidak boleh ditentukan dengan garis lurus pada peta datar?", ["Karena Ka'bah selalu bergerak","Karena Bumi bulat, sehingga jalur terpendek mengikuti lingkaran besar","Karena kompas tidak akurat","Karena peta tidak memuat Makkah"], 1, "Peta datar mendistorsi arah. Jalur terpendek di permukaan bola adalah busur lingkaran besar."],
+    ["Menurut kriteria Kemenag RI, awal waktu Isya ditandai saat tinggi Matahari …", ["−20°","−18°","−0°50′","0°"], 1, "Isya: h = −18° (hilangnya syafaq). Subuh memakai h = −20°."]
+  ];
+  var quiz = document.getElementById('quiz'), score = 0, done = 0;
+  Q.forEach(function(it, i){
+    var d = document.createElement('div'); d.className='q';
+    d.innerHTML = '<p>'+(i+1)+'. '+it[0]+'</p><div class="opts"></div><div class="fb" hidden></div>';
+    var opts = d.querySelector('.opts'), fb = d.querySelector('.fb');
+    it[1].forEach(function(o, j){
+      var b = document.createElement('button'); b.type='button'; b.textContent = String.fromCharCode(65+j)+'. '+o;
+      b.addEventListener('click', function(){
+        opts.querySelectorAll('button').forEach(function(x,k){ x.disabled=true; if(k===it[2]) x.classList.add('ok'); });
+        if(j===it[2]){ score++; fb.textContent='Benar. '+it[3]; } else { b.classList.add('bad'); fb.textContent='Kurang tepat. '+it[3]; }
+        fb.hidden=false; done++;
+        document.getElementById('score').textContent = 'Skor: '+score+' / '+Q.length + (done===Q.length ? ' · selesai' : '');
+      });
+      opts.appendChild(b);
+    });
+    quiz.appendChild(d);
+  });
+})();
+</script>
+
+</body>
+</html>
